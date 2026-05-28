@@ -1218,8 +1218,8 @@ function buildCalc(prefix, mode){
       <text x="${cx}" y="${(ASy-8).toFixed(1)}" font-family="Inter" font-size="10" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
       <line x1="${cx}" y1="${sy-58}" x2="${cx}" y2="${sy-32}" stroke="#1E63B0" stroke-width="4.5" marker-end="url(#${p.prefix}ld)" stroke-linecap="round"/>
       <text x="${cx+10}" y="${sy-46}" font-family="Fraunces" font-size="11" fill="#1E63B0" font-weight="700">${p.mode==='sl'?'V':'V = G+Q'}</text>
-      ${p.Hk>0?`<line x1="${(fx-46).toFixed(1)}" y1="${(sy+10).toFixed(1)}" x2="${fx.toFixed(1)}" y2="${(sy+10).toFixed(1)}" stroke="#C0512A" stroke-width="4.5" marker-end="url(#${p.prefix}lh)" stroke-linecap="round"/>
-      <text x="${(fx-44).toFixed(1)}" y="${(sy+3).toFixed(1)}" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-weight="700">H</text>`:''}
+      ${p.Hk>0?`<line x1="${(fx-46).toFixed(1)}" y1="${sy}" x2="${fx.toFixed(1)}" y2="${sy}" stroke="#C0512A" stroke-width="4.5" marker-end="url(#${p.prefix}lh)" stroke-linecap="round"/>
+      <text x="${(fx-44).toFixed(1)}" y="${(sy-6).toFixed(1)}" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-weight="700">H</text>`:''}
       ${p.mode==='sl'?`<g stroke="#5C7A52" stroke-width="3" fill="none">
         <line x1="${fx+34}" y1="${(ASy+11).toFixed(1)}" x2="${fx+6}" y2="${(ASy+11).toFixed(1)}" marker-end="url(#${p.prefix}rr)"/>
         <line x1="${cx+10}" y1="${(ASy+11).toFixed(1)}" x2="${cx-18}" y2="${(ASy+11).toFixed(1)}" marker-end="url(#${p.prefix}rr)"/>
