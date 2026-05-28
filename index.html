@@ -167,7 +167,7 @@ figure svg{width:100%;height:auto;display:block}
     <div class="panel">
       <p>A felső sávban a <b>fő fejezetek</b> között válthatsz, az alattuk megjelenő almenüvel pedig az adott fejezet szakaszai között. A bevezetésen túl három tartalmi fejezet épül egymásra:</p>
       <ol style="padding-left:22px;line-height:1.9">
-        <li><b>A számítás menete</b> — az EC7 határállapotai (GEO, STR, EQU, UPL), a tervezés menete, a talajtörési mechanizmus, valamint a síkalap talajtöréssel szembeni ellenállásának teljes képlete <b>drénezett</b> és <b>drénezetlen</b> esetre, interaktív ábrákkal.</li>
+        <li><b>A számítás menete</b> — a tervezés menete, majd a síkalap talajtöréssel szembeni <b>teherbírásának</b> teljes képlete <b>drénezett</b> és <b>drénezetlen</b> esetre, a dolgozó keresztmetszet és a talajvíz kezelése, végül az <b>elcsúszás-vizsgálat</b> (drénezett és drénezetlen) és a megfelelőség igazolása.</li>
         <li><b>Mintapéldák</b> — a gyakorlati anyag alapján rekonstruált, lépésről-lépésre levezetett példák: központos és külpontos, függőleges és ferde teher, a talajvíz hatása és mélysége, valamint a vízszintes erő irányának hatása.</li>
         <li><b>Kalkulátorok</b> — interaktív teherbírás-kalkulátor: állítható geometria, terhek és talajparaméterek; az ábra léptékhelyesen frissül, a program kiszámítja az R<sub>d</sub> tervezési ellenállást és összeveti a V<sub>d</sub> tervezési teherrel.</li>
       </ol>
@@ -180,88 +180,23 @@ figure svg{width:100%;height:auto;display:block}
 <div class="chapter-page" id="page-menete" data-ch="menete">
 
   <section class="subsection" id="me-1">
-    <h2>1. Az EC7 határállapotai</h2>
-    <p>A síkalapok tervezésekor különböző <b>határállapotokat</b> kell vizsgálni. A teherbírási (tönkremeneteli) határállapotok az Eurocode 7 szerint:</p>
-    <div class="grid c2">
-      <div class="panel" style="margin:8px 0">
-        <h3 style="margin-top:0">Teherbírási határállapotok</h3>
-        <ul class="bullet">
-          <li><b>GEO</b> — a talaj törése vagy túlzott mértékű alakváltozása &nbsp;<span class="tag rebar">ez a fejezet · 1–4. gyak</span></li>
-          <li><b>STR</b> — a tartószerkezeti elemek belső törése vagy túlzott alakváltozása (alapvetően tartószerkezeti feladat)</li>
-          <li><b>EQU</b> — a helyzeti állékonyság elvesztése (felbillenés, elcsúszás)</li>
-          <li><b>UPL</b> — a szerkezet/talaj felúszás miatti egyensúlyvesztése</li>
-        </ul>
-      </div>
-      <div class="panel" style="margin:8px 0">
-        <h3 style="margin-top:0">A tervezés szokásos menete</h3>
-        <ol style="padding-left:20px;line-height:1.7;font-size:0.95rem">
-          <li>az <b>alapozási sík</b> felvétele (teherbíró réteg, talajvíz, fagyhatár)</li>
-          <li>az <b>alaptípus</b> kiválasztása</li>
-          <li>az <b>alapszélesség</b> meghatározása — talajtörés és süllyedés ellenőrzéssel</li>
-          <li>az <b>alapszerkezet</b> méretezése (anyag, magasság, vasalás)</li>
-          <li>az <b>állékonyság és felúszás</b> ellenőrzése</li>
-        </ol>
-      </div>
+    <h2>1. A tervezés menete</h2>
+    <p>A síkalap tervezése egymásra épülő lépésekből áll. Ez a fejezet ezek közül a <b>teherbírás (talajtörés)</b> és az <b>elcsúszás</b> elméletét részletezi — drénezett és drénezetlen esetre egyaránt.</p>
+    <div class="panel" style="margin:8px 0">
+      <h3 style="margin-top:0">A tervezés szokásos menete</h3>
+      <ol style="padding-left:22px;line-height:1.95">
+        <li>az <b>alapozási sík</b> felvétele (teherbíró réteg, talajvíz, fagyhatár)</li>
+        <li>az <b>alaptípus</b> kiválasztása</li>
+        <li>az <b>alapszélesség</b> meghatározása — talajtörés (teherbírás) és süllyedés ellenőrzéssel</li>
+        <li>az <b>alapszerkezet</b> méretezése (anyag, magasság, vasalás)</li>
+        <li>az <b>állékonyság</b> ellenőrzése — elcsúszás, felborulás, felúszás</li>
+      </ol>
     </div>
-    <div class="callout"><b>Ez a fejezet a GEO határállapottal foglalkozik:</b> a síkalap alatti talaj töréssel szembeni ellenállásának (teherbírásának) számításával — a 3. tervezési lépés magjával.</div>
+    <div class="callout">A fejezet felépítése: előbb a <b>teherbírás-számítás</b> (talajtörési ellenállás) drénezett és drénezetlen esetre, majd a <b>dolgozó keresztmetszet</b> és a <b>talajvíz</b> kezelése, végül az <b>elcsúszás-vizsgálat</b> (drénezett és drénezetlen) és a megfelelőség igazolása.</div>
   </section>
 
   <section class="subsection" id="me-2">
-    <h2>2. A talajtörési mechanizmus</h2>
-    <p>A síkalap alatt a talaj egy összefüggő <b>csúszólap</b> mentén megy tönkre. A klasszikus modell <b>Terzaghi</b> általános megoldása központos, függőleges terhelésű sávalapra: egy aktív ék (I), egy logaritmikus spirál menti nyírási zóna (II) és egy passzív zóna (III) alakul ki.</p>
-    <figure>
-      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="tzg" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
-          <marker id="tza" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
-          <marker id="tzd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
-        </defs>
-        <rect x="20" y="92" width="720" height="250" fill="#F0E9DC"/>
-        <rect x="20" y="86" width="720" height="6" fill="url(#tzg)"/>
-        <line x1="20" y1="92" x2="740" y2="92" stroke="#8A7B5E" stroke-width="1.5"/>
-        <text x="26" y="82" font-family="Inter" font-size="10" fill="#8A7B5E">terepszint</text>
-        <!-- alaptest -->
-        <rect x="300" y="50" width="160" height="42" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
-        <text x="380" y="76" font-family="Inter" font-size="11" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
-        <line x1="300" y1="36" x2="460" y2="36" stroke="#3D4852" stroke-width="0.9" marker-start="url(#tzd)" marker-end="url(#tzd)"/>
-        <text x="380" y="30" font-family="Fraunces" font-size="12" fill="#3D4852" text-anchor="middle" font-style="italic">2b = B</text>
-        <line x1="270" y1="92" x2="270" y2="50" stroke="#3D4852" stroke-width="0.9" marker-start="url(#tzd)" marker-end="url(#tzd)"/>
-        <text x="262" y="74" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="end" font-style="italic">t</text>
-        <line x1="380" y1="14" x2="380" y2="48" stroke="#C0512A" stroke-width="4" marker-end="url(#tza)" stroke-linecap="round"/>
-        <text x="388" y="26" font-family="Fraunces" font-size="12" fill="#8F3A1B" font-weight="700">F</text>
-        <!-- q=t·γ a felszínen az alaptest mellett -->
-        <g stroke="#8A7B5E" stroke-width="1.4" fill="none">
-          <line x1="200" y1="94" x2="200" y2="112" marker-end="url(#tza)"/>
-          <line x1="235" y1="94" x2="235" y2="112" marker-end="url(#tza)"/>
-          <line x1="270" y1="94" x2="270" y2="112" marker-end="url(#tza)"/>
-        </g>
-        <text x="150" y="108" font-family="Fraunces" font-size="11" fill="#6B6052" font-style="italic">q = t·γ</text>
-        <!-- törési felület -->
-        <path d="M300,92 L380,150 L460,92" fill="rgba(192,81,42,0.16)" stroke="#C0512A" stroke-width="1.6"/>
-        <path d="M380,150 Q470,250 600,210 L600,210" fill="none" stroke="#3D2A1A" stroke-width="2"/>
-        <path d="M380,150 Q470,250 600,210" fill="rgba(138,123,94,0.18)" stroke="none"/>
-        <line x1="460" y1="92" x2="600" y2="210" stroke="#3D2A1A" stroke-width="1.4"/>
-        <line x1="600" y1="210" x2="690" y2="92" stroke="#3D2A1A" stroke-width="2"/>
-        <text x="380" y="128" font-family="Inter" font-size="12" fill="#8F3A1B" text-anchor="middle" font-weight="600">I.</text>
-        <text x="470" y="195" font-family="Inter" font-size="12" fill="#3D2A1A" text-anchor="middle" font-weight="600">II.</text>
-        <text x="585" y="150" font-family="Inter" font-size="12" fill="#3D2A1A" text-anchor="middle" font-weight="600">III.</text>
-        <text x="500" y="262" font-family="Inter" font-size="9.5" fill="#6B6052" font-style="italic">logaritmikus spirál</text>
-        <text x="660" y="150" font-family="Inter" font-size="9.5" fill="#6B6052" font-style="italic">egyenes</text>
-        <text x="345" y="106" font-family="JetBrains Mono" font-size="9" fill="#8F3A1B">45°−φ/2</text>
-        <text x="595" y="106" font-family="JetBrains Mono" font-size="9" fill="#8F3A1B">45°−φ/2</text>
-        <text x="380" y="332" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">Terzaghi általános törési modellje — aktív ék (I), spirál nyírási zóna (II), passzív zóna (III)</text>
-      </svg>
-    </figure>
-    <p>A Terzaghi-modell zárt megoldást ad, de <b>ritkán érvényes</b> pontosan (csak központos, függőleges teher, vízszintes alapsík). A gyakorlatban a Terzaghi-modellt <b>modellkísérletekkel</b> kiegészítve használjuk, amelyek figyelembe veszik:</p>
-    <ul class="bullet">
-      <li>az <b>alaptest alakját</b> (sáv-, téglalap-, négyzetes pilléralap),</li>
-      <li>a <b>teher ferdeségét</b> (ferde / vízszintes erőkomponens),</li>
-      <li>a <b>teher külpontosságát</b> (excentrikus terhelés).</li>
-    </ul>
-  </section>
-
-  <section class="subsection" id="me-3">
-    <h2>3. A teherbírási képlet — drénezett eset</h2>
+    <h2>2. Teherbírás-számítás — drénezett eset</h2>
     <p>A <b>drénezett</b> eset a lassú terhelésre / szemcsés talajra jellemző: a talaj nyírószilárdsága a <span class="inline-math">φ – c</span> értékpárral írható le, a víz felhajtóerejének kedvező hatása figyelembe vehető. A síkalap talajtöréssel szembeni ellenállása az EC7 (MSZ EN 1997-1) szerint:</p>
     <div class="callout formula" style="text-align:center;font-size:0.98rem">
       R<sub>k</sub> / (B′·L′) = 0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> &nbsp;+&nbsp; q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> &nbsp;+&nbsp; c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>
@@ -287,37 +222,6 @@ figure svg{width:100%;height:auto;display:block}
       <li><b>q′</b> — az alapsíkon az alap mellett működő hatékony geosztatikus nyomás</li>
       <li><b>c</b> — az alap alatti talaj kohéziója; <b>φ</b> — belső súrlódási szöge</li>
     </ul>
-
-    <figure>
-      <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="m3g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
-          <marker id="m3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
-          <marker id="m3d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
-        </defs>
-        <rect x="30" y="60" width="700" height="100" fill="#F2E9C9"/>
-        <rect x="30" y="160" width="700" height="130" fill="#E8C98A"/>
-        <rect x="30" y="54" width="700" height="6" fill="url(#m3g)"/>
-        <line x1="30" y1="60" x2="730" y2="60" stroke="#8A7B5E" stroke-width="1.6"/>
-        <text x="36" y="50" font-family="Inter" font-size="10" fill="#8A7B5E">terepszint</text>
-        <rect x="300" y="20" width="34" height="40" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.1"/>
-        <rect x="262" y="120" width="110" height="40" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
-        <text x="317" y="145" font-family="Inter" font-size="10" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
-        <line x1="317" y1="6" x2="317" y2="56" stroke="#C0512A" stroke-width="4.5" marker-end="url(#m3a)" stroke-linecap="round"/>
-        <text x="325" y="20" font-family="Fraunces" font-size="12" fill="#8F3A1B" font-weight="700">F</text>
-        <line x1="244" y1="60" x2="244" y2="120" stroke="#3D4852" stroke-width="0.9" marker-start="url(#m3d)" marker-end="url(#m3d)"/>
-        <text x="238" y="93" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="end" font-style="italic">t</text>
-        <text x="120" y="95" font-family="Fraunces" font-size="13" fill="#6B6052" font-style="italic">γ</text>
-        <text x="120" y="230" font-family="Fraunces" font-size="13" fill="#6B6052" font-style="italic">γ′</text>
-        <line x1="262" y1="174" x2="372" y2="174" stroke="#3D4852" stroke-width="0.9" marker-start="url(#m3d)" marker-end="url(#m3d)"/>
-        <text x="317" y="188" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B</text>
-        <line x1="30" y1="160" x2="730" y2="160" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
-        <text x="724" y="155" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík (A.S.)</text>
-        <path d="M262,160 Q317,250 372,160" fill="rgba(192,81,42,0.12)" stroke="#C0512A" stroke-width="1.5" stroke-dasharray="5,3"/>
-        <text x="500" y="120" font-family="Inter" font-size="10.5" fill="#6B6052" font-style="italic">q′ = a geosztatikus nyomás az alapsíkon, az alap mellett</text>
-        <text x="500" y="232" font-family="Inter" font-size="10.5" fill="#6B6052" font-style="italic">γ′ = az alap alatti talaj hatékony térfogatsúlya</text>
-      </svg>
-    </figure>
 
     <h3>Teherbírási (talajtörési ellenállási) tényezők</h3>
     <div class="callout formula">
@@ -365,11 +269,8 @@ figure svg{width:100%;height:auto;display:block}
         <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Vízszintes alapsík esetén α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
       </div>
     </div>
-  </section>
-
-  <section class="subsection" id="me-4">
-    <h2>4. A teherbírási képlet — drénezett eset (hatékony m<sub>B</sub>)</h2>
-    <p>A teher-ferdeségi tényezőkben szereplő <b>m</b> kitevő a dolgozó keresztmetszet arányától függ, attól függően, hogy a vízszintes erő a B vagy az L oldallal párhuzamos:</p>
+    <h3>A teher-ferdeségi kitevő — hatékony m</h3>
+    <p>A teher-ferdeségi (i) tényezőkben szereplő <b>m</b> kitevő a dolgozó keresztmetszet arányától függ, attól függően, hogy a vízszintes erő a B vagy az L oldallal párhuzamos:</p>
     <div class="callout formula">
       m<sub>B</sub> = [2 + (B′/L′)] / [1 + (B′/L′)] &nbsp;&nbsp;(ha a vízszintes erő B-vel párhuzamos)<br>
       m<sub>L</sub> = [2 + (L′/B′)] / [1 + (L′/B′)] &nbsp;&nbsp;(ha az L-lel párhuzamos)
@@ -383,8 +284,8 @@ figure svg{width:100%;height:auto;display:block}
     </table>
   </section>
 
-  <section class="subsection" id="me-5">
-    <h2>5. A teherbírási képlet — drénezetlen eset</h2>
+  <section class="subsection" id="me-3">
+    <h2>3. Teherbírás-számítás — drénezetlen eset</h2>
     <p>A <b>drénezetlen</b> eset a gyors terhelésre / kötött talajra jellemző: a talaj nyírószilárdságát a <span class="inline-math">c<sub>u</sub></span> drénezetlen nyírószilárdsággal írjuk le, <span class="inline-math">φ = 0</span>. A víz felhajtóerejét <b>nem szabad</b> figyelembe venni — teljes feszültségekkel számolunk.</p>
     <div class="callout formula" style="text-align:center;font-size:0.98rem">
       σ<sub>t</sub> = R<sub>v</sub> / (B′·L′) = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> &nbsp;+&nbsp; q
@@ -410,32 +311,70 @@ figure svg{width:100%;height:auto;display:block}
     </div>
   </section>
 
-  <section class="subsection" id="me-6">
-    <h2>6. Dolgozó keresztmetszet — külpontosság</h2>
+  <section class="subsection" id="me-4">
+    <h2>4. Dolgozó keresztmetszet — külpontosság</h2>
     <p>Külpontos terhelésnél a teher nem a keresztmetszet középpontjában működik. A számításhoz a <b>dolgozó (hatékony) keresztmetszetet</b> használjuk, amelynek középpontja egybeesik az eredő erő döféspontjával:</p>
     <div class="callout formula" style="text-align:center">
       B′ = B − 2·e<sub>B</sub> &nbsp;&nbsp;&nbsp; L′ = L − 2·e<sub>L</sub>
     </div>
-    <figure style="max-width:520px">
-      <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="exd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker></defs>
-        <rect x="120" y="60" width="200" height="220" fill="#C9C0AE" stroke="#3D2A1A" stroke-width="1.6"/>
-        <rect x="200" y="60" width="120" height="150" fill="#BFE0DF" stroke="#2E7D8A" stroke-width="1.6"/>
-        <line x1="200" y1="135" x2="320" y2="210" stroke="#3D2A1A" stroke-width="0.8"/>
-        <circle cx="260" cy="172" r="6" fill="#C0512A" stroke="#8F3A1B" stroke-width="1.5"/>
-        <line x1="220" y1="30" x2="320" y2="30" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="270" y="24" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B′</text>
-        <line x1="120" y1="44" x2="320" y2="44" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="220" y="38" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B</text>
-        <line x1="350" y1="60" x2="350" y2="210" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="358" y="138" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L′</text>
-        <line x1="378" y1="60" x2="378" y2="280" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="386" y="173" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L</text>
-        <line x1="200" y1="172" x2="260" y2="172" stroke="#C0512A" stroke-width="1.4" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="230" y="166" font-family="Fraunces" font-size="10" fill="#8F3A1B" text-anchor="middle" font-style="italic">e<tspan baseline-shift="sub" font-size="7">B</tspan></text>
-        <line x1="260" y1="135" x2="260" y2="172" stroke="#C0512A" stroke-width="1.4" marker-start="url(#exd)" marker-end="url(#exd)"/>
-        <text x="270" y="158" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-style="italic">e<tspan baseline-shift="sub" font-size="7">L</tspan></text>
-        <text x="240" y="305" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">a kék terület a dolgozó keresztmetszet (A′ = B′·L′)</text>
+    <figure>
+      <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="dkd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+          <marker id="dkr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+        </defs>
+        <!-- felső keresztmetszet (oldalnézet) -->
+        <line x1="210" y1="14" x2="210" y2="100" stroke="#3D4852" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>
+        <rect x="150" y="34" width="120" height="52" fill="#C9C0AE" stroke="#241C12" stroke-width="2"/>
+        <line x1="226" y1="12" x2="226" y2="80" stroke="#C0512A" stroke-width="5" marker-end="url(#dkr)" stroke-linecap="round"/>
+        <text x="118" y="64" font-family="Inter" font-size="10" fill="#6B6052" font-style="italic" text-anchor="end">oldalnézet</text>
+        <!-- alaprajz: tényleges keresztmetszet -->
+        <rect x="110" y="180" width="150" height="230" fill="#C9C0AE" stroke="#241C12" stroke-width="2"/>
+        <!-- dolgozó keresztmetszet -->
+        <rect x="170" y="180" width="90" height="160" fill="#BFE6EC" stroke="#2E7D8A" stroke-width="1.8"/>
+        <line x1="170" y1="340" x2="260" y2="180" stroke="#241C12" stroke-width="0.9"/>
+        <!-- középvonalak -->
+        <line x1="185" y1="165" x2="185" y2="425" stroke="#3D4852" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>
+        <line x1="95" y1="295" x2="305" y2="295" stroke="#3D4852" stroke-width="0.8" stroke-dasharray="10 3 2 3"/>
+        <!-- döféspont -->
+        <circle cx="215" cy="260" r="6" fill="#C0512A" stroke="#8F3A1B" stroke-width="1.5"/>
+        <!-- felső méretek: B/2 | e_B | B'/2 -->
+        <line x1="110" y1="166" x2="185" y2="166" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="147" y="161" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="middle" font-style="italic">B/2</text>
+        <line x1="185" y1="166" x2="215" y2="166" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="200" y="161" font-family="Fraunces" font-size="9" fill="#8F3A1B" text-anchor="middle" font-style="italic">e<tspan baseline-shift="sub" font-size="7">B</tspan></text>
+        <line x1="215" y1="166" x2="260" y2="166" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="237" y="161" font-family="Fraunces" font-size="10" fill="#2E7D8A" text-anchor="middle" font-style="italic">B′/2</text>
+        <!-- bal méretek: L', L -->
+        <line x1="92" y1="180" x2="92" y2="340" stroke="#2E7D8A" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="86" y="263" font-family="Fraunces" font-size="10" fill="#2E7D8A" text-anchor="end" font-style="italic">L′</text>
+        <line x1="72" y1="180" x2="72" y2="410" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="66" y="298" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">L</text>
+        <!-- jobb méretek: L'/2 (fent), L/2 (lent) -->
+        <line x1="278" y1="180" x2="278" y2="260" stroke="#2E7D8A" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="284" y="224" font-family="Fraunces" font-size="10" fill="#2E7D8A" font-style="italic">L′/2</text>
+        <line x1="278" y1="295" x2="278" y2="410" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="284" y="356" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">L/2</text>
+        <!-- e_L tengelyjelölés -->
+        <line x1="215" y1="295" x2="215" y2="260" stroke="#8F3A1B" stroke-width="1"/>
+        <text x="309" y="291" font-family="Fraunces" font-size="9" fill="#8F3A1B" font-style="italic">e<tspan baseline-shift="sub" font-size="7">L</tspan></text>
+        <!-- alsó méretek: B', B -->
+        <line x1="170" y1="424" x2="260" y2="424" stroke="#2E7D8A" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="215" y="437" font-family="Fraunces" font-size="10" fill="#2E7D8A" text-anchor="middle" font-style="italic">B′</text>
+        <line x1="110" y1="444" x2="260" y2="444" stroke="#3D4852" stroke-width="0.7" marker-start="url(#dkd)" marker-end="url(#dkd)"/>
+        <text x="185" y="457" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="middle" font-style="italic">B</text>
+        <!-- jelmagyarázat -->
+        <text x="440" y="46" font-family="Inter" font-size="12.5" fill="#241C12" font-weight="700" text-decoration="underline">tényleges keresztmetszet</text>
+        <text x="472" y="76" font-family="Fraunces" font-size="12.5" fill="#241C12">B&#160;&#160;&#160;szélesség</text>
+        <text x="472" y="100" font-family="Fraunces" font-size="12.5" fill="#241C12">L&#160;&#160;&#160;hosszúság</text>
+        <text x="440" y="152" font-family="Inter" font-size="12.5" fill="#8F3A1B" font-weight="700" text-decoration="underline">külpontosság</text>
+        <text x="472" y="182" font-family="Fraunces" font-size="12.5" fill="#8F3A1B">e<tspan baseline-shift="sub" font-size="8">B</tspan>&#160;&#160;&#160;B irányában</text>
+        <text x="472" y="206" font-family="Fraunces" font-size="12.5" fill="#8F3A1B">e<tspan baseline-shift="sub" font-size="8">L</tspan>&#160;&#160;&#160;L irányában</text>
+        <text x="440" y="258" font-family="Inter" font-size="12.5" fill="#2E7D8A" font-weight="700" text-decoration="underline">dolgozó keresztmetszet</text>
+        <text x="472" y="288" font-family="Fraunces" font-size="12.5" fill="#2E7D8A">B′&#160;&#160;&#160;szélesség</text>
+        <text x="472" y="312" font-family="Fraunces" font-size="12.5" fill="#2E7D8A">B′ = B − 2·e<tspan baseline-shift="sub" font-size="8">B</tspan></text>
+        <text x="472" y="340" font-family="Fraunces" font-size="12.5" fill="#2E7D8A">L′&#160;&#160;&#160;hosszúság</text>
+        <text x="472" y="364" font-family="Fraunces" font-size="12.5" fill="#2E7D8A">L′ = L − 2·e<tspan baseline-shift="sub" font-size="8">L</tspan></text>
       </svg>
     </figure>
     <p>A külpontosság az alapsíkra felírt <b>nyomatéki egyenletből</b> adódik. Ha vízszintes H<sub>k</sub> erő és külpontos Q<sub>k</sub> teher hat:</p>
@@ -445,8 +384,8 @@ figure svg{width:100%;height:auto;display:block}
     <div class="callout warn"><b>Vigyázz az előjelekre!</b> A vízszintes erő és a külpontos függőleges teher nyomatéka <i>ellentétes</i> irányú is lehet — ekkor a külpontosság csökken.</div>
   </section>
 
-  <section class="subsection" id="me-7">
-    <h2>7. Talajvíz hatása — a hatékony γ′</h2>
+  <section class="subsection" id="me-5">
+    <h2>5. Talajvíz hatása — a hatékony γ′</h2>
     <p>A szélességi tagban szereplő γ′ értékét a talajvíz alapsík alatti mélysége (t<sub>wd</sub>) befolyásolja. A törési zóna a B′ mélységig terjed; a γ′ a t<sub>wd</sub>/B′ aránytól függően lineárisan változik:</p>
     <figure style="max-width:600px">
       <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
@@ -473,8 +412,45 @@ figure svg{width:100%;height:auto;display:block}
     <div class="callout note">A negatív t<sub>wd</sub> azt jelenti, hogy a talajvíz az alapsík <i>fölött</i> van — ekkor γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</div>
   </section>
 
-  <section class="subsection" id="me-8">
-    <h2>8. A megfelelőség igazolása</h2>
+  <section class="subsection" id="me-6">
+    <h2>6. Elcsúszás-vizsgálat (EQU)</h2>
+    <p>Ha az alapsíkra ható erőnek van <b>vízszintes komponense</b> (nem merőleges az alapsíkra), ellenőrizni kell az <b>elcsúszás</b> elleni biztonságot. A megfelelőség feltétele:</p>
+    <div class="callout formula" style="text-align:center;font-size:1.04rem">
+      H<sub>d</sub> &le; R<sub>d</sub> + R<sub>p;d</sub>
+    </div>
+    <ul class="bullet">
+      <li><b>H<sub>d</sub></b> — az alapsíkon működő vízszintes teher tervezési értéke; tartalmaznia kell az alaptestre ható <b>aktív földnyomás</b> tervezési értékét is.</li>
+      <li><b>R<sub>d</sub></b> — az alapsíkon ébredő <b>nyírási (talp-) ellenállás</b> tervezési értéke.</li>
+      <li><b>R<sub>p;d</sub></b> — az alaptest oldalfelületén működő <b>(passzív) földnyomásból</b> származó ellenállás tervezési értéke.</li>
+    </ul>
+    <div class="callout warn"><b>R<sub>p;d</sub> óvatosan!</b> A homlokfal előtti talajt erózió vagy emberi beavatkozás eltávolíthatja, agyagnál a szezonális zsugorodás elválhat tőle. A teljes passzív földellenállás csak nagy elmozdulásra mobilizálódik, ezért agyagban gyakran csak a fele–kétharmada vehető figyelembe.</div>
+
+    <div class="grid c2">
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--moss)">
+        <h4 style="margin-top:0">Drénezett eset — talp-súrlódás</h4>
+        <div class="callout formula" style="margin:6px 0;text-align:center">R<sub>d</sub> = V′<sub>k</sub> · tg δ<sub>k</sub> / γ<sub>R;h</sub></div>
+        <ul class="bullet" style="font-size:0.9rem">
+          <li><b>V′<sub>k</sub></b> — a függőleges teher karakterisztikus értéke; csak a H<sub>d</sub>-vel <i>biztosan egyidejű</i> esetleges teher vehető bele.</li>
+          <li><b>δ<sub>k</sub></b> — a talp–talaj súrlódási szög: <b>monolit</b> alaptestnél δ<sub>k</sub> = φ′<sub>k</sub>, <b>előregyártottnál</b> δ<sub>k</sub> = ⅔·φ′<sub>k</sub>.</li>
+          <li>A talpon a <b>c′ kohéziót a biztonság javára elhanyagoljuk</b>.</li>
+          <li><b>γ<sub>R;h</sub> = 1,1</b> (DA-2*).</li>
+        </ul>
+      </div>
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)">
+        <h4 style="margin-top:0">Drénezetlen eset — talp-adhézió</h4>
+        <div class="callout formula" style="margin:6px 0;text-align:center">R<sub>d</sub> = A<sub>c</sub> · c<sub>u;k</sub> / γ<sub>R;h</sub></div>
+        <ul class="bullet" style="font-size:0.9rem">
+          <li><b>A<sub>c</sub></b> — a nyomott talpfelület (B·L, ill. a dolgozó A′).</li>
+          <li><b>c<sub>u;k</sub></b> — a drénezetlen nyírószilárdság karakterisztikus értéke az alapsíkon.</li>
+          <li><b>γ<sub>R;h</sub> = 1,1</b>.</li>
+          <li><b>Korlát:</b> a talp–talaj hézag (víz, levegő) miatt teljesülnie kell az <b>R<sub>d</sub> ≤ 0,4·V<sub>d</sub></b> feltételnek is.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="subsection" id="me-7">
+    <h2>7. A megfelelőség igazolása</h2>
     <p>A teherbírási (GEO) határállapot akkor teljesül, ha a <b>tervezési teher</b> nem nagyobb a <b>tervezési ellenállásnál</b>:</p>
     <div class="callout success" style="text-align:center;font-size:1.05rem"><b>V<sub>d</sub> &le; R<sub>d</sub></b></div>
     <div class="grid c2">
@@ -1800,14 +1776,13 @@ figure svg{width:100%;height:auto;display:block}
 const CHAPTERS = [
   {id:'bevezetes', label:'Bevezetés', subsections:[]},
   {id:'menete', label:'A számítás menete', subsections:[
-    {id:'me-1', label:'1. EC7 határállapotok'},
-    {id:'me-2', label:'2. Törési mechanizmus'},
-    {id:'me-3', label:'3. Teherbírási képlet'},
-    {id:'me-4', label:'4. Hatékony m'},
-    {id:'me-5', label:'5. Drénezetlen eset'},
-    {id:'me-6', label:'6. Külpontosság'},
-    {id:'me-7', label:'7. Talajvíz'},
-    {id:'me-8', label:'8. Megfelelőség'},
+    {id:'me-1', label:'1. Tervezés menete'},
+    {id:'me-2', label:'2. Teherbírás — drénezett'},
+    {id:'me-3', label:'3. Teherbírás — drénezetlen'},
+    {id:'me-4', label:'4. Dolgozó keresztmetszet'},
+    {id:'me-5', label:'5. Talajvíz hatása'},
+    {id:'me-6', label:'6. Elcsúszás'},
+    {id:'me-7', label:'7. Megfelelőség'},
   ]},
   {id:'mintapeldak', label:'Mintapéldák', subsections:[
     {id:'s-mp1', label:'MP1'},
