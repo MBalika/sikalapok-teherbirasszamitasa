@@ -1022,7 +1022,7 @@ function buildCalc(prefix, mode){
   } else {
     loadHTML=sl('Gk','G_k állandó teher',50,5000,10,(mode==='dr'?290:243))
       +sl('Qk','Q_k esetleges teher',0,3000,10,(mode==='dr'?170:70))
-      +sl('Hk','H_k vízszintes erő',0,800,5,(mode==='dr'?30:0));
+      +sl('Hk','H_k vízszintes erő',0,800,5,(mode==='dr'?30:40));
   }
   const layerHTML=(n)=>{
     const d=(n===1)
@@ -1163,8 +1163,7 @@ function buildCalc(prefix, mode){
       const tcoh=(2+Math.PI)*cub*bc*sc*ic;
       RkA=tcoh+q; Rk=RkA*Ap; Rd=Rk/1.4;
       extra=`<b>5.</b> A talp alatti réteg (<b>${layB}. réteg</b>) drénezetlen nyírószilárdsága, átlagolás nélkül: c<sub>u</sub> = <b>${fmt(cub,0)} kPa</b><br>
-      <b>6.</b> s<sub>c</sub>=${fmt(sc,2)} · b<sub>c</sub>=${fmt(bc,2)} · i<sub>c</sub>=${fmt(ic,3)}<br>
-      <b>7.</b> σ<sub>t</sub> = (2+π)·c<sub>u</sub>·s<sub>c</sub>·i<sub>c</sub> + q′ = ${fmt(tcoh,0)} + ${fmt(q,0)} = <b>${fmt(RkA,0)} kPa</b>`;
+      <b>6.</b> s<sub>c</sub>=${fmt(sc,2)} · b<sub>c</sub>=${fmt(bc,2)} · i<sub>c</sub>=${fmt(ic,3)}`;
     }
     const ok=Rd>=Vd;
     drawFig(figP);
@@ -1179,7 +1178,7 @@ function buildCalc(prefix, mode){
       <b>3.</b> γ′ az alap alatt — talajvíz: t<sub>wd</sub> = gw − D = ${fmt(gw,1)} − ${fmt(D,1)} = <b>${fmt(twd,2)} m</b>; ${gpCase} → γ′ = <b>${fmt(gpb,1)} kN/m³</b><br>
       <b>4.</b> q′ hatékony geosztatikus nyomás az alapsíkon (víz felett γ, alatta γ_sat−γ_w) = <b>${fmt(q,1)} kPa</b><br>
       ${extra}<br>
-      <b>8.</b> R<sub>k</sub> = ${fmt(RkA,0)}·A′ = ${fmt(Rk,0)} → R<sub>d</sub> = R<sub>k</sub>/1,4 = <b>${fmt(Rd,0)}${u}</b>
+      <b>${mode==='dr'?8:7}.</b> R<sub>k</sub> = ${fmt(RkA,0)}·A′ = ${fmt(Rk,0)} → R<sub>d</sub> = R<sub>k</sub>/1,4 = <b>${fmt(Rd,0)}${u}</b>
       <div class="verdict ${ok?'ok':'fail'}" style="margin-top:10px"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub> = ${fmt(Rd,0)}${u} ${ok?'≥':'&lt;'} V<sub>d</sub> = ${fmt(Vd,0)}${u}</div>`;
   }
   function drawFig(p){
