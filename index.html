@@ -1008,6 +1008,107 @@ figure svg{width:100%;height:auto;display:block}
       </div>
     </div>
   </section>
+
+  <!-- ===== MP6 (nagyobb külpontosság) ===== -->
+  <section class="subsection" id="s-mp6">
+    <h2>Mintapélda 6 — A külpontosság növelésének hatása</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ugyanaz a <b>sávalap</b>, mint az MP3-ban — minden adat változatlan: B = 1,3 m, b = 0,3 m, h = 1,0 m, t = 0,4 m, t<sub>fill</sub> = 1,1 m, γ<sub>b</sub> = 25; G<sub>z,k</sub> = 250, Q<sub>z,k</sub> = 170, G<sub>x,k</sub> = 30 kN/m; talajvíz 0,6 m-rel az alapsík fölött; Sa feltöltés és siSa termett talaj. <b>Az egyetlen különbség:</b> a Q<sub>z,k</sub> teher külpontossága e<sub>q</sub> = 0,3 m-ről <b>0,5 m-re (50 cm-re) nő</b>. <b>Kérdés: hogyan változik R<sub>d</sub>?</b></p>
+        </div>
+        <span class="task-num">MP6</span>
+      </div>
+    </div>
+
+    <h3>Ábra</h3>
+    <figure>
+      <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p6g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p6r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p6d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="175" width="660" height="110" fill="#F2E14A"/>
+        <rect x="30" y="285" width="660" height="103" fill="#F0A92E"/>
+        <rect x="30" y="169" width="660" height="6" fill="url(#p6g)"/>
+        <line x1="30" y1="175" x2="690" y2="175" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="165" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <line x1="30" y1="285" x2="690" y2="285" stroke="#9A6B1E" stroke-width="1.4"/>
+        <line x1="90" y1="255" x2="245" y2="255" stroke="#1E78C8" stroke-width="2"/>
+        <path d="M111,249 l14,0 l-7,7 z" fill="#1E78C8"/>
+        <text x="92" y="249" font-family="Inter" font-size="9" fill="#1E78C8">talajvíz</text>
+        <rect x="303" y="75" width="35" height="140" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <rect x="245" y="215" width="150" height="100" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="352" y="305" font-family="Inter" font-size="10.5" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan>=25 kN/m³</text>
+        <line x1="262" y1="18" x2="262" y2="213" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p6r)" stroke-linecap="round"/>
+        <line x1="320" y1="18" x2="320" y2="213" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p6r)" stroke-linecap="round"/>
+        <text x="256" y="38" font-family="Fraunces" font-size="11.5" fill="#222" font-weight="700" text-anchor="end">Q<tspan baseline-shift="sub" font-size="8">z,k</tspan>=170 kN/m</text>
+        <text x="256" y="56" font-family="Fraunces" font-size="10.5" fill="#222" font-weight="700" text-anchor="end">e<tspan baseline-shift="sub" font-size="7">q</tspan>=0,5 m</text>
+        <text x="360" y="30" font-family="Fraunces" font-size="11.5" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=250 kN/m</text>
+        <line x1="262" y1="58" x2="320" y2="58" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <line x1="250" y1="216" x2="348" y2="216" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p6r)" stroke-linecap="round"/>
+        <text x="298" y="238" font-family="Fraunces" font-size="11" fill="#222" font-weight="700" text-anchor="middle">G<tspan baseline-shift="sub" font-size="8">x,k</tspan>=30 kN/m</text>
+        <line x1="303" y1="135" x2="338" y2="135" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="346" y="139" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">b=0,3m</text>
+        <line x1="225" y1="175" x2="225" y2="215" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="219" y="199" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">t=0,4m</text>
+        <line x1="225" y1="215" x2="225" y2="315" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="219" y="268" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=1,0m</text>
+        <line x1="100" y1="255" x2="100" y2="315" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="94" y="289" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h<tspan baseline-shift="sub" font-size="7">MTV</tspan>=0,6m</text>
+        <line x1="620" y1="175" x2="620" y2="285" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="628" y="234" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1,1m</text>
+        <line x1="245" y1="330" x2="395" y2="330" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p6d)" marker-end="url(#p6d)"/>
+        <text x="320" y="345" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 1,3 m</text>
+        <text x="470" y="238" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sa feltöltés</text>
+        <text x="470" y="253" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=19 · φ=30° · c=5</text>
+        <text x="540" y="335" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
+        <text x="540" y="350" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20 · φ=26° · c=30</text>
+        <text x="45" y="360" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sávalap</text>
+        <text x="45" y="375" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">L ≫ B</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Terhelési oldal — változatlan</h4>
+      <p>G<sub>k</sub> = 250 + 7,2 + 32,5 = <b>289,7 kN/m</b>; &nbsp; V<sub>d</sub> = 1,35·289,7 + 1,5·170 = <b>646,1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(a teher nagysága nem változik)</span></p>
+    </div>
+    <div class="step"><h4>2. Külpontosság — <u>ez nő!</u></h4>
+      <p>A nagyobb e<sub>q</sub> miatt a Q nyomatéka (170·0,5 = 85) most már <b>nagyobb</b>, mint a G<sub>x</sub> nyomatéka (30·1,0 = 30):</p>
+      <p>e<sub>B</sub> = |H<sub>k</sub>·h − Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1,0 − 170·0,5|/459,7 = 55/459,7 = <b>0,120 m</b> &nbsp;<span style="color:var(--ink-mute)">(MP3-ban 0,046 m volt)</span></p>
+      <p>B′ = 1,3 − 2·0,120 = <b>1,06 m</b>; &nbsp; A′ = 1,06 m²/m &nbsp;<span style="color:var(--ink-mute)">(MP3-ban 1,208 m volt)</span></p>
+    </div>
+    <div class="step"><h4>3. q′, γ′ és a tényezők — változatlanok</h4>
+      <p>q′ = 20,1 kPa; γ′ = 10 kN/m³; φ = 26° → N<sub>q</sub>=11,85, N<sub>c</sub>=22,25, N<sub>γ</sub>=10,59; i<sub>γ</sub>≈0,84, i<sub>q</sub>≈0,89, i<sub>c</sub>≈0,88.</p>
+    </div>
+    <div class="step"><h4>4. Ellenállás a kisebb B′-vel</h4>
+      <p>R<sub>k</sub>/A′ = 0,5·10·1,06·10,59·0,84 + 20,1·11,85·0,89 + 30·22,25·0,88 ≈ 47 + 212 + 587 = <b>845 kPa</b></p>
+      <p>R<sub>k</sub> = 845·1,06 = 896 kN/m → R<sub>d</sub> = 896/1,4 = <b>640 kN/m</b></p>
+    </div>
+    <div class="callout warn"><b>Eredmény:</b> R<sub>d</sub> = 640 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>épphogy NEM FELEL MEG!</b> &nbsp; A nagyobb külpontosság miatt R<sub>d</sub> <b>csökkent</b> (MP3: 736 → MP6: 640 kN/m): nagyobb e<sub>q</sub> → nagyobb e<sub>B</sub> → kisebb dolgozó szélesség (B′) → kisebb teherbírás.</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp6">
+      <div class="calc-head"><h3>MP6 — nagyobb e<sub>q</sub> külpontosság</h3><span class="calc-tag">GEO</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp6-B" value="1.3" step="0.05"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp6-q" value="20.1" step="0.5"></div>
+          <div class="cr"><label>G<sub>z,k</sub> központos (kN/m)</label><input type="number" id="mp6-Gz" value="250" step="10"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp6-gp" value="10" step="0.5"></div>
+          <div class="cr"><label>Q<sub>z,k</sub> külpontos (kN/m)</label><input type="number" id="mp6-Qz" value="170" step="10"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp6-phi" value="26" step="1"></div>
+          <div class="cr"><label>e<sub>q</sub> a Q külpontossága (m)</label><input type="number" id="mp6-eq" value="0.5" step="0.05"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp6-c" value="30" step="1"></div>
+          <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp6-Gx" value="30" step="5"></div>
+        </div>
+        <p class="calc-note">Húzd az e<sub>q</sub> mezőt 0,3-ra, hogy lásd az MP3 esetét (R<sub>d</sub> = 736). Állandók: b=0,3 · h=1,0 · t=0,4 m · γ<sub>feltöltés</sub>=18 · γ<sub>b</sub>=25 kN/m³ · sávalap.</p>
+        <div class="calc-results" id="mp6-res"></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ===================== KALKULÁTOROK ===================== -->
@@ -1060,6 +1161,7 @@ const CHAPTERS = [
     {id:'s-mp3', label:'MP3'},
     {id:'s-mp4', label:'MP4'},
     {id:'s-mp5', label:'MP5'},
+    {id:'s-mp6', label:'MP6'},
   ]},
   {id:'kalkulator', label:'Kalkulátorok', subsections:[
     {id:'kk-drenezett', label:'Drénezett'},
@@ -1448,7 +1550,26 @@ function calcMP5(){
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
-[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5]].forEach(([p,fn])=>{
+function calcMP6(){
+  const B=num('mp6-B'),Gz=num('mp6-Gz'),Qz=num('mp6-Qz'),eq=num('mp6-eq'),Gx=num('mp6-Gx'),q=num('mp6-q'),gp=num('mp6-gp'),phi=num('mp6-phi'),c=num('mp6-c');
+  const Gf=(B-0.3)*0.4*18, Gb=B*1.0*25, Gk=Gz+Gf+Gb, Vd=1.35*Gk+1.5*Qz;
+  const Vk=Gk+Qz, Hk=Gx;
+  const eB=Math.abs(Hk*1.0-Qz*eq)/Vk, Bp=Math.max(B-2*eB,0.05);
+  const N=nFactors(phi);
+  const cot=phi>0?1/Math.tan(deg2rad(phi)):0;
+  const f=Hk/(Vk+Bp*c*cot);
+  const ig=Math.pow(Math.max(1-f,0),3), iq=Math.pow(Math.max(1-f,0),2), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
+  const tw=0.5*gp*Bp*N.Ng*ig, td=q*N.Nq*iq, tc=c*N.Nc*ic, RkA=tw+td+tc, Rk=RkA*Bp, Rd=Rk/1.4;
+  document.getElementById('mp6-res').innerHTML='<h4>Eredmény (nagyobb e<sub>q</sub>)</h4>'+
+    rr('V<sub>d</sub> tervezési teher', fmt(Vd,0)+' kN/m')+
+    rr('e<sub>B</sub> = |H·h − Q·e<sub>q</sub>|/V<sub>k</sub> → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
+    rr('f teher-ferdeségi paraméter', fmt(f,3),true)+
+    rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
+    rr('R<sub>k</sub>/A′ = szél. + mély. + kohéz.', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
+}
+[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
 });
 /* ===================== INDÍTÁS ===================== */
