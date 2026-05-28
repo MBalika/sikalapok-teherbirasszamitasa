@@ -1215,6 +1215,132 @@ figure svg{width:100%;height:auto;display:block}
       </div>
     </div>
   </section>
+
+  <!-- ===== MP8 (pilléralap, két irány) ===== -->
+  <section class="subsection" id="s-mp8">
+    <h2>Mintapélda 8 — Pilléralap, két irányban vizsgálva</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ellenőrizd a <b>pilléralapot</b> (B = 2,0 m, L = 1,5 m) talajtöréssel szemben, drénezett esetben! Pillér: b = l = 0,4 m; h = 1,2 m; t = 0,4 m; t<sub>fill</sub> = 1,5 m; γ<sub>b</sub> = 25. Terhek: <b>G<sub>z,k</sub> = 1000 kN</b> (központos) és <b>Q<sub>x,k</sub> = 100 kN</b> vízszintes erő (a B oldallal párhuzamos). A talajvíz az alapsík fölött 0,6 m-rel (h<sub>MTV</sub>). <b>Sa feltöltés:</b> γ=18, γ<sub>sat</sub>=19, φ=30°, c=5; <b>saGr termett talaj:</b> γ=19, γ<sub>sat</sub>=20, φ=32°, c=0. Mivel a vízszintes teher a hosszabb oldalt „gyengíti", <b>mindkét irányt (B és L) vizsgálni kell</b>.</p>
+        </div>
+        <span class="task-num">MP8</span>
+      </div>
+    </div>
+
+    <h3>Ábra — keresztmetszet</h3>
+    <figure>
+      <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p8g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p8r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p8d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="115" width="660" height="135" fill="#F2E14A"/>
+        <rect x="30" y="250" width="660" height="90" fill="#F0A92E"/>
+        <rect x="30" y="109" width="660" height="6" fill="url(#p8g)"/>
+        <line x1="30" y1="115" x2="690" y2="115" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="105" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <line x1="30" y1="250" x2="690" y2="250" stroke="#9A6B1E" stroke-width="1.4"/>
+        <line x1="90" y1="205" x2="210" y2="205" stroke="#1E78C8" stroke-width="2"/>
+        <path d="M111,199 l14,0 l-7,7 z" fill="#1E78C8"/>
+        <text x="92" y="199" font-family="Inter" font-size="9" fill="#1E78C8">talajvíz</text>
+        <rect x="282" y="40" width="36" height="111" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <rect x="210" y="151" width="180" height="108" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="345" y="240" font-family="Inter" font-size="10.5" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan>=25 kN/m³</text>
+        <line x1="300" y1="16" x2="300" y2="149" stroke="#E0281C" stroke-width="4.8" marker-end="url(#p8r)" stroke-linecap="round"/>
+        <text x="308" y="30" font-family="Fraunces" font-size="12" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=1000 kN</text>
+        <line x1="252" y1="153" x2="352" y2="153" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p8r)" stroke-linecap="round"/>
+        <text x="300" y="174" font-family="Fraunces" font-size="11" fill="#222" font-weight="700" text-anchor="middle">Q<tspan baseline-shift="sub" font-size="8">x,k</tspan>=100 kN</text>
+        <line x1="282" y1="78" x2="318" y2="78" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="326" y="82" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">b=l=0,4m</text>
+        <line x1="190" y1="115" x2="190" y2="151" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="184" y="137" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">t=0,4m</text>
+        <line x1="190" y1="151" x2="190" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="184" y="209" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=1,2m</text>
+        <line x1="100" y1="205" x2="100" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="94" y="236" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h<tspan baseline-shift="sub" font-size="7">MTV</tspan>=0,6m</text>
+        <line x1="620" y1="115" x2="620" y2="250" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="628" y="186" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1,5m</text>
+        <line x1="210" y1="274" x2="390" y2="274" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p8d)" marker-end="url(#p8d)"/>
+        <text x="300" y="288" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <text x="470" y="160" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sa feltöltés</text>
+        <text x="470" y="175" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=19 · φ=30° · c=5</text>
+        <text x="470" y="305" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">saGr termett talaj</text>
+        <text x="470" y="320" font-family="Inter" font-size="9" fill="#6B6052">γ=19 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20 · φ=32° · c=0</text>
+        <text x="45" y="328" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Pilléralap (L = 1,5 m)</text>
+      </svg>
+    </figure>
+
+    <h3>Ábra — alaprajzi nézet</h3>
+    <figure style="max-width:440px">
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="p8pr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p8pd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="90" y="70" width="210" height="157" fill="#C9C0AE" stroke="#3D2A1A" stroke-width="1.6"/>
+        <rect x="174" y="127" width="42" height="42" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.3"/>
+        <line x1="120" y1="148" x2="278" y2="148" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p8pr)" stroke-linecap="round"/>
+        <circle cx="195" cy="148" r="6.5" fill="#E0281C" stroke="#8F3A1B" stroke-width="1.2"/>
+        <text x="120" y="120" font-family="Fraunces" font-size="11" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=1000 kN</text>
+        <text x="250" y="140" font-family="Fraunces" font-size="11" fill="#222" font-weight="700">Q<tspan baseline-shift="sub" font-size="8">x,k</tspan>=100 kN</text>
+        <line x1="90" y1="56" x2="300" y2="56" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8pd)" marker-end="url(#p8pd)"/>
+        <text x="195" y="50" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <line x1="316" y1="70" x2="316" y2="227" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p8pd)" marker-end="url(#p8pd)"/>
+        <text x="324" y="152" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L = 1,5 m</text>
+        <text x="195" y="252" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">alaprajzi nézet</text>
+        <text x="195" y="278" font-family="Inter" font-size="9.5" fill="#8F3A1B" text-anchor="middle" font-style="italic">a vizsgálatot B és L irányban is el kell végezni</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Alapsíkon működő függőleges teher</h4>
+      <p>Feltöltés: G<sub>f,k</sub> = (B·L − b·l)·t·γ = (2·1,5 − 0,4·0,4)·0,4·18 = <b>20,5 kN</b>; &nbsp; Alaptest: G<sub>b,k</sub> = B·L·h·γ<sub>b</sub> = 2·1,5·1,2·25 = <b>90 kN</b></p>
+      <p>G<sub>k</sub> = 1000 + 20,5 + 90 = <b>1110,5 kN</b>; &nbsp; V<sub>d</sub> = 1,35·1110,5 + 1,5·0 = <b>1499 kN</b> &nbsp;<span style="color:var(--ink-mute)">(a felhajtóerőt elhanyagoljuk)</span></p>
+    </div>
+    <div class="step"><h4>2. Az eredő erő külpontossága</h4>
+      <p>V<sub>k</sub> = G<sub>k</sub> = 1110,5 kN; &nbsp; H<sub>k</sub> = Q<sub>x,k</sub> = 100 kN</p>
+      <p>e<sub>B</sub> = (H<sub>k</sub>·h)/V<sub>k</sub> = (100·1,2)/1110,5 = <b>0,11 m</b>; &nbsp; e<sub>L</sub> = 0</p>
+      <p>B′ = 2,0 − 2·0,11 = <b>1,78 m</b>; &nbsp; L′ = 1,5 m; &nbsp; A′ = 1,78·1,5 = <b>2,67 m²</b></p>
+    </div>
+    <div class="step"><h4>3. q′ és γ′ (talajvízzel)</h4>
+      <p>q′ = 18·1,0 + (19−10)·0,5 + (20−10)·0,1 = 18 + 4,5 + 1,0 = <b>23,5 kPa</b></p>
+      <p>A talajvíz az alapsík fölött → t<sub>wd</sub>/B′ &lt; 0,5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b></p>
+    </div>
+    <div class="step"><h4>4. Teherbírási tényezők (saGr: φ = 32°, c = 0)</h4>
+      <p>N<sub>q</sub> = 23,17; N<sub>c</sub> = 35,48; N<sub>γ</sub> = 27,71. &nbsp; Vízszintes alapsík → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
+    </div>
+    <div class="step"><h4>5. Mindkét irány vizsgálata</h4>
+      <p><b>B oldal</b> (a Q<sub>x</sub> ezt gyengíti — mértékadó): s<sub>γ</sub>=0,64, s<sub>q</sub>=1,65, s<sub>c</sub>=1,68; &nbsp; f = H<sub>k</sub>/V<sub>k</sub> = 0,09 → i<sub>γ</sub>=0,793, i<sub>q</sub>=0,871, i<sub>c</sub>=0,865.</p>
+      <p>R<sub>k</sub>/A′ = 0,5·10·1,78·27,71·0,64·0,793 + 23,5·23,17·1,65·0,871 + 0 = 125 + 782 + 0 = <b>907,7 kPa</b></p>
+      <p>R<sub>k,B</sub> = 907,7·2,67 = 2424 kN → R<sub>d,B</sub> = 2424/1,4 = <b>1731 kN</b></p>
+      <p><b>L oldal:</b> s<sub>γ</sub>=0,75, s<sub>q</sub>=1,46, s<sub>c</sub>=1,48; a vízszintes teher B-vel párhuzamos, ezért L irányban i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. A mértékadó tehát a <b>B oldal</b>.</p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1731 kN &gt; V<sub>d</sub> = 1499 kN → <b>MEGFELEL.</b> ✓ &nbsp; A mértékadó a B oldal, mert a vízszintes Q<sub>x</sub> ezzel az iránnyal párhuzamos (i &lt; 1).</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp8">
+      <div class="calc-head"><h3>MP8 — pilléralap, B oldal (mértékadó)</h3><span class="calc-tag">GEO</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp8-B" value="2.0" step="0.1"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp8-q" value="23.5" step="0.5"></div>
+          <div class="cr"><label>L hossz (m)</label><input type="number" id="mp8-L" value="1.5" step="0.1"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp8-gp" value="10" step="0.5"></div>
+          <div class="cr"><label>G<sub>k</sub> állandó teher (kN)</label><input type="number" id="mp8-Gk" value="1110.5" step="10"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp8-phi" value="32" step="1"></div>
+          <div class="cr"><label>Q<sub>z,k</sub> esetleges (kN)</label><input type="number" id="mp8-Qz" value="0" step="10"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp8-c" value="0" step="1"></div>
+          <div class="cr"><label>H<sub>k</sub> = Q<sub>x,k</sub> vízszintes (kN)</label><input type="number" id="mp8-Hk" value="100" step="10"></div>
+          <div class="cr"><label>h alaptest magasság (m)</label><input type="number" id="mp8-h" value="1.2" step="0.1"></div>
+        </div>
+        <p class="calc-note">A vízszintes erő a B oldallal párhuzamos; az alaki (s) és ferdeségi (i) tényezők figyelembe vannak véve. A B oldal a mértékadó.</p>
+        <div class="calc-results" id="mp8-res"></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ===================== KALKULÁTOROK ===================== -->
@@ -1269,6 +1395,7 @@ const CHAPTERS = [
     {id:'s-mp5', label:'MP5'},
     {id:'s-mp6', label:'MP6'},
     {id:'s-mp7', label:'MP7'},
+    {id:'s-mp8', label:'MP8'},
   ]},
   {id:'kalkulator', label:'Kalkulátorok', subsections:[
     {id:'kk-drenezett', label:'Drénezett'},
@@ -1695,7 +1822,26 @@ function calcMP7(){
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
-[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7]].forEach(([p,fn])=>{
+function calcMP8(){
+  const B=num('mp8-B'),L=num('mp8-L'),Gk=num('mp8-Gk'),Qz=num('mp8-Qz'),Hk=num('mp8-Hk'),h=num('mp8-h'),q=num('mp8-q'),gp=num('mp8-gp'),phi=num('mp8-phi'),c=num('mp8-c');
+  const Vk=Gk+Qz, Vd=1.35*Gk+1.5*Qz;
+  const eB=Vk>0?Hk*h/Vk:0, Bp=Math.max(B-2*eB,0.05), Lp=L, BL=Bp/Lp;
+  const N=nFactors(phi);
+  const sg=Math.max(1-0.3*BL,0.1), sq=1+BL*Math.sin(deg2rad(phi)), sc=N.Nq>1?(sq*N.Nq-1)/(N.Nq-1):1;
+  const cot=phi>0?1/Math.tan(deg2rad(phi)):0;
+  const f=Hk/(Vk+Bp*Lp*c*cot), m=(2+BL)/(1+BL);
+  const ig=Math.pow(Math.max(1-f,0),m+1), iq=Math.pow(Math.max(1-f,0),m), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
+  const tw=0.5*gp*Bp*N.Ng*sg*ig, td=q*N.Nq*sq*iq, tc=c*N.Nc*sc*ic, RkA=tw+td+tc, Rk=RkA*Bp*Lp, Rd=Rk/1.4;
+  document.getElementById('mp8-res').innerHTML='<h4>Eredmény (B oldal mértékadó)</h4>'+
+    rr('V<sub>d</sub> tervezési teher', fmt(Vd,0)+' kN')+
+    rr('e<sub>B</sub> = H<sub>k</sub>·h/V<sub>k</sub> → B′ × L′', fmt(eB,3)+' m → '+fmt(Bp,2)+' × '+fmt(Lp,2)+' m',true)+
+    rr('s<sub>γ</sub> / s<sub>q</sub> / s<sub>c</sub> alaki tény.', fmt(sg,2)+' / '+fmt(sq,2)+' / '+fmt(sc,2),true)+
+    rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub> ferdeségi tény.', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
+    rr('R<sub>k</sub>/A′', fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN');
+}
+[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
 });
 /* ===================== INDÍTÁS ===================== */
