@@ -93,6 +93,10 @@ table.dt td{padding:7px 11px;border-bottom:1px solid var(--line)}
 table.dt tr:nth-child(even) td{background:#F8F5F0}
 table.dt.num td{font-family:'JetBrains Mono';font-size:0.86rem;text-align:right}
 table.dt.num td:first-child{text-align:left;font-family:'Inter'}
+table.dt.num th{text-align:right;font-variant-numeric:tabular-nums}
+table.dt.num th:first-child{text-align:left}
+table.dt.mc th,table.dt.mc td{text-align:center}
+table.dt.mc th:first-child,table.dt.mc td:first-child{text-align:left}
 .foot{margin-top:60px;padding:24px 28px;background:var(--steel-dk);color:#CDC2B2;font-size:0.84rem;text-align:center}
 .foot a{color:var(--gold)}
 .chapter-page{display:none}
@@ -156,7 +160,7 @@ figure svg{width:100%;height:auto;display:block}
 
   <div class="hero">
     <h1>Síkalapok teherbírásszámítása</h1>
-    <p class="subtitle">A sáv- és pilléralapok talajtöréssel szembeni ellenállásának meghatározása az Eurocode 7 szerint — a gyakorlati órákon bemutatott mintapéldákon keresztül, interaktív kalkulátorokkal.</p>
+    <p class="subtitle">A sáv- és&nbsp;pilléralapok talajtöréssel szembeni ellenállásának meghatározása az&nbsp;Eurocode&nbsp;7 szerint — a&nbsp;gyakorlati órákon bemutatott mintapéldákon keresztül, interaktív kalkulátorokkal.</p>
     <div class="meta">
       <span><b>Tárgy</b> Alapozás BSc · BMEEOGMAT45</span>
     </div>
@@ -165,13 +169,12 @@ figure svg{width:100%;height:auto;display:block}
   <section class="subsection" id="b-utmutato">
     <h2>Útmutató ehhez az anyaghoz</h2>
     <div class="panel">
-      <p>A felső sávban a <b>fő fejezetek</b> között válthatsz, az alattuk megjelenő almenüvel pedig az adott fejezet szakaszai között. A bevezetésen túl három tartalmi fejezet épül egymásra:</p>
+      <p>A felső sávban a&nbsp;<b>fő fejezetek</b> között válthatsz, az&nbsp;alattuk megjelenő almenüvel pedig az&nbsp;adott fejezet szakaszai között. A&nbsp;bevezetésen túl három tartalmi fejezet épül egymásra:</p>
       <ol style="padding-left:22px;line-height:1.9">
-        <li><b>A számítás menete</b> — a tervezés menete, majd a síkalap talajtöréssel szembeni <b>teherbírásának</b> teljes képlete <b>drénezett</b> és <b>drénezetlen</b> esetre, a dolgozó keresztmetszet és a talajvíz kezelése, végül az <b>elcsúszás-vizsgálat</b> (drénezett és drénezetlen) és a megfelelőség igazolása.</li>
-        <li><b>Mintapéldák</b> — a gyakorlati anyag alapján rekonstruált, lépésről-lépésre levezetett példák: központos és külpontos, függőleges és ferde teher, a talajvíz hatása és mélysége, valamint a vízszintes erő irányának hatása.</li>
-        <li><b>Kalkulátorok</b> — interaktív teherbírás-kalkulátor: állítható geometria, terhek és talajparaméterek; az ábra léptékhelyesen frissül, a program kiszámítja az R<sub>d</sub> tervezési ellenállást és összeveti a V<sub>d</sub> tervezési teherrel.</li>
+        <li><b>A számítás menete</b> — a&nbsp;tervezés menete, majd a&nbsp;síkalap talajtöréssel szembeni <b>teherbírásának</b> teljes képlete <b>drénezett</b> és&nbsp;<b>drénezetlen</b> esetre, a&nbsp;dolgozó keresztmetszet és&nbsp;a&nbsp;talajvíz kezelése, végül az&nbsp;<b>elcsúszás-vizsgálat</b> (drénezett és&nbsp;drénezetlen) és&nbsp;a&nbsp;megfelelőség igazolása.</li>
+        <li><b>Mintapéldák</b> — a&nbsp;gyakorlati anyag alapján rekonstruált, lépésről-lépésre levezetett <b>11 példa</b>: drénezett és&nbsp;drénezetlen sáv- és&nbsp;pilléralap, központos és&nbsp;külpontos, függőleges és&nbsp;ferde teher, a&nbsp;talajvíz hatása és&nbsp;mélysége, a&nbsp;vízszintes erő irányának hatása, a&nbsp;szükséges alapszélesség, valamint az&nbsp;<b>elcsúszás-vizsgálat</b> (drénezett és&nbsp;drénezetlen) passzív földellenállással.</li>
+        <li><b>Kalkulátorok</b> — három interaktív kalkulátor (drénezett, drénezetlen, elcsúszás): állítható geometria, terhek és&nbsp;talajparaméterek; az&nbsp;ábra léptékhelyesen frissül, a&nbsp;program kiszámítja az&nbsp;R<sub>d</sub> tervezési ellenállást és&nbsp;összeveti a&nbsp;V<sub>d</sub> tervezési teherrel.</li>
       </ol>
-      <p style="margin-bottom:0;color:var(--ink-mute);font-size:0.95rem">A teherbírási megfelelőség alapfeltétele: <span class="inline-math">V<sub>d</sub> &le; R<sub>d</sub></span> — a tervezési teher nem lépheti túl a tervezési ellenállást.</p>
     </div>
   </section>
 </div>
@@ -181,46 +184,46 @@ figure svg{width:100%;height:auto;display:block}
 
   <section class="subsection" id="me-1">
     <h2>1. A tervezés menete</h2>
-    <p>A síkalap tervezése egymásra épülő lépésekből áll. Ez a fejezet ezek közül a <b>teherbírás (talajtörés)</b> és az <b>elcsúszás</b> elméletét részletezi — drénezett és drénezetlen esetre egyaránt.</p>
+    <p>A&nbsp;síkalap tervezése egymásra épülő lépésekből áll. Ez a&nbsp;fejezet ezek közül a&nbsp;<b>teherbírás (talajtörés)</b> és&nbsp;az&nbsp;<b>elcsúszás</b> elméletét részletezi — drénezett és&nbsp;drénezetlen esetre egyaránt.</p>
     <div class="panel" style="margin:8px 0">
       <h3 style="margin-top:0">A tervezés szokásos menete</h3>
       <ol style="padding-left:22px;line-height:1.95">
-        <li>az <b>alapozási sík</b> felvétele (teherbíró réteg, talajvíz, fagyhatár)</li>
-        <li>az <b>alaptípus</b> kiválasztása</li>
-        <li>az <b>alapszélesség</b> meghatározása — talajtörés (teherbírás) és süllyedés ellenőrzéssel</li>
-        <li>az <b>alapszerkezet</b> méretezése (anyag, magasság, vasalás)</li>
-        <li>az <b>állékonyság</b> ellenőrzése — elcsúszás, felborulás, felúszás</li>
+        <li>az&nbsp;<b>alapozási sík</b> felvétele (teherbíró réteg, talajvíz, fagyhatár)</li>
+        <li>az&nbsp;<b>alaptípus</b> kiválasztása</li>
+        <li>az&nbsp;<b>alapszélesség</b> meghatározása — talajtörés (teherbírás) és&nbsp;süllyedés ellenőrzéssel</li>
+        <li>az&nbsp;<b>alapszerkezet</b> méretezése (anyag, magasság, vasalás)</li>
+        <li>az&nbsp;<b>állékonyság</b> ellenőrzése — elcsúszás, felborulás, felúszás</li>
       </ol>
     </div>
-    <div class="callout">A fejezet felépítése: előbb a <b>teherbírás-számítás</b> (talajtörési ellenállás) drénezett és drénezetlen esetre, majd a <b>dolgozó keresztmetszet</b> és a <b>talajvíz</b> kezelése, végül az <b>elcsúszás-vizsgálat</b> (drénezett és drénezetlen) és a megfelelőség igazolása.</div>
+    <div class="callout">A fejezet felépítése: előbb a&nbsp;<b>teherbírás-számítás</b> (talajtörési ellenállás) drénezett és&nbsp;drénezetlen esetre, majd a&nbsp;<b>dolgozó keresztmetszet</b> és&nbsp;a&nbsp;<b>talajvíz</b> kezelése, végül az&nbsp;<b>elcsúszás-vizsgálat</b> (drénezett és&nbsp;drénezetlen) és&nbsp;a&nbsp;megfelelőség igazolása.</div>
   </section>
 
   <section class="subsection" id="me-2">
     <h2>2. Teherbírás-számítás — drénezett eset</h2>
-    <p>A <b>drénezett</b> eset a lassú terhelésre / szemcsés talajra jellemző: a talaj nyírószilárdsága a <span class="inline-math">φ – c</span> értékpárral írható le, a víz felhajtóerejének kedvező hatása figyelembe vehető. A síkalap talajtöréssel szembeni ellenállása az EC7 (MSZ EN 1997-1) szerint:</p>
+    <p>A <b>drénezett</b> eset a&nbsp;lassú terhelésre / szemcsés talajra jellemző: a&nbsp;talaj nyírószilárdsága a&nbsp;<span class="inline-math">φ – c</span> értékpárral írható le, a&nbsp;víz felhajtóerejének kedvező hatása figyelembe vehető. A&nbsp;síkalap talajtöréssel szembeni ellenállása az&nbsp;EC7 (MSZ&nbsp;EN&nbsp;1997-1) szerint:</p>
     <div class="callout formula" style="text-align:center;font-size:0.98rem">
       R<sub>k</sub> / (B′·L′) = 0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> &nbsp;+&nbsp; q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> &nbsp;+&nbsp; c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>
     </div>
     <div class="grid c3">
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--rebar)">
         <h4 style="margin-top:0">Szélességi tag</h4>
-        <p style="font-size:0.9rem;margin:0">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az alaptest szélessége és az alatta lévő talaj súlya adja</span></p>
+        <p style="font-size:0.9rem;margin:0">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alaptest szélessége és&nbsp;az&nbsp;alatta lévő talaj súlya adja</span></p>
       </div>
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--steel)">
         <h4 style="margin-top:0">Mélységi tag</h4>
-        <p style="font-size:0.9rem;margin:0">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az alapsík melletti q′ geosztatikus nyomás (alapozási mélység) hatása</span></p>
+        <p style="font-size:0.9rem;margin:0">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alapsík melletti q′ geosztatikus nyomás (alapozási mélység) hatása</span></p>
       </div>
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)">
         <h4 style="margin-top:0">Kohéziós tag</h4>
-        <p style="font-size:0.9rem;margin:0">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">a talaj kohéziójából származó ellenállás</span></p>
+        <p style="font-size:0.9rem;margin:0">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">a&nbsp;talaj kohéziójából származó ellenállás</span></p>
       </div>
     </div>
     <h3>Bemenő paraméterek</h3>
     <ul class="bullet">
-      <li><b>γ′</b> — az alap alatti talaj hatékony térfogatsúlya</li>
-      <li><b>B / L</b> — az alaptest tényleges szélessége / hossza; <b>B′ / L′</b> — a dolgozó (hatékony) keresztmetszet méretei</li>
-      <li><b>q′</b> — az alapsíkon az alap mellett működő hatékony geosztatikus nyomás</li>
-      <li><b>c</b> — az alap alatti talaj kohéziója; <b>φ</b> — belső súrlódási szöge</li>
+      <li><b>γ′</b> — az&nbsp;alap alatti talaj hatékony térfogatsúlya</li>
+      <li><b>B / L</b> — az&nbsp;alaptest tényleges szélessége / hossza; <b>B′ / L′</b> — a&nbsp;dolgozó (hatékony) keresztmetszet méretei</li>
+      <li><b>q′</b> — az&nbsp;alapsíkon az&nbsp;alap mellett működő hatékony geosztatikus nyomás</li>
+      <li><b>c</b> — az&nbsp;alap alatti talaj kohéziója; <b>φ</b> — belső súrlódási szöge</li>
     </ul>
 
     <h3>Teherbírási (talajtörési ellenállási) tényezők</h3>
@@ -229,7 +232,7 @@ figure svg{width:100%;height:auto;display:block}
       N<sub>γ</sub> = 2 · (N<sub>q</sub> − 1) · tgφ<br>
       N<sub>c</sub> = (N<sub>q</sub> − 1) · ctgφ
     </div>
-    <p>A három tényező kizárólag a belső súrlódási szögtől (φ) függ, és a φ növekedésével rohamosan nő. Néhány jellemző érték:</p>
+    <p>A három tényező kizárólag a&nbsp;belső súrlódási szögtől (φ) függ, és&nbsp;a&nbsp;φ növekedésével rohamosan nő. Néhány jellemző érték:</p>
     <table class="dt num">
       <thead><tr><th>φ [°]</th><th>0</th><th>10</th><th>15</th><th>20</th><th>24</th><th>26</th><th>30</th><th>32</th><th>35</th><th>40</th></tr></thead>
       <tbody>
@@ -242,40 +245,40 @@ figure svg{width:100%;height:auto;display:block}
     <h3>Korrekciós tényezők</h3>
     <div class="grid c3">
       <div class="panel" style="margin:8px 0">
-        <h4 style="margin-top:0">Alaki tényezők (s)</h4>
+        <h4 style="margin-top:0;text-align:center">Alaki tényezők (s)</h4>
         <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
           s<sub>γ</sub> = 1 − 0,3·(B′/L′)<br>
           s<sub>q</sub> = 1 + (B′/L′)·sinφ<br>
           s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Sávalapnál (L ≫ B): s<sub>γ</sub> = s<sub>q</sub> = s<sub>c</sub> ≈ 1.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Sávalapnál (L&nbsp;≫&nbsp;B): s<sub>γ</sub>&nbsp;=&nbsp;s<sub>q</sub>&nbsp;=&nbsp;s<sub>c</sub>&nbsp;≈&nbsp;1.</p>
       </div>
       <div class="panel" style="margin:8px 0">
-        <h4 style="margin-top:0">Teher-ferdeségi tényezők (i)</h4>
+        <h4 style="margin-top:0;text-align:center">Teher-ferdeségi tényezők (i)</h4>
         <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
           i<sub>γ</sub> = (1 − f)<sup>m+1</sup><br>
           i<sub>q</sub> = (1 − f)<sup>m</sup><br>
           i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)<br>
           f = R<sub>h</sub> / (R<sub>v</sub> + B′·L′·c·ctgφ)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Csak függőleges erő esetén R<sub>h</sub> = 0 → f = 0 → i = 1.<br>m: sávalapnál m<sub>B</sub> ≈ 2, pontalapnál 1,5.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Csak függőleges erő esetén R<sub>h</sub>&nbsp;=&nbsp;0&nbsp;→&nbsp;f&nbsp;=&nbsp;0&nbsp;→&nbsp;i&nbsp;=&nbsp;1.<br>m: sávalapnál m<sub>B</sub>&nbsp;≈&nbsp;2, pontalapnál 1,5.</p>
       </div>
       <div class="panel" style="margin:8px 0">
-        <h4 style="margin-top:0">Alapsík-ferdeségi tényezők (b)</h4>
+        <h4 style="margin-top:0;text-align:center">Alapsík-ferdeségi tényezők (b)</h4>
         <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
           b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tgφ)²<br>
           b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tgφ)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Vízszintes alapsík esetén α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Vízszintes alapsík esetén α&nbsp;=&nbsp;0°&nbsp;→&nbsp;b<sub>γ</sub>&nbsp;=&nbsp;b<sub>q</sub>&nbsp;=&nbsp;b<sub>c</sub>&nbsp;≈&nbsp;1.</p>
       </div>
     </div>
     <h3>A teher-ferdeségi kitevő — hatékony m</h3>
-    <p>A teher-ferdeségi (i) tényezőkben szereplő <b>m</b> kitevő a dolgozó keresztmetszet arányától függ, attól függően, hogy a vízszintes erő a B vagy az L oldallal párhuzamos:</p>
+    <p>A teher-ferdeségi (i) tényezőkben szereplő <b>m</b> kitevő a&nbsp;dolgozó keresztmetszet arányától függ, attól függően, hogy a&nbsp;vízszintes erő a&nbsp;B vagy az&nbsp;L oldallal párhuzamos:</p>
     <div class="callout formula">
       m<sub>B</sub> = [2 + (B′/L′)] / [1 + (B′/L′)] &nbsp;&nbsp;(ha a vízszintes erő B-vel párhuzamos)<br>
       m<sub>L</sub> = [2 + (L′/B′)] / [1 + (L′/B′)] &nbsp;&nbsp;(ha az L-lel párhuzamos)
     </div>
-    <table class="dt">
+    <table class="dt mc">
       <thead><tr><th>Alaptípus</th><th>m<sub>B</sub> (B-vel párhuzamos H)</th><th>m<sub>L</sub> (L-lel párhuzamos H)</th></tr></thead>
       <tbody>
         <tr><td>Sávalap (L ≫ B)</td><td>2,0</td><td>1,0</td></tr>
@@ -286,7 +289,7 @@ figure svg{width:100%;height:auto;display:block}
 
   <section class="subsection" id="me-3">
     <h2>3. Teherbírás-számítás — drénezetlen eset</h2>
-    <p>A <b>drénezetlen</b> eset a gyors terhelésre / kötött talajra jellemző: a talaj nyírószilárdságát a <span class="inline-math">c<sub>u</sub></span> drénezetlen nyírószilárdsággal írjuk le, <span class="inline-math">φ = 0</span>. A víz felhajtóerejét <b>nem szabad</b> figyelembe venni — teljes feszültségekkel számolunk.</p>
+    <p>A <b>drénezetlen</b> eset a&nbsp;gyors terhelésre / kötött talajra jellemző: a&nbsp;talaj nyírószilárdságát a&nbsp;<span class="inline-math">c<sub>u</sub></span> drénezetlen nyírószilárdsággal írjuk le, <span class="inline-math">φ&nbsp;=&nbsp;0</span>. A&nbsp;víz felhajtóerejét <b>nem szabad</b> figyelembe venni — teljes feszültségekkel számolunk.</p>
     <div class="callout formula" style="text-align:center;font-size:0.98rem">
       σ<sub>t</sub> = R<sub>v</sub> / (B′·L′) = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> &nbsp;+&nbsp; q
     </div>
@@ -298,14 +301,14 @@ figure svg{width:100%;height:auto;display:block}
           b<sub>c</sub> = 1 − 2α/(π + 2)<br>
           i<sub>c</sub> = 0,5·[1 + √(1 − R<sub>h</sub>/(A′·c<sub>u</sub>))]
         </div>
-        <p style="font-size:0.84rem;color:var(--ink-mute);margin:0">α értékét radiánban kell a képletbe írni.</p>
+        <p style="font-size:0.84rem;color:var(--ink-mute);margin:0">α értékét radiánban kell a&nbsp;képletbe írni.</p>
       </div>
       <div class="panel" style="margin:8px 0">
         <h4 style="margin-top:0">Jelölések</h4>
         <ul class="bullet" style="font-size:0.9rem">
-          <li><b>q</b> — az alapsíkon az alap mellett működő <i>teljes</i> geosztatikus nyomás</li>
+          <li><b>q</b> — az&nbsp;alapsíkon az&nbsp;alap mellett működő <i>teljes</i> geosztatikus nyomás</li>
           <li><b>c<sub>u</sub></b> — drénezetlen nyírószilárdság</li>
-          <li><b>A′ = B′·L′</b> — a dolgozó keresztmetszet</li>
+          <li><b>A′ = B′·L′</b> — a&nbsp;dolgozó keresztmetszet</li>
         </ul>
       </div>
     </div>
@@ -313,7 +316,7 @@ figure svg{width:100%;height:auto;display:block}
 
   <section class="subsection" id="me-4">
     <h2>4. Dolgozó keresztmetszet — külpontosság</h2>
-    <p>Külpontos terhelésnél a teher nem a keresztmetszet középpontjában működik. A számításhoz a <b>dolgozó (hatékony) keresztmetszetet</b> használjuk, amelynek középpontja egybeesik az eredő erő döféspontjával:</p>
+    <p>Külpontos terhelésnél a&nbsp;teher nem a&nbsp;keresztmetszet középpontjában működik. A&nbsp;számításhoz a&nbsp;<b>dolgozó (hatékony) keresztmetszetet</b> használjuk, amelynek középpontja egybeesik az&nbsp;eredő erő döféspontjával:</p>
     <div class="callout formula" style="text-align:center">
       B′ = B − 2·e<sub>B</sub> &nbsp;&nbsp;&nbsp; L′ = L − 2·e<sub>L</sub>
     </div>
@@ -377,16 +380,16 @@ figure svg{width:100%;height:auto;display:block}
         <text x="472" y="364" font-family="Fraunces" font-size="12.5" fill="#2E7D8A">L′ = L − 2·e<tspan baseline-shift="sub" font-size="8">L</tspan></text>
       </svg>
     </figure>
-    <p>A külpontosság az alapsíkra felírt <b>nyomatéki egyenletből</b> adódik. Ha vízszintes H<sub>k</sub> erő és külpontos Q<sub>k</sub> teher hat:</p>
+    <p>A külpontosság az&nbsp;alapsíkra felírt <b>nyomatéki egyenletből</b> adódik. Ha vízszintes H<sub>k</sub> erő és&nbsp;külpontos Q<sub>k</sub> teher hat:</p>
     <div class="callout formula" style="text-align:center">
       e<sub>B,k</sub> = | (H<sub>k</sub>·h) − (Q<sub>k</sub>·e<sub>q</sub>) | / V<sub>k</sub>
     </div>
-    <div class="callout warn"><b>Vigyázz az előjelekre!</b> A vízszintes erő és a külpontos függőleges teher nyomatéka <i>ellentétes</i> irányú is lehet — ekkor a külpontosság csökken.</div>
+    <div class="callout warn"><b>Vigyázz az&nbsp;előjelekre!</b> A&nbsp;vízszintes erő és&nbsp;a&nbsp;külpontos függőleges teher nyomatéka <i>ellentétes</i> irányú is lehet — ekkor a&nbsp;külpontosság csökken.</div>
   </section>
 
   <section class="subsection" id="me-5">
     <h2>5. Talajvíz hatása — a hatékony γ′</h2>
-    <p>A szélességi tagban szereplő γ′ értékét a talajvíz alapsík alatti mélysége (t<sub>wd</sub>) befolyásolja. A törési zóna a B′ mélységig terjed; a γ′ a t<sub>wd</sub>/B′ aránytól függően lineárisan változik:</p>
+    <p>A szélességi tagban szereplő γ′ értékét a&nbsp;talajvíz alapsík alatti mélysége (t<sub>wd</sub>) befolyásolja. A&nbsp;törési zóna a&nbsp;B′ mélységig terjed; a&nbsp;γ′ a&nbsp;t<sub>wd</sub>/B′ aránytól függően lineárisan változik:</p>
     <figure style="max-width:600px">
       <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
         <line x1="70" y1="40" x2="70" y2="250" stroke="#3D4852" stroke-width="1.2"/>
@@ -409,41 +412,41 @@ figure svg{width:100%;height:auto;display:block}
       0,5·B′ &lt; t<sub>wd</sub> &lt; 1,5·B′ &nbsp;→&nbsp; γ′ = (γ<sub>sat</sub> − γ<sub>w</sub>) + (γ<sub>m</sub> − (γ<sub>sat</sub> − γ<sub>w</sub>))·(t<sub>wd</sub>/B′ − 0,5) &nbsp;&nbsp;(lineáris átmenet)<br>
       1,5·B′ ≤ t<sub>wd</sub> &nbsp;→&nbsp; γ′ = γ<sub>m</sub> &nbsp;&nbsp;(víz mélyen, nincs hatása)
     </div>
-    <div class="callout note">A negatív t<sub>wd</sub> azt jelenti, hogy a talajvíz az alapsík <i>fölött</i> van — ekkor γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</div>
+    <div class="callout note">A negatív t<sub>wd</sub> azt jelenti, hogy a&nbsp;talajvíz az&nbsp;alapsík <i>fölött</i> van — ekkor γ′&nbsp;=&nbsp;γ<sub>sat</sub> − γ<sub>w</sub>.</div>
   </section>
 
   <section class="subsection" id="me-6">
     <h2>6. Elcsúszás-vizsgálat (EQU)</h2>
-    <p>Ha az alapsíkra ható erőnek van <b>vízszintes komponense</b> (nem merőleges az alapsíkra), ellenőrizni kell az <b>elcsúszás</b> elleni biztonságot. A megfelelőség feltétele:</p>
+    <p>Ha az&nbsp;alapsíkra ható erőnek van <b>vízszintes komponense</b> (nem merőleges az&nbsp;alapsíkra), ellenőrizni kell az&nbsp;<b>elcsúszás</b> elleni biztonságot. A&nbsp;megfelelőség feltétele:</p>
     <div class="callout formula" style="text-align:center;font-size:1.04rem">
       H<sub>d</sub> &le; R<sub>d</sub> + R<sub>p;d</sub>
     </div>
     <ul class="bullet">
-      <li><b>H<sub>d</sub></b> — az alapsíkon működő vízszintes teher tervezési értéke; tartalmaznia kell az alaptestre ható <b>aktív földnyomás</b> tervezési értékét is.</li>
-      <li><b>R<sub>d</sub></b> — az alapsíkon ébredő <b>nyírási (talp-) ellenállás</b> tervezési értéke.</li>
-      <li><b>R<sub>p;d</sub></b> — az alaptest oldalfelületén működő <b>(passzív) földnyomásból</b> származó ellenállás tervezési értéke.</li>
+      <li><b>H<sub>d</sub></b> — az&nbsp;alapsíkon működő vízszintes teher tervezési értéke; tartalmaznia kell az&nbsp;alaptestre ható <b>aktív földnyomás</b> tervezési értékét is.</li>
+      <li><b>R<sub>d</sub></b> — az&nbsp;alapsíkon ébredő <b>nyírási (talp-) ellenállás</b> tervezési értéke.</li>
+      <li><b>R<sub>p;d</sub></b> — az&nbsp;alaptest oldalfelületén működő <b>(passzív) földnyomásból</b> származó ellenállás tervezési értéke.</li>
     </ul>
-    <div class="callout warn"><b>R<sub>p;d</sub> óvatosan!</b> A homlokfal előtti talajt erózió vagy emberi beavatkozás eltávolíthatja, agyagnál a szezonális zsugorodás elválhat tőle. A teljes passzív földellenállás csak nagy elmozdulásra mobilizálódik, ezért agyagban gyakran csak a fele–kétharmada vehető figyelembe.</div>
+    <div class="callout warn"><b>R<sub>p;d</sub> óvatosan!</b> A&nbsp;homlokfal előtti talajt erózió vagy emberi beavatkozás eltávolíthatja, agyagnál a&nbsp;szezonális zsugorodás elválhat tőle. A&nbsp;teljes passzív földellenállás csak nagy elmozdulásra mobilizálódik, ezért agyagban gyakran csak a&nbsp;fele–kétharmada vehető figyelembe.</div>
 
     <div class="grid c2">
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--moss)">
         <h4 style="margin-top:0">Drénezett eset — talp-súrlódás</h4>
         <div class="callout formula" style="margin:6px 0;text-align:center">R<sub>d</sub> = V′<sub>k</sub> · tg δ<sub>k</sub> / γ<sub>R;h</sub></div>
         <ul class="bullet" style="font-size:0.9rem">
-          <li><b>V′<sub>k</sub></b> — a függőleges teher karakterisztikus értéke; csak a H<sub>d</sub>-vel <i>biztosan egyidejű</i> esetleges teher vehető bele.</li>
-          <li><b>δ<sub>k</sub></b> — a talp–talaj súrlódási szög: <b>monolit</b> alaptestnél δ<sub>k</sub> = φ′<sub>k</sub>, <b>előregyártottnál</b> δ<sub>k</sub> = ⅔·φ′<sub>k</sub>.</li>
-          <li>A talpon a <b>c′ kohéziót a biztonság javára elhanyagoljuk</b>.</li>
-          <li><b>γ<sub>R;h</sub> = 1,1</b> (DA-2*).</li>
+          <li><b>V′<sub>k</sub></b> — a&nbsp;függőleges teher karakterisztikus értéke; csak a&nbsp;H<sub>d</sub>-vel <i>biztosan egyidejű</i> esetleges teher vehető bele.</li>
+          <li><b>δ<sub>k</sub></b> — a&nbsp;talp–talaj súrlódási szög: <b>monolit</b> alaptestnél δ<sub>k</sub>&nbsp;=&nbsp;φ′<sub>k</sub>, <b>előregyártottnál</b> δ<sub>k</sub>&nbsp;=&nbsp;⅔·φ′<sub>k</sub>.</li>
+          <li>A&nbsp;talpon a&nbsp;<b>c′ kohéziót a&nbsp;biztonság javára elhanyagoljuk</b>.</li>
+          <li><b>γ<sub>R;h</sub>&nbsp;=&nbsp;1,1</b> (DA-2*).</li>
         </ul>
       </div>
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)">
         <h4 style="margin-top:0">Drénezetlen eset — talp-adhézió</h4>
         <div class="callout formula" style="margin:6px 0;text-align:center">R<sub>d</sub> = A<sub>c</sub> · c<sub>u;k</sub> / γ<sub>R;h</sub></div>
         <ul class="bullet" style="font-size:0.9rem">
-          <li><b>A<sub>c</sub></b> — a nyomott talpfelület (B·L, ill. a dolgozó A′).</li>
-          <li><b>c<sub>u;k</sub></b> — a drénezetlen nyírószilárdság karakterisztikus értéke az alapsíkon.</li>
-          <li><b>γ<sub>R;h</sub> = 1,1</b>.</li>
-          <li><b>Korlát:</b> a talp–talaj hézag (víz, levegő) miatt teljesülnie kell az <b>R<sub>d</sub> ≤ 0,4·V<sub>d</sub></b> feltételnek is.</li>
+          <li><b>A<sub>c</sub></b> — a&nbsp;nyomott talpfelület (B·L, ill. a&nbsp;dolgozó A′).</li>
+          <li><b>c<sub>u;k</sub></b> — a&nbsp;drénezetlen nyírószilárdság karakterisztikus értéke az&nbsp;alapsíkon.</li>
+          <li><b>γ<sub>R;h</sub>&nbsp;=&nbsp;1,1</b>.</li>
+          <li><b>Korlát:</b> a&nbsp;talp–talaj hézag (víz, levegő) miatt teljesülnie kell az&nbsp;<b>R<sub>d</sub>&nbsp;≤&nbsp;0,4·V<sub>d</sub></b> feltételnek is.</li>
         </ul>
       </div>
     </div>
@@ -451,21 +454,21 @@ figure svg{width:100%;height:auto;display:block}
 
   <section class="subsection" id="me-7">
     <h2>7. A megfelelőség igazolása</h2>
-    <p>A teherbírási (GEO) határállapot akkor teljesül, ha a <b>tervezési teher</b> nem nagyobb a <b>tervezési ellenállásnál</b>:</p>
+    <p>A teherbírási (GEO) határállapot akkor teljesül, ha a&nbsp;<b>tervezési teher</b> nem nagyobb a&nbsp;<b>tervezési ellenállásnál</b>:</p>
     <div class="callout success" style="text-align:center;font-size:1.05rem"><b>V<sub>d</sub> &le; R<sub>d</sub></b></div>
     <div class="grid c2">
       <div class="panel" style="margin:8px 0">
         <h4 style="margin-top:0">Tervezési teher — V<sub>d</sub></h4>
         <div class="callout formula" style="margin:6px 0;font-size:0.88rem">V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub></div>
-        <p style="font-size:0.88rem;margin:0">Részleges tényezők: állandó teherre <b>γ<sub>G</sub> = 1,35</b>, esetleges (hasznos) teherre <b>γ<sub>Q</sub> = 1,5</b>. A G<sub>k</sub> tartalmazza a felszerkezet, az alaptest és a leterhelő talaj (feltöltés) önsúlyát.</p>
+        <p style="font-size:0.88rem;margin:0">Részleges tényezők: állandó teherre <b>γ<sub>G</sub>&nbsp;=&nbsp;1,35</b>, esetleges (hasznos) teherre <b>γ<sub>Q</sub>&nbsp;=&nbsp;1,5</b>. A&nbsp;G<sub>k</sub> tartalmazza a&nbsp;felszerkezet, az&nbsp;alaptest és&nbsp;a&nbsp;leterhelő talaj (feltöltés) önsúlyát.</p>
       </div>
       <div class="panel" style="margin:8px 0">
         <h4 style="margin-top:0">Tervezési ellenállás — R<sub>d</sub></h4>
         <div class="callout formula" style="margin:6px 0;font-size:0.88rem">R<sub>d</sub> = R<sub>k</sub> / γ<sub>R</sub></div>
-        <p style="font-size:0.88rem;margin:0">Az ellenállási részleges tényező síkalapok talajtörésére <b>γ<sub>R</sub> = 1,4</b>. Az R<sub>k</sub> karakterisztikus ellenállás a teherbírási képletből adódik.</p>
+        <p style="font-size:0.88rem;margin:0">Az&nbsp;ellenállási részleges tényező síkalapok talajtörésére <b>γ<sub>R</sub>&nbsp;=&nbsp;1,4</b>. Az&nbsp;R<sub>k</sub> karakterisztikus ellenállás a&nbsp;teherbírási képletből adódik.</p>
       </div>
     </div>
-    <div class="callout warn"><b>Ha V<sub>d</sub> &gt; R<sub>d</sub>:</b> az alap nem felel meg. Két megoldás van — <b>(1)</b> mélyebbre visszük az alapozási síkot (nő q′), vagy <b>(2)</b> szélesítjük az alaptestet (nő B). A gyakorlatban általában a szélesítés a praktikusabb.</div>
+    <div class="callout warn"><b>Ha V<sub>d</sub>&nbsp;&gt;&nbsp;R<sub>d</sub>:</b> az&nbsp;alap nem felel meg. Két megoldás van — <b>(1)</b> mélyebbre visszük az&nbsp;alapozási síkot (nő q′), vagy <b>(2)</b> szélesítjük az&nbsp;alaptestet (nő B). A&nbsp;gyakorlatban általában a&nbsp;szélesítés a&nbsp;praktikusabb.</div>
   </section>
 </div>
 
@@ -473,7 +476,7 @@ figure svg{width:100%;height:auto;display:block}
 <div class="chapter-page" id="page-mintapeldak" data-ch="mintapeldak">
 
   <h1>Mintapéldák</h1>
-  <p style="color:var(--ink-mute);max-width:820px">Öt részletesen levezetett mintapélda a gyakorlati anyag szerint — drénezett és drénezetlen sávalap, külpontos és ferde teher talajvízzel, a talajvíz mélységének hatása, valamint a vízszintes erő irányának hatása. Mindegyik példához a gyakorlati anyag alapján rekonstruált ábra és lépésről-lépésre megoldás tartozik.</p>
+  <p style="color:var(--ink-mute);max-width:820px"><b>11</b> részletesen levezetett mintapélda a&nbsp;gyakorlati anyag szerint — drénezett és&nbsp;drénezetlen sáv- és&nbsp;pilléralap, központos és&nbsp;külpontos, függőleges és&nbsp;ferde teher, a&nbsp;talajvíz hatása és&nbsp;mélysége, a&nbsp;vízszintes erő irányának hatása, a&nbsp;szükséges alapszélesség, valamint az&nbsp;elcsúszás-vizsgálat (drénezett és&nbsp;drénezetlen) passzív földellenállással. Mindegyik példához a&nbsp;gyakorlati anyag alapján rekonstruált ábra és&nbsp;lépésről-lépésre megoldás tartozik.</p>
 
   <!-- ===== MP1 ===== -->
   <section class="subsection" id="s-mp1">
@@ -1745,7 +1748,7 @@ figure svg{width:100%;height:auto;display:block}
 <div class="chapter-page" id="page-kalkulator" data-ch="kalkulator">
 
   <h1>Kalkulátorok</h1>
-  <p style="color:var(--ink-mute);max-width:840px">Három interaktív kalkulátor a síkalap GEO határállapotának ellenőrzésére. Állítsd a geometriát, a terheket és a talajparamétereket — az ábra léptékhelyesen frissül, a program kiszámítja a tervezési ellenállást és összeveti a tervezési teherrel. A felső almenüben válthatsz a három kalkulátor között.</p>
+  <p style="color:var(--ink-mute);max-width:840px">Három interaktív kalkulátor a&nbsp;síkalap ellenőrzésére. Állítsd a&nbsp;geometriát, a&nbsp;terheket és&nbsp;a&nbsp;talajparamétereket — az&nbsp;ábra léptékhelyesen frissül, a&nbsp;program kiszámítja a&nbsp;tervezési ellenállást és&nbsp;összeveti a&nbsp;tervezési teherrel. A&nbsp;felső almenüben válthatsz a&nbsp;három kalkulátor között.</p>
 
   <section class="subsection" id="kk-drenezett">
     <h2>Drénezett eset — teherbírás-ellenőrzés</h2>
