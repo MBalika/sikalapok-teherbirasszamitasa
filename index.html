@@ -1431,6 +1431,129 @@ figure svg{width:100%;height:auto;display:block}
       </div>
     </div>
   </section>
+
+  <!-- ===== MP10 (elcsúszás, drénezett) ===== -->
+  <section class="subsection" id="s-mp10">
+    <h2>Mintapélda 10 — Elcsúszás-vizsgálat (EQU, drénezett)</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ellenőrizd az ábrán látható <b>pilléralap</b> (B = 2,0 m, L = 1,5 m) megfelelőségét <b>vízszintes elcsúszással</b> szemben (EQU határállapot, drénezett eset)! Pillér: b = l = 0,4 m; h = 1,2 m; t = 0,4 m; t<sub>fill</sub> = 1,5 m; γ<sub>b</sub> = 25. Terhek (karakterisztikus): <b>G<sub>z,k</sub> = 320 kN</b> függőleges (benne az alaptest és a talaj önsúlya is) és <b>Q<sub>x,k</sub> = 100 kN</b> vízszintes pillérteher. A talajvíz az alapsík fölött 0,6 m-rel (h<sub>MTV</sub>). <b>Sa feltöltés:</b> γ=18, γ<sub>sat</sub>=19, φ=30°, c=0; <b>siSa termett talaj:</b> γ=19, γ<sub>sat</sub>=20, φ=28°, c=0. A megfelelőség feltétele: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.</p>
+        </div>
+        <span class="task-num">MP10</span>
+      </div>
+    </div>
+
+    <h3>Ábra — keresztmetszet</h3>
+    <figure>
+      <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p10g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p10r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p10gr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"/></marker>
+          <marker id="p10d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="115" width="660" height="135" fill="#F2E14A"/>
+        <rect x="30" y="250" width="660" height="90" fill="#F0A92E"/>
+        <rect x="30" y="109" width="660" height="6" fill="url(#p10g)"/>
+        <line x1="30" y1="115" x2="690" y2="115" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="105" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <line x1="30" y1="250" x2="690" y2="250" stroke="#9A6B1E" stroke-width="1.4"/>
+        <line x1="90" y1="205" x2="210" y2="205" stroke="#1E78C8" stroke-width="2"/>
+        <path d="M111,199 l14,0 l-7,7 z" fill="#1E78C8"/>
+        <text x="92" y="199" font-family="Inter" font-size="9" fill="#1E78C8">talajvíz</text>
+        <rect x="282" y="40" width="36" height="111" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <rect x="210" y="151" width="180" height="108" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="345" y="200" font-family="Inter" font-size="10.5" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan>=25 kN/m³</text>
+        <line x1="300" y1="16" x2="300" y2="149" stroke="#E0281C" stroke-width="4.8" marker-end="url(#p10r)" stroke-linecap="round"/>
+        <text x="308" y="30" font-family="Fraunces" font-size="12" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=320 kN</text>
+        <line x1="252" y1="153" x2="352" y2="153" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p10r)" stroke-linecap="round"/>
+        <text x="300" y="174" font-family="Fraunces" font-size="11" fill="#222" font-weight="700" text-anchor="middle">Q<tspan baseline-shift="sub" font-size="8">x,k</tspan>=100 kN</text>
+        <line x1="170" y1="224" x2="208" y2="224" stroke="#2E8B57" stroke-width="4" marker-end="url(#p10gr)" stroke-linecap="round"/>
+        <text x="164" y="228" font-family="Fraunces" font-size="10" fill="#1E6B3C" font-weight="700" text-anchor="end">E<tspan baseline-shift="sub" font-size="7">0</tspan> (R<tspan baseline-shift="sub" font-size="7">pd</tspan>)</text>
+        <line x1="248" y1="253" x2="370" y2="253" stroke="#2E8B57" stroke-width="3" marker-end="url(#p10gr)" stroke-linecap="round"/>
+        <text x="376" y="257" font-family="Fraunces" font-size="9.5" fill="#1E6B3C" font-weight="700">R<tspan baseline-shift="sub" font-size="7">d</tspan> (talp-súrlódás)</text>
+        <line x1="282" y1="78" x2="318" y2="78" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="326" y="82" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">b=l=0,4m</text>
+        <line x1="190" y1="115" x2="190" y2="151" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="184" y="137" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">t=0,4m</text>
+        <line x1="190" y1="151" x2="190" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="184" y="209" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=1,2m</text>
+        <line x1="100" y1="205" x2="100" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="94" y="236" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h<tspan baseline-shift="sub" font-size="7">MTV</tspan>=0,6m</text>
+        <line x1="620" y1="115" x2="620" y2="250" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="628" y="186" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1,5m</text>
+        <line x1="210" y1="274" x2="390" y2="274" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p10d)" marker-end="url(#p10d)"/>
+        <text x="300" y="288" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <text x="470" y="160" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sa feltöltés</text>
+        <text x="470" y="175" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=19 · φ=30° · c=0</text>
+        <text x="470" y="305" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
+        <text x="470" y="320" font-family="Inter" font-size="9" fill="#6B6052">γ=19 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20 · φ=28° · c=0</text>
+        <text x="45" y="328" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Pilléralap (L = 1,5 m)</text>
+      </svg>
+    </figure>
+
+    <h3>Ábra — alaprajzi nézet</h3>
+    <figure style="max-width:440px">
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="p10pr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p10pd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="90" y="70" width="210" height="157" fill="#C9C0AE" stroke="#3D2A1A" stroke-width="1.6"/>
+        <rect x="174" y="127" width="42" height="42" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.3"/>
+        <line x1="120" y1="148" x2="278" y2="148" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p10pr)" stroke-linecap="round"/>
+        <circle cx="195" cy="148" r="6.5" fill="#E0281C" stroke="#8F3A1B" stroke-width="1.2"/>
+        <text x="120" y="120" font-family="Fraunces" font-size="11" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=320 kN</text>
+        <text x="250" y="140" font-family="Fraunces" font-size="11" fill="#222" font-weight="700">Q<tspan baseline-shift="sub" font-size="8">x,k</tspan>=100 kN</text>
+        <line x1="90" y1="56" x2="300" y2="56" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10pd)" marker-end="url(#p10pd)"/>
+        <text x="195" y="50" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <line x1="316" y1="70" x2="316" y2="227" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10pd)" marker-end="url(#p10pd)"/>
+        <text x="324" y="152" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L = 1,5 m</text>
+        <text x="195" y="252" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">alaprajzi nézet</text>
+        <text x="195" y="278" font-family="Inter" font-size="9.5" fill="#8F3A1B" text-anchor="middle" font-style="italic">a vízszintes teher a B oldallal párhuzamos</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Alapsíkon működő vízszintes mértékadó teher</h4>
+      <p>Vízszintes pillérteher: Q<sub>x,k</sub> = 100 kN. &nbsp; Az alaptestre ható <b>aktív földnyomás</b> földnyomási szorzói:</p>
+      <p>Sa feltöltés: K<sub>a1</sub> = tg²(45°−φ/2) = tg²(45°−15°) = <b>0,333</b>; &nbsp; siSa termett: K<sub>a2</sub> = tg²(45°−14°) = <b>0,361</b></p>
+      <p>Az aktív földnyomás eredője az alaptest magasságában: E<sub>a,k</sub> = G<sub>x,k</sub> = <b>10,08 kN</b></p>
+      <p>A vízszintes terhelés tervezési értéke: H<sub>d</sub> = γ<sub>G</sub>·G<sub>x,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1,35·10,08 + 1,5·100 = <b>163,6 kN</b></p>
+    </div>
+    <div class="step"><h4>2. Elcsúszással szembeni ellenállás — talp-súrlódás</h4>
+      <p>R<sub>d</sub> = V′<sub>k</sub>·tg δ<sub>k</sub> / γ<sub>R;h</sub>, &nbsp; ahol V′<sub>k</sub> = G<sub>z,k</sub> = 320 kN (tartalmazza az alaptest és a talaj önsúlyát is).</p>
+      <p>Monolit vasbeton alaptest → δ<sub>k</sub> = φ = 28° → tg δ<sub>k</sub> = <b>0,532</b>; &nbsp; γ<sub>R;h</sub> = 1,1</p>
+      <p>R<sub>d</sub> = (320·0,532)/1,1 = <b>155 kN</b> &nbsp; <span style="color:var(--ink-mute)">→ R<sub>d</sub> = 155 &lt; H<sub>d</sub> = 163,6, tehát önmagában <b>nem elég</b>.</span></p>
+    </div>
+    <div class="step"><h4>3. Földellenállás (nyugalmi földnyomás) hozzávétele</h4>
+      <p>R<sub>pd</sub> nyugalmi vagy passzív földnyomásból? A biztonság javára a <b>nyugalmi</b> földnyomással számolunk: K<sub>0</sub> = 1 − sin φ.</p>
+      <p>A nyugalmi földnyomás eredője E<sub>0,k</sub> = <b>15,1 kN</b> &nbsp;→&nbsp; R<sub>pd</sub> = E<sub>0,k</sub>/γ<sub>R;h</sub> = 15,1/1,1 = <b>13,7 kN</b></p>
+    </div>
+    <div class="step"><h4>4. Megfelelőség</h4>
+      <p>R<sub>d</sub> + R<sub>pd</sub> = 155 + 13,7 = <b>168,7 kN</b> &gt; H<sub>d</sub> = 163,6 kN</p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> + R<sub>pd</sub> = 168,7 kN &gt; H<sub>d</sub> = 163,6 kN → <b>MEGFELEL.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Megj.: ha a „passzív"/nyugalmi föld eltűnhet vagy felfazhat, ellenállását nem szabad figyelembe venni.</span></div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp10">
+      <div class="calc-head"><h3>MP10 — elcsúszás-ellenőrzés (drénezett)</h3><span class="calc-tag" style="background:var(--moss)">EQU</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>V′<sub>k</sub> függőleges teher (kN)</label><input type="number" id="mp10-Vk" value="320" step="10"></div>
+          <div class="cr"><label>Q<sub>x,k</sub> vízszintes pillérteher (kN)</label><input type="number" id="mp10-Qx" value="100" step="5"></div>
+          <div class="cr"><label>δ talp-súrlódási szög (°)</label><input type="number" id="mp10-delta" value="28" step="1"></div>
+          <div class="cr"><label>E<sub>a,k</sub> aktív földnyomás (kN)</label><input type="number" id="mp10-Ea" value="10.08" step="0.5"></div>
+          <div class="cr"><label>γ<sub>R;h</sub> ellenállási tényező</label><input type="number" id="mp10-gR" value="1.1" step="0.05"></div>
+          <div class="cr"><label>E<sub>0,k</sub> nyugalmi földnyomás (kN)</label><input type="number" id="mp10-E0" value="15.1" step="0.5"></div>
+        </div>
+        <p class="calc-note">Monolit vasbeton alaptest → δ = φ. A feltétel: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>pd</sub>. A nyugalmi földnyomás (R<sub>pd</sub>) csak akkor vehető figyelembe, ha a föld biztosan nem fazik fel és nem távolítható el.</p>
+        <div class="calc-results" id="mp10-res"></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ===================== KALKULÁTOROK ===================== -->
@@ -1487,6 +1610,7 @@ const CHAPTERS = [
     {id:'s-mp7', label:'MP7'},
     {id:'s-mp8', label:'MP8'},
     {id:'s-mp9', label:'MP9'},
+    {id:'s-mp10', label:'MP10'},
   ]},
   {id:'kalkulator', label:'Kalkulátorok', subsections:[
     {id:'kk-drenezett', label:'Drénezett'},
@@ -1945,7 +2069,17 @@ function calcMP9(){
     rr('Dolgozó szélesség B′', fmt(Bp,3)+' m',true)+
     `<div class="verdict ok"><span class="big">B ≈ ${fmt(B,2)} m</span>szükséges alapszélesség &nbsp;(B = B′ + 2·e<sub>B</sub>)</div>`;
 }
-[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9]].forEach(([p,fn])=>{
+function calcMP10(){
+  const Vk=num('mp10-Vk'),delta=num('mp10-delta'),gR=num('mp10-gR'),Qx=num('mp10-Qx'),Ea=num('mp10-Ea'),E0=num('mp10-E0');
+  const Hd=1.35*Ea+1.5*Qx, Rd=gR>0?Vk*Math.tan(deg2rad(delta))/gR:0, Rpd=gR>0?E0/gR:0, tot=Rd+Rpd, ok=tot>=Hd;
+  document.getElementById('mp10-res').innerHTML='<h4>Eredmény (elcsúszás, drénezett)</h4>'+
+    rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
+    rr('R<sub>d</sub> = V′<sub>k</sub>·tg δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
+    rr('R<sub>pd</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (földellenállás)', fmt(Rpd,1)+' kN',true)+
+    rr('R<sub>d</sub> + R<sub>pd</sub>', fmt(tot,1)+' kN',true)+
+    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub>+R<sub>pd</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
+}
+[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9],['mp10',calcMP10]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
 });
 /* ===================== INDÍTÁS ===================== */
