@@ -1100,10 +1100,12 @@ function buildCalc(prefix, mode){
       return q;
     }
     const q=overb();
-    /* törési zóna ≈ B′ az alapsík alatt — réteg-súlyok */
+    /* a talp alatti réteg paramétereivel számolunk (átlagolás nélkül) */
     const twd=gw-D;
-    const z1=Math.max(0,Math.min(t1-D,Bp)), w1=z1/Bp, w2=1-w1;
-    const gmZ=w1*gm1+w2*gm2, gsZ=w1*gs1+w2*gs2, subZ=gsZ-GWU;
+    const below1=(t1>D);          /* az 1. réteg van közvetlenül a talp alatt? */
+    const layB=below1?1:2;
+    const gmZ=below1?gm1:gm2, gsZ=below1?gs1:gs2, subZ=gsZ-GWU;
+    const phiB=below1?phi1:phi2, cB=below1?c1:c2, cuB=below1?cu1:cu2;
     /* γ′ az alap alatt — a t_wd/B′ aránytól függő képlet (gyak1) */
     let gpb, gpCase;
     if(twd<=0.5*Bp){gpb=subZ; gpCase='t_wd ≤ 0,5·B′ → γ′ = γ_sat − γ_w';}
@@ -1114,11 +1116,11 @@ function buildCalc(prefix, mode){
     if(mode==='sl'){
       const sldr=gv('slmode').value==='dr';
       if(gv('phi1'))gv('phi1').disabled=!sldr;
-      if(gv('phi2'))gv('phi2').disabled=true;
+      if(gv('phi2'))gv('phi2').disabled=!sldr;
       if(gv('cu1'))gv('cu1').disabled=sldr;
-      if(gv('cu2'))gv('cu2').disabled=true;
+      if(gv('cu2'))gv('cu2').disabled=sldr;
       const Ep=v('Ep'), Vd=1.35*Gk+1.5*Qk, Hd=1.5*Hk;
-      const Rbase=sldr?Vd*Math.tan(deg2rad(phi1)):Ap*cu1;
+      const Rbase=sldr?Vd*Math.tan(deg2rad(phiB)):Ap*cuB;
       const Rd=Rbase+Ep, ok=Hd<=Rd, util=Rd>0?Hd/Rd*100:999;
       figP.sldr=sldr; drawFig(figP);
       gv('out').innerHTML=
@@ -1127,12 +1129,12 @@ function buildCalc(prefix, mode){
         box('R_d ellenállás',fmt(Rd,0)+u,'var(--moss)')+
         box('H_d teher',fmt(Hd,0)+u,'var(--rebar)');
       const bt=sldr
-        ? `R<sub>súrl.</sub> = V<sub>d</sub>·tg δ = ${fmt(Vd,0)}·tg${fmt(phi1,0)}° = <b>${fmt(Rbase,0)}${u}</b> &nbsp;(δ = az 1. réteg φ-je)`
-        : `R<sub>adh.</sub> = A′·c<sub>u</sub> = ${fmt(Ap,2)}·${fmt(cu1,0)} = <b>${fmt(Rbase,0)}${u}</b>`;
+        ? `R<sub>súrl.</sub> = V<sub>d</sub>·tg δ = ${fmt(Vd,0)}·tg${fmt(phiB,0)}° = <b>${fmt(Rbase,0)}${u}</b> &nbsp;(δ = a talp alatti réteg φ-je)`
+        : `R<sub>adh.</sub> = A′·c<sub>u</sub> = ${fmt(Ap,2)}·${fmt(cuB,0)} = <b>${fmt(Rbase,0)}${u}</b>`;
       gv('steps').innerHTML=`
         <b>1.</b> Tervezési terhek: V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub> = <b>${fmt(Vd,0)}${u}</b>; H<sub>d</sub> = 1,5·H<sub>k</sub> = <b>${fmt(Hd,0)}${u}</b><br>
         <b>2.</b> Külpontosság a vízszintes teherből: e<sub>B</sub> = H<sub>k</sub>·D/V<sub>k</sub> = ${fmt(Hk,0)}·${fmt(D,1)}/${fmt(Vk,0)} = <b>${fmt(eB,3)} m</b> → B′ = B − 2e<sub>B</sub> = <b>${fmt(Bp,2)} m</b>${isSav?'':' · A′ = '+fmt(Ap,2)+' m²'}<br>
-        <b>3.</b> Az elcsúszás a talp alatti <b>1. réteggel</b> szemben ébred (${sldr?'drénezett — súrlódás':'drénezetlen — adhézió'}): ${bt}<br>
+        <b>3.</b> Az elcsúszás a <b>talp alatti ${layB}. réteggel</b> szemben ébred (${sldr?'drénezett — súrlódás':'drénezetlen — adhézió'}): ${bt}<br>
         <b>4.</b> Passzív földnyomás: E<sub>p</sub> = ${fmt(Ep,0)}${u} → R<sub>d</sub> = ${fmt(Rbase,0)} + ${fmt(Ep,0)} = <b>${fmt(Rd,0)}${u}</b><br>
         <b>5.</b> Kihasználtság: H<sub>d</sub>/R<sub>d</sub> = <b>${fmt(util,0)} %</b>
         <div class="verdict ${ok?'ok':'fail'}" style="margin-top:10px"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>H<sub>d</sub> = ${fmt(Hd,0)}${u} ${ok?'≤':'&gt;'} R<sub>d</sub> = ${fmt(Rd,0)}${u}</div>`;
@@ -1142,7 +1144,7 @@ function buildCalc(prefix, mode){
     const Vd=1.35*Gk+1.5*Qk, BL=isSav?0:Bp/Lp;
     let RkA,Rk,Rd,extra;
     if(mode==='dr'){
-      const phib=w1*phi1+w2*phi2, cb=w1*c1+w2*c2;
+      const phib=phiB, cb=cB;
       const N=nFactors(phib);
       const sg=isSav?1:Math.max(1-0.3*BL,0.1), sq=isSav?1:1+BL*Math.sin(deg2rad(phib)), sc=isSav?1:(N.Nq>1?(sq*N.Nq-1)/(N.Nq-1):1);
       const cot=phib>0?1/Math.tan(deg2rad(phib)):0;
@@ -1150,17 +1152,17 @@ function buildCalc(prefix, mode){
       const ig=Math.pow(Math.max(1-f,0),m+1), iq=Math.pow(Math.max(1-f,0),m), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
       const tw=0.5*gpb*Bp*N.Ng*sg*ig, td=q*N.Nq*sq*iq, tc=cb*N.Nc*sc*ic;
       RkA=tw+td+tc; Rk=RkA*Ap; Rd=Rk/1.4;
-      extra=`<b>5.</b> Törési zóna ≈ B′ → 1. réteg súlya w₁ = <b>${fmt(w1*100,0)}%</b>, 2. rétegé w₂ = ${fmt(w2*100,0)}% → mértékadó φ=${fmt(phib,1)}° · c=${fmt(cb,1)} kPa<br>
+      extra=`<b>5.</b> A talp alatti réteg (<b>${layB}. réteg</b>) paramétereivel számolunk, átlagolás nélkül: φ = ${fmt(phib,1)}° · c = ${fmt(cb,1)} kPa<br>
       <b>6.</b> N<sub>q</sub>=${fmt(N.Nq,2)} · N<sub>c</sub>=${fmt(N.Nc,2)} · N<sub>γ</sub>=${fmt(N.Ng,2)} &nbsp;|&nbsp; i<sub>γ</sub>=${fmt(ig,3)} · i<sub>q</sub>=${fmt(iq,3)} · i<sub>c</sub>=${fmt(ic,3)}<br>
       <b>7.</b> R<sub>k</sub>/A′ = ${fmt(tw,0)} (szél.) + ${fmt(td,0)} (mély.) + ${fmt(tc,0)} (kohéz.) = <b>${fmt(RkA,0)} kPa</b>`;
     } else {
-      const cub=w1*cu1+w2*cu2;
+      const cub=cuB;
       const sc=isSav?1:1+0.2*BL, bc=1;
       let arg=1-Hk/(Ap*cub); if(arg<0)arg=0;
       const ic=0.5*(1+Math.sqrt(arg));
       const tcoh=(2+Math.PI)*cub*bc*sc*ic;
       RkA=tcoh+q; Rk=RkA*Ap; Rd=Rk/1.4;
-      extra=`<b>5.</b> Törési zóna ≈ B′ → 1. réteg súlya w₁ = <b>${fmt(w1*100,0)}%</b>, 2. rétegé w₂ = ${fmt(w2*100,0)}% → mértékadó c<sub>u</sub> = <b>${fmt(cub,0)} kPa</b><br>
+      extra=`<b>5.</b> A talp alatti réteg (<b>${layB}. réteg</b>) drénezetlen nyírószilárdsága, átlagolás nélkül: c<sub>u</sub> = <b>${fmt(cub,0)} kPa</b><br>
       <b>6.</b> s<sub>c</sub>=${fmt(sc,2)} · b<sub>c</sub>=${fmt(bc,2)} · i<sub>c</sub>=${fmt(ic,3)}<br>
       <b>7.</b> σ<sub>t</sub> = (2+π)·c<sub>u</sub>·s<sub>c</sub>·i<sub>c</sub> + q′ = ${fmt(tcoh,0)} + ${fmt(q,0)} = <b>${fmt(RkA,0)} kPa</b>`;
     }
