@@ -1,0 +1,1338 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Síkalapok teherbírásszámítása — gyakorlati segédlet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --steel:#7C5A38; --steel-dk:#3A2A1A; --concrete:#A99B86; --concrete-lt:#D8D0C2;
+  --rebar:#C0512A; --rebar-dk:#8F3A1B; --azure:#2E7D8A; --moss:#5C7A52; --gold:#D7A33C;
+  --bg:#F6F3EE; --paper:#FFFFFF; --ink:#241C12; --ink-mute:#6B6052;
+  --line:#E2DBD0; --line-strong:#C4BAAB;
+  --shadow:0 1px 2px rgba(58,42,26,0.06), 0 8px 24px rgba(58,42,26,0.08);
+  --radius:14px; --radius-sm:8px;
+  --calc-bg:#F3EEE6; --calc-input:#FFFFFF; --calc-result:#EFE7DA;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;color:var(--ink);letter-spacing:-0.01em}
+h1{font-size:2.4rem;line-height:1.15;margin:0 0 .4em}
+h2{font-size:1.7rem;margin:1.6em 0 .6em;border-bottom:1px solid var(--line);padding-bottom:.3em}
+h3{font-size:1.2rem;margin:1.4em 0 .4em;color:var(--steel-dk)}
+h4{font-size:1rem;margin:1em 0 .3em;color:var(--steel)}
+p{margin:.7em 0}
+a{color:var(--steel);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--steel)}
+code,kbd,.mono{font-family:'JetBrains Mono',Menlo,monospace;font-size:0.92em}
+sub,sup{line-height:0}
+.brandbar{background:var(--steel-dk);color:#EFE7DA;border-bottom:1px solid var(--steel-dk)}
+.brandbar .wrap{max-width:1180px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brandbar .lhs{display:flex;align-items:center;gap:14px}
+.brand-mark{width:36px;height:36px;background:var(--rebar);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:700;font-size:1.05em;color:#fff;letter-spacing:-0.04em}
+.brand-text{display:flex;flex-direction:column;line-height:1.15}
+.brand-text .uni{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.75}
+.brand-text .course{font-family:'Fraunces';font-weight:600;font-size:1.05rem;color:#fff}
+.brandbar .rhs{font-size:0.85rem;opacity:0.85;display:flex;gap:18px;align-items:center}
+.pill{background:rgba(255,255,255,.08);padding:5px 12px;border-radius:99px;font-size:0.78rem;letter-spacing:0.04em}
+.pill.rebar{background:var(--rebar);color:#fff;font-weight:500}
+.chaptertabs{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(0,0,0,0.02)}
+.chaptertabs .wrap{max-width:1180px;margin:0 auto;padding:0 28px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin}
+.chaptertabs button{background:transparent;border:none;padding:14px 16px;cursor:pointer;font-family:'Inter';font-size:0.92rem;color:var(--ink-mute);border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.15s;font-weight:500;letter-spacing:0.01em}
+.chaptertabs button:hover{color:var(--steel-dk)}
+.chaptertabs button.active{color:var(--steel-dk);border-bottom-color:var(--rebar);font-weight:600}
+.chaptertabs .ch-num{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--concrete-lt);font-size:0.72rem;line-height:22px;text-align:center;margin-right:8px;color:var(--ink-mute);font-weight:600;font-variant-numeric:tabular-nums}
+.chaptertabs button.active .ch-num{background:var(--rebar);color:#fff}
+.subnav{background:#EEE7DC;border-bottom:1px solid var(--line);position:sticky;top:51px;z-index:40}
+.subnav .wrap{max-width:1180px;margin:0 auto;padding:0 28px;display:flex;gap:0;overflow-x:auto}
+.subnav a{padding:11px 14px;font-size:0.86rem;color:var(--ink-mute);border-bottom:2px solid transparent;white-space:nowrap;font-weight:500;cursor:pointer}
+.subnav a.active{color:var(--steel-dk);border-bottom-color:var(--steel)}
+.subnav a:hover{color:var(--steel-dk)}
+main{max-width:1180px;margin:0 auto;padding:36px 28px 80px}
+.hero{background:linear-gradient(135deg,var(--steel) 0%,var(--steel-dk) 70%,#241810 100%);color:#EFE7DA;border-radius:var(--radius);padding:42px 44px;margin-bottom:28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero::after{content:"";position:absolute;right:-80px;bottom:-80px;width:280px;height:280px;background:radial-gradient(circle,var(--rebar) 0%,transparent 70%);opacity:0.22;border-radius:50%}
+.hero h1{color:#fff;font-size:2.6rem;margin-bottom:.2em}
+.hero .subtitle{font-size:1.05rem;opacity:0.88;font-weight:300;max-width:640px}
+.hero .meta{display:flex;gap:24px;margin-top:24px;flex-wrap:wrap;font-size:0.85rem;opacity:0.85}
+.hero .meta span{display:flex;align-items:center;gap:8px}
+.hero .meta b{color:var(--gold);font-weight:600}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin:18px 0;box-shadow:var(--shadow)}
+.panel h3:first-child,.panel h2:first-child{margin-top:0}
+.callout{background:linear-gradient(180deg,#F4EFE7,#EBE3D6);border-left:4px solid var(--steel);padding:16px 20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:14px 0;font-size:0.95rem}
+.callout.warn{background:linear-gradient(180deg,#FBF1E6,#F6E4CF);border-left-color:var(--rebar)}
+.callout.warn b{color:var(--rebar-dk)}
+.callout.note{background:#F4F1EB;border-left-color:var(--concrete)}
+.callout.formula{background:#F1EEE7;border-left-color:var(--azure);font-family:'JetBrains Mono';font-size:0.9rem;line-height:1.8}
+.callout.success{background:linear-gradient(180deg,#E8F1E3,#D6E5CE);border-left-color:var(--moss)}
+.callout.success b{color:#3E5A1F}
+.callout.fail{background:linear-gradient(180deg,#F7E1D8,#EFC9B5);border-left-color:var(--rebar)}
+.callout.fail b{color:var(--rebar-dk)}
+.tag{display:inline-block;padding:2px 8px;background:var(--concrete-lt);color:var(--steel-dk);border-radius:4px;font-size:0.78rem;font-weight:500;letter-spacing:0.02em;margin-right:6px}
+.tag.rebar{background:var(--rebar);color:#fff}
+.tag.steel{background:var(--steel);color:#fff}
+.tag.gold{background:var(--gold);color:#fff}
+.tag.moss{background:var(--moss);color:#fff}
+.tag.azure{background:var(--azure);color:#fff}
+.grid{display:grid;gap:20px}
+.grid.c2{grid-template-columns:1fr 1fr}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:880px){.grid.c2,.grid.c3{grid-template-columns:1fr}.hero{padding:32px 24px}.hero h1{font-size:1.9rem}main{padding:24px 18px 60px}h2{font-size:1.4rem}}
+ul.bullet{list-style:none;padding-left:0}
+ul.bullet li{padding:4px 0 4px 22px;position:relative}
+ul.bullet li::before{content:"";position:absolute;left:6px;top:13px;width:6px;height:6px;background:var(--steel);border-radius:50%}
+ul.check{list-style:none;padding-left:0}
+ul.check li{padding:6px 0 6px 30px;position:relative}
+ul.check li::before{content:"\2713";position:absolute;left:0;top:6px;width:20px;height:20px;background:var(--moss);color:#fff;border-radius:50%;font-size:0.78rem;text-align:center;line-height:20px;font-weight:700}
+table.dt{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.92rem}
+table.dt th{background:var(--steel);color:#fff;padding:9px 11px;text-align:left;font-weight:600}
+table.dt td{padding:7px 11px;border-bottom:1px solid var(--line)}
+table.dt tr:nth-child(even) td{background:#F8F5F0}
+table.dt.num td{font-family:'JetBrains Mono';font-size:0.86rem;text-align:right}
+table.dt.num td:first-child{text-align:left;font-family:'Inter'}
+.foot{margin-top:60px;padding:24px 28px;background:var(--steel-dk);color:#CDC2B2;font-size:0.84rem;text-align:center}
+.foot a{color:var(--gold)}
+.chapter-page{display:none}
+.chapter-page.active{display:block}
+section.subsection{scroll-margin-top:120px;padding-top:8px}
+section.subsection h2{margin-top:0}
+.inline-math{font-family:'JetBrains Mono';background:#F1EEE7;padding:1px 6px;border-radius:4px;font-size:0.92em;color:var(--steel-dk)}
+.step{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:12px 18px;margin:12px 0;box-shadow:var(--shadow)}
+.step h4{margin:0 0 6px;color:var(--steel-dk);font-family:'Inter';font-weight:600;font-size:0.95rem}
+.step p{margin:5px 0;font-size:0.93rem}
+.task-card{background:linear-gradient(135deg,#F4EFE7,#EBE3D6);border:1px solid var(--line-strong);border-radius:var(--radius);padding:4px 22px 16px;margin:14px 0}
+.task-card .task-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.task-card .task-num{background:var(--rebar);color:#fff;padding:4px 12px;border-radius:6px;font-weight:600;font-size:0.85rem;margin-top:18px;white-space:nowrap}
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:0;margin:24px 0;box-shadow:var(--shadow);overflow:hidden}
+.calc-head{background:linear-gradient(135deg,var(--steel),var(--steel-dk));color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.calc-head h3{margin:0;color:#fff;font-size:1.12rem}
+.calc-tag{background:var(--rebar);color:#fff;padding:4px 12px;border-radius:6px;font-size:0.78rem;font-weight:600;letter-spacing:0.04em}
+.calc-body{padding:22px 24px;background:var(--calc-bg)}
+.calc-results{background:var(--calc-result);border-radius:var(--radius-sm);padding:16px 20px;margin-top:16px}
+.calc-results h4{margin:0 0 10px;color:var(--steel-dk);font-family:'Inter';font-size:0.92rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;border-bottom:1px solid var(--line-strong);padding-bottom:8px}
+.res-row{display:grid;grid-template-columns:1fr auto;gap:16px;padding:5px 0;font-size:0.92rem;align-items:baseline}
+.res-row.subtle{color:var(--ink-mute);font-size:0.85rem}
+.res-row .val{font-family:'JetBrains Mono';font-weight:600;color:var(--steel-dk);font-size:1rem;text-align:right}
+.verdict{margin-top:14px;padding:14px 18px;border-radius:var(--radius-sm);font-weight:600;text-align:center}
+.verdict .big{font-size:1.4rem;font-family:'Fraunces';margin-bottom:4px;display:block}
+.verdict.ok{background:#D6E5CE;color:#2E4A1F;border:2px solid var(--moss)}
+.verdict.fail{background:#EFC9B5;color:#6B2F12;border:2px solid var(--rebar)}
+figure{margin:14px 0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;box-shadow:var(--shadow);max-width:760px}
+figure svg{width:100%;height:auto;display:block}
+.cr{display:grid;grid-template-columns:1fr 96px;gap:8px;align-items:center;margin:5px 0;font-size:0.88rem}
+.cr label{color:var(--ink)}
+.cr input{background:var(--calc-input);border:1px solid var(--line-strong);border-radius:6px;padding:5px 8px;font-family:'JetBrains Mono';font-size:0.9rem;text-align:right;color:var(--steel-dk);width:100%}
+.cr input:focus{outline:2px solid var(--steel);outline-offset:0}
+.calc-note{font-size:0.8rem;color:var(--ink-mute);margin:8px 0 0}
+</style>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="wrap">
+    <div class="lhs">
+      <div class="brand-mark">B</div>
+      <div class="brand-text">
+        <span class="uni">BME · Építőmérnöki Kar · Geotechnika és Mérnökgeológia Tanszék</span>
+        <span class="course">Alapozás BSc · Síkalapok teherbírásszámítása</span>
+      </div>
+    </div>
+    <div class="rhs">
+      <span class="pill rebar">kalkulátorok</span>
+    </div>
+  </div>
+</header>
+
+<nav class="chaptertabs"><div class="wrap" id="chTabs"></div></nav>
+<nav class="subnav" id="subNav"><div class="wrap" id="subNavInner"></div></nav>
+
+<main>
+
+<!-- ===================== BEVEZETÉS ===================== -->
+<div class="chapter-page active" id="page-bevezetes" data-ch="bevezetes">
+
+  <div class="hero">
+    <h1>Síkalapok teherbírásszámítása</h1>
+    <p class="subtitle">A sáv- és pilléralapok talajtöréssel szembeni ellenállásának meghatározása az Eurocode 7 szerint — a gyakorlati órákon bemutatott mintapéldákon keresztül, interaktív kalkulátorokkal.</p>
+    <div class="meta">
+      <span><b>Tárgy</b> Alapozás BSc · BMEEOGMAT45</span>
+    </div>
+  </div>
+
+  <section class="subsection" id="b-utmutato">
+    <h2>Útmutató ehhez az anyaghoz</h2>
+    <div class="panel">
+      <p>A felső sávban a <b>fő fejezetek</b> között válthatsz, az alattuk megjelenő almenüvel pedig az adott fejezet szakaszai között. A bevezetésen túl három tartalmi fejezet épül egymásra:</p>
+      <ol style="padding-left:22px;line-height:1.9">
+        <li><b>A számítás menete</b> — az EC7 határállapotai (GEO, STR, EQU, UPL), a tervezés menete, a talajtörési mechanizmus, valamint a síkalap talajtöréssel szembeni ellenállásának teljes képlete <b>drénezett</b> és <b>drénezetlen</b> esetre, interaktív ábrákkal.</li>
+        <li><b>Mintapéldák</b> — a gyakorlati anyag alapján rekonstruált, lépésről-lépésre levezetett példák: központos és külpontos, függőleges és ferde teher, talajvíz hatása, pilléralap, valamint a szükséges alapszélesség meghatározása.</li>
+        <li><b>Kalkulátorok</b> — interaktív teherbírás-kalkulátor: állítható geometria, terhek és talajparaméterek; az ábra léptékhelyesen frissül, a program kiszámítja az R<sub>d</sub> tervezési ellenállást és összeveti a V<sub>d</sub> tervezési teherrel.</li>
+      </ol>
+      <p style="margin-bottom:0;color:var(--ink-mute);font-size:0.95rem">A teherbírási megfelelőség alapfeltétele: <span class="inline-math">V<sub>d</sub> &le; R<sub>d</sub></span> — a tervezési teher nem lépheti túl a tervezési ellenállást.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== A SZÁMÍTÁS MENETE ===================== -->
+<div class="chapter-page" id="page-menete" data-ch="menete">
+
+  <section class="subsection" id="me-1">
+    <h2>1. Az EC7 határállapotai</h2>
+    <p>A síkalapok tervezésekor különböző <b>határállapotokat</b> kell vizsgálni. A teherbírási (tönkremeneteli) határállapotok az Eurocode 7 szerint:</p>
+    <div class="grid c2">
+      <div class="panel" style="margin:8px 0">
+        <h3 style="margin-top:0">Teherbírási határállapotok</h3>
+        <ul class="bullet">
+          <li><b>GEO</b> — a talaj törése vagy túlzott mértékű alakváltozása &nbsp;<span class="tag rebar">ez a fejezet · 1–4. gyak</span></li>
+          <li><b>STR</b> — a tartószerkezeti elemek belső törése vagy túlzott alakváltozása (alapvetően tartószerkezeti feladat)</li>
+          <li><b>EQU</b> — a helyzeti állékonyság elvesztése (felbillenés, elcsúszás)</li>
+          <li><b>UPL</b> — a szerkezet/talaj felúszás miatti egyensúlyvesztése</li>
+        </ul>
+      </div>
+      <div class="panel" style="margin:8px 0">
+        <h3 style="margin-top:0">A tervezés szokásos menete</h3>
+        <ol style="padding-left:20px;line-height:1.7;font-size:0.95rem">
+          <li>az <b>alapozási sík</b> felvétele (teherbíró réteg, talajvíz, fagyhatár)</li>
+          <li>az <b>alaptípus</b> kiválasztása</li>
+          <li>az <b>alapszélesség</b> meghatározása — talajtörés és süllyedés ellenőrzéssel</li>
+          <li>az <b>alapszerkezet</b> méretezése (anyag, magasság, vasalás)</li>
+          <li>az <b>állékonyság és felúszás</b> ellenőrzése</li>
+        </ol>
+      </div>
+    </div>
+    <div class="callout"><b>Ez a fejezet a GEO határállapottal foglalkozik:</b> a síkalap alatti talaj töréssel szembeni ellenállásának (teherbírásának) számításával — a 3. tervezési lépés magjával.</div>
+  </section>
+
+  <section class="subsection" id="me-2">
+    <h2>2. A talajtörési mechanizmus</h2>
+    <p>A síkalap alatt a talaj egy összefüggő <b>csúszólap</b> mentén megy tönkre. A klasszikus modell <b>Terzaghi</b> általános megoldása központos, függőleges terhelésű sávalapra: egy aktív ék (I), egy logaritmikus spirál menti nyírási zóna (II) és egy passzív zóna (III) alakul ki.</p>
+    <figure>
+      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="tzg" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="tza" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+          <marker id="tzd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="20" y="92" width="720" height="250" fill="#F0E9DC"/>
+        <rect x="20" y="86" width="720" height="6" fill="url(#tzg)"/>
+        <line x1="20" y1="92" x2="740" y2="92" stroke="#8A7B5E" stroke-width="1.5"/>
+        <text x="26" y="82" font-family="Inter" font-size="10" fill="#8A7B5E">terepszint</text>
+        <!-- alaptest -->
+        <rect x="300" y="50" width="160" height="42" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
+        <text x="380" y="76" font-family="Inter" font-size="11" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
+        <line x1="300" y1="36" x2="460" y2="36" stroke="#3D4852" stroke-width="0.9" marker-start="url(#tzd)" marker-end="url(#tzd)"/>
+        <text x="380" y="30" font-family="Fraunces" font-size="12" fill="#3D4852" text-anchor="middle" font-style="italic">2b = B</text>
+        <line x1="270" y1="92" x2="270" y2="50" stroke="#3D4852" stroke-width="0.9" marker-start="url(#tzd)" marker-end="url(#tzd)"/>
+        <text x="262" y="74" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="end" font-style="italic">t</text>
+        <line x1="380" y1="14" x2="380" y2="48" stroke="#C0512A" stroke-width="4" marker-end="url(#tza)" stroke-linecap="round"/>
+        <text x="388" y="26" font-family="Fraunces" font-size="12" fill="#8F3A1B" font-weight="700">F</text>
+        <!-- q=t·γ a felszínen az alaptest mellett -->
+        <g stroke="#8A7B5E" stroke-width="1.4" fill="none">
+          <line x1="200" y1="94" x2="200" y2="112" marker-end="url(#tza)"/>
+          <line x1="235" y1="94" x2="235" y2="112" marker-end="url(#tza)"/>
+          <line x1="270" y1="94" x2="270" y2="112" marker-end="url(#tza)"/>
+        </g>
+        <text x="150" y="108" font-family="Fraunces" font-size="11" fill="#6B6052" font-style="italic">q = t·γ</text>
+        <!-- törési felület -->
+        <path d="M300,92 L380,150 L460,92" fill="rgba(192,81,42,0.16)" stroke="#C0512A" stroke-width="1.6"/>
+        <path d="M380,150 Q470,250 600,210 L600,210" fill="none" stroke="#3D2A1A" stroke-width="2"/>
+        <path d="M380,150 Q470,250 600,210" fill="rgba(138,123,94,0.18)" stroke="none"/>
+        <line x1="460" y1="92" x2="600" y2="210" stroke="#3D2A1A" stroke-width="1.4"/>
+        <line x1="600" y1="210" x2="690" y2="92" stroke="#3D2A1A" stroke-width="2"/>
+        <text x="380" y="128" font-family="Inter" font-size="12" fill="#8F3A1B" text-anchor="middle" font-weight="600">I.</text>
+        <text x="470" y="195" font-family="Inter" font-size="12" fill="#3D2A1A" text-anchor="middle" font-weight="600">II.</text>
+        <text x="585" y="150" font-family="Inter" font-size="12" fill="#3D2A1A" text-anchor="middle" font-weight="600">III.</text>
+        <text x="500" y="262" font-family="Inter" font-size="9.5" fill="#6B6052" font-style="italic">logaritmikus spirál</text>
+        <text x="660" y="150" font-family="Inter" font-size="9.5" fill="#6B6052" font-style="italic">egyenes</text>
+        <text x="345" y="106" font-family="JetBrains Mono" font-size="9" fill="#8F3A1B">45°−φ/2</text>
+        <text x="595" y="106" font-family="JetBrains Mono" font-size="9" fill="#8F3A1B">45°−φ/2</text>
+        <text x="380" y="332" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">Terzaghi általános törési modellje — aktív ék (I), spirál nyírási zóna (II), passzív zóna (III)</text>
+      </svg>
+    </figure>
+    <p>A Terzaghi-modell zárt megoldást ad, de <b>ritkán érvényes</b> pontosan (csak központos, függőleges teher, vízszintes alapsík). A gyakorlatban a Terzaghi-modellt <b>modellkísérletekkel</b> kiegészítve használjuk, amelyek figyelembe veszik:</p>
+    <ul class="bullet">
+      <li>az <b>alaptest alakját</b> (sáv-, téglalap-, négyzetes pilléralap),</li>
+      <li>a <b>teher ferdeségét</b> (ferde / vízszintes erőkomponens),</li>
+      <li>a <b>teher külpontosságát</b> (excentrikus terhelés).</li>
+    </ul>
+  </section>
+
+  <section class="subsection" id="me-3">
+    <h2>3. A teherbírási képlet — drénezett eset</h2>
+    <p>A <b>drénezett</b> eset a lassú terhelésre / szemcsés talajra jellemző: a talaj nyírószilárdsága a <span class="inline-math">φ – c</span> értékpárral írható le, a víz felhajtóerejének kedvező hatása figyelembe vehető. A síkalap talajtöréssel szembeni ellenállása az EC7 (MSZ EN 1997-1) szerint:</p>
+    <div class="callout formula" style="text-align:center;font-size:0.98rem">
+      R<sub>k</sub> / (B′·L′) = 0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> &nbsp;+&nbsp; q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> &nbsp;+&nbsp; c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>
+    </div>
+    <div class="grid c3">
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--rebar)">
+        <h4 style="margin-top:0">Szélességi tag</h4>
+        <p style="font-size:0.9rem;margin:0">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az alaptest szélessége és az alatta lévő talaj súlya adja</span></p>
+      </div>
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--steel)">
+        <h4 style="margin-top:0">Mélységi tag</h4>
+        <p style="font-size:0.9rem;margin:0">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az alapsík melletti q′ geosztatikus nyomás (alapozási mélység) hatása</span></p>
+      </div>
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)">
+        <h4 style="margin-top:0">Kohéziós tag</h4>
+        <p style="font-size:0.9rem;margin:0">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">a talaj kohéziójából származó ellenállás</span></p>
+      </div>
+    </div>
+    <h3>Bemenő paraméterek</h3>
+    <ul class="bullet">
+      <li><b>γ′</b> — az alap alatti talaj hatékony térfogatsúlya</li>
+      <li><b>B / L</b> — az alaptest tényleges szélessége / hossza; <b>B′ / L′</b> — a dolgozó (hatékony) keresztmetszet méretei</li>
+      <li><b>q′</b> — az alapsíkon az alap mellett működő hatékony geosztatikus nyomás</li>
+      <li><b>c</b> — az alap alatti talaj kohéziója; <b>φ</b> — belső súrlódási szöge</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="m3g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="m3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+          <marker id="m3d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="60" width="700" height="100" fill="#F2E9C9"/>
+        <rect x="30" y="160" width="700" height="130" fill="#E8C98A"/>
+        <rect x="30" y="54" width="700" height="6" fill="url(#m3g)"/>
+        <line x1="30" y1="60" x2="730" y2="60" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="50" font-family="Inter" font-size="10" fill="#8A7B5E">terepszint</text>
+        <rect x="300" y="20" width="34" height="40" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.1"/>
+        <rect x="262" y="120" width="110" height="40" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
+        <text x="317" y="145" font-family="Inter" font-size="10" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
+        <line x1="317" y1="6" x2="317" y2="56" stroke="#C0512A" stroke-width="4.5" marker-end="url(#m3a)" stroke-linecap="round"/>
+        <text x="325" y="20" font-family="Fraunces" font-size="12" fill="#8F3A1B" font-weight="700">F</text>
+        <line x1="244" y1="60" x2="244" y2="120" stroke="#3D4852" stroke-width="0.9" marker-start="url(#m3d)" marker-end="url(#m3d)"/>
+        <text x="238" y="93" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="end" font-style="italic">t</text>
+        <text x="120" y="95" font-family="Fraunces" font-size="13" fill="#6B6052" font-style="italic">γ</text>
+        <text x="120" y="230" font-family="Fraunces" font-size="13" fill="#6B6052" font-style="italic">γ′</text>
+        <line x1="262" y1="174" x2="372" y2="174" stroke="#3D4852" stroke-width="0.9" marker-start="url(#m3d)" marker-end="url(#m3d)"/>
+        <text x="317" y="188" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B</text>
+        <line x1="30" y1="160" x2="730" y2="160" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="724" y="155" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík (A.S.)</text>
+        <path d="M262,160 Q317,250 372,160" fill="rgba(192,81,42,0.12)" stroke="#C0512A" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="500" y="120" font-family="Inter" font-size="10.5" fill="#6B6052" font-style="italic">q′ = a geosztatikus nyomás az alapsíkon, az alap mellett</text>
+        <text x="500" y="232" font-family="Inter" font-size="10.5" fill="#6B6052" font-style="italic">γ′ = az alap alatti talaj hatékony térfogatsúlya</text>
+      </svg>
+    </figure>
+
+    <h3>Teherbírási (talajtörési ellenállási) tényezők</h3>
+    <div class="callout formula">
+      N<sub>q</sub> = e<sup>π·tgφ</sup> · tg²(45° + φ/2)<br>
+      N<sub>γ</sub> = 2 · (N<sub>q</sub> − 1) · tgφ<br>
+      N<sub>c</sub> = (N<sub>q</sub> − 1) · ctgφ
+    </div>
+    <p>A három tényező kizárólag a belső súrlódási szögtől (φ) függ, és a φ növekedésével rohamosan nő. Néhány jellemző érték:</p>
+    <table class="dt num">
+      <thead><tr><th>φ [°]</th><th>0</th><th>10</th><th>15</th><th>20</th><th>24</th><th>26</th><th>30</th><th>32</th><th>35</th><th>40</th></tr></thead>
+      <tbody>
+        <tr><td>N<sub>q</sub></td><td>1,00</td><td>2,47</td><td>3,94</td><td>6,40</td><td>9,63</td><td>11,85</td><td>18,40</td><td>23,18</td><td>33,30</td><td>64,20</td></tr>
+        <tr><td>N<sub>c</sub></td><td>5,14</td><td>8,34</td><td>10,98</td><td>14,83</td><td>19,32</td><td>22,25</td><td>30,14</td><td>35,49</td><td>46,12</td><td>75,31</td></tr>
+        <tr><td>N<sub>γ</sub></td><td>0,00</td><td>0,52</td><td>1,58</td><td>3,93</td><td>7,66</td><td>10,59</td><td>20,09</td><td>27,72</td><td>45,23</td><td>106,05</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Korrekciós tényezők</h3>
+    <div class="grid c3">
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Alaki tényezők (s)</h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
+          s<sub>γ</sub> = 1 − 0,3·(B′/L′)<br>
+          s<sub>q</sub> = 1 + (B′/L′)·sinφ<br>
+          s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)
+        </div>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Sávalapnál (L ≫ B): s<sub>γ</sub> = s<sub>q</sub> = s<sub>c</sub> ≈ 1.</p>
+      </div>
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Teher-ferdeségi tényezők (i)</h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
+          i<sub>γ</sub> = (1 − f)<sup>m+1</sup><br>
+          i<sub>q</sub> = (1 − f)<sup>m</sup><br>
+          i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)<br>
+          f = R<sub>h</sub> / (R<sub>v</sub> + B′·L′·c·ctgφ)
+        </div>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Csak függőleges erő esetén R<sub>h</sub> = 0 → f = 0 → i = 1.<br>m: sávalapnál m<sub>B</sub> ≈ 2, pontalapnál 1,5.</p>
+      </div>
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Alapsík-ferdeségi tényezők (b)</h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.83rem">
+          b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tgφ)²<br>
+          b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tgφ)
+        </div>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">Vízszintes alapsík esetén α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="subsection" id="me-4">
+    <h2>4. A teherbírási képlet — drénezett eset (hatékony m<sub>B</sub>)</h2>
+    <p>A teher-ferdeségi tényezőkben szereplő <b>m</b> kitevő a dolgozó keresztmetszet arányától függ, attól függően, hogy a vízszintes erő a B vagy az L oldallal párhuzamos:</p>
+    <div class="callout formula">
+      m<sub>B</sub> = [2 + (B′/L′)] / [1 + (B′/L′)] &nbsp;&nbsp;(ha a vízszintes erő B-vel párhuzamos)<br>
+      m<sub>L</sub> = [2 + (L′/B′)] / [1 + (L′/B′)] &nbsp;&nbsp;(ha az L-lel párhuzamos)
+    </div>
+    <table class="dt">
+      <thead><tr><th>Alaptípus</th><th>m<sub>B</sub> (B-vel párhuzamos H)</th><th>m<sub>L</sub> (L-lel párhuzamos H)</th></tr></thead>
+      <tbody>
+        <tr><td>Sávalap (L ≫ B)</td><td>2,0</td><td>1,0</td></tr>
+        <tr><td>Négyzetes pontalap (L = B)</td><td>1,5</td><td>1,5</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="subsection" id="me-5">
+    <h2>5. A teherbírási képlet — drénezetlen eset</h2>
+    <p>A <b>drénezetlen</b> eset a gyors terhelésre / kötött talajra jellemző: a talaj nyírószilárdságát a <span class="inline-math">c<sub>u</sub></span> drénezetlen nyírószilárdsággal írjuk le, <span class="inline-math">φ = 0</span>. A víz felhajtóerejét <b>nem szabad</b> figyelembe venni — teljes feszültségekkel számolunk.</p>
+    <div class="callout formula" style="text-align:center;font-size:0.98rem">
+      σ<sub>t</sub> = R<sub>v</sub> / (B′·L′) = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> &nbsp;+&nbsp; q
+    </div>
+    <div class="grid c2">
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Tényezők (drénezetlen)</h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.85rem">
+          s<sub>c</sub> = 1 + 0,2·(B′/L′)<br>
+          b<sub>c</sub> = 1 − 2α/(π + 2)<br>
+          i<sub>c</sub> = 0,5·[1 + √(1 − R<sub>h</sub>/(A′·c<sub>u</sub>))]
+        </div>
+        <p style="font-size:0.84rem;color:var(--ink-mute);margin:0">α értékét radiánban kell a képletbe írni.</p>
+      </div>
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Jelölések</h4>
+        <ul class="bullet" style="font-size:0.9rem">
+          <li><b>q</b> — az alapsíkon az alap mellett működő <i>teljes</i> geosztatikus nyomás</li>
+          <li><b>c<sub>u</sub></b> — drénezetlen nyírószilárdság</li>
+          <li><b>A′ = B′·L′</b> — a dolgozó keresztmetszet</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="subsection" id="me-6">
+    <h2>6. Dolgozó keresztmetszet — külpontosság</h2>
+    <p>Külpontos terhelésnél a teher nem a keresztmetszet középpontjában működik. A számításhoz a <b>dolgozó (hatékony) keresztmetszetet</b> használjuk, amelynek középpontja egybeesik az eredő erő döféspontjával:</p>
+    <div class="callout formula" style="text-align:center">
+      B′ = B − 2·e<sub>B</sub> &nbsp;&nbsp;&nbsp; L′ = L − 2·e<sub>L</sub>
+    </div>
+    <figure style="max-width:520px">
+      <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="exd" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker></defs>
+        <rect x="120" y="60" width="200" height="220" fill="#C9C0AE" stroke="#3D2A1A" stroke-width="1.6"/>
+        <rect x="200" y="60" width="120" height="150" fill="#BFE0DF" stroke="#2E7D8A" stroke-width="1.6"/>
+        <line x1="200" y1="135" x2="320" y2="210" stroke="#3D2A1A" stroke-width="0.8"/>
+        <circle cx="260" cy="172" r="6" fill="#C0512A" stroke="#8F3A1B" stroke-width="1.5"/>
+        <line x1="220" y1="30" x2="320" y2="30" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="270" y="24" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B′</text>
+        <line x1="120" y1="44" x2="320" y2="44" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="220" y="38" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B</text>
+        <line x1="350" y1="60" x2="350" y2="210" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="358" y="138" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L′</text>
+        <line x1="378" y1="60" x2="378" y2="280" stroke="#3D4852" stroke-width="0.8" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="386" y="173" font-family="Fraunces" font-size="11" fill="#3D4852" font-style="italic">L</text>
+        <line x1="200" y1="172" x2="260" y2="172" stroke="#C0512A" stroke-width="1.4" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="230" y="166" font-family="Fraunces" font-size="10" fill="#8F3A1B" text-anchor="middle" font-style="italic">e<tspan baseline-shift="sub" font-size="7">B</tspan></text>
+        <line x1="260" y1="135" x2="260" y2="172" stroke="#C0512A" stroke-width="1.4" marker-start="url(#exd)" marker-end="url(#exd)"/>
+        <text x="270" y="158" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-style="italic">e<tspan baseline-shift="sub" font-size="7">L</tspan></text>
+        <text x="240" y="305" font-family="Inter" font-size="10" fill="#6B6052" text-anchor="middle" font-style="italic">a kék terület a dolgozó keresztmetszet (A′ = B′·L′)</text>
+      </svg>
+    </figure>
+    <p>A külpontosság az alapsíkra felírt <b>nyomatéki egyenletből</b> adódik. Ha vízszintes H<sub>k</sub> erő és külpontos Q<sub>k</sub> teher hat:</p>
+    <div class="callout formula" style="text-align:center">
+      e<sub>B,k</sub> = | (H<sub>k</sub>·h) − (Q<sub>k</sub>·e<sub>q</sub>) | / V<sub>k</sub>
+    </div>
+    <div class="callout warn"><b>Vigyázz az előjelekre!</b> A vízszintes erő és a külpontos függőleges teher nyomatéka <i>ellentétes</i> irányú is lehet — ekkor a külpontosság csökken.</div>
+  </section>
+
+  <section class="subsection" id="me-7">
+    <h2>7. Talajvíz hatása — a hatékony γ′</h2>
+    <p>A szélességi tagban szereplő γ′ értékét a talajvíz alapsík alatti mélysége (t<sub>wd</sub>) befolyásolja. A törési zóna a B′ mélységig terjed; a γ′ a t<sub>wd</sub>/B′ aránytól függően lineárisan változik:</p>
+    <figure style="max-width:600px">
+      <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
+        <line x1="70" y1="40" x2="70" y2="250" stroke="#3D4852" stroke-width="1.2"/>
+        <line x1="70" y1="250" x2="520" y2="250" stroke="#3D4852" stroke-width="1.2"/>
+        <text x="58" y="44" font-family="Fraunces" font-size="12" fill="#3D4852" font-style="italic" text-anchor="end">γ′</text>
+        <text x="512" y="270" font-family="Fraunces" font-size="12" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="8">wd</tspan>/B′</text>
+        <polyline points="70,200 230,200 410,80 520,80" fill="none" stroke="#2E7D8A" stroke-width="2.6"/>
+        <line x1="230" y1="250" x2="230" y2="200" stroke="#9A8" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="410" y1="250" x2="410" y2="80" stroke="#9A8" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <text x="230" y="266" font-family="JetBrains Mono" font-size="10" fill="#6B6052" text-anchor="middle">0,5</text>
+        <text x="410" y="266" font-family="JetBrains Mono" font-size="10" fill="#6B6052" text-anchor="middle">1,5</text>
+        <line x1="58" y1="200" x2="70" y2="200" stroke="#3D4852" stroke-width="1"/>
+        <text x="54" y="204" font-family="JetBrains Mono" font-size="9" fill="#6B6052" text-anchor="end">γ<tspan baseline-shift="sub" font-size="7">sat</tspan>−γ<tspan baseline-shift="sub" font-size="7">w</tspan></text>
+        <line x1="58" y1="80" x2="70" y2="80" stroke="#3D4852" stroke-width="1"/>
+        <text x="54" y="84" font-family="JetBrains Mono" font-size="9" fill="#6B6052" text-anchor="end">γ<tspan baseline-shift="sub" font-size="7">m</tspan></text>
+      </svg>
+    </figure>
+    <div class="callout formula" style="font-size:0.86rem">
+      t<sub>wd</sub> ≤ 0,5·B′ &nbsp;→&nbsp; γ′ = γ<sub>sat</sub> − γ<sub>w</sub> &nbsp;&nbsp;(víz a törési zónában)<br>
+      0,5·B′ &lt; t<sub>wd</sub> &lt; 1,5·B′ &nbsp;→&nbsp; γ′ = (γ<sub>sat</sub> − γ<sub>w</sub>) + (γ<sub>m</sub> − (γ<sub>sat</sub> − γ<sub>w</sub>))·(t<sub>wd</sub>/B′ − 0,5) &nbsp;&nbsp;(lineáris átmenet)<br>
+      1,5·B′ ≤ t<sub>wd</sub> &nbsp;→&nbsp; γ′ = γ<sub>m</sub> &nbsp;&nbsp;(víz mélyen, nincs hatása)
+    </div>
+    <div class="callout note">A negatív t<sub>wd</sub> azt jelenti, hogy a talajvíz az alapsík <i>fölött</i> van — ekkor γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</div>
+  </section>
+
+  <section class="subsection" id="me-8">
+    <h2>8. A megfelelőség igazolása</h2>
+    <p>A teherbírási (GEO) határállapot akkor teljesül, ha a <b>tervezési teher</b> nem nagyobb a <b>tervezési ellenállásnál</b>:</p>
+    <div class="callout success" style="text-align:center;font-size:1.05rem"><b>V<sub>d</sub> &le; R<sub>d</sub></b></div>
+    <div class="grid c2">
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Tervezési teher — V<sub>d</sub></h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.88rem">V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub></div>
+        <p style="font-size:0.88rem;margin:0">Részleges tényezők: állandó teherre <b>γ<sub>G</sub> = 1,35</b>, esetleges (hasznos) teherre <b>γ<sub>Q</sub> = 1,5</b>. A G<sub>k</sub> tartalmazza a felszerkezet, az alaptest és a leterhelő talaj (feltöltés) önsúlyát.</p>
+      </div>
+      <div class="panel" style="margin:8px 0">
+        <h4 style="margin-top:0">Tervezési ellenállás — R<sub>d</sub></h4>
+        <div class="callout formula" style="margin:6px 0;font-size:0.88rem">R<sub>d</sub> = R<sub>k</sub> / γ<sub>R</sub></div>
+        <p style="font-size:0.88rem;margin:0">Az ellenállási részleges tényező síkalapok talajtörésére <b>γ<sub>R</sub> = 1,4</b>. Az R<sub>k</sub> karakterisztikus ellenállás a teherbírási képletből adódik.</p>
+      </div>
+    </div>
+    <div class="callout warn"><b>Ha V<sub>d</sub> &gt; R<sub>d</sub>:</b> az alap nem felel meg. Két megoldás van — <b>(1)</b> mélyebbre visszük az alapozási síkot (nő q′), vagy <b>(2)</b> szélesítjük az alaptestet (nő B). A gyakorlatban általában a szélesítés a praktikusabb.</div>
+  </section>
+</div>
+
+<!-- ===================== MINTAPÉLDÁK ===================== -->
+<div class="chapter-page" id="page-mintapeldak" data-ch="mintapeldak">
+
+  <h1>Mintapéldák</h1>
+  <p style="color:var(--ink-mute);max-width:820px">Öt részletesen levezetett mintapélda a gyakorlati anyag szerint — drénezett és drénezetlen sávalap, külpontos és ferde teher talajvízzel, pilléralap két irányban, valamint a szükséges alapszélesség meghatározása. Mindegyik példához a gyakorlati anyag alapján rekonstruált ábra és lépésről-lépésre megoldás tartozik.</p>
+
+  <!-- ===== MP1 ===== -->
+  <section class="subsection" id="s-mp1">
+    <h2>Mintapélda 1 — Drénezett sávalap ellenőrzése</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ellenőrizd az ábrán látható <b>sávalap</b> (L ≫ B) talajtöréssel szembeni megfelelőségét drénezett esetben! Terhek: <b>G<sub>v,k</sub> = 220 kN/m</b>, <b>Q<sub>v,k</sub> = 70 kN/m</b> (központos, függőleges). Geometria: b = 0,3 m, B = 1,1 m, h = 0,6 m, az alapsík 1,1 m-rel a terepszint alatt. γ<sub>b</sub> = 25 kN/m³. A talajvíz mélyen van. <b>saGr feltöltés:</b> γ = 17, φ = 30°, c = 10 kPa. <b>siSa termett talaj:</b> γ = 18, φ = 24°, c = 12 kPa.</p>
+        </div>
+        <span class="task-num">MP1</span>
+      </div>
+    </div>
+
+    <h3>Ábra</h3>
+    <figure>
+      <svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p1g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker>
+          <marker id="p1d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="92" width="700" height="78" fill="#F2E14A"/>
+        <rect x="30" y="170" width="700" height="150" fill="#F0A92E"/>
+        <rect x="30" y="86" width="700" height="6" fill="url(#p1g)"/>
+        <line x1="30" y1="92" x2="730" y2="92" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="82" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <!-- pillér -->
+        <rect x="318" y="44" width="44" height="48" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <!-- alaptest -->
+        <rect x="270" y="92" width="140" height="78" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="340" y="135" font-family="Inter" font-size="11" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan> = 25 kN/m³</text>
+        <!-- terhek -->
+        <line x1="340" y1="10" x2="340" y2="42" stroke="#1E63B0" stroke-width="5" marker-end="url(#p1a)" stroke-linecap="round"/>
+        <text x="350" y="24" font-family="Fraunces" font-size="12" fill="#1E63B0" font-weight="700">G<tspan baseline-shift="sub" font-size="9">v,k</tspan>=220 · Q<tspan baseline-shift="sub" font-size="9">v,k</tspan>=70 kN/m</text>
+        <!-- méretek -->
+        <line x1="318" y1="30" x2="362" y2="30" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="340" y="24" font-family="Fraunces" font-size="9" fill="#3D4852" text-anchor="middle" font-style="italic">b=0,3</text>
+        <line x1="252" y1="92" x2="252" y2="170" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="246" y="135" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=0,6 m</text>
+        <line x1="270" y1="184" x2="410" y2="184" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="340" y="198" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 1,1 m</text>
+        <!-- alapsík -->
+        <line x1="30" y1="170" x2="730" y2="170" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="724" y="165" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík −1,10 mRel</text>
+        <!-- talaj feliratok -->
+        <text x="560" y="125" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">saGr feltöltés</text>
+        <text x="560" y="140" font-family="Inter" font-size="9" fill="#6B6052">γ=17 · φ=30° · c=10 kPa</text>
+        <text x="560" y="245" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
+        <text x="560" y="260" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · φ=24° · c=12 kPa</text>
+        <text x="60" y="300" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sávalap (L ≫ B)</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Terhelési oldal — a tervezési teher</h4>
+      <p>Feltöltés súlya: G<sub>f,k</sub> = (B−b)·t·γ = (1,1−0,3)·0,5·17 = <b>6,8 kN/m</b></p>
+      <p>Alaptest súlya: G<sub>b,k</sub> = B·h·γ<sub>b</sub> = 1,1·0,6·25 = <b>16,5 kN/m</b></p>
+      <p>Állandó terhek: G<sub>k</sub> = 220 + 6,8 + 16,5 = <b>243,3 kN/m</b></p>
+      <p>V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub> = 1,35·243,3 + 1,5·70 = <b>434 kN/m</b></p>
+    </div>
+    <div class="step"><h4>2. Geometria és geosztatikus nyomás</h4>
+      <p>Központos teher → B = B′, A′ = B′·L′ = 1,1 m²/m.</p>
+      <p>q′ = Σγ<sub>i</sub>·t<sub>i</sub> = 17·0,8 + 18·0,3 = <b>19 kPa</b></p>
+      <p>Talajvíz mélyen: t<sub>wd</sub>/B′ &gt; 1,5 → γ′ = γ<sub>m</sub> = <b>18 kN/m³</b></p>
+    </div>
+    <div class="step"><h4>3. Teherbírási tényezők (φ = 24°)</h4>
+      <p>N<sub>q</sub> = e<sup>π·tg24°</sup>·tg²(45°+12°) = <b>9,63</b>; &nbsp; N<sub>c</sub> = (N<sub>q</sub>−1)·ctg24° = <b>19,32</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tg24° = <b>7,66</b></p>
+      <p>Sávalap, központos teher, vízszintes alapsík → s = i = b ≈ 1.</p>
+    </div>
+    <div class="step"><h4>4. Karakterisztikus és tervezési ellenállás</h4>
+      <p>R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub> + q′·N<sub>q</sub> + c·N<sub>c</sub> = 0,5·18·1,1·7,66 + 19·9,63 + 12·19,32</p>
+      <p>= 76 + 182 + 232 = <b>490 kPa</b></p>
+      <p>R<sub>k</sub> = 490·1,1 = 539 kN/m → R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub> = 539/1,4 = <b>385 kN/m</b></p>
+    </div>
+    <div class="callout fail"><b>Eredmény (B = 1,1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 434 kN/m → <b>NEM FELEL MEG.</b></div>
+    <div class="step"><h4>5. Megoldás: szélesítsük az alaptestet — B = 1,3 m</h4>
+      <p>Új súlyok: G<sub>f,k</sub> = (1,3−0,3)·0,5·17 = 8,5; &nbsp; G<sub>b,k</sub> = 1,3·0,6·25 = 19,5 → G<sub>k</sub> = 248 → V<sub>d</sub> = 1,35·248 + 1,5·70 = <b>440 kN/m</b></p>
+      <p>R<sub>k</sub>/A′ = 0,5·18·1,3·7,66 + 19·9,63 + 12·19,32 = 90 + 182 + 232 = 504 kPa</p>
+      <p>R<sub>k</sub> = 504·1,3 = 655 → R<sub>d</sub> = 655/1,4 = <b>468 kN/m</b></p>
+    </div>
+    <div class="callout success"><b>Eredmény (B = 1,3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m → <b>MEGFELEL.</b> ✓</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp1">
+      <div class="calc-head"><h3>MP1 — drénezett sávalap ellenőrzése</h3><span class="calc-tag">GEO</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp1-B" value="1.3" step="0.05"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp1-q" value="19" step="1"></div>
+          <div class="cr"><label>G<sub>v,k</sub> (kN/m)</label><input type="number" id="mp1-Gv" value="220" step="10"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp1-gp" value="18" step="0.5"></div>
+          <div class="cr"><label>Q<sub>v,k</sub> (kN/m)</label><input type="number" id="mp1-Qv" value="70" step="10"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp1-phi" value="24" step="1"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp1-c" value="12" step="1"></div>
+        </div>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 0,6 · t = 0,5 m · γ<sub>feltöltés</sub> = 17 · γ<sub>b</sub> = 25 kN/m³</p>
+        <div class="calc-results" id="mp1-res"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MP2 ===== -->
+  <section class="subsection" id="s-mp2">
+    <h2>Mintapélda 2 — Drénezetlen sávalap ellenőrzése</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Az MP1-gyel <b>azonos geometria és terhelés</b>, de az alap alatti termett talaj most kötött (Cl): φ<sub>u</sub> = 0°, <b>c<sub>u</sub> = 150 kPa</b>. Ellenőrizd a sávalapot <b>drénezetlen</b> esetben (B = 1,1 m)!</p>
+        </div>
+        <span class="task-num">MP2</span>
+      </div>
+    </div>
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Terhelési oldal</h4>
+      <p>Azonos az MP1-gyel: G<sub>k</sub> = 243,3 kN/m → V<sub>d</sub> = 1,35·243,3 + 1,5·70 = <b>434 kN/m</b></p>
+    </div>
+    <div class="step"><h4>2. Geosztatikus nyomás (teljes feszültség!)</h4>
+      <p>Drénezetlen eset → <i>teljes</i> feszültséggel számolunk, a víz felhajtóerejét nem vesszük figyelembe.</p>
+      <p>q = Σγ<sub>i</sub>·t<sub>i</sub> = 17·0,8 + 18·0,3 = <b>19 kPa</b></p>
+    </div>
+    <div class="step"><h4>3. Drénezetlen ellenállás</h4>
+      <p>Sávalap → s<sub>c</sub> = 1; vízszintes alapsík → b<sub>c</sub> = 1; függőleges teher → i<sub>c</sub> = 1.</p>
+      <p>σ<sub>t</sub> = R<sub>v</sub>/A′ = (2+π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q = (2+π)·150·1·1·1 + 19 = 771 + 19 = <b>790 kPa</b></p>
+      <p>R<sub>k</sub> = 790·1,1 = 869 kN/m → R<sub>d</sub> = 869/1,4 = <b>620 kN/m</b></p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 620 kN/m &gt; V<sub>d</sub> = 434 kN/m → <b>MEGFELEL.</b> ✓ &nbsp; A kemény kötött talaj drénezetlen állapotban már 1,1 m szélességgel is bírja a terhet.</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp2">
+      <div class="calc-head"><h3>MP2 — drénezetlen sávalap ellenőrzése</h3><span class="calc-tag" style="background:var(--azure)">drénezetlen</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp2-B" value="1.1" step="0.05"></div>
+          <div class="cr"><label>q geosztatikus (kPa)</label><input type="number" id="mp2-q" value="19" step="1"></div>
+          <div class="cr"><label>G<sub>v,k</sub> (kN/m)</label><input type="number" id="mp2-Gv" value="220" step="10"></div>
+          <div class="cr"><label>c<sub>u</sub> drénezetlen ny.szil. (kPa)</label><input type="number" id="mp2-cu" value="150" step="10"></div>
+          <div class="cr"><label>Q<sub>v,k</sub> (kN/m)</label><input type="number" id="mp2-Qv" value="70" step="10"></div>
+        </div>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 0,6 · t = 0,5 m · γ<sub>feltöltés</sub> = 17 · γ<sub>b</sub> = 25 kN/m³ &nbsp;·&nbsp; teljes feszültség (φ = 0)</p>
+        <div class="calc-results" id="mp2-res"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MP3 ===== -->
+  <section class="subsection" id="s-mp3">
+    <h2>Mintapélda 3 — Külpontos és ferde teher, talajvízzel</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ellenőrizd a <b>sávalapot</b> drénezett esetben! Terhek: <b>G<sub>z,k</sub> = 250 kN/m</b> (központos), <b>Q<sub>z,k</sub> = 170 kN/m</b> külpontosan (e<sub>q</sub> = 0,3 m), <b>G<sub>x,k</sub> = 30 kN/m</b> vízszintes erő. Geometria: b = 0,3 m, B = 1,3 m, h = 1,0 m, t = 0,4 m, t<sub>fill</sub> = 1,1 m, γ<sub>b</sub> = 25. A talajvíz az alapsík fölött 0,6 m-rel. <b>Sa feltöltés:</b> γ = 18, γ<sub>sat</sub> = 19, φ = 30°, c = 5. <b>siSa termett talaj:</b> γ = 18, γ<sub>sat</sub> = 20, φ = 26°, c = 30.</p>
+        </div>
+        <span class="task-num">MP3</span>
+      </div>
+    </div>
+
+    <h3>Ábra</h3>
+    <figure>
+      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p3g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker>
+          <marker id="p3r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+          <marker id="p3d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <rect x="30" y="92" width="700" height="98" fill="#F2E14A"/>
+        <rect x="30" y="190" width="700" height="140" fill="#F0A92E"/>
+        <rect x="30" y="86" width="700" height="6" fill="url(#p3g)"/>
+        <line x1="30" y1="92" x2="730" y2="92" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="82" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <!-- víz -->
+        <line x1="30" y1="138" x2="120" y2="138" stroke="#1E78C8" stroke-width="2"/>
+        <path d="M70,132 l8,0 l-4,7 z" fill="#1E78C8"/>
+        <text x="36" y="132" font-family="Inter" font-size="9" fill="#1E78C8">talajvíz</text>
+        <!-- pillér -->
+        <rect x="322" y="40" width="44" height="52" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <!-- alaptest -->
+        <rect x="262" y="92" width="170" height="98" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="347" y="160" font-family="Inter" font-size="10" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan>=25</text>
+        <!-- függőleges terhek -->
+        <line x1="300" y1="8" x2="300" y2="90" stroke="#1E63B0" stroke-width="4.5" marker-end="url(#p3a)" stroke-linecap="round"/>
+        <text x="232" y="22" font-family="Fraunces" font-size="10.5" fill="#1E63B0" font-weight="700">Q<tspan baseline-shift="sub" font-size="8">z,k</tspan>=170</text>
+        <text x="232" y="35" font-family="Fraunces" font-size="9" fill="#1E63B0">e<tspan baseline-shift="sub" font-size="7">q</tspan>=0,3 m</text>
+        <line x1="344" y1="8" x2="344" y2="40" stroke="#1E63B0" stroke-width="4.5" marker-end="url(#p3a)" stroke-linecap="round"/>
+        <text x="352" y="20" font-family="Fraunces" font-size="10.5" fill="#1E63B0" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=250</text>
+        <!-- vízszintes erő -->
+        <line x1="232" y1="118" x2="300" y2="118" stroke="#C0512A" stroke-width="4.5" marker-end="url(#p3r)" stroke-linecap="round"/>
+        <text x="234" y="112" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-weight="700">G<tspan baseline-shift="sub" font-size="8">x,k</tspan>=30 kN/m</text>
+        <!-- méretek -->
+        <line x1="262" y1="204" x2="432" y2="204" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p3d)" marker-end="url(#p3d)"/>
+        <text x="347" y="218" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 1,3 m</text>
+        <line x1="244" y1="92" x2="244" y2="190" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p3d)" marker-end="url(#p3d)"/>
+        <text x="238" y="145" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=1,0</text>
+        <!-- alapsík -->
+        <line x1="30" y1="190" x2="730" y2="190" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="724" y="185" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík</text>
+        <text x="560" y="130" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sa feltöltés</text>
+        <text x="560" y="145" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=19 · φ=30° · c=5</text>
+        <text x="560" y="255" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
+        <text x="560" y="270" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20 · φ=26° · c=30</text>
+        <text x="60" y="312" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sávalap (L ≫ B)</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Terhelési oldal</h4>
+      <p>G<sub>f,k</sub> = (1,3−0,3)·0,4·18 = 7,2; &nbsp; G<sub>b,k</sub> = 1,3·1,0·25 = 32,5 → G<sub>k</sub> = 250 + 7,2 + 32,5 = <b>289,7 kN/m</b></p>
+      <p>V<sub>d</sub> = 1,35·289,7 + 1,5·170 = <b>646,1 kN/m</b></p>
+    </div>
+    <div class="step"><h4>2. Az eredő erő külpontossága</h4>
+      <p>Függőleges karakterisztikus teher: V<sub>k</sub> = G<sub>z,k</sub>+G<sub>f,k</sub>+G<sub>b,k</sub>+Q<sub>z,k</sub> = 250+7,2+32,5+170 = <b>459,7 kN/m</b></p>
+      <p>Vízszintes teher: H<sub>k</sub> = G<sub>x,k</sub> = <b>30 kN/m</b></p>
+      <p>Nyomatéki egyenlet az alapsík tengelyére: e<sub>B,k</sub> = |(H<sub>k</sub>·h) − (Q<sub>z,k</sub>·e<sub>q</sub>)| / V<sub>k</sub> = |(30·1,0) − (170·0,3)| / 459,7 = 21/459,7 = <b>0,046 m</b></p>
+      <p>Dolgozó szélesség: B′ = B − 2·e<sub>B,k</sub> = 1,3 − 2·0,046 = <b>1,208 m</b>; &nbsp; A′ = 1,208 m²/m</p>
+    </div>
+    <div class="step"><h4>3. Geosztatikus nyomás és γ′ (víz az alapsík fölött)</h4>
+      <p>q′ = Σγ′<sub>i</sub>·t<sub>i</sub> = 18·0,8 + (19−10)·0,3 + (20−10)·0,3 = <b>20,1 kPa</b></p>
+      <p>A víz az alapsík fölött → t<sub>wd</sub>/B′ &lt; 0,5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b></p>
+    </div>
+    <div class="step"><h4>4. Tényezők (φ = 26°)</h4>
+      <p>N<sub>q</sub> = 11,85; N<sub>c</sub> = 22,25; N<sub>γ</sub> = 10,59. &nbsp; Sávalap → s ≈ 1; vízszintes alapsík → b ≈ 1.</p>
+      <p>f = H<sub>k</sub>/(V<sub>k</sub> + B′·L′·c·ctgφ) = 30/(459,7 + 1,208·30·ctg26°) = 30/534 = <b>0,0562</b></p>
+      <p>m<sub>B</sub> = 2 (sávalap) → i<sub>γ</sub> = (1−f)<sup>3</sup> = <b>0,841</b>; &nbsp; i<sub>q</sub> = (1−f)<sup>2</sup> = <b>0,891</b>; &nbsp; i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub>−1)/(N<sub>q</sub>−1) = <b>0,881</b></p>
+    </div>
+    <div class="step"><h4>5. Ellenállás</h4>
+      <p>R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub>·i<sub>γ</sub> + q′·N<sub>q</sub>·i<sub>q</sub> + c·N<sub>c</sub>·i<sub>c</sub></p>
+      <p>= 0,5·10·1,208·10,59·0,841 + 20,1·11,85·0,891 + 30·22,25·0,881 ≈ 54 + 212 + 588 = <b>854 kPa</b></p>
+      <p>R<sub>k</sub> = 854·1,208 = 1031 kN/m → R<sub>d</sub> = 1031/1,4 = <b>736 kN/m</b></p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 736 kN/m &gt; V<sub>d</sub> = 646,1 kN/m → <b>MEGFELEL.</b> ✓</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp3">
+      <div class="calc-head"><h3>MP3 — külpontos + ferde teher, talajvízzel</h3><span class="calc-tag">GEO</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp3-B" value="1.3" step="0.05"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp3-q" value="20.1" step="0.5"></div>
+          <div class="cr"><label>G<sub>z,k</sub> központos (kN/m)</label><input type="number" id="mp3-Gz" value="250" step="10"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp3-gp" value="10" step="0.5"></div>
+          <div class="cr"><label>Q<sub>z,k</sub> külpontos (kN/m)</label><input type="number" id="mp3-Qz" value="170" step="10"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp3-phi" value="26" step="1"></div>
+          <div class="cr"><label>e<sub>q</sub> a Q külpontossága (m)</label><input type="number" id="mp3-eq" value="0.3" step="0.05"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp3-c" value="30" step="1"></div>
+          <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp3-Gx" value="30" step="5"></div>
+        </div>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 1,0 · t = 0,4 m · γ<sub>feltöltés</sub> = 18 · γ<sub>b</sub> = 25 kN/m³ &nbsp;·&nbsp; sávalap, m<sub>B</sub> = 2</p>
+        <div class="calc-results" id="mp3-res"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MP4 (pilléralap) ===== -->
+  <section class="subsection" id="s-mp4">
+    <h2>Mintapélda 4 — Pilléralap, két irányban vizsgálva</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Ellenőrizd a <b>négyzetes pilléralapot</b>: B = 2,0 m, L = 1,5 m, b = l = 0,4 m, h = 1,2 m. Terhek: <b>G<sub>z,k</sub> = 1000 kN</b> (központos), <b>Q<sub>x,k</sub> = 100 kN</b> vízszintes erő (B-vel párhuzamos). γ<sub>b</sub> = 25; a talajvíz az alapsík fölött 0,6 m-rel. A teherbíró saGr talaj: φ = 32°, c = 0. A G<sub>k</sub> = 1110,5 kN (önsúllyal együtt).</p>
+        </div>
+        <span class="task-num">MP4</span>
+      </div>
+    </div>
+
+    <h3>Ábra</h3>
+    <figure>
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="p4a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker>
+          <marker id="p4r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+          <marker id="p4d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+        </defs>
+        <!-- keresztmetszet -->
+        <rect x="30" y="70" width="360" height="70" fill="#F2E14A"/>
+        <rect x="30" y="140" width="360" height="120" fill="#F0A92E"/>
+        <line x1="30" y1="70" x2="390" y2="70" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="34" y="62" font-family="Inter" font-size="9" fill="#6B6052">terepszint</text>
+        <rect x="190" y="30" width="40" height="40" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.1"/>
+        <rect x="120" y="92" width="180" height="48" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
+        <line x1="210" y1="6" x2="210" y2="30" stroke="#1E63B0" stroke-width="5" marker-end="url(#p4a)" stroke-linecap="round"/>
+        <text x="218" y="20" font-family="Fraunces" font-size="10" fill="#1E63B0" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=1000 kN</text>
+        <line x1="80" y1="112" x2="150" y2="112" stroke="#C0512A" stroke-width="4.5" marker-end="url(#p4r)" stroke-linecap="round"/>
+        <text x="78" y="106" font-family="Fraunces" font-size="9.5" fill="#8F3A1B" font-weight="700">Q<tspan baseline-shift="sub" font-size="7">x,k</tspan>=100 kN</text>
+        <line x1="120" y1="150" x2="300" y2="150" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p4d)" marker-end="url(#p4d)"/>
+        <text x="210" y="164" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <line x1="30" y1="140" x2="390" y2="140" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="210" y="245" font-family="Inter" font-size="9.5" fill="#6B6052" text-anchor="middle" font-style="italic">keresztmetszet</text>
+        <!-- alaprajz -->
+        <rect x="470" y="60" width="230" height="170" fill="#C9C0AE" stroke="#3D2A1A" stroke-width="1.6"/>
+        <rect x="540" y="120" width="90" height="50" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <circle cx="585" cy="145" r="6" fill="#C0512A"/>
+        <line x1="500" y1="145" x2="585" y2="145" stroke="#C0512A" stroke-width="4" marker-end="url(#p4r)"/>
+        <text x="500" y="138" font-family="Fraunces" font-size="9" fill="#8F3A1B" font-weight="700">Q<tspan baseline-shift="sub" font-size="7">x,k</tspan></text>
+        <line x1="470" y1="48" x2="700" y2="48" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p4d)" marker-end="url(#p4d)"/>
+        <text x="585" y="42" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <line x1="716" y1="60" x2="716" y2="230" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p4d)" marker-end="url(#p4d)"/>
+        <text x="724" y="150" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">L=1,5</text>
+        <text x="585" y="252" font-family="Inter" font-size="9.5" fill="#6B6052" text-anchor="middle" font-style="italic">alaprajzi nézet</text>
+      </svg>
+    </figure>
+
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. Terhelési oldal</h4>
+      <p>V<sub>k</sub> = G<sub>k</sub> = 1110,5 kN; &nbsp; H<sub>k</sub> = Q<sub>x,k</sub> = 100 kN</p>
+      <p>V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>z,k</sub> = 1,35·1110,5 + 1,5·0 = <b>1499 kN</b></p>
+    </div>
+    <div class="step"><h4>2. Külpontosság és dolgozó keresztmetszet</h4>
+      <p>e<sub>B</sub> = (H<sub>k</sub>·h)/V<sub>k</sub> = (100·1,2)/1110,5 = <b>0,11 m</b>; &nbsp; e<sub>L</sub> = 0</p>
+      <p>B′ = B − 2·e<sub>B</sub> = 2,0 − 0,22 = <b>1,78 m</b>; &nbsp; L′ = L = 1,5 m; &nbsp; A′ = 1,78·1,5 = <b>2,67 m²</b></p>
+    </div>
+    <div class="step"><h4>3. Pilléralapnál mindkét oldalt vizsgálni kell</h4>
+      <p>Nem dönthető el előre, melyik oldal a mértékadó, mert a vízszintes teher a hosszabb oldalt „gyengíti". A B oldalt vizsgálva (φ = 32°, N<sub>q</sub>=23,17, N<sub>c</sub>=35,48, N<sub>γ</sub>=27,71):</p>
+      <p>s<sub>γB</sub> = 1 − 0,3·(1,78/1,5) = 0,64; &nbsp; s<sub>qB</sub> = 1 + (1,78/1,5)·sin32° = 1,65; &nbsp; s<sub>cB</sub> = 1,68</p>
+    </div>
+    <div class="step"><h4>4. Ellenállás (B oldal mértékadó)</h4>
+      <p>R<sub>k</sub>/A′ ≈ 0,64·γ′·B′·N<sub>γ</sub>·i<sub>γ</sub>·0,5 + 1,65·q′·N<sub>q</sub>·i<sub>q</sub> + s<sub>c</sub>·c·N<sub>c</sub>·i<sub>c</sub> ≈ 125 + 783 + 0 = <b>908 kPa</b></p>
+      <p>R<sub>k</sub> = 908·2,67 = 2424 kN → R<sub>d</sub> = 2424/1,4 = <b>1731 kN</b></p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 1731 kN &gt; V<sub>d</sub> = 1499 kN → <b>MEGFELEL.</b> ✓</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp4">
+      <div class="calc-head"><h3>MP4 — pilléralap, B oldal vizsgálva</h3><span class="calc-tag">GEO</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp4-B" value="2.0" step="0.1"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp4-q" value="23.5" step="0.5"></div>
+          <div class="cr"><label>L hossz (m)</label><input type="number" id="mp4-L" value="1.5" step="0.1"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp4-gp" value="10" step="0.5"></div>
+          <div class="cr"><label>G<sub>k</sub> állandó teher (kN)</label><input type="number" id="mp4-Gk" value="1110.5" step="10"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp4-phi" value="32" step="1"></div>
+          <div class="cr"><label>Q<sub>z,k</sub> esetleges (kN)</label><input type="number" id="mp4-Qz" value="0" step="10"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp4-c" value="0" step="1"></div>
+          <div class="cr"><label>H<sub>k</sub> vízszintes erő (kN)</label><input type="number" id="mp4-Hk" value="100" step="10"></div>
+          <div class="cr"><label>h alaptest magasság (m)</label><input type="number" id="mp4-h" value="1.2" step="0.1"></div>
+        </div>
+        <p class="calc-note">A vízszintes erő a B oldallal párhuzamos; az alaki tényezők (s) figyelembe vannak véve.</p>
+        <div class="calc-results" id="mp4-res"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MP5 (szükséges B) ===== -->
+  <section class="subsection" id="s-mp5">
+    <h2>Mintapélda 5 — A szükséges alapszélesség meghatározása</h2>
+    <div class="task-card">
+      <div class="task-head">
+        <div>
+          <h3>Feladat</h3>
+          <p style="margin:6px 0 0">Határozd meg egy <b>sávalap</b> szükséges B szélességét úgy, hogy a teherbírás éppen kielégüljön! A megadott teher tervezési érték (önsúllyal): <b>V<sub>d</sub> = 255 kN/m</b>, e<sub>B</sub> = 0,02 m. A teherbíró talaj: <b>γ′ = 10 kN/m³</b> (talajvíz az alapsíkon), <b>φ = 30°</b>, c = 5 kPa; az alapsík melletti geosztatikus nyomás q′ = 23,2 kPa. A mértékadó helyzetre méretezünk: <b>V<sub>d</sub> = R<sub>d</sub></b>.</p>
+        </div>
+        <span class="task-num">MP5</span>
+      </div>
+    </div>
+    <h3>Megoldás</h3>
+    <div class="step"><h4>1. A méretezési feltétel</h4>
+      <p>A mértékadó (éppen megfelelő) helyzetben V<sub>d</sub> = R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>, tehát a szükséges karakterisztikus ellenállás: R<sub>k</sub> = V<sub>d</sub>·γ<sub>R</sub> = 255·1,4 = <b>357 kN/m</b></p>
+    </div>
+    <div class="step"><h4>2. A teherbírási képlet — most B′ az ismeretlen</h4>
+      <p>Sávalap, c = 5 a réteghez, de a vezető levezetésben a kohéziós tag is B′-től független; a szélességi tag B′-ben négyzetes:</p>
+      <p>R<sub>k</sub>/B′ = 0,5·B′·γ′·N<sub>γ</sub> + q′·N<sub>q</sub> &nbsp;→&nbsp; 0 = 0,5·γ′·N<sub>γ</sub>·(B′)² + q′·N<sub>q</sub>·B′ − R<sub>k</sub></p>
+    </div>
+    <div class="step"><h4>3. Másodfokú egyenlet</h4>
+      <p>A számértékek behelyettesítése után: 0 = 100,45·(B′)² + 576,84·B′ − 357</p>
+      <p>B′<sub>1,2</sub> = [−576,84 ± √(576,84² + 4·100,45·357)] / (2·100,45)</p>
+      <p>A negatív gyök fizikailag értelmetlen → <b>B′ ≈ 0,56 m</b></p>
+    </div>
+    <div class="step"><h4>4. A tényleges szélesség</h4>
+      <p>B = B′ + 2·e<sub>B</sub> = 0,56 + 2·0,02 = <b>0,60 m</b></p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> a szükséges alapszélesség <b>B ≈ 0,60 m</b>. A gyakorlatban ezt felfelé kerekítjük a választott modulhoz (pl. 0,6–0,7 m).</div>
+
+    <h3>Mini-kalkulátor</h3>
+    <div class="calc" id="calc-mp5">
+      <div class="calc-head"><h3>MP5 — szükséges alapszélesség</h3><span class="calc-tag" style="background:var(--gold)">méretezés</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>V<sub>d</sub> tervezési teher (kN/m)</label><input type="number" id="mp5-Vd" value="255" step="5"></div>
+          <div class="cr"><label>q′ geosztatikus (kPa)</label><input type="number" id="mp5-q" value="23.2" step="0.5"></div>
+          <div class="cr"><label>e<sub>B</sub> külpontosság (m)</label><input type="number" id="mp5-eB" value="0.02" step="0.01"></div>
+          <div class="cr"><label>γ′ az alap alatt (kN/m³)</label><input type="number" id="mp5-gp" value="10" step="0.5"></div>
+          <div class="cr"><label>φ (°)</label><input type="number" id="mp5-phi" value="30" step="1"></div>
+          <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp5-c" value="5" step="1"></div>
+        </div>
+        <p class="calc-note">A mértékadó (éppen megfelelő) helyzetre méretezünk: V<sub>d</sub> = R<sub>d</sub>. A megoldás másodfokú egyenletből adódik.</p>
+        <div class="calc-results" id="mp5-res"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== KALKULÁTOROK ===================== -->
+<div class="chapter-page" id="page-kalkulator" data-ch="kalkulator">
+
+  <h1>Kalkulátorok</h1>
+  <p style="color:var(--ink-mute);max-width:840px">Három interaktív kalkulátor a síkalap GEO határállapotának ellenőrzésére. Állítsd a geometriát, a terheket és a talajparamétereket — az ábra léptékhelyesen frissül, a program kiszámítja a tervezési ellenállást és összeveti a tervezési teherrel. A felső almenüben válthatsz a három kalkulátor között.</p>
+
+  <section class="subsection" id="kk-drenezett">
+    <h2>Drénezett eset — teherbírás-ellenőrzés</h2>
+    <p style="color:var(--ink-mute);max-width:840px;font-size:0.95rem">A drénezett képlet mindhárom tagjával számol (szélességi, mélységi, kohéziós), figyelembe veszi a teher ferdeségét (i tényezők) és külpontosságát (B′). Sávalapnál az alaki tényezők ≈ 1.</p>
+    <div id="cdr-host"></div>
+  </section>
+
+  <section class="subsection" id="kk-drenezetlen">
+    <h2>Drénezetlen eset — teherbírás-ellenőrzés</h2>
+    <p style="color:var(--ink-mute);max-width:840px;font-size:0.95rem">Kötött talaj, gyors terhelés: a nyírószilárdságot a c<sub>u</sub> drénezetlen értékkel írjuk le (φ = 0), teljes feszültségekkel. σ<sub>t</sub> = (2+π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q.</p>
+    <div id="cud-host"></div>
+  </section>
+
+  <section class="subsection" id="kk-elcsuszas">
+    <h2>Elcsúszás-vizsgálat</h2>
+    <p style="color:var(--ink-mute);max-width:840px;font-size:0.95rem">Az alaptest vízszintes elcsúszással szembeni ellenőrzése. A megfelelőség feltétele: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>. Drénezett esetben az ellenállás a talpon ébredő súrlódásból (V<sub>d</sub>·tg δ), drénezetlen esetben a c<sub>u</sub> talpadhézióból (A·c<sub>u</sub>) származik; opcionálisan a passzív földnyomás (E<sub>p</sub>) is hozzáadható.</p>
+    <div id="csl-host"></div>
+  </section>
+</div>
+
+</main>
+<footer class="foot">
+  <div>BME Építőmérnöki Kar · Geotechnika és Mérnökgeológia Tanszék · Alapozás BSc</div>
+</footer>
+
+<script>
+/* ===================== FEJEZET-NAVIGÁCIÓ ===================== */
+const CHAPTERS = [
+  {id:'bevezetes', label:'Bevezetés', subsections:[]},
+  {id:'menete', label:'A számítás menete', subsections:[
+    {id:'me-1', label:'1. EC7 határállapotok'},
+    {id:'me-2', label:'2. Törési mechanizmus'},
+    {id:'me-3', label:'3. Teherbírási képlet'},
+    {id:'me-4', label:'4. Hatékony m'},
+    {id:'me-5', label:'5. Drénezetlen eset'},
+    {id:'me-6', label:'6. Külpontosság'},
+    {id:'me-7', label:'7. Talajvíz'},
+    {id:'me-8', label:'8. Megfelelőség'},
+  ]},
+  {id:'mintapeldak', label:'Mintapéldák', subsections:[
+    {id:'s-mp1', label:'MP1'},
+    {id:'s-mp2', label:'MP2'},
+    {id:'s-mp3', label:'MP3'},
+    {id:'s-mp4', label:'MP4'},
+    {id:'s-mp5', label:'MP5'},
+  ]},
+  {id:'kalkulator', label:'Kalkulátorok', subsections:[
+    {id:'kk-drenezett', label:'Drénezett'},
+    {id:'kk-drenezetlen', label:'Drénezetlen'},
+    {id:'kk-elcsuszas', label:'Elcsúszás'},
+  ]},
+];
+function setChapter(chId){
+  document.querySelectorAll('.chapter-page').forEach(p=>p.classList.remove('active'));
+  const page = document.getElementById('page-'+chId);
+  if(page) page.classList.add('active');
+  document.querySelectorAll('#chTabs button').forEach(b=>b.classList.toggle('active', b.dataset.ch===chId));
+  const ch = CHAPTERS.find(c=>c.id===chId);
+  const sub = document.getElementById('subNavInner');
+  sub.innerHTML='';
+  if(ch && ch.subsections.length){
+    document.getElementById('subNav').style.display='';
+    ch.subsections.forEach(s=>{
+      const a=document.createElement('a');
+      a.textContent=s.label; a.dataset.target=s.id;
+      a.addEventListener('click',()=>{
+        const el=document.getElementById(s.id);
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      sub.appendChild(a);
+    });
+  } else {
+    document.getElementById('subNav').style.display='none';
+  }
+  window.scrollTo({top:0,behavior:'instant'});
+  history.replaceState(null,'','#'+chId);
+}
+(function(){
+  const tabs=document.getElementById('chTabs');
+  CHAPTERS.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.dataset.ch=c.id;
+    b.innerHTML = (i>0?`<span class="ch-num">${i}</span>`:'') + c.label;
+    b.addEventListener('click',()=>setChapter(c.id));
+    tabs.appendChild(b);
+  });
+})();
+
+/* ===================== SEGÉDFÜGGVÉNYEK ===================== */
+const fmt = (v,dec=2) => { if(!isFinite(v)) return '—'; if(Math.abs(v)<1e-9) v=0; return v.toFixed(dec).replace('.',','); };
+const deg2rad = d => d*Math.PI/180;
+function nFactors(phi){
+  const r=deg2rad(phi);
+  if(phi<=0) return {Nq:1, Nc:5.14, Ng:0};
+  const Nq=Math.exp(Math.PI*Math.tan(r))*Math.pow(Math.tan(Math.PI/4+r/2),2);
+  const Nc=(Nq-1)/Math.tan(r);
+  const Ng=2*(Nq-1)*Math.tan(r);
+  return {Nq,Nc,Ng};
+}
+
+/* ===================== DRÉNEZETT TEHERBÍRÁS-KALKULÁTOR ===================== */
+function buildCalc(prefix, mode){
+  /* mode: 'dr' drénezett | 'ud' drénezetlen | 'sl' elcsúszás. Kétréteges talajmodell.
+     γ′ az alap alatt a talajvíz helyzetéből; külpontosság a vízszintes teherből számítva. */
+  const host=document.getElementById(prefix+'-host'); if(!host) return;
+  const GWU=10;  /* γ_w */
+  const sl=(id,lab,mn,mx,st,val)=>`<div style="display:grid;grid-template-columns:196px 1fr 76px;gap:8px;align-items:center;margin:4px 0">
+    <label style="font-size:0.81rem">${lab}</label>
+    <input type="range" id="${prefix}-${id}" min="${mn}" max="${mx}" step="${st}" value="${val}">
+    <span id="${prefix}-${id}-v" style="font-family:'JetBrains Mono';font-size:0.77rem;color:var(--steel-dk);text-align:right"></span></div>`;
+  const selR=(id,lab,opts)=>`<div style="display:grid;grid-template-columns:196px 1fr;gap:8px;align-items:center;margin:4px 0">
+    <label style="font-size:0.81rem">${lab}</label>
+    <select id="${prefix}-${id}" style="padding:5px 8px;border:1px solid var(--line-strong);border-radius:6px;font-family:'Inter';font-size:0.85rem;background:var(--calc-input)">${opts}</select></div>`;
+  const META={dr:{t:'Drénezett teherbírás',tag:'GEO',col:'var(--steel)'},ud:{t:'Drénezetlen teherbírás',tag:'drénezetlen',col:'var(--azure)'},sl:{t:'Elcsúszás-vizsgálat',tag:'H ≤ R',col:'var(--gold)'}}[mode];
+  let loadHTML;
+  if(mode==='sl'){
+    loadHTML=selR('slmode','Talajállapot','<option value="dr" selected>Drénezett (talp-súrlódás)</option><option value="ud">Drénezetlen (talp-adhézió)</option>')
+      +sl('Gk','G_k állandó (függőleges)',50,5000,10,290)
+      +sl('Qk','Q_k esetleges (függőleges)',0,3000,10,80)
+      +sl('Hk','H_k vízszintes teher',5,1500,5,90)
+      +sl('Ep','E_p passzív földnyomás',0,800,5,0);
+  } else {
+    loadHTML=sl('Gk','G_k állandó teher',50,5000,10,(mode==='dr'?290:243))
+      +sl('Qk','Q_k esetleges teher',0,3000,10,(mode==='dr'?170:70))
+      +sl('Hk','H_k vízszintes erő',0,800,5,(mode==='dr'?30:0));
+  }
+  const layerHTML=(n)=>{
+    const d=(n===1)
+      ?{gm:18,gs:20,phi:(mode==='sl'?30:26),c:30,cu:(mode==='sl'?80:150),t:(mode==='ud'?3.0:(mode==='sl'?2.0:2.4))}
+      :{gm:19,gs:21,phi:(mode==='sl'?26:30),c:10,cu:(mode==='sl'?120:90)};
+    let s=`<h4 style="margin:9px 0 2px;color:var(--steel-dk);font-size:0.9rem">${n===1?'1. réteg — a terepszinttől':'2. réteg — az 1. réteg alatt'}</h4>`;
+    if(n===1) s+=sl('t1','1. réteg vastagsága (m)',0.3,8,0.1,d.t);
+    s+=sl('gm'+n,'γ nedves térfogatsúly (kN/m³)',13,23,0.5,d.gm);
+    s+=sl('gs'+n,'γ_sat telített térfogatsúly (kN/m³)',15,24,0.5,d.gs);
+    if(mode==='dr'||mode==='sl') s+=sl('phi'+n,'φ belső súrlódási szög (°)',0,40,1,d.phi);
+    if(mode==='dr') s+=sl('c'+n,'c kohézió (kPa)',0,80,1,d.c);
+    if(mode==='ud'||mode==='sl') s+=sl('cu'+n,'c_u drénezetlen ny.szil. (kPa)',10,300,5,d.cu);
+    return s;
+  };
+  host.innerHTML=`
+  <div class="calc">
+    <div class="calc-head"><h3>${META.t} — interaktív, kétréteges</h3><span class="calc-tag" style="background:${META.col}">${META.tag}</span></div>
+    <div class="calc-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 26px">
+        <div>
+          <h4 style="margin:0 0 4px;color:var(--steel-dk)">Alaptest, terhek, talajvíz</h4>
+          ${selR('type','Alaptest típusa','<option value="sav" selected>Sávalap (L ≫ B)</option><option value="pont">Pontalap (B × L)</option>')}
+          ${sl('B','B szélesség (m)',0.5,5,0.05,1.3)}
+          ${sl('L','L hossz (m)',0.5,12,0.1,3.0)}
+          ${sl('D','alapsík mélysége D (m)',0.4,4,0.1,(mode==='sl'?1.0:1.1))}
+          ${sl('gw','talajvízszint (m, terep alatt)',0,8,0.1,(mode==='ud'?2.5:3.5))}
+          ${loadHTML}
+        </div>
+        <div>
+          <h4 style="margin:0 0 4px;color:var(--steel-dk)">Talajrétegek (a terepszinttől)</h4>
+          ${layerHTML(1)}
+          ${layerHTML(2)}
+        </div>
+      </div>
+      <div id="${prefix}-svg" style="margin-top:14px"></div>
+      <div id="${prefix}-out" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px"></div>
+      <div id="${prefix}-steps" style="background:#F8F5F0;border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.88rem;line-height:1.75"></div>
+    </div>
+  </div>`;
+  host.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',update);el.addEventListener('change',update);});
+  function gv(id){return document.getElementById(prefix+'-'+id);}
+  function v(id){const e=gv(id);return e?(+e.value):0;}
+  function setv(id,txt){const e=gv(id+'-v');if(e)e.textContent=txt;}
+  function box(lab,val,acc){return `<div style="background:#F3EEE6;padding:10px 12px;border-radius:8px;border-left:3px solid ${acc}">
+    <div style="font-size:0.7rem;color:var(--ink-mute);text-transform:uppercase;letter-spacing:0.04em">${lab}</div>
+    <div style="font-family:'JetBrains Mono';font-size:1.16rem;color:var(--steel-dk);font-weight:600">${val}</div></div>`;}
+  function update(){
+    const isSav=gv('type').value==='sav';
+    const B=v('B'),L=v('L'),D=v('D'),t1=v('t1'),gw=v('gw');
+    const Gk=v('Gk'),Qk=v('Qk'),Hk=v('Hk');
+    const gm1=v('gm1'),gs1=v('gs1'),gm2=v('gm2'),gs2=v('gs2');
+    setv('B',fmt(B,2)+' m'); setv('L',isSav?'—':fmt(L,1)+' m'); setv('D',fmt(D,1)+' m');
+    setv('gw',fmt(gw,1)+' m'); setv('t1',fmt(t1,1)+' m');
+    setv('gm1',fmt(gm1,1)); setv('gs1',fmt(gs1,1)); setv('gm2',fmt(gm2,1)); setv('gs2',fmt(gs2,1));
+    setv('Gk',Math.round(Gk)+(isSav?' kN/m':' kN'));
+    setv('Qk',Math.round(Qk)+(isSav?' kN/m':' kN'));
+    setv('Hk',Math.round(Hk)+(isSav?' kN/m':' kN'));
+    if(mode==='sl') setv('Ep',Math.round(v('Ep'))+(isSav?' kN/m':' kN'));
+    let phi1=0,phi2=0,c1=0,c2=0,cu1=0,cu2=0;
+    if(mode==='dr'||mode==='sl'){phi1=v('phi1');phi2=v('phi2');setv('phi1',fmt(phi1,0)+'°');setv('phi2',fmt(phi2,0)+'°');}
+    if(mode==='dr'){c1=v('c1');c2=v('c2');setv('c1',fmt(c1,0)+' kPa');setv('c2',fmt(c2,0)+' kPa');}
+    if(mode==='ud'||mode==='sl'){cu1=v('cu1');cu2=v('cu2');setv('cu1',fmt(cu1,0)+' kPa');setv('cu2',fmt(cu2,0)+' kPa');}
+    gv('L').disabled=isSav;
+    const u=isSav?' kN/m':' kN';
+    /* külpontosság a vízszintes teherből: e_B = H_k·D / V_k */
+    const Vk=Gk+Qk;
+    const eB=Vk>0?Hk*D/Vk:0;
+    const Bp=Math.max(B-2*eB,0.05), Lp=isSav?1:L, Ap=isSav?Bp:Bp*Lp;
+    /* hatékony geosztatikus nyomás q′ az alapsíkon (talajvízzel) */
+    function overb(){
+      let q=0; const segs=(t1<D)?[[0,t1,gm1,gs1],[t1,D,gm2,gs2]]:[[0,D,gm1,gs1]];
+      for(let i=0;i<segs.length;i++){const a=segs[i][0],b=segs[i][1],gm=segs[i][2],gs=segs[i][3];
+        const dry=Math.max(0,Math.min(b,gw)-a), wet=Math.max(0,b-Math.max(a,gw));
+        q+=dry*gm+wet*(gs-GWU);}
+      return q;
+    }
+    const q=overb();
+    /* törési zóna ≈ B′ az alapsík alatt — réteg-súlyok */
+    const twd=gw-D;
+    const z1=Math.max(0,Math.min(t1-D,Bp)), w1=z1/Bp, w2=1-w1;
+    const gmZ=w1*gm1+w2*gm2, gsZ=w1*gs1+w2*gs2, subZ=gsZ-GWU;
+    /* γ′ az alap alatt — a t_wd/B′ aránytól függő képlet (gyak1) */
+    let gpb, gpCase;
+    if(twd<=0.5*Bp){gpb=subZ; gpCase='t_wd ≤ 0,5·B′ → γ′ = γ_sat − γ_w';}
+    else if(twd<1.5*Bp){gpb=subZ+(gmZ-subZ)*(twd/Bp-0.5); gpCase='0,5·B′ &lt; t_wd &lt; 1,5·B′ → lineáris átmenet';}
+    else {gpb=gmZ; gpCase='t_wd ≥ 1,5·B′ → γ′ = γ (nedves)';}
+    const figP={mode,prefix,B,L,D,t1,Bp,isSav,gm1,gs1,gm2,gs2,phi1,phi2,c1,c2,cu1,cu2,Hk,gw};
+    /* ====== ELCSÚSZÁS ====== */
+    if(mode==='sl'){
+      const sldr=gv('slmode').value==='dr';
+      if(gv('phi1'))gv('phi1').disabled=!sldr;
+      if(gv('phi2'))gv('phi2').disabled=true;
+      if(gv('cu1'))gv('cu1').disabled=sldr;
+      if(gv('cu2'))gv('cu2').disabled=true;
+      const Ep=v('Ep'), Vd=1.35*Gk+1.5*Qk, Hd=1.5*Hk;
+      const Rbase=sldr?Vd*Math.tan(deg2rad(phi1)):Ap*cu1;
+      const Rd=Rbase+Ep, ok=Hd<=Rd, util=Rd>0?Hd/Rd*100:999;
+      figP.sldr=sldr; drawFig(figP);
+      gv('out').innerHTML=
+        box(sldr?'talp-súrlódás':'talp-adhézió',fmt(Rbase,0)+u,'var(--moss)')+
+        box('E_p passzív',fmt(Ep,0)+u,'var(--steel)')+
+        box('R_d ellenállás',fmt(Rd,0)+u,'var(--moss)')+
+        box('H_d teher',fmt(Hd,0)+u,'var(--rebar)');
+      const bt=sldr
+        ? `R<sub>súrl.</sub> = V<sub>d</sub>·tg δ = ${fmt(Vd,0)}·tg${fmt(phi1,0)}° = <b>${fmt(Rbase,0)}${u}</b> &nbsp;(δ = az 1. réteg φ-je)`
+        : `R<sub>adh.</sub> = A′·c<sub>u</sub> = ${fmt(Ap,2)}·${fmt(cu1,0)} = <b>${fmt(Rbase,0)}${u}</b>`;
+      gv('steps').innerHTML=`
+        <b>1.</b> Tervezési terhek: V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub> = <b>${fmt(Vd,0)}${u}</b>; H<sub>d</sub> = 1,5·H<sub>k</sub> = <b>${fmt(Hd,0)}${u}</b><br>
+        <b>2.</b> Külpontosság a vízszintes teherből: e<sub>B</sub> = H<sub>k</sub>·D/V<sub>k</sub> = ${fmt(Hk,0)}·${fmt(D,1)}/${fmt(Vk,0)} = <b>${fmt(eB,3)} m</b> → B′ = B − 2e<sub>B</sub> = <b>${fmt(Bp,2)} m</b>${isSav?'':' · A′ = '+fmt(Ap,2)+' m²'}<br>
+        <b>3.</b> Az elcsúszás a talp alatti <b>1. réteggel</b> szemben ébred (${sldr?'drénezett — súrlódás':'drénezetlen — adhézió'}): ${bt}<br>
+        <b>4.</b> Passzív földnyomás: E<sub>p</sub> = ${fmt(Ep,0)}${u} → R<sub>d</sub> = ${fmt(Rbase,0)} + ${fmt(Ep,0)} = <b>${fmt(Rd,0)}${u}</b><br>
+        <b>5.</b> Kihasználtság: H<sub>d</sub>/R<sub>d</sub> = <b>${fmt(util,0)} %</b>
+        <div class="verdict ${ok?'ok':'fail'}" style="margin-top:10px"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>H<sub>d</sub> = ${fmt(Hd,0)}${u} ${ok?'≤':'&gt;'} R<sub>d</sub> = ${fmt(Rd,0)}${u}</div>`;
+      return;
+    }
+    /* ====== TEHERBÍRÁS (dr / ud) ====== */
+    const Vd=1.35*Gk+1.5*Qk, BL=isSav?0:Bp/Lp;
+    let RkA,Rk,Rd,extra;
+    if(mode==='dr'){
+      const phib=w1*phi1+w2*phi2, cb=w1*c1+w2*c2;
+      const N=nFactors(phib);
+      const sg=isSav?1:Math.max(1-0.3*BL,0.1), sq=isSav?1:1+BL*Math.sin(deg2rad(phib)), sc=isSav?1:(N.Nq>1?(sq*N.Nq-1)/(N.Nq-1):1);
+      const cot=phib>0?1/Math.tan(deg2rad(phib)):0;
+      const f=Hk/(Vk+Bp*Lp*cb*cot), m=isSav?2:(2+BL)/(1+BL);
+      const ig=Math.pow(Math.max(1-f,0),m+1), iq=Math.pow(Math.max(1-f,0),m), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
+      const tw=0.5*gpb*Bp*N.Ng*sg*ig, td=q*N.Nq*sq*iq, tc=cb*N.Nc*sc*ic;
+      RkA=tw+td+tc; Rk=RkA*Ap; Rd=Rk/1.4;
+      extra=`<b>5.</b> Törési zóna ≈ B′ → 1. réteg súlya w₁ = <b>${fmt(w1*100,0)}%</b>, 2. rétegé w₂ = ${fmt(w2*100,0)}% → mértékadó φ=${fmt(phib,1)}° · c=${fmt(cb,1)} kPa<br>
+      <b>6.</b> N<sub>q</sub>=${fmt(N.Nq,2)} · N<sub>c</sub>=${fmt(N.Nc,2)} · N<sub>γ</sub>=${fmt(N.Ng,2)} &nbsp;|&nbsp; i<sub>γ</sub>=${fmt(ig,3)} · i<sub>q</sub>=${fmt(iq,3)} · i<sub>c</sub>=${fmt(ic,3)}<br>
+      <b>7.</b> R<sub>k</sub>/A′ = ${fmt(tw,0)} (szél.) + ${fmt(td,0)} (mély.) + ${fmt(tc,0)} (kohéz.) = <b>${fmt(RkA,0)} kPa</b>`;
+    } else {
+      const cub=w1*cu1+w2*cu2;
+      const sc=isSav?1:1+0.2*BL, bc=1;
+      let arg=1-Hk/(Ap*cub); if(arg<0)arg=0;
+      const ic=0.5*(1+Math.sqrt(arg));
+      const tcoh=(2+Math.PI)*cub*bc*sc*ic;
+      RkA=tcoh+q; Rk=RkA*Ap; Rd=Rk/1.4;
+      extra=`<b>5.</b> Törési zóna ≈ B′ → 1. réteg súlya w₁ = <b>${fmt(w1*100,0)}%</b>, 2. rétegé w₂ = ${fmt(w2*100,0)}% → mértékadó c<sub>u</sub> = <b>${fmt(cub,0)} kPa</b><br>
+      <b>6.</b> s<sub>c</sub>=${fmt(sc,2)} · b<sub>c</sub>=${fmt(bc,2)} · i<sub>c</sub>=${fmt(ic,3)}<br>
+      <b>7.</b> σ<sub>t</sub> = (2+π)·c<sub>u</sub>·s<sub>c</sub>·i<sub>c</sub> + q′ = ${fmt(tcoh,0)} + ${fmt(q,0)} = <b>${fmt(RkA,0)} kPa</b>`;
+    }
+    const ok=Rd>=Vd;
+    drawFig(figP);
+    gv('out').innerHTML=
+      box('B′ dolgozó szél.',fmt(Bp,2)+' m','var(--steel)')+
+      box(mode==='dr'?'R_k/A′':'σ_t',fmt(RkA,0)+' kPa','var(--azure)')+
+      box('R_d ellenállás',fmt(Rd,0)+u,'var(--moss)')+
+      box('V_d teher',fmt(Vd,0)+u,'var(--rebar)');
+    gv('steps').innerHTML=`
+      <b>1.</b> Tervezési teher: V<sub>d</sub> = 1,35·${Math.round(Gk)} + 1,5·${Math.round(Qk)} = <b>${fmt(Vd,0)}${u}</b> &nbsp;(V<sub>k</sub> = ${fmt(Vk,0)}${u})<br>
+      <b>2.</b> Külpontosság a vízszintes teherből: e<sub>B</sub> = H<sub>k</sub>·D/V<sub>k</sub> = ${fmt(Hk,0)}·${fmt(D,1)}/${fmt(Vk,0)} = <b>${fmt(eB,3)} m</b> → B′ = B − 2e<sub>B</sub> = <b>${fmt(Bp,2)} m</b><br>
+      <b>3.</b> γ′ az alap alatt — talajvíz: t<sub>wd</sub> = gw − D = ${fmt(gw,1)} − ${fmt(D,1)} = <b>${fmt(twd,2)} m</b>; ${gpCase} → γ′ = <b>${fmt(gpb,1)} kN/m³</b><br>
+      <b>4.</b> q′ hatékony geosztatikus nyomás az alapsíkon (víz felett γ, alatta γ_sat−γ_w) = <b>${fmt(q,1)} kPa</b><br>
+      ${extra}<br>
+      <b>8.</b> R<sub>k</sub> = ${fmt(RkA,0)}·A′ = ${fmt(Rk,0)} → R<sub>d</sub> = R<sub>k</sub>/1,4 = <b>${fmt(Rd,0)}${u}</b>
+      <div class="verdict ${ok?'ok':'fail'}" style="margin-top:10px"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub> = ${fmt(Rd,0)}${u} ${ok?'≥':'&lt;'} V<sub>d</sub> = ${fmt(Vd,0)}${u}</div>`;
+  }
+  function drawFig(p){
+    const gv2=id=>document.getElementById(p.prefix+'-'+id);
+    const W=720, cx=270, sy=66;
+    const totD=Math.min(Math.max(p.t1+0.6, p.D+1.6, p.gw+0.5, 2.4),8);
+    const vSc=Math.min(54,410/totD);
+    const ASy=sy+p.D*vSc, RHy=sy+p.t1*vSc, botY=sy+totD*vSc, Hh=botY+30;
+    const RHv=Math.min(Math.max(RHy,sy+20),botY-20);
+    const fBpx=Math.min(Math.max(p.B*44,40),230), fx=cx-fBpx/2;
+    const L1col=p.mode==='ud'?'#C9D6C2':'#F0C46A', L2col=p.mode==='ud'?'#9DB293':'#D98C2A';
+    const lay1txt = p.mode==='ud' ? `c_u=${fmt(p.cu1,0)}` : (p.mode==='sl'?`φ=${fmt(p.phi1,0)}° c_u=${fmt(p.cu1,0)}`:`φ=${fmt(p.phi1,0)}° c=${fmt(p.c1,0)}`);
+    const lay2txt = p.mode==='ud' ? `c_u=${fmt(p.cu2,0)}` : (p.mode==='sl'?`φ=${fmt(p.phi2,0)}°`:`φ=${fmt(p.phi2,0)}° c=${fmt(p.c2,0)}`);
+    const y1=Math.min(Math.max(sy+(RHv-sy)/2+3,sy+22),RHv-6);
+    const y2=Math.min(Math.max(RHv+(botY-RHv)/2+3,RHv+16),botY-8);
+    const GWy=sy+p.gw*vSc;
+    const gwHTML=(GWy>sy+3 && GWy<botY-2)?`
+      <line x1="40" y1="${GWy.toFixed(1)}" x2="680" y2="${GWy.toFixed(1)}" stroke="#1E78C8" stroke-width="1.7"/>
+      <path d="M148,${(GWy-10).toFixed(1)} L164,${(GWy-10).toFixed(1)} L156,${GWy.toFixed(1)} Z" fill="#1E78C8"/>
+      <text x="172" y="${(GWy-4).toFixed(1)}" font-family="Inter" font-size="9" fill="#1E78C8" font-weight="600">talajvíz (${fmt(p.gw,1)} m)</text>`:'';
+    const svg=`
+    <svg viewBox="0 0 ${W} ${Hh.toFixed(0)}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:linear-gradient(#fff,#FAF7F1);border:1px solid var(--line);border-radius:8px">
+      <defs>
+        <marker id="${p.prefix}ld" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker>
+        <marker id="${p.prefix}lh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker>
+        <marker id="${p.prefix}rr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A52"/></marker>
+        <marker id="${p.prefix}dm" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+      </defs>
+      <rect x="40" y="${sy}" width="640" height="${(RHv-sy).toFixed(1)}" fill="${L1col}"/>
+      <rect x="40" y="${RHv.toFixed(1)}" width="640" height="${(botY-RHv).toFixed(1)}" fill="${L2col}"/>
+      <rect x="40" y="${sy}" width="640" height="${(botY-sy).toFixed(1)}" fill="none" stroke="#C4BAAB"/>
+      <line x1="40" y1="${sy}" x2="680" y2="${sy}" stroke="#8A7B5E" stroke-width="2"/>
+      <text x="44" y="${sy-6}" font-family="Inter" font-size="10" fill="#8A7B5E">terepszint</text>
+      <rect x="${cx-16}" y="${sy-30}" width="32" height="30" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.1"/>
+      <rect x="${fx.toFixed(1)}" y="${sy}" width="${fBpx.toFixed(1)}" height="${(ASy-sy).toFixed(1)}" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.6"/>
+      <text x="${cx}" y="${(ASy-8).toFixed(1)}" font-family="Inter" font-size="10" fill="#241C12" text-anchor="middle" font-weight="600">alaptest</text>
+      <line x1="${cx}" y1="${sy-58}" x2="${cx}" y2="${sy-32}" stroke="#1E63B0" stroke-width="4.5" marker-end="url(#${p.prefix}ld)" stroke-linecap="round"/>
+      <text x="${cx+10}" y="${sy-46}" font-family="Fraunces" font-size="11" fill="#1E63B0" font-weight="700">${p.mode==='sl'?'V':'V = G+Q'}</text>
+      ${p.Hk>0?`<line x1="${(fx-46).toFixed(1)}" y1="${(sy+10).toFixed(1)}" x2="${fx.toFixed(1)}" y2="${(sy+10).toFixed(1)}" stroke="#C0512A" stroke-width="4.5" marker-end="url(#${p.prefix}lh)" stroke-linecap="round"/>
+      <text x="${(fx-44).toFixed(1)}" y="${(sy+3).toFixed(1)}" font-family="Fraunces" font-size="10" fill="#8F3A1B" font-weight="700">H</text>`:''}
+      ${p.mode==='sl'?`<g stroke="#5C7A52" stroke-width="3" fill="none">
+        <line x1="${fx+34}" y1="${(ASy+11).toFixed(1)}" x2="${fx+6}" y2="${(ASy+11).toFixed(1)}" marker-end="url(#${p.prefix}rr)"/>
+        <line x1="${cx+10}" y1="${(ASy+11).toFixed(1)}" x2="${cx-18}" y2="${(ASy+11).toFixed(1)}" marker-end="url(#${p.prefix}rr)"/>
+        <line x1="${fx+fBpx-6}" y1="${(ASy+11).toFixed(1)}" x2="${fx+fBpx-34}" y2="${(ASy+11).toFixed(1)}" marker-end="url(#${p.prefix}rr)"/></g>
+        <text x="${cx}" y="${(ASy+26).toFixed(1)}" font-family="Inter" font-size="9" fill="#3E5A1F" text-anchor="middle" font-weight="600">talp-ellenállás</text>`:''}
+      ${gwHTML}
+      <line x1="${fx.toFixed(1)}" y1="${(ASy+(p.mode==='sl'?34:18)).toFixed(1)}" x2="${(fx+fBpx).toFixed(1)}" y2="${(ASy+(p.mode==='sl'?34:18)).toFixed(1)}" stroke="#3D4852" stroke-width="0.9" marker-start="url(#${p.prefix}dm)" marker-end="url(#${p.prefix}dm)"/>
+      <text x="${cx}" y="${(ASy+(p.mode==='sl'?47:31)).toFixed(1)}" font-family="Fraunces" font-size="10.5" fill="#3D4852" text-anchor="middle" font-style="italic">B = ${fmt(p.B,2)} m${p.isSav?'':' · L = '+fmt(p.L,1)+' m'}</text>
+      <line x1="${(fx-22).toFixed(1)}" y1="${sy}" x2="${(fx-22).toFixed(1)}" y2="${ASy.toFixed(1)}" stroke="#3D4852" stroke-width="0.9" marker-start="url(#${p.prefix}dm)" marker-end="url(#${p.prefix}dm)"/>
+      <text x="${(fx-28).toFixed(1)}" y="${((sy+ASy)/2).toFixed(1)}" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">D = ${fmt(p.D,1)} m</text>
+      <line x1="40" y1="${ASy.toFixed(1)}" x2="680" y2="${ASy.toFixed(1)}" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+      <text x="676" y="${(ASy-5).toFixed(1)}" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík (D)</text>
+      <line x1="40" y1="${RHv.toFixed(1)}" x2="680" y2="${RHv.toFixed(1)}" stroke="#8A4A22" stroke-width="1.6"/>
+      <text x="44" y="${(RHv-4).toFixed(1)}" font-family="Inter" font-size="9" fill="#8A4A22" font-weight="600">réteghatár (t₁ = ${fmt(p.t1,1)} m)</text>
+      <text x="470" y="${y1.toFixed(1)}" font-family="Inter" font-size="9" fill="#3D2A1A" font-weight="600">1. réteg · γ=${fmt(p.gm1,1)} · γ_sat=${fmt(p.gs1,1)} · ${lay1txt}</text>
+      <text x="470" y="${y2.toFixed(1)}" font-family="Inter" font-size="9" fill="#3D2A1A" font-weight="600">2. réteg · γ=${fmt(p.gm2,1)} · γ_sat=${fmt(p.gs2,1)} · ${lay2txt}</text>
+    </svg>`;
+    gv2('svg').innerHTML=svg;
+  }
+  update();
+}
+
+/* ===================== MINTAPÉLDA MINI-KALKULÁTOROK ===================== */
+const num=id=>{const e=document.getElementById(id);return e?(parseFloat(e.value)||0):0;};
+function bindCalc(p,fn){document.querySelectorAll('#calc-'+p+' input').forEach(el=>{el.addEventListener('input',fn);el.addEventListener('change',fn);});}
+function rr(l,v,sub){return `<div class="res-row${sub?' subtle':''}"><span>${l}</span><span class="val">${v}</span></div>`;}
+function vbox(ok,rd,vd,u){return `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub> = ${rd}${u} ${ok?'≥':'&lt;'} V<sub>d</sub> = ${vd}${u}</div>`;}
+
+function calcMP1(){
+  const B=num('mp1-B'),Gv=num('mp1-Gv'),Qv=num('mp1-Qv'),q=num('mp1-q'),gp=num('mp1-gp'),phi=num('mp1-phi'),c=num('mp1-c');
+  const Gf=(B-0.3)*0.5*17, Gb=B*0.6*25, Gk=Gv+Gf+Gb, Vd=1.35*Gk+1.5*Qv;
+  const N=nFactors(phi);
+  const tw=0.5*gp*B*N.Ng, td=q*N.Nq, tc=c*N.Nc, RkA=tw+td+tc, Rk=RkA*B, Rd=Rk/1.4;
+  document.getElementById('mp1-res').innerHTML='<h4>Eredmény</h4>'+
+    rr('Önsúly G<sub>f,k</sub> + G<sub>b,k</sub>', fmt(Gf,1)+' + '+fmt(Gb,1)+' kN/m',true)+
+    rr('G<sub>k</sub> állandó teher', fmt(Gk,1)+' kN/m',true)+
+    rr('V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
+    rr('N<sub>q</sub> / N<sub>c</sub> / N<sub>γ</sub> (φ='+fmt(phi,0)+'°)', fmt(N.Nq,2)+' / '+fmt(N.Nc,2)+' / '+fmt(N.Ng,2),true)+
+    rr('R<sub>k</sub>/A′ = szél. + mély. + kohéz.', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub> = R<sub>k</sub>/A′ · B', fmt(Rk,0)+' kN/m',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN/m')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
+}
+function calcMP2(){
+  const B=num('mp2-B'),Gv=num('mp2-Gv'),Qv=num('mp2-Qv'),q=num('mp2-q'),cu=num('mp2-cu');
+  const Gf=(B-0.3)*0.5*17, Gb=B*0.6*25, Gk=Gv+Gf+Gb, Vd=1.35*Gk+1.5*Qv;
+  const st=(2+Math.PI)*cu+q, Rk=st*B, Rd=Rk/1.4;
+  document.getElementById('mp2-res').innerHTML='<h4>Eredmény</h4>'+
+    rr('G<sub>k</sub> állandó teher', fmt(Gk,1)+' kN/m',true)+
+    rr('V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
+    rr('σ<sub>t</sub> = (2+π)·c<sub>u</sub> + q', '(2+π)·'+fmt(cu,0)+' + '+fmt(q,0)+' = '+fmt(st,0)+' kPa',true)+
+    rr('R<sub>k</sub> = σ<sub>t</sub> · B', fmt(Rk,0)+' kN/m',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN/m')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
+}
+function calcMP3(){
+  const B=num('mp3-B'),Gz=num('mp3-Gz'),Qz=num('mp3-Qz'),eq=num('mp3-eq'),Gx=num('mp3-Gx'),q=num('mp3-q'),gp=num('mp3-gp'),phi=num('mp3-phi'),c=num('mp3-c');
+  const Gf=(B-0.3)*0.4*18, Gb=B*1.0*25, Gk=Gz+Gf+Gb, Vd=1.35*Gk+1.5*Qz;
+  const Vk=Gk+Qz, Hk=Gx;
+  const eB=Math.abs(Hk*1.0-Qz*eq)/Vk, Bp=Math.max(B-2*eB,0.05);
+  const N=nFactors(phi);
+  const cot=phi>0?1/Math.tan(deg2rad(phi)):0;
+  const f=Hk/(Vk+Bp*c*cot);
+  const ig=Math.pow(Math.max(1-f,0),3), iq=Math.pow(Math.max(1-f,0),2), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
+  const tw=0.5*gp*Bp*N.Ng*ig, td=q*N.Nq*iq, tc=c*N.Nc*ic, RkA=tw+td+tc, Rk=RkA*Bp, Rd=Rk/1.4;
+  document.getElementById('mp3-res').innerHTML='<h4>Eredmény</h4>'+
+    rr('V<sub>d</sub> tervezési teher', fmt(Vd,0)+' kN/m')+
+    rr('e<sub>B</sub> külpontosság → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
+    rr('f teher-ferdeségi paraméter', fmt(f,3),true)+
+    rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
+    rr('R<sub>k</sub>/A′ = szél. + mély. + kohéz.', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
+}
+function calcMP4(){
+  const B=num('mp4-B'),L=num('mp4-L'),Gk=num('mp4-Gk'),Qz=num('mp4-Qz'),Hk=num('mp4-Hk'),h=num('mp4-h'),q=num('mp4-q'),gp=num('mp4-gp'),phi=num('mp4-phi'),c=num('mp4-c');
+  const Vk=Gk+Qz, Vd=1.35*Gk+1.5*Qz;
+  const eB=Vk>0?Hk*h/Vk:0, Bp=Math.max(B-2*eB,0.05), Lp=L, BL=Bp/Lp;
+  const N=nFactors(phi);
+  const sg=Math.max(1-0.3*BL,0.1), sq=1+BL*Math.sin(deg2rad(phi)), sc=N.Nq>1?(sq*N.Nq-1)/(N.Nq-1):1;
+  const cot=phi>0?1/Math.tan(deg2rad(phi)):0;
+  const f=Hk/(Vk+Bp*Lp*c*cot), m=(2+BL)/(1+BL);
+  const ig=Math.pow(Math.max(1-f,0),m+1), iq=Math.pow(Math.max(1-f,0),m), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):1;
+  const tw=0.5*gp*Bp*N.Ng*sg*ig, td=q*N.Nq*sq*iq, tc=c*N.Nc*sc*ic, RkA=tw+td+tc, Rk=RkA*Bp*Lp, Rd=Rk/1.4;
+  document.getElementById('mp4-res').innerHTML='<h4>Eredmény (B oldal vizsgálva)</h4>'+
+    rr('V<sub>d</sub> tervezési teher', fmt(Vd,0)+' kN')+
+    rr('e<sub>B</sub> → dolgozó B′ × L′', fmt(eB,3)+' m → '+fmt(Bp,2)+' × '+fmt(Lp,2)+' m',true)+
+    rr('s<sub>γ</sub> / s<sub>q</sub> / s<sub>c</sub> alaki tény.', fmt(sg,2)+' / '+fmt(sq,2)+' / '+fmt(sc,2),true)+
+    rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub> ferdeségi tény.', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
+    rr('R<sub>k</sub>/A′', fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN')+
+    vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN');
+}
+function calcMP5(){
+  const Vd=num('mp5-Vd'),eB=num('mp5-eB'),q=num('mp5-q'),gp=num('mp5-gp'),phi=num('mp5-phi'),c=num('mp5-c');
+  const Rk=Vd*1.4, N=nFactors(phi);
+  const a=0.5*gp*N.Ng, lin=q*N.Nq+c*N.Nc;
+  let Bp;
+  if(a>1e-6){ Bp=(-lin+Math.sqrt(lin*lin+4*a*Rk))/(2*a); } else { Bp=lin>0?Rk/lin:0; }
+  const B=Bp+2*eB;
+  document.getElementById('mp5-res').innerHTML='<h4>Eredmény</h4>'+
+    rr('Szükséges R<sub>k</sub> = V<sub>d</sub> · 1,4', fmt(Rk,0)+' kN/m',true)+
+    rr('Másodfokú egyenlet', fmt(a,2)+'·B′² + '+fmt(lin,1)+'·B′ − '+fmt(Rk,0)+' = 0',true)+
+    rr('Dolgozó szélesség B′', fmt(Bp,3)+' m',true)+
+    `<div class="verdict ok"><span class="big">B ≈ ${fmt(B,2)} m</span>szükséges alapszélesség &nbsp;(B = B′ + 2·e<sub>B</sub>)</div>`;
+}
+[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5]].forEach(([p,fn])=>{
+  bindCalc(p,fn); fn();
+});
+/* ===================== INDÍTÁS ===================== */
+const initCh=(location.hash||'#bevezetes').slice(1);
+setChapter(CHAPTERS.find(c=>c.id===initCh)?initCh:'bevezetes');
+buildCalc('cdr','dr');
+buildCalc('cud','ud');
+buildCalc('csl','sl');
+</script>
+</body>
+</html>
