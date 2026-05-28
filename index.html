@@ -1553,6 +1553,81 @@ figure svg{width:100%;height:auto;display:block}
         <div class="calc-results" id="mp10-res"></div>
       </div>
     </div>
+
+    <h3 style="margin-top:34px;border-top:1px solid var(--line);padding-top:22px">Drénezetlen eset (Mintapélda 10.5)</h3>
+    <p style="color:var(--ink-mute);max-width:840px">Ugyanaz a pilléralap és terhelés, de az alapsík alatti termett talaj most <b>kohézív agyag (Ci)</b>: φ<sub>u</sub> = 0°, c<sub>u</sub> = 65 kPa (a feltöltésé c = 5 kPa). Drénezetlen esetben az elcsúszási ellenállás nem a talp-súrlódásból, hanem a <b>teljes talpfelületen ébredő adhézióból</b> (A<sub>c</sub>·c<sub>u</sub>) származik.</p>
+
+    <figure>
+      <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="p10ug" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
+          <marker id="p10ur" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0281C"/></marker>
+          <marker id="p10ud" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
+          <pattern id="p10adh" patternUnits="userSpaceOnUse" width="7" height="7"><path d="M0,7 L7,0" stroke="#2E8B57" stroke-width="1.4"/></pattern>
+        </defs>
+        <rect x="30" y="115" width="660" height="135" fill="#F2E14A"/>
+        <rect x="30" y="250" width="660" height="90" fill="#AEA189"/>
+        <rect x="30" y="109" width="660" height="6" fill="url(#p10ug)"/>
+        <line x1="30" y1="115" x2="690" y2="115" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="105" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <line x1="30" y1="250" x2="690" y2="250" stroke="#6E5B3E" stroke-width="1.4"/>
+        <line x1="90" y1="205" x2="210" y2="205" stroke="#1E78C8" stroke-width="2"/>
+        <path d="M111,199 l14,0 l-7,7 z" fill="#1E78C8"/>
+        <text x="92" y="199" font-family="Inter" font-size="9" fill="#1E78C8">talajvíz</text>
+        <rect x="282" y="40" width="36" height="111" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <rect x="210" y="151" width="180" height="108" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="345" y="200" font-family="Inter" font-size="10.5" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan>=25 kN/m³</text>
+        <rect x="210" y="250" width="180" height="9" fill="url(#p10adh)" stroke="#2E8B57" stroke-width="1.2"/>
+        <text x="396" y="257" font-family="Fraunces" font-size="9.5" fill="#1E6B3C" font-weight="700">R<tspan baseline-shift="sub" font-size="7">d</tspan> = A<tspan baseline-shift="sub" font-size="7">c</tspan>·c<tspan baseline-shift="sub" font-size="7">u</tspan> (talp-adhézió)</text>
+        <line x1="300" y1="16" x2="300" y2="149" stroke="#E0281C" stroke-width="4.8" marker-end="url(#p10ur)" stroke-linecap="round"/>
+        <text x="308" y="30" font-family="Fraunces" font-size="12" fill="#222" font-weight="700">G<tspan baseline-shift="sub" font-size="8">z,k</tspan>=320 kN</text>
+        <line x1="252" y1="153" x2="352" y2="153" stroke="#E0281C" stroke-width="4.5" marker-end="url(#p10ur)" stroke-linecap="round"/>
+        <text x="300" y="174" font-family="Fraunces" font-size="11" fill="#222" font-weight="700" text-anchor="middle">Q<tspan baseline-shift="sub" font-size="8">x,k</tspan>=100 kN</text>
+        <line x1="282" y1="78" x2="318" y2="78" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="326" y="82" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">b=l=0,4m</text>
+        <line x1="190" y1="115" x2="190" y2="151" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="184" y="137" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">t=0,4m</text>
+        <line x1="190" y1="151" x2="190" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="184" y="209" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=1,2m</text>
+        <line x1="100" y1="205" x2="100" y2="259" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="94" y="236" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h<tspan baseline-shift="sub" font-size="7">MTV</tspan>=0,6m</text>
+        <line x1="620" y1="115" x2="620" y2="250" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="628" y="186" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1,5m</text>
+        <line x1="210" y1="278" x2="390" y2="278" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p10ud)" marker-end="url(#p10ud)"/>
+        <text x="300" y="292" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 2,0 m</text>
+        <text x="470" y="160" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sa feltöltés</text>
+        <text x="470" y="175" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=19 · φ=30° · c=5</text>
+        <text x="470" y="312" font-family="Inter" font-size="10.5" fill="#5A4632" font-weight="600">Ci agyag (kohézív)</text>
+        <text x="470" y="327" font-family="Inter" font-size="9" fill="#5A4632">γ=19 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20 · φ<tspan baseline-shift="sub" font-size="7">u</tspan>=0° · c<tspan baseline-shift="sub" font-size="7">u</tspan>=65 kPa</text>
+        <text x="45" y="328" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Pilléralap (L = 1,5 m)</text>
+      </svg>
+    </figure>
+
+    <div class="step"><h4>1. A vízszintes mértékadó teher változatlan</h4>
+      <p>A vízszintes teher számítása nem függ a talp alatti talaj drénezettségétől: H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1,35·10,08 + 1,5·100 = <b>163,6 kN</b></p>
+    </div>
+    <div class="step"><h4>2. Elcsúszással szembeni ellenállás — talp-adhézió</h4>
+      <p>R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub> / γ<sub>R;h</sub>, &nbsp; ahol A<sub>c</sub> = B·L = 2,0·1,5 = 3,0 m², &nbsp; c<sub>u,k</sub> = 65 kPa, &nbsp; γ<sub>R;h</sub> = 1,1.</p>
+      <p>R<sub>d</sub> = (2,0·1,5·65)/1,1 = <b>177 kN</b> &nbsp;<span style="color:var(--ink-mute)">(a teljes talpfelület működik, földellenállásra nincs szükség)</span></p>
+    </div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163,6 kN → <b>MEGFELEL.</b> ✓ &nbsp; A drénezetlen talp-adhézió önmagában elegendő (a drénezett esetben még szükség volt a földellenállásra is).</div>
+
+    <h3>Mini-kalkulátor — drénezetlen</h3>
+    <div class="calc" id="calc-mp10u">
+      <div class="calc-head"><h3>MP10.5 — elcsúszás-ellenőrzés (drénezetlen)</h3><span class="calc-tag" style="background:var(--moss)">EQU</span></div>
+      <div class="calc-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">
+          <div class="cr"><label>B szélesség (m)</label><input type="number" id="mp10u-B" value="2.0" step="0.1"></div>
+          <div class="cr"><label>Q<sub>x,k</sub> vízszintes pillérteher (kN)</label><input type="number" id="mp10u-Qx" value="100" step="5"></div>
+          <div class="cr"><label>L hossz (m)</label><input type="number" id="mp10u-L" value="1.5" step="0.1"></div>
+          <div class="cr"><label>E<sub>a,k</sub> aktív földnyomás (kN)</label><input type="number" id="mp10u-Ea" value="10.08" step="0.5"></div>
+          <div class="cr"><label>c<sub>u,k</sub> talp-adhézió (kPa)</label><input type="number" id="mp10u-cu" value="65" step="5"></div>
+          <div class="cr"><label>γ<sub>R;h</sub> ellenállási tényező</label><input type="number" id="mp10u-gR" value="1.1" step="0.05"></div>
+        </div>
+        <p class="calc-note">Drénezetlen elcsúszási ellenállás a teljes talpfelületen: R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub>/γ<sub>R;h</sub>. A feltétel: H<sub>d</sub> ≤ R<sub>d</sub>.</p>
+        <div class="calc-results" id="mp10u-res"></div>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -2079,7 +2154,16 @@ function calcMP10(){
     rr('R<sub>d</sub> + R<sub>pd</sub>', fmt(tot,1)+' kN',true)+
     `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub>+R<sub>pd</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
 }
-[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9],['mp10',calcMP10]].forEach(([p,fn])=>{
+function calcMP10u(){
+  const B=num('mp10u-B'),L=num('mp10u-L'),cu=num('mp10u-cu'),gR=num('mp10u-gR'),Qx=num('mp10u-Qx'),Ea=num('mp10u-Ea');
+  const Hd=1.35*Ea+1.5*Qx, Ac=B*L, Rd=gR>0?Ac*cu/gR:0, ok=Rd>=Hd;
+  document.getElementById('mp10u-res').innerHTML='<h4>Eredmény (elcsúszás, drénezetlen)</h4>'+
+    rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
+    rr('A<sub>c</sub> = B·L', fmt(Ac,2)+' m²',true)+
+    rr('R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub> / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
+    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub> = ${fmt(Rd,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
+}
+[['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9],['mp10',calcMP10],['mp10u',calcMP10u]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
 });
 /* ===================== INDÍTÁS ===================== */
