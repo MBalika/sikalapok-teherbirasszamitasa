@@ -514,41 +514,54 @@ figure svg{width:100%;height:auto;display:block}
 
     <h3>Ábra</h3>
     <figure>
-      <svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 760 390" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="p1g" patternUnits="userSpaceOnUse" width="13" height="6"><path d="M0,6 L6.5,0 L13,6" stroke="#8A7B5E" stroke-width="1" fill="none"/></pattern>
           <marker id="p1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker>
           <marker id="p1d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2,2 L8,5 L2,8" fill="none" stroke="#3D4852" stroke-width="1.4"/></marker>
         </defs>
-        <rect x="30" y="92" width="700" height="78" fill="#F2E14A"/>
-        <rect x="30" y="170" width="700" height="150" fill="#F0A92E"/>
-        <rect x="30" y="86" width="700" height="6" fill="url(#p1g)"/>
-        <line x1="30" y1="92" x2="730" y2="92" stroke="#8A7B5E" stroke-width="1.6"/>
-        <text x="36" y="82" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <!-- talajrétegek: feltöltés (terep→0,8 m), termett talaj alatta -->
+        <rect x="30" y="100" width="700" height="104" fill="#F2E14A"/>
+        <rect x="30" y="204" width="700" height="141" fill="#F0A92E"/>
+        <!-- terepszint -->
+        <rect x="30" y="94" width="700" height="6" fill="url(#p1g)"/>
+        <line x1="30" y1="100" x2="730" y2="100" stroke="#8A7B5E" stroke-width="1.6"/>
+        <text x="36" y="90" font-family="Inter" font-size="10" fill="#6B6052">terepszint</text>
+        <!-- réteghatár (a feltöltés alja, t_fill = 0,8 m) — beleér az alaptestbe -->
+        <line x1="30" y1="204" x2="730" y2="204" stroke="#9A6B1E" stroke-width="1.4"/>
         <!-- pillér -->
-        <rect x="318" y="44" width="44" height="48" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
-        <!-- alaptest -->
-        <rect x="270" y="92" width="140" height="78" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
-        <text x="340" y="135" font-family="Inter" font-size="11" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan> = 25 kN/m³</text>
-        <!-- terhek -->
-        <line x1="340" y1="10" x2="340" y2="42" stroke="#1E63B0" stroke-width="5" marker-end="url(#p1a)" stroke-linecap="round"/>
-        <text x="350" y="24" font-family="Fraunces" font-size="12" fill="#1E63B0" font-weight="700">G<tspan baseline-shift="sub" font-size="9">v,k</tspan>=220 · Q<tspan baseline-shift="sub" font-size="9">v,k</tspan>=70 kN/m</text>
-        <!-- méretek -->
-        <line x1="318" y1="30" x2="362" y2="30" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
-        <text x="340" y="24" font-family="Fraunces" font-size="9" fill="#3D4852" text-anchor="middle" font-style="italic">b=0,3</text>
-        <line x1="252" y1="92" x2="252" y2="170" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
-        <text x="246" y="135" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=0,6 m</text>
-        <line x1="270" y1="184" x2="410" y2="184" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
-        <text x="340" y="198" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 1,1 m</text>
+        <rect x="321" y="55" width="38" height="110" fill="#9AA3AA" stroke="#3D2A1A" stroke-width="1.2"/>
+        <!-- alaptest (a réteghatár átmegy rajta) -->
+        <rect x="270" y="165" width="140" height="78" fill="#BCC0C3" stroke="#3D2A1A" stroke-width="1.7"/>
+        <text x="340" y="200" font-family="Inter" font-size="11" fill="#241C12" text-anchor="middle" font-weight="600">γ<tspan baseline-shift="sub" font-size="8">b</tspan> = 25 kN/m³</text>
         <!-- alapsík -->
-        <line x1="30" y1="170" x2="730" y2="170" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
-        <text x="724" y="165" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík −1,10 mRel</text>
+        <line x1="30" y1="243" x2="730" y2="243" stroke="#3D2A1A" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="724" y="238" font-family="Inter" font-size="9" fill="#3D2A1A" text-anchor="end">alapsík −1,10 mRel</text>
+        <!-- teher -->
+        <line x1="340" y1="14" x2="340" y2="235" stroke="#1E63B0" stroke-width="5" marker-end="url(#p1a)" stroke-linecap="round"/>
+        <text x="392" y="24" font-family="Fraunces" font-size="12" fill="#1E63B0" font-weight="700">G<tspan baseline-shift="sub" font-size="9">v,k</tspan> = 220 kN/m</text>
+        <text x="392" y="42" font-family="Fraunces" font-size="12" fill="#1E63B0" font-weight="700">Q<tspan baseline-shift="sub" font-size="9">v,k</tspan> = 70 kN/m</text>
+        <!-- b méret -->
+        <line x1="321" y1="138" x2="359" y2="138" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="313" y="142" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">b=0,3m</text>
+        <!-- t méret (terep → alaptest teteje) -->
+        <line x1="255" y1="100" x2="255" y2="165" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="249" y="136" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">t=0,5m</text>
+        <!-- h méret (alaptest magassága) -->
+        <line x1="255" y1="165" x2="255" y2="243" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="249" y="208" font-family="Fraunces" font-size="10" fill="#3D4852" text-anchor="end" font-style="italic">h=0,6m</text>
+        <!-- t_fill méret (terep → réteghatár) -->
+        <line x1="618" y1="100" x2="618" y2="204" stroke="#3D4852" stroke-width="0.8" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="626" y="156" font-family="Fraunces" font-size="10" fill="#3D4852" font-style="italic">t<tspan baseline-shift="sub" font-size="7">fill</tspan>=0,8m</text>
+        <!-- B méret -->
+        <line x1="270" y1="258" x2="410" y2="258" stroke="#3D4852" stroke-width="0.9" marker-start="url(#p1d)" marker-end="url(#p1d)"/>
+        <text x="340" y="272" font-family="Fraunces" font-size="11" fill="#3D4852" text-anchor="middle" font-style="italic">B = 1,1 m</text>
         <!-- talaj feliratok -->
-        <text x="560" y="125" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">saGr feltöltés</text>
-        <text x="560" y="140" font-family="Inter" font-size="9" fill="#6B6052">γ=17 · φ=30° · c=10 kPa</text>
-        <text x="560" y="245" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
-        <text x="560" y="260" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · φ=24° · c=12 kPa</text>
-        <text x="60" y="300" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sávalap (L ≫ B)</text>
+        <text x="440" y="148" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">saGr feltöltés</text>
+        <text x="440" y="163" font-family="Inter" font-size="9" fill="#6B6052">γ=17 · φ=30° · c=10 kPa</text>
+        <text x="470" y="292" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">siSa termett talaj</text>
+        <text x="470" y="307" font-family="Inter" font-size="9" fill="#6B6052">γ=18 · φ=24° · c=12 kPa</text>
+        <text x="60" y="325" font-family="Inter" font-size="10.5" fill="#6B6052" font-weight="600">Sávalap (L ≫ B)</text>
       </svg>
     </figure>
 
