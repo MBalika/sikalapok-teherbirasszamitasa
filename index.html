@@ -2295,5 +2295,47 @@ buildCalc('cdr','dr');
 buildCalc('cud','ud');
 buildCalc('csl','sl');
 </script>
+<style>
+/* Magyar tipográfia — kiegyensúlyozott, olvasható tördelés */
+body{text-wrap:pretty}
+p,li,figcaption,blockquote,dd,td{text-wrap:pretty;hyphens:none}
+h1,h2,h3,h4{text-wrap:balance}
+.nowrap{white-space:nowrap}
+</style>
+<script>
+/* Magyar tipográfia — automatikus sortörés-szabályok */
+(function(){
+  "use strict";
+  var NBSP=' ', WJ='⁠';
+  function math(s){return s.replace(/ (?=[=+−·×<>])/g,NBSP).replace(/([=+−·×<>]) /g,'$1'+NBSP);}
+  function units(s){return s.replace(/(\d) (?=(?:kPa|MPa|GPa|kN\/m³|kN\/m²|kN|m³|m²|m\/s|cm|mm|km|kg|°C|°|%|m|t|óra|nap|hét|hónap|év)(?:[\s.,;:!?)\]–—]|$))/g,'$1'+NBSP);}
+  function shortWords(s){return s.replace(/(^|[\s(„"'»–—])(a|az|s|e|é|és|is)(?: )(?=\S)/gi,'$1$2'+NBSP);}
+  function dashes(s){return s.replace(/([0-9A-Za-zÀ-ÿ])([-–—])([0-9A-Za-zÀ-ÿ])/g,'$1'+WJ+'$2'+WJ+'$3');}
+  function sentenceStart(s){return s.replace(/([.!?…][)"'»”’]?\s+\S+) (?=\S)/g,'$1'+NBSP);}
+  function fix(s){return dashes(units(math(shortWords(sentenceStart(s)))));}
+  var SKIP={SCRIPT:1,STYLE:1,CODE:1,PRE:1,KBD:1,SAMP:1,INPUT:1,TEXTAREA:1,SELECT:1,OPTION:1,NOSCRIPT:1};
+  function walk(el){
+    for(var n=el.firstChild;n;n=n.nextSibling){
+      if(n.nodeType===3){var t=n.nodeValue;if(t&&/\S/.test(t)){var nt=fix(t);if(nt!==t)n.nodeValue=nt;}}
+      else if(n.nodeType===1){
+        var tag=n.tagName?n.tagName.toUpperCase():'';
+        if(SKIP[tag])continue;
+        if(n.namespaceURI==='http://www.w3.org/2000/svg')continue;
+        if(n.classList&&n.classList.contains('nowrap'))continue;
+        if(n.isContentEditable)continue;
+        walk(n);
+      }
+    }
+  }
+  function across(root){
+    if(!document.createTreeWalker)return;
+    var SHORT=/(^|[\s„"'(»–—])(a|az|s|e|é|és|is) $/i, w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), arr=[], x;
+    while(x=w.nextNode()){var p=x.parentNode,sk=false;while(p&&p.nodeType===1){var tg=p.tagName?p.tagName.toUpperCase():'';if(SKIP[tg]||p.namespaceURI==='http://www.w3.org/2000/svg'){sk=true;break;}p=p.parentNode;}if(!sk&&/\S/.test(x.nodeValue))arr.push(x);}
+    for(var i=0;i<arr.length-1;i++){var v=arr[i].nodeValue;if(SHORT.test(v)){var nv=arr[i+1].nodeValue;if(/^[^\s]/.test(nv))arr[i].nodeValue=v.replace(/ $/,NBSP);else if(/^ /.test(nv)){arr[i].nodeValue=v.replace(/ $/,NBSP);arr[i+1].nodeValue=nv.replace(/^ +/,'');}}}
+  }
+  function run(){if(!document.body)return;walk(document.body);across(document.body);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
 </body>
 </html>
