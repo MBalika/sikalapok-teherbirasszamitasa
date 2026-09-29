@@ -2393,11 +2393,19 @@ const KALK = (function(){
     /* --- teher-nyilak (képernyő-térben, a pillér tetejéhez kötve) --- */
     const top=proj(0,colTop,-lz/2), topE=proj(0,colTop+0.85,-lz/2);
     const arrow=(a,c,col,w)=>{ ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(c.x,c.y);ctx.stroke(); const ang=Math.atan2(c.y-a.y,c.x-a.x); ctx.beginPath();ctx.moveTo(c.x,c.y);ctx.lineTo(c.x-11*Math.cos(ang-0.4),c.y-11*Math.sin(ang-0.4));ctx.lineTo(c.x-11*Math.cos(ang+0.4),c.y-11*Math.sin(ang+0.4));ctx.closePath();ctx.fill(); };
-    const label=(t,x,y,col,al2,bold,sz)=>{ ctx.font=(bold?'700 ':'600 ')+(sz||12)+'px Inter, system-ui, sans-serif'; ctx.textAlign=al2||'left'; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.strokeText(t,x,y); ctx.fillStyle=col; ctx.fillText(t,x,y); };
+    /* felirat alsó indexszel: a „_{...}" részek kisebb betűvel, lejjebb rajzolódnak (pl. γ_{sat}, c_{u}) */
+    const label=(t,x,y,col,al2,bold,sz)=>{
+      sz=sz||12; const w=bold?'700 ':'600 ', fam='px Inter, system-ui, sans-serif';
+      const segs=[]; String(t).split(/(_\{[^}]*\})/).forEach(p=>{ if(!p) return; const m=p.match(/^_\{([^}]*)\}$/); segs.push(m?{s:m[1],sub:true}:{s:p,sub:false}); });
+      let tw=0; segs.forEach(g=>{ ctx.font=w+(g.sub?Math.round(sz*0.72):sz)+fam; g.w=ctx.measureText(g.s).width; tw+=g.w; });
+      let cx=al2==='center'?x-tw/2:(al2==='right'?x-tw:x);
+      ctx.textAlign='left'; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)';
+      segs.forEach(g=>{ ctx.font=w+(g.sub?Math.round(sz*0.72):sz)+fam; const yy=g.sub?y+sz*0.28:y; ctx.strokeText(g.s,cx,yy); ctx.fillStyle=col; ctx.fillText(g.s,cx,yy); cx+=g.w; });
+    };
     arrow(topE,{x:top.x,y:top.y+2},'#1E63B0',4);
-    label(`V = G + Q = ${F(R.Vk,0)}${R.u}`,topE.x,topE.y-7,'#1E63B0','center');
-    if(S.Qk>0&&S.eQ>0){ const qa=proj(S.eQ,colTop+0.75,-lz/2), qb=proj(S.eQ,colTop+0.02,-lz/2); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e = ${F(S.eQ,2)} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
-    if(S.Hk>0){ const hs=proj(-b/2-1.0,colTop-0.02,-lz/2), he=proj(-b/2-0.03,colTop-0.02,-lz/2); arrow(hs,he,'#C0512A',3.5); label(`H = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
+    label(`V_{k} = G_{k} + Q_{k} = ${F(R.Vk,0)}${R.u}`,topE.x,topE.y-7,'#1E63B0','center');
+    if(S.Qk>0&&S.eQ>0){ const qa=proj(S.eQ,colTop+0.75,-lz/2), qb=proj(S.eQ,colTop+0.02,-lz/2); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e_{Q} = ${F(S.eQ,2)} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
+    if(S.Hk>0){ const hs=proj(-b/2-1.0,colTop-0.02,-lz/2), he=proj(-b/2-0.03,colTop-0.02,-lz/2); arrow(hs,he,'#C0512A',3.5); label(`H_{k} = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
     /* --- feliratok --- */
     if(frontVisible){
       const pB=proj(0,-(D+Math.abs(dy))-0.28,0); label(`B = ${F(B,2)} m${strip?'':' · L = '+F(S.L,2)+' m'}`,pB.x,pB.y,'#2E2620','center');
@@ -2407,7 +2415,7 @@ const KALK = (function(){
     }
     /* rétegnevek a tömbön kívül, a látható oldal mellett */
     const rightVis=facing({x:1,y:0,z:0}); const side=rightVis?Wx/2:-Wx/2, sideZ=-Wz/2, alg=rightVis?'left':'right', off=rightVis?10:-10;
-    bl.forEach((x,i)=>{ const y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=x.top) return; const p=proj(side,-(x.top+y2)/2,sideZ); const Ly=x.L; label(`${i+1}. ${Ly.name}`,p.x+off,p.y-5,'#3A2A1A',alg,true); label(`γ ${F(Ly.g,1)} | γsat ${F(Ly.gs,1)} | φ ${F(Ly.phi,0)}° | c ${F(Ly.c,0)}${Ly.cu?' | cu '+F(Ly.cu,0):''}`,p.x+off,p.y+9,'#3A2A1A',alg,false,11); });
+    bl.forEach((x,i)=>{ const y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=x.top) return; const p=proj(side,-(x.top+y2)/2,sideZ); const Ly=x.L; label(`${i+1}. ${Ly.name}`,p.x+off,p.y-9,'#3A2A1A',alg,true); label(`γ = ${F(Ly.g,1)} | γ_{sat} = ${F(Ly.gs,1)} kN/m³`,p.x+off,p.y+9,'#3A2A1A',alg,false,11); label(`φ = ${F(Ly.phi,0)}° | c = ${F(Ly.c,0)}${Ly.cu?' | c_{u} = '+F(Ly.cu,0):''} kPa`,p.x+off,p.y+22,'#3A2A1A',alg,false,11); });
     if(gwz<Ztot){ const fv=facing({x:0,y:0,z:1}); const p=proj(-side,-gwz,fv?0:-Wz); label(`▼ MTV ${F(S.gw,1)} m`,p.x-off,p.y-4,'#1E78C8',rightVis?'right':'left',true); }
     const ptv=facing({x:0,y:0,z:1}); const pt=proj(ptv?-Wx/2:Wx/2,0.04,ptv?0:-Wz); label('terepszint',pt.x+(ptv?-6:6),pt.y-4,'#6B5B3E',ptv?'right':'left');
   }
