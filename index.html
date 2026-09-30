@@ -2020,15 +2020,18 @@ const KALK = (function(){
   };
 
   /* ---------- állapot ---------- */
+  /* alapbeállítás: pilléralap kétirányú külpontossággal */
   const S = {
-    type:'sav', B:1.3, L:2.0, h:0.8, D:1.3, b:0.3, alpha:0,
-    Gk:250, Qk:170, eQ:0.3, Hk:30, eQL:0, HL:0, Htype:'G', Hopp:true, HoppL:true, self:true, gamB:25,
-    gw:0.8, gwDeep:false,
-    layers:[{name:'homok feltöltés',t:1.1,g:18,gs:19,phi:30,c:5,cu:40},{name:'iszapos homok',t:0,g:18,gs:20,phi:26,c:30,cu:120}],
+    type:'pont', B:2.2, L:1.8, h:1.0, D:1.5, b:0.4, alpha:0,
+    Gk:900, Qk:300, eQ:0.15, Hk:80, eQL:0.10, HL:50, Htype:'Q', Hopp:true, HoppL:true, self:true, gamB:25,
+    gw:1.2, gwDeep:false,
+    layers:[{name:'homok feltöltés',t:1.5,g:18,gs:19,phi:30,c:5,cu:0},{name:'iszapos homok',t:0,g:19,gs:20,phi:28,c:10,cu:80}],
     gG:1.35, gQ:1.5, gR:1.4, gRh:1.1, delta:'mono', pass:'K0', mob:1.0, incEa:true,
     detail:'dr', view:'3d', xray:true
   };
   const PRESETS = {
+    alap:{name:'Alapbeállítás — pilléralap, kétirányú külpontosság',s:{type:'pont',B:2.2,L:1.8,h:1.0,D:1.5,b:0.4,alpha:0,Gk:900,Qk:300,eQ:0.15,Hk:80,eQL:0.10,HL:50,Htype:'Q',Hopp:true,HoppL:true,self:true,gwDeep:false,gw:1.2,
+      layers:[{name:'homok feltöltés',t:1.5,g:18,gs:19,phi:30,c:5,cu:0},{name:'iszapos homok',t:0,g:19,gs:20,phi:28,c:10,cu:80}],delta:'mono',pass:'K0',mob:1,incEa:true,detail:'dr'}},
     mp1:{name:'MP1 — drénezett sávalap (B = 1,3 m)',s:{type:'sav',B:1.3,h:0.6,D:1.1,b:0.3,alpha:0,Gk:220,Qk:70,eQ:0,Hk:0,Htype:'G',Hopp:true,self:true,gwDeep:true,gw:6,
       layers:[{name:'homokos kavics feltöltés',t:0.8,g:17,gs:18,phi:30,c:10,cu:0},{name:'iszapos homok',t:0,g:18,gs:20,phi:24,c:12,cu:0}],detail:'dr'}},
     mp2:{name:'MP2 — drénezetlen sávalap',s:{type:'sav',B:1.1,h:0.6,D:1.1,b:0.3,alpha:0,Gk:220,Qk:70,eQ:0,Hk:0,Htype:'G',Hopp:true,self:true,gwDeep:true,gw:6,
@@ -2047,8 +2050,6 @@ const KALK = (function(){
       layers:[{name:'homok feltöltés',t:1.5,g:18,gs:19,phi:30,c:5,cu:0},{name:'homokos kavics',t:0,g:19,gs:20,phi:32,c:0,cu:0}],detail:'dr'}},
     mp10:{name:'MP10 — elcsúszás, nyugalmi földellenállással',s:{type:'pont',B:2.0,L:1.5,h:1.2,D:1.6,b:0.4,alpha:0,Gk:320,Qk:0,eQ:0,Hk:100,Htype:'Q',Hopp:true,self:false,gwDeep:false,gw:1.0,
       layers:[{name:'homok feltöltés',t:1.5,g:18,gs:19,phi:30,c:0,cu:0},{name:'iszapos homok',t:0,g:19,gs:20,phi:28,c:0,cu:65}],delta:'mono',pass:'K0',mob:1,incEa:true,detail:'sl'}},
-    bi:{name:'Demó — pilléralap kétirányú külpontossággal',s:{type:'pont',B:2.2,L:1.8,h:1.0,D:1.5,b:0.4,alpha:0,Gk:900,Qk:300,eQ:0.15,Hk:80,eQL:0.10,HL:50,Htype:'Q',Hopp:true,HoppL:true,self:true,gwDeep:false,gw:1.2,
-      layers:[{name:'homok feltöltés',t:1.5,g:18,gs:19,phi:30,c:5,cu:0},{name:'iszapos homok',t:0,g:19,gs:20,phi:28,c:10,cu:0}],detail:'dr'}},
     mp11:{name:'MP11 — elcsúszás, passzív földellenállással',s:{type:'pont',B:0.95,L:1.45,h:0.95,D:3.0,b:0.4,alpha:0,Gk:490,Qk:610,eQ:0,Hk:250,Htype:'Q',Hopp:true,self:false,gwDeep:false,gw:2.05,
       layers:[{name:'homok feltöltés',t:3.0,g:19.5,gs:20.5,phi:32,c:0,cu:0},{name:'iszap',t:0,g:19.5,gs:20.5,phi:16,c:40,cu:70}],delta:'two3',pass:'Kp',mob:1,incEa:true,detail:'sl'}}
   };
@@ -2197,7 +2198,7 @@ const KALK = (function(){
     ['type','Htype','delta','pass'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).value;onChange();}));
     ['Hopp','HoppL','self','gwDeep','incEa'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).checked;onChange();}));
     $('preset').addEventListener('change',()=>{const p=PRESETS[$('preset').value];if(p){S.eQL=0;S.HL=0;S.HoppL=true;Object.assign(S,JSON.parse(JSON.stringify(p.s)));S.xray=true;sync();onChange();}});
-    $('reset').addEventListener('click',()=>{Object.assign(S,JSON.parse(JSON.stringify(PRESETS.mp3.s)));$('preset').value='';sync();onChange();});
+    $('reset').addEventListener('click',()=>{S.eQL=0;S.HL=0;Object.assign(S,JSON.parse(JSON.stringify(PRESETS.alap.s)));$('preset').value='';sync();onChange();});
     $('addlay').addEventListener('click',()=>{const n=S.layers.length;const last=S.layers[n-1];S.layers.splice(n-1,0,{name:(n)+'. réteg',t:1,g:last.g,gs:last.gs,phi:last.phi,c:last.c,cu:last.cu});renderLayers();onChange();});
     $('soil').addEventListener('change',()=>{const k=$('soil').value;if(!k)return;const s=SOILS[k];const n=S.layers.length;S.layers.splice(n-1,0,{name:s.n,t:1,g:s.g,gs:s.gs,phi:s.phi,c:s.c,cu:s.cu});$('soil').value='';renderLayers();onChange();});
     host.querySelectorAll('.kt[data-d]').forEach(bt=>bt.addEventListener('click',()=>{S.detail=bt.dataset.d;host.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x===bt));renderSteps(compute());}));
