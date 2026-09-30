@@ -2023,7 +2023,7 @@ const KALK = (function(){
     gw:0.8, gwDeep:false,
     layers:[{name:'homok feltöltés',t:1.1,g:18,gs:19,phi:30,c:5,cu:40},{name:'iszapos homok',t:0,g:18,gs:20,phi:26,c:30,cu:120}],
     gG:1.35, gQ:1.5, gR:1.4, gRh:1.1, delta:'mono', pass:'K0', mob:1.0, incEa:true,
-    detail:'dr', view:'3d', xray:false
+    detail:'dr', view:'3d', xray:true
   };
   const PRESETS = {
     mp1:{name:'MP1 — drénezett sávalap (B = 1,3 m)',s:{type:'sav',B:1.3,h:0.6,D:1.1,b:0.3,alpha:0,Gk:220,Qk:70,eQ:0,Hk:0,Htype:'G',Hopp:true,self:true,gwDeep:true,gw:6,
@@ -2165,10 +2165,9 @@ const KALK = (function(){
       </aside>
       <div class="kmain">
         <div class="kview">
-          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D modell</button><button type="button" class="kt" data-v="2d">2D metszet</button>
-            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button><button type="button" class="kbtn" id="k-xray" title="Átlátszó talaj: a teljes alaptest látszik">◫ átlátszó talaj</button></div>
+          <div class="kvt"><span class="kt on">3D modell — átlátszó talajjal</span>
+            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button></div>
           <div class="kcanvas"><canvas id="k-c3d"></canvas><div class="khint">húzd az egérrel / ujjaddal a forgatáshoz · görgetés = nagyítás</div></div>
-          <div class="k2d" id="k-2d" hidden></div>
         </div>
         <div class="ktiles" id="k-tiles"></div>
         <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Teherbírás — drénezett</button><button type="button" class="kt" data-d="ud">Teherbírás — drénezetlen</button><button type="button" class="kt" data-d="sl">Elcsúszás (EQU)</button>
@@ -2183,17 +2182,16 @@ const KALK = (function(){
       t.addEventListener('change',()=>{const v=parseFloat(String(t.value).replace(',','.'));if(isFinite(v)){S[id]=v;}t.value=F(S[id],dec(id));r.value=S[id];onChange();});
       t.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();t.blur();}});
     });
-    ['type','Htype','delta','pass'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).value;if(id==='type'){S.xray=(S.type==='pont');$('xray').classList.toggle('on',S.xray);}onChange();}));
+    ['type','Htype','delta','pass'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).value;onChange();}));
     ['Hopp','self','gwDeep','incEa'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).checked;onChange();}));
-    $('preset').addEventListener('change',()=>{const p=PRESETS[$('preset').value];if(p){Object.assign(S,JSON.parse(JSON.stringify(p.s)));S.xray=(S.type==='pont');$('xray').classList.toggle('on',S.xray);sync();onChange();}});
+    $('preset').addEventListener('change',()=>{const p=PRESETS[$('preset').value];if(p){Object.assign(S,JSON.parse(JSON.stringify(p.s)));S.xray=true;sync();onChange();}});
     $('reset').addEventListener('click',()=>{Object.assign(S,JSON.parse(JSON.stringify(PRESETS.mp3.s)));$('preset').value='';sync();onChange();});
     $('addlay').addEventListener('click',()=>{const n=S.layers.length;const last=S.layers[n-1];S.layers.splice(n-1,0,{name:(n)+'. réteg',t:1,g:last.g,gs:last.gs,phi:last.phi,c:last.c,cu:last.cu});renderLayers();onChange();});
     $('soil').addEventListener('change',()=>{const k=$('soil').value;if(!k)return;const s=SOILS[k];const n=S.layers.length;S.layers.splice(n-1,0,{name:s.n,t:1,g:s.g,gs:s.gs,phi:s.phi,c:s.c,cu:s.cu});$('soil').value='';renderLayers();onChange();});
-    host.querySelectorAll('.kt[data-v]').forEach(bt=>bt.addEventListener('click',()=>{S.view=bt.dataset.v;host.querySelectorAll('.kt[data-v]').forEach(x=>x.classList.toggle('on',x===bt));$('2d').hidden=S.view!=='2d';host.querySelector('.kcanvas').hidden=S.view!=='3d';draw();}));
     host.querySelectorAll('.kt[data-d]').forEach(bt=>bt.addEventListener('click',()=>{S.detail=bt.dataset.d;host.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x===bt));renderSteps(compute());}));
     $('vreset').addEventListener('click',()=>{V3.az=-0.5;V3.el=0.36;V3.zoom=1.15;draw();});
     $('spin').addEventListener('click',()=>{V3.spin=!V3.spin;$('spin').classList.toggle('on',V3.spin);if(V3.spin)spinLoop();});
-    $('xray').addEventListener('click',()=>{S.xray=!S.xray;$('xray').classList.toggle('on',S.xray);draw();});
+
     $('copy').addEventListener('click',()=>{const t=$('steps').innerText;navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>{$('copy').textContent='✓ másolva';setTimeout(()=>$('copy').textContent='⧉ számítás másolása',1600);});});
     $('print').addEventListener('click',()=>window.print());
     init3d();
@@ -2311,7 +2309,6 @@ const KALK = (function(){
   function spinLoop(){ if(!V3.spin) return; V3.az+=0.006; draw(); requestAnimationFrame(spinLoop); }
   function draw(R){
     R=R||lastR||compute(); lastR=R;
-    if(S.view==='2d'){ $('2d').innerHTML=svg2d(R); return; }
     if(!CV||CV.hidden) return;
     const box=CV.parentElement.getBoundingClientRect(); const dpr=window.devicePixelRatio||1;
     const W=Math.max(300,box.width), H=Math.max(260,box.height);
@@ -2342,7 +2339,7 @@ const KALK = (function(){
     /* normál nézeti irány szerint: látható-e a lap (kamerához képest) */
     const viewDir={x:-sa*ce,y:se,z:ca*ce}; /* kamera iránya a jelenet felől */
     const facing=n=>(n.x*viewDir.x+n.y*viewDir.y+n.z*viewDir.z)>0;
-    const xray=!!S.xray;                                     /* átlátszó talaj: a teljes alaptest látszik */
+    const xray=true;                                     /* átlátszó talaj: a teljes alaptest látszik */
     const gwz=S.gwDeep?Infinity:S.gw;
     const al=S.alpha*Math.PI/180, dy=Math.tan(al)*B/2;
     const zEps=0.001;
