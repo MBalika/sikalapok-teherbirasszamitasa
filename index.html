@@ -251,6 +251,7 @@ table.dt th{background:var(--steel-dk)}
 .kcanvas:active{cursor:grabbing}
 .khint{position:absolute;left:10px;bottom:8px;font-size:.72rem;color:var(--ink-mute);background:rgba(255,255,255,.75);padding:3px 8px;border-radius:6px;pointer-events:none}
 .k2d{padding:12px}
+.kcap{padding:8px 12px;font-size:.84rem;color:var(--ink-mute);border-top:1px solid var(--line);background:#FBF9F5}
 @media(max-width:700px){.kcanvas{height:340px}}
 .ktiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
 .ktile{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;border-left:4px solid var(--steel);box-shadow:var(--shadow)}
@@ -2165,9 +2166,10 @@ const KALK = (function(){
       </aside>
       <div class="kmain">
         <div class="kview">
-          <div class="kvt"><span class="kt on">3D modell — átlátszó talajjal</span>
+          <div class="kvt"><span class="kt on">3D modell</span>
             <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button></div>
           <div class="kcanvas"><canvas id="k-c3d"></canvas><div class="khint">húzd az egérrel / ujjaddal a forgatáshoz · görgetés = nagyítás</div></div>
+          <div class="kcap" id="k-cap"></div>
         </div>
         <div class="ktiles" id="k-tiles"></div>
         <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Teherbírás — drénezett</button><button type="button" class="kt" data-d="ud">Teherbírás — drénezetlen</button><button type="button" class="kt" data-d="sl">Elcsúszás (EQU)</button>
@@ -2309,6 +2311,7 @@ const KALK = (function(){
   function spinLoop(){ if(!V3.spin) return; V3.az+=0.006; draw(); requestAnimationFrame(spinLoop); }
   function draw(R){
     R=R||lastR||compute(); lastR=R;
+    { const cap=$('cap'); if(cap) cap.innerHTML=R.strip?'<b>Sávalap (L ≫ B):</b> a fal és az alaptest a hossz mentén folytatódik — a számítás egy <b>1 m hosszú szakaszra</b> vonatkozik (a modellen tömören kiemelve), ezért a terhek és az ellenállások <b>kN/m</b>-ben szerepelnek.':'<b>Pilléralap (B × L):</b> a teljes alaptest és a pillér látszik; a terhek és az ellenállások az egész alaptestre, <b>kN</b>-ban szerepelnek.'; }
     if(!CV||CV.hidden) return;
     const box=CV.parentElement.getBoundingClientRect(); const dpr=window.devicePixelRatio||1;
     const W=Math.max(300,box.width), H=Math.max(260,box.height);
@@ -2363,7 +2366,7 @@ const KALK = (function(){
     };
     const addTop=(alpha,list)=>{ const P=[[-Wx/2,0,0],[Wx/2,0,0],[Wx/2,0,-Wz],[-Wx/2,0,-Wz]].map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:alpha<1?rgba('#D9C77A',alpha,topN):shade('#D9C77A',topN),stroke:'rgba(60,40,20,.35)',d:depthOf(0,0,-Wz/2)}); };
     /* doboz (alaptest / pillér) látható lapjai */
-    const addBox=(x1,x2,y1,y2,z1,z2,col,list,slant)=>{ /* y1<y2 (felfelé), z1<z2; slant: az alsó lap ferde (α) */
+    const addBox=(x1,x2,y1,y2,z1,z2,col,list,slant,alpha)=>{ /* y1<y2 (felfelé), z1<z2; slant: az alsó lap ferde (α) */
       const yb=x=>-(y1)-(slant?(x/(B/2))*dy:0);                 /* alsó lap y-ja x szerint (a −y1 = −D szint körül) */
       const fs=[
         {n:{x:0,y:0,z:1}, p:[[x1,y2,z2],[x2,y2,z2],[x2,yb(x2),z2],[x1,yb(x1),z2]]},
@@ -2373,11 +2376,11 @@ const KALK = (function(){
         {n:{x:0,y:1,z:0}, p:[[x1,y2,z2],[x1,y2,z1],[x2,y2,z1],[x2,y2,z2]]},
         {n:{x:0,y:-1,z:0},p:[[x1,yb(x1),z2],[x2,yb(x2),z2],[x2,yb(x2),z1],[x1,yb(x1),z1]]}
       ];
-      fs.forEach(f=>{ if(!facing(f.n)) return; const P=f.p.map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:shade(col,f.n),stroke:'#2E2620',d:P.reduce((a,p)=>a+p.d,0)/P.length}); });
+      fs.forEach(f=>{ if(!facing(f.n)) return; const P=f.p.map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:alpha!=null?rgba(col,alpha,f.n):shade(col,f.n),stroke:alpha!=null?'rgba(46,38,32,.45)':'#2E2620',d:P.reduce((a,p)=>a+p.d,0)/P.length}); });
     };
     const lz=strip?Wz:l/2;                                      /* metszet-mód: a pillér Z ∈ [−lz, 0] */
     const zc=-Wz/2;                                             /* átlátszó mód: az alaptest a tömb közepén */
-    const fzF=xray?(strip?0:zc+L/2):0;                          /* az alaptest elülső síkja (feliratokhoz) */
+    const fzF=xray?(strip?zc+0.5:zc+L/2):0;                     /* az alaptest elülső síkja (feliratokhoz) */
     const zcol=xray?(strip?-Wz/2:zc):-lz/2;                     /* a pillér közepe (nyilakhoz) */
     const colPolys=[];
     if(!xray){
@@ -2397,8 +2400,16 @@ const KALK = (function(){
       if(!facing(topN)) addTop(0.16,back);
       back.sort((a,b)=>a.d-b.d).forEach(p=>polys.push(Object.assign(p,{d:-1e6+p.d})));
       /* 2) a teljes alaptest és a pillér (tömör), a tömb belsejében */
-      const zb1=strip?-Wz:zc-L/2, zb2=strip?0:zc+L/2, zp1=strip?-Wz:zc-l/2, zp2=strip?0:zc+l/2;
-      const solid=[]; addBox(-B/2,B/2,D,-(D-h),zb1,zb2,'#B5BBC0',solid,true); addBox(-b/2,b/2,(D-h),colTop,zp1,zp2,'#A9B2B8',solid,false);
+      const solid=[];
+      if(strip){
+        /* a sáv teljes hosszban halványan, az 1 m-es vizsgált szakasz tömören */
+        const ghost=[]; addBox(-B/2,B/2,D,-(D-h),-Wz,zc-0.5,'#B5BBC0',ghost,true,0.28); addBox(-b/2,b/2,(D-h),colTop,-Wz,zc-0.5,'#A9B2B8',ghost,false,0.28);
+        addBox(-B/2,B/2,D,-(D-h),zc+0.5,0,'#B5BBC0',ghost,true,0.28); addBox(-b/2,b/2,(D-h),colTop,zc+0.5,0,'#A9B2B8',ghost,false,0.28);
+        ghost.sort((a,b)=>a.d-b.d).forEach(p=>polys.push(Object.assign(p,{d:-6e5+p.d})));
+        addBox(-B/2,B/2,D,-(D-h),zc-0.5,zc+0.5,'#B5BBC0',solid,true); addBox(-b/2,b/2,(D-h),colTop,zc-0.5,zc+0.5,'#A9B2B8',solid,false);
+      } else {
+        addBox(-B/2,B/2,D,-(D-h),zc-L/2,zc+L/2,'#B5BBC0',solid,true); addBox(-b/2,b/2,(D-h),colTop,zc-l/2,zc+l/2,'#A9B2B8',solid,false);
+      }
       solid.sort((a,b)=>a.d-b.d).forEach(p=>polys.push(Object.assign(p,{d:-5e5+p.d})));
       /* alapsík vonala a tömb elülső lapján */
       /* 3) elülső (látható) talajlapok áttetszően */
@@ -2438,6 +2449,13 @@ const KALK = (function(){
       const ph=proj(B/2+0.12,-(D-h/2),zl); label(`h = ${F(h,2)} m`,ph.x,ph.y,'#2E2620');
       if(S.alpha){ const pa=proj(-B/2-0.15,-D-0.3,zl); label(`α = ${F(S.alpha,1)}°`,pa.x,pa.y,'#C0512A','right'); }
       if(xray&&!strip){ const pL=proj(B/2+0.1,-(D-h)-0.02,zc-L/2); label(`L = ${F(S.L,2)} m`,pL.x+4,pL.y-4,'#2E2620'); }
+      if(xray&&strip){ /* az 1 m-es vizsgált szakasz méretvonala */
+        const a=proj(B/2+0.18,-D-0.02,zc+0.5), c=proj(B/2+0.18,-D-0.02,zc-0.5);
+        ctx.strokeStyle='#8F3A1B'; ctx.lineWidth=1.6; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.stroke();
+        [a,c].forEach(q=>{ ctx.beginPath(); ctx.arc(q.x,q.y,2.6,0,6.3); ctx.fillStyle='#8F3A1B'; ctx.fill(); });
+        const m=proj(B/2+0.22,-D-0.02,zc); label('1,0 m',m.x+4,m.y+4,'#8F3A1B','left',true);
+        const m2=proj(0,-D-0.6,zc+0.5); label('vizsgált 1 m-es szakasz',m2.x,m2.y,'#8F3A1B','center',true,11);
+      }
     }
     /* rétegnevek a tömbön kívül, a látható oldal mellett */
     const rightVis=true; const side=Wx/2, alg='left', off=10;
