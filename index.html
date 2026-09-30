@@ -2023,7 +2023,7 @@ const KALK = (function(){
     gw:0.8, gwDeep:false,
     layers:[{name:'homok feltöltés',t:1.1,g:18,gs:19,phi:30,c:5,cu:40},{name:'iszapos homok',t:0,g:18,gs:20,phi:26,c:30,cu:120}],
     gG:1.35, gQ:1.5, gR:1.4, gRh:1.1, delta:'mono', pass:'K0', mob:1.0, incEa:true,
-    detail:'dr', view:'3d'
+    detail:'dr', view:'3d', xray:false
   };
   const PRESETS = {
     mp1:{name:'MP1 — drénezett sávalap (B = 1,3 m)',s:{type:'sav',B:1.3,h:0.6,D:1.1,b:0.3,alpha:0,Gk:220,Qk:70,eQ:0,Hk:0,Htype:'G',Hopp:true,self:true,gwDeep:true,gw:6,
@@ -2166,7 +2166,7 @@ const KALK = (function(){
       <div class="kmain">
         <div class="kview">
           <div class="kvt"><button type="button" class="kt on" data-v="3d">3D modell</button><button type="button" class="kt" data-v="2d">2D metszet</button>
-            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button></div>
+            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button><button type="button" class="kbtn" id="k-xray" title="Átlátszó talaj: a teljes alaptest látszik">◫ átlátszó talaj</button></div>
           <div class="kcanvas"><canvas id="k-c3d"></canvas><div class="khint">húzd az egérrel / ujjaddal a forgatáshoz · görgetés = nagyítás</div></div>
           <div class="k2d" id="k-2d" hidden></div>
         </div>
@@ -2183,9 +2183,9 @@ const KALK = (function(){
       t.addEventListener('change',()=>{const v=parseFloat(String(t.value).replace(',','.'));if(isFinite(v)){S[id]=v;}t.value=F(S[id],dec(id));r.value=S[id];onChange();});
       t.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();t.blur();}});
     });
-    ['type','Htype','delta','pass'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).value;onChange();}));
+    ['type','Htype','delta','pass'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).value;if(id==='type'){S.xray=(S.type==='pont');$('xray').classList.toggle('on',S.xray);}onChange();}));
     ['Hopp','self','gwDeep','incEa'].forEach(id=>$(id).addEventListener('change',()=>{S[id]=$(id).checked;onChange();}));
-    $('preset').addEventListener('change',()=>{const p=PRESETS[$('preset').value];if(p){Object.assign(S,JSON.parse(JSON.stringify(p.s)));sync();onChange();}});
+    $('preset').addEventListener('change',()=>{const p=PRESETS[$('preset').value];if(p){Object.assign(S,JSON.parse(JSON.stringify(p.s)));S.xray=(S.type==='pont');$('xray').classList.toggle('on',S.xray);sync();onChange();}});
     $('reset').addEventListener('click',()=>{Object.assign(S,JSON.parse(JSON.stringify(PRESETS.mp3.s)));$('preset').value='';sync();onChange();});
     $('addlay').addEventListener('click',()=>{const n=S.layers.length;const last=S.layers[n-1];S.layers.splice(n-1,0,{name:(n)+'. réteg',t:1,g:last.g,gs:last.gs,phi:last.phi,c:last.c,cu:last.cu});renderLayers();onChange();});
     $('soil').addEventListener('change',()=>{const k=$('soil').value;if(!k)return;const s=SOILS[k];const n=S.layers.length;S.layers.splice(n-1,0,{name:s.n,t:1,g:s.g,gs:s.gs,phi:s.phi,c:s.c,cu:s.cu});$('soil').value='';renderLayers();onChange();});
@@ -2193,6 +2193,7 @@ const KALK = (function(){
     host.querySelectorAll('.kt[data-d]').forEach(bt=>bt.addEventListener('click',()=>{S.detail=bt.dataset.d;host.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x===bt));renderSteps(compute());}));
     $('vreset').addEventListener('click',()=>{V3.az=-0.5;V3.el=0.36;V3.zoom=1.15;draw();});
     $('spin').addEventListener('click',()=>{V3.spin=!V3.spin;$('spin').classList.toggle('on',V3.spin);if(V3.spin)spinLoop();});
+    $('xray').addEventListener('click',()=>{S.xray=!S.xray;$('xray').classList.toggle('on',S.xray);draw();});
     $('copy').addEventListener('click',()=>{const t=$('steps').innerText;navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>{$('copy').textContent='✓ másolva';setTimeout(()=>$('copy').textContent='⧉ számítás másolása',1600);});});
     $('print').addEventListener('click',()=>window.print());
     init3d();
@@ -2341,57 +2342,83 @@ const KALK = (function(){
     /* normál nézeti irány szerint: látható-e a lap (kamerához képest) */
     const viewDir={x:-sa*ce,y:se,z:ca*ce}; /* kamera iránya a jelenet felől */
     const facing=n=>(n.x*viewDir.x+n.y*viewDir.y+n.z*viewDir.z)>0;
-    /* --- talajtömb oldalai réteg-sávokkal --- */
+    const xray=!!S.xray;                                     /* átlátszó talaj: a teljes alaptest látszik */
+    const gwz=S.gwDeep?Infinity:S.gw;
+    const al=S.alpha*Math.PI/180, dy=Math.tan(al)*B/2;
+    const zEps=0.001;
+    /* a lap normál-vektorai és pontjai: a tömb Z ∈ [−Wz, 0] */
     const faces=[
       {n:{x:0,y:0,z:1},  pts:(y1,y2)=>[[-Wx/2,-y1,0],[Wx/2,-y1,0],[Wx/2,-y2,0],[-Wx/2,-y2,0]], front:true},
       {n:{x:0,y:0,z:-1}, pts:(y1,y2)=>[[Wx/2,-y1,-Wz],[-Wx/2,-y1,-Wz],[-Wx/2,-y2,-Wz],[Wx/2,-y2,-Wz]]},
       {n:{x:1,y:0,z:0},  pts:(y1,y2)=>[[Wx/2,-y1,0],[Wx/2,-y1,-Wz],[Wx/2,-y2,-Wz],[Wx/2,-y2,0]]},
       {n:{x:-1,y:0,z:0}, pts:(y1,y2)=>[[-Wx/2,-y1,-Wz],[-Wx/2,-y1,0],[-Wx/2,-y2,0],[-Wx/2,-y2,-Wz]]}
     ];
-    const gwz=S.gwDeep?Infinity:S.gw;
-    /* egy lap minden eleme (rétegsávok, vízvonal, metszet) a lap KÖZÉPPONTJÁNAK mélységével rendeződik — így a sávok nem takarják egymást rosszul */
-    const faceD={};
-    faces.forEach(fc=>{
-      if(!facing(fc.n)) return;
-      const c=fc.pts(0,Ztot); const fd=depthOf((c[0][0]+c[2][0])/2,(c[0][1]+c[2][1])/2,(c[0][2]+c[2][2])/2); faceD[fc.n.x+','+fc.n.z]=fd;
-      bl.forEach((x,i)=>{ const y1=x.top, y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=y1) return; addPoly(fc.pts(y1,y2),LAYCOL[i%LAYCOL.length],fc.n,'rgba(60,40,20,.35)',0,fd); });
-      if(gwz<Ztot){ const P=fc.pts(gwz,gwz+0.001); polys.push({P:P.map(p=>proj(p[0],p[1],p[2])),line:true,color:'#1E78C8',wide:true,d:fd+0.001}); }
-    });
-    /* --- terepszint (felső lap) --- */
     const topN={x:0,y:1,z:0};
-    if(facing(topN)){ addPoly([[-Wx/2,0,0],[Wx/2,0,0],[Wx/2,0,-Wz],[-Wx/2,0,-Wz]],'#D9C77A',topN,'rgba(60,40,20,.35)',0,depthOf(0,0,-Wz/2)); }
-    /* alsó lap (ha alulról nézne) */
-    if(facing({x:0,y:-1,z:0})) addPoly([[-Wx/2,-Ztot,0],[-Wx/2,-Ztot,-Wz],[Wx/2,-Ztot,-Wz],[Wx/2,-Ztot,0]],'#8B7A5A',{x:0,y:-1,z:0},null,0);
-    /* --- alaptest és fal metszete a Z=0 síkon (csak ha a metszősík látszik) --- */
     const frontVisible=facing({x:0,y:0,z:1});
-    const zEps=0.001;
-    const al=S.alpha*Math.PI/180, dy=Math.tan(al)*B/2;
-    if(frontVisible){
-      /* alaptest metszete */
-      const fd=faceD['0,1'];
-      addPoly([[-B/2,-(D-h),zEps],[B/2,-(D-h),zEps],[B/2,-(D+dy),zEps],[-B/2,-(D-dy),zEps]],'#B5BBC0',null,'#2E2620',0.003,fd);
-      /* fal / pillér metszete a terepig (az alaptesttel egybeépítve) */
-      addPoly([[-b/2,0.001,zEps],[b/2,0.001,zEps],[b/2,-(D-h)-0.02,zEps],[-b/2,-(D-h)-0.02,zEps]],'#B5BBC0',null,'#2E2620',0.004,fd);
-      /* alapsík vonala */
-      {const a=proj(-Wx/2,-D,zEps),c=proj(Wx/2,-D,zEps); polys.push({P:[a,c],line:true,dash:[5,4],color:'#3D2A1A',d:fd+0.002});}
+    const faceD={};
+    const rgba=(hex,a,n)=>{ const c=parseInt(hex.slice(1),16); let r=c>>16,g=(c>>8)&255,bb=c&255; const k=n?0.72+0.28*Math.max(0,(n.x*light.x+n.y*light.y+n.z*light.z)):1; return `rgba(${Math.round(r*k)},${Math.round(g*k)},${Math.round(bb*k)},${a})`; };
+    /* egy lap minden eleme (rétegsávok, vízvonal, metszet) a lap KÖZÉPPONTJÁNAK mélységével rendeződik */
+    const addSoilFace=(fc,alpha,list)=>{
+      const c=fc.pts(0,Ztot); const fd=depthOf((c[0][0]+c[2][0])/2,(c[0][1]+c[2][1])/2,(c[0][2]+c[2][2])/2); faceD[fc.n.x+','+fc.n.z]=fd;
+      bl.forEach((x,i)=>{ const y1=x.top, y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=y1) return; const P=fc.pts(y1,y2).map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:alpha<1?rgba(LAYCOL[i%LAYCOL.length],alpha,fc.n):shade(LAYCOL[i%LAYCOL.length],fc.n),stroke:'rgba(60,40,20,.35)',d:fd}); });
+      if(gwz<Ztot){ const P=fc.pts(gwz,gwz+0.001); list.push({P:P.map(p=>proj(p[0],p[1],p[2])),line:true,color:alpha<1?'rgba(30,120,200,.7)':'#1E78C8',wide:true,d:fd+0.001}); }
+      return fd;
+    };
+    const addTop=(alpha,list)=>{ const P=[[-Wx/2,0,0],[Wx/2,0,0],[Wx/2,0,-Wz],[-Wx/2,0,-Wz]].map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:alpha<1?rgba('#D9C77A',alpha,topN):shade('#D9C77A',topN),stroke:'rgba(60,40,20,.35)',d:depthOf(0,0,-Wz/2)}); };
+    /* doboz (alaptest / pillér) látható lapjai */
+    const addBox=(x1,x2,y1,y2,z1,z2,col,list,slant)=>{ /* y1<y2 (felfelé), z1<z2; slant: az alsó lap ferde (α) */
+      const yb=x=>-(y1)-(slant?(x/(B/2))*dy:0);                 /* alsó lap y-ja x szerint (a −y1 = −D szint körül) */
+      const fs=[
+        {n:{x:0,y:0,z:1}, p:[[x1,y2,z2],[x2,y2,z2],[x2,yb(x2),z2],[x1,yb(x1),z2]]},
+        {n:{x:0,y:0,z:-1},p:[[x2,y2,z1],[x1,y2,z1],[x1,yb(x1),z1],[x2,yb(x2),z1]]},
+        {n:{x:1,y:0,z:0}, p:[[x2,y2,z2],[x2,y2,z1],[x2,yb(x2),z1],[x2,yb(x2),z2]]},
+        {n:{x:-1,y:0,z:0},p:[[x1,y2,z1],[x1,y2,z2],[x1,yb(x1),z2],[x1,yb(x1),z1]]},
+        {n:{x:0,y:1,z:0}, p:[[x1,y2,z2],[x1,y2,z1],[x2,y2,z1],[x2,y2,z2]]},
+        {n:{x:0,y:-1,z:0},p:[[x1,yb(x1),z2],[x2,yb(x2),z2],[x2,yb(x2),z1],[x1,yb(x1),z1]]}
+      ];
+      fs.forEach(f=>{ if(!facing(f.n)) return; const P=f.p.map(p=>proj(p[0],p[1],p[2])); list.push({P,fill:shade(col,f.n),stroke:'#2E2620',d:P.reduce((a,p)=>a+p.d,0)/P.length}); });
+    };
+    const lz=strip?Wz:l/2;                                      /* metszet-mód: a pillér Z ∈ [−lz, 0] */
+    const zc=-Wz/2;                                             /* átlátszó mód: az alaptest a tömb közepén */
+    const fzF=xray?(strip?0:zc+L/2):0;                          /* az alaptest elülső síkja (feliratokhoz) */
+    const zcol=xray?(strip?-Wz/2:zc):-lz/2;                     /* a pillér közepe (nyilakhoz) */
+    const colPolys=[];
+    if(!xray){
+      faces.forEach(fc=>{ if(facing(fc.n)) addSoilFace(fc,1,polys); });
+      if(facing(topN)) addTop(1,polys);
+      if(facing({x:0,y:-1,z:0})) addPoly([[-Wx/2,-Ztot,0],[-Wx/2,-Ztot,-Wz],[Wx/2,-Ztot,-Wz],[Wx/2,-Ztot,0]],'#8B7A5A',{x:0,y:-1,z:0},null,0);
+      if(frontVisible){
+        const fd=faceD['0,1'];
+        addPoly([[-B/2,-(D-h),zEps],[B/2,-(D-h),zEps],[B/2,-(D+dy),zEps],[-B/2,-(D-dy),zEps]],'#B5BBC0',null,'#2E2620',0.003,fd);
+        addPoly([[-b/2,0.001,zEps],[b/2,0.001,zEps],[b/2,-(D-h)-0.02,zEps],[-b/2,-(D-h)-0.02,zEps]],'#B5BBC0',null,'#2E2620',0.004,fd);
+        {const a=proj(-Wx/2,-D,zEps),c=proj(Wx/2,-D,zEps); polys.push({P:[a,c],line:true,dash:[5,4],color:'#3D2A1A',d:fd+0.002});}
+      }
+      addBox(-b/2,b/2,0,colTop,-lz,0,'#A9B2B8',colPolys,false);
+    } else {
+      /* 1) hátsó (nem látható) lapok halványan — üvegtömb-hatás */
+      const back=[]; faces.forEach(fc=>{ if(!facing(fc.n)) addSoilFace(fc,0.16,back); });
+      if(!facing(topN)) addTop(0.16,back);
+      back.sort((a,b)=>a.d-b.d).forEach(p=>polys.push(Object.assign(p,{d:-1e6+p.d})));
+      /* 2) a teljes alaptest és a pillér (tömör), a tömb belsejében */
+      const zb1=strip?-Wz:zc-L/2, zb2=strip?0:zc+L/2, zp1=strip?-Wz:zc-l/2, zp2=strip?0:zc+l/2;
+      const solid=[]; addBox(-B/2,B/2,D,-(D-h),zb1,zb2,'#B5BBC0',solid,true); addBox(-b/2,b/2,(D-h),colTop,zp1,zp2,'#A9B2B8',solid,false);
+      solid.sort((a,b)=>a.d-b.d).forEach(p=>polys.push(Object.assign(p,{d:-5e5+p.d})));
+      /* alapsík vonala a tömb elülső lapján */
+      /* 3) elülső (látható) talajlapok áttetszően */
+      const frontL=[]; faces.forEach(fc=>{ if(facing(fc.n)) addSoilFace(fc,0.42,frontL); });
+      if(facing(topN)) addTop(0.30,frontL);
+      frontL.forEach(p=>polys.push(p));
+      /* tömb-élek vékonyan */
+      const E=[[[-Wx/2,0,0],[Wx/2,0,0]],[[Wx/2,0,0],[Wx/2,0,-Wz]],[[Wx/2,0,-Wz],[-Wx/2,0,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,0,0]],[[-Wx/2,0,0],[-Wx/2,-Ztot,0]],[[Wx/2,0,0],[Wx/2,-Ztot,0]],[[Wx/2,0,-Wz],[Wx/2,-Ztot,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,0],[Wx/2,-Ztot,0]],[[Wx/2,-Ztot,0],[Wx/2,-Ztot,-Wz]],[[Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,0]]];
+      E.forEach(e=>polys.push({P:e.map(p=>proj(p[0],p[1],p[2])),line:true,color:'rgba(60,40,20,.45)',thin:true,d:1e6}));
     }
-    /* --- a pillér a terep fölött (3D doboz, Z ∈ [−l/2, 0]) --- */
-    const lz=strip?Wz:l/2;
-    const boxFaces=[
-      {n:{x:0,y:0,z:1},pts:[[-b/2,colTop,0],[b/2,colTop,0],[b/2,0,0],[-b/2,0,0]]},
-      {n:{x:1,y:0,z:0},pts:[[b/2,colTop,0],[b/2,colTop,-lz],[b/2,0,-lz],[b/2,0,0]]},
-      {n:{x:-1,y:0,z:0},pts:[[-b/2,colTop,-lz],[-b/2,colTop,0],[-b/2,0,0],[-b/2,0,-lz]]},
-      {n:{x:0,y:0,z:-1},pts:[[b/2,colTop,-lz],[-b/2,colTop,-lz],[-b/2,0,-lz],[b/2,0,-lz]]},
-      {n:{x:0,y:1,z:0},pts:[[-b/2,colTop,0],[-b/2,colTop,-lz],[b/2,colTop,-lz],[b/2,colTop,0]]}
-    ];
-    const colPolys=[]; boxFaces.forEach(f=>{ if(!facing(f.n)) return; const P=f.pts.map(p=>proj(p[0],p[1],p[2])); colPolys.push({P,fill:shade('#A9B2B8',f.n),stroke:'#2E2620',d:P.reduce((a,p)=>a+p.d,0)/P.length}); });
     /* --- rajzolás hátulról előre --- */
     polys.sort((a,b)=>a.d-b.d);
-    const drawP=p=>{ ctx.beginPath(); p.P.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)); if(p.line){ctx.setLineDash(p.dash||[]);ctx.strokeStyle=p.color;ctx.lineWidth=p.dash?1.2:(p.wide?2.4:2);ctx.stroke();ctx.setLineDash([]);return;} ctx.closePath(); ctx.fillStyle=p.fill; ctx.fill(); if(p.stroke){ctx.strokeStyle=p.stroke;ctx.lineWidth=0.8;ctx.stroke();} };
+    const drawP=p=>{ ctx.beginPath(); p.P.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)); if(p.line){ctx.setLineDash(p.dash||[]);ctx.strokeStyle=p.color;ctx.lineWidth=p.dash?1.2:(p.wide?2.4:(p.thin?0.8:2));ctx.stroke();ctx.setLineDash([]);return;} ctx.closePath(); ctx.fillStyle=p.fill; ctx.fill(); if(p.stroke){ctx.strokeStyle=p.stroke;ctx.lineWidth=0.8;ctx.stroke();} };
     polys.forEach(drawP);
     colPolys.sort((a,b)=>a.d-b.d).forEach(drawP);
     /* --- teher-nyilak (képernyő-térben, a pillér tetejéhez kötve) --- */
-    const top=proj(0,colTop,-lz/2), topE=proj(0,colTop+0.85,-lz/2);
+    const top=proj(0,colTop,zcol), topE=proj(0,colTop+0.85,zcol);
     const arrow=(a,c,col,w)=>{ ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(c.x,c.y);ctx.stroke(); const ang=Math.atan2(c.y-a.y,c.x-a.x); ctx.beginPath();ctx.moveTo(c.x,c.y);ctx.lineTo(c.x-11*Math.cos(ang-0.4),c.y-11*Math.sin(ang-0.4));ctx.lineTo(c.x-11*Math.cos(ang+0.4),c.y-11*Math.sin(ang+0.4));ctx.closePath();ctx.fill(); };
     /* felirat alsó indexszel: a „_{...}" részek kisebb betűvel, lejjebb rajzolódnak (pl. γ_{sat}, c_{u}) */
     const label=(t,x,y,col,al2,bold,sz)=>{
@@ -2404,20 +2431,22 @@ const KALK = (function(){
     };
     arrow(topE,{x:top.x,y:top.y+2},'#1E63B0',4);
     label(`V_{k} = G_{k} + Q_{k} = ${F(R.Vk,0)}${R.u}`,topE.x,topE.y-7,'#1E63B0','center');
-    if(S.Qk>0&&S.eQ>0){ const qa=proj(S.eQ,colTop+0.75,-lz/2), qb=proj(S.eQ,colTop+0.02,-lz/2); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e_{Q} = ${F(S.eQ,2)} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
-    if(S.Hk>0){ const hs=proj(-b/2-1.0,colTop-0.02,-lz/2), he=proj(-b/2-0.03,colTop-0.02,-lz/2); arrow(hs,he,'#C0512A',3.5); label(`H_{k} = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
+    if(S.Qk>0&&S.eQ>0){ const qa=proj(S.eQ,colTop+0.75,zcol), qb=proj(S.eQ,colTop+0.02,zcol); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e_{Q} = ${F(S.eQ,2)} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
+    if(S.Hk>0){ const hs=proj(-b/2-1.0,colTop-0.02,zcol), he=proj(-b/2-0.03,colTop-0.02,zcol); arrow(hs,he,'#C0512A',3.5); label(`H_{k} = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
     /* --- feliratok --- */
-    if(frontVisible){
-      const pB=proj(0,-(D+Math.abs(dy))-0.28,0); label(`B = ${F(B,2)} m${strip?'':' · L = '+F(S.L,2)+' m'}`,pB.x,pB.y,'#2E2620','center');
-      const pD=proj(-B/2-0.15,-D/2,0); label(`D = ${F(D,2)} m`,pD.x,pD.y,'#2E2620','right');
-      const ph=proj(B/2+0.12,-(D-h/2),0); label(`h = ${F(h,2)} m`,ph.x,ph.y,'#2E2620');
-      if(S.alpha){ const pa=proj(B/2+0.1,-(D+dy)-0.05,0); label(`α = ${F(S.alpha,1)}°`,pa.x,pa.y,'#C0512A'); }
+    if(frontVisible||xray){
+      const zl=xray?fzF:0;
+      const pB=proj(0,-(D+Math.abs(dy))-0.28,zl); label(`B = ${F(B,2)} m${strip?'':' · L = '+F(S.L,2)+' m'}`,pB.x,pB.y,'#2E2620','center');
+      const pD=proj(-B/2-0.15,-D/2,zl); label(`D = ${F(D,2)} m`,pD.x,pD.y,'#2E2620','right');
+      const ph=proj(B/2+0.12,-(D-h/2),zl); label(`h = ${F(h,2)} m`,ph.x,ph.y,'#2E2620');
+      if(S.alpha){ const pa=proj(-B/2-0.15,-D-0.3,zl); label(`α = ${F(S.alpha,1)}°`,pa.x,pa.y,'#C0512A','right'); }
+      if(xray&&!strip){ const pL=proj(B/2+0.1,-(D-h)-0.02,zc-L/2); label(`L = ${F(S.L,2)} m`,pL.x+4,pL.y-4,'#2E2620'); }
     }
     /* rétegnevek a tömbön kívül, a látható oldal mellett */
-    const rightVis=facing({x:1,y:0,z:0}); const side=rightVis?Wx/2:-Wx/2, sideZ=-Wz/2, alg=rightVis?'left':'right', off=rightVis?10:-10;
-    bl.forEach((x,i)=>{ const y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=x.top) return; const p=proj(side,-(x.top+y2)/2,sideZ); const Ly=x.L; label(`${i+1}. ${Ly.name}`,p.x+off,p.y-9,'#3A2A1A',alg,true); label(`γ = ${F(Ly.g,1)} | γ_{sat} = ${F(Ly.gs,1)} kN/m³`,p.x+off,p.y+9,'#3A2A1A',alg,false,11); label(`φ = ${F(Ly.phi,0)}° | c = ${F(Ly.c,0)}${Ly.cu?' | c_{u} = '+F(Ly.cu,0):''} kPa`,p.x+off,p.y+22,'#3A2A1A',alg,false,11); });
-    if(gwz<Ztot){ const fv=facing({x:0,y:0,z:1}); const p=proj(-side,-gwz,fv?0:-Wz); label(`▼ MTV ${F(S.gw,1)} m`,p.x-off,p.y-4,'#1E78C8',rightVis?'right':'left',true); }
-    const ptv=facing({x:0,y:0,z:1}); const pt=proj(ptv?-Wx/2:Wx/2,0.04,ptv?0:-Wz); label('terepszint',pt.x+(ptv?-6:6),pt.y-4,'#6B5B3E',ptv?'right':'left');
+    const rightVis=true; const side=Wx/2, alg='left', off=10;
+    bl.forEach((x,i)=>{ const y2=Math.min(isFinite(x.bot)?x.bot:Ztot,Ztot); if(y2<=x.top) return; const ym=-(x.top+y2)/2; const p=[proj(Wx/2,ym,0),proj(Wx/2,ym,-Wz),proj(-Wx/2,ym,0),proj(-Wx/2,ym,-Wz)].reduce((m,q)=>q.x>m.x?q:m); const Ly=x.L; label(`${i+1}. ${Ly.name}`,p.x+off,p.y-9,'#3A2A1A',alg,true); label(`γ = ${F(Ly.g,1)} | γ_{sat} = ${F(Ly.gs,1)} kN/m³`,p.x+off,p.y+9,'#3A2A1A',alg,false,11); label(`φ = ${F(Ly.phi,0)}° | c = ${F(Ly.c,0)}${Ly.cu?' | c_{u} = '+F(Ly.cu,0):''} kPa`,p.x+off,p.y+22,'#3A2A1A',alg,false,11); });
+    if(gwz<Ztot){ const p=[proj(Wx/2,-gwz,0),proj(Wx/2,-gwz,-Wz),proj(-Wx/2,-gwz,0),proj(-Wx/2,-gwz,-Wz)].reduce((m,q)=>q.x<m.x?q:m); label(`▼ MTV ${F(S.gw,1)} m`,p.x-8,p.y-4,'#1E78C8','right',true); }
+    { const pt=[proj(Wx/2,0.04,0),proj(Wx/2,0.04,-Wz),proj(-Wx/2,0.04,0),proj(-Wx/2,0.04,-Wz)].reduce((m,q)=>q.x<m.x?q:m); label('terepszint',pt.x-8,pt.y-4,'#6B5B3E','right'); }
   }
   /* ---------- 2D metszet (SVG) ---------- */
   function svg2d(R){
