@@ -1899,7 +1899,7 @@ table.dt th{background:var(--steel-dk)}
 <div class="chapter-page" id="page-kalkulator" data-ch="kalkulator">
 
   <h1>Kalkulátor</h1>
-  <p class="lead">Egy kalkulátor a síkalap teljes ellenőrzésére: tetszőleges számú talajréteg, sáv- vagy pilléralap, központos és külpontos teher, vízszintes erő, ferde alapsík és talajvíz. A program egyszerre számítja a <b>drénezett</b> és a <b>drénezetlen</b> teherbírást, valamint az <b>elcsúszást</b>, lépésről lépésre levezetve — a modell forgatható 3D-ben, és a mintapéldák adatai egy kattintással betölthetők.</p>
+  <p class="lead">Egy kalkulátor a síkalap teljes ellenőrzésére: tetszőleges számú talajréteg, sáv- vagy pilléralap, központos és (pilléralapnál akár kétirányban) külpontos teher, vízszintes erők mindkét irányban, ferde alapsík és talajvíz. A program egyszerre számítja a <b>drénezett</b> és a <b>drénezetlen</b> teherbírást, valamint az <b>elcsúszást</b>, lépésről lépésre levezetve — a modell forgatható 3D-ben, és a mintapéldák adatai egy kattintással betölthetők.</p>
 
   <section class="subsection" id="kk-kalkulator">
     <div id="kalk-host"></div>
@@ -1908,13 +1908,35 @@ table.dt th{background:var(--steel-dk)}
   <section class="subsection" id="kk-megjegyzesek">
     <h2>Számítási konvenciók</h2>
     <div class="panel">
+      <h3 style="margin-top:0">Terhek és önsúly</h3>
       <ul class="bullet">
-        <li>A terhek karakterisztikus értékek az alaptest tetején; a tervezési értékek: V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub>. Az alaptest és a feltöltés önsúlya (bekapcsolva) állandó teherként a G<sub>k</sub>-hoz adódik — a feltöltés a nedves térfogatsúllyal, a felhajtóerő elhanyagolásával (a gyakorlati anyag szerint).</li>
-        <li>A vízszintes H<sub>k</sub> erő az alaptest tetején hat (karja az alapsíkra h), a B oldallal párhuzamosan. Az eredő külpontossága: e<sub>B</sub> = |H<sub>k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q</sub>| / V<sub>k</sub>; a dolgozó szélesség B′ = B − 2·e<sub>B</sub>, pilléralapnál L′ = L.</li>
-        <li>A teherbírást az <b>alapsík alatti réteg</b> nyírószilárdságával számoljuk, átlagolás nélkül; q′ (illetve drénezetlen esetben a teljes q) a teljes rétegsorból és a talajvízből adódik. A γ′ a t<sub>wd</sub>/B′ aránytól függ (≤ 0,5: γ<sub>sat</sub> − γ<sub>w</sub>; ≥ 1,5: γ; közte lineáris).</li>
-        <li>Pilléralapnál az alaki tényezőket és az m kitevőt a B′/L′ aránnyal számoljuk, ahol B a vízszintes erő iránya (a mintapéldák konvenciója). A teher-ferdeséget a karakterisztikus H<sub>k</sub> és V<sub>k</sub> értékekkel vesszük figyelembe.</li>
-        <li>Elcsúszásnál a talp-súrlódást csak az állandó függőleges teher (G<sub>k</sub>) adja, a kohéziót elhanyagoljuk; R<sub>d</sub> = V′<sub>k</sub>·tg δ / γ<sub>R;h</sub>. Az aktív és a földellenállás az alaptest h magasságú homlokfelületén, hatékony feszültségekkel, rétegenkénti K-val adódik (a víznyomás a két oldalon kiegyenlítődik). Drénezetlen esetben R<sub>d</sub> = A′·c<sub>u</sub>/γ<sub>R;h</sub>, és teljesülnie kell az R<sub>d</sub> ≤ 0,4·V<sub>d</sub> korlátnak.</li>
-        <li>Ha e<sub>B</sub> &gt; B/3, a dolgozó keresztmetszet modellje már nem érvényes — a program figyelmeztet, ilyenkor az alaptest méretét vagy a terhek elrendezését kell módosítani.</li>
+        <li>A terhek <b>karakterisztikus</b> értékek az alaptest tetején: G<sub>k</sub> állandó és Q<sub>k</sub> esetleges függőleges teher, H<sub>B,k</sub> vízszintes erő a B oldallal, H<sub>L,k</sub> az L oldallal párhuzamosan (ez utóbbi csak pilléralapnál). A H jellege választható: állandó (γ<sub>G</sub>) vagy esetleges (γ<sub>Q</sub>) — mindkét összetevőre ugyanaz. Sávalapnál minden érték 1 m hosszú szakaszra, kN/m-ben értendő.</li>
+        <li>Bekapcsolt önsúly esetén az alaptest (G<sub>b,k</sub> = B·L·h·γ<sub>b</sub>, γ<sub>b</sub> = 25 kN/m³) és a felette lévő feltöltés (G<sub>f,k</sub> = (B·L − b·l)·Σγ<sub>i</sub>·t<sub>i</sub> a D − h vastagságban, a nedves térfogatsúllyal, a felhajtóerő elhanyagolásával) állandó teherként a G<sub>k</sub>-hoz adódik — a gyakorlati anyag szerint.</li>
+        <li>Tervezési értékek: V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub>; a vízszintes teher az eredővel: H<sub>d</sub> = γ<sub>H</sub>·√(H<sub>B,k</sub>² + H<sub>L,k</sub>²). Alapértékek: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,5, γ<sub>R</sub> = 1,4 (talajtörés), γ<sub>R;h</sub> = 1,1 (elcsúszás) — mind átírható.</li>
+      </ul>
+      <h3>Külpontosság — két irányban</h3>
+      <ul class="bullet">
+        <li>A vízszintes erők az alaptest tetején hatnak (karjuk az alapsíkra h), a Q<sub>k</sub> pedig e<sub>Q</sub> (B irány) és e<sub>Q,L</sub> (L irány) külpontossággal. A nyomatéki egyenletből irányonként: e<sub>B</sub> = |H<sub>B,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q</sub>| / V<sub>k</sub> és e<sub>L</sub> = |H<sub>L,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q,L</sub>| / V<sub>k</sub>, ahol V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub>; a ∓ előjelet a kapcsoló dönti el (ellentétes vagy azonos irányú nyomatékok).</li>
+        <li>Dolgozó keresztmetszet: B′ = B − 2·e<sub>B</sub>, L′ = L − 2·e<sub>L</sub>, A′ = B′·L′. Sávalapnál L′ = 1 m és e<sub>L</sub> = 0. Ha e<sub>B</sub> &gt; B/3 vagy e<sub>L</sub> &gt; L/3, a dolgozó keresztmetszet modellje már nem érvényes — a program figyelmeztet, ilyenkor az alaptest méretét vagy a terhek elrendezését kell módosítani.</li>
+      </ul>
+      <h3>Teherbírás (GEO)</h3>
+      <ul class="bullet">
+        <li>A teherbírást az <b>alapsík alatti réteg</b> nyírószilárdságával (φ, c, illetve c<sub>u</sub>) számoljuk, átlagolás nélkül. A q′ hatékony geosztatikus nyomás (drénezetlen esetben a teljes q) a teljes rétegsorból és a talajvízből adódik: a víz felett γ, alatta γ<sub>sat</sub> − γ<sub>w</sub> (teljes feszültségnél γ<sub>sat</sub>). A γ′ a t<sub>wd</sub>/B′ aránytól függ: ≤ 0,5 → γ<sub>sat</sub> − γ<sub>w</sub>; ≥ 1,5 → γ; közte lineáris átmenet.</li>
+        <li>Teherbírási tényezők: N<sub>q</sub> = e<sup>π·tgφ</sup>·tg²(45° + φ/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·ctgφ, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tgφ. Alaki tényezők pilléralapnál a B′/L′ aránnyal (s<sub>γ</sub> = 1 − 0,3·B′/L′, s<sub>q</sub> = 1 + (B′/L′)·sinφ, s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)), ahol B a H<sub>B</sub> iránya — a mintapéldák konvenciója; sávalapnál s = 1.</li>
+        <li>Teher-ferdeség a <b>H eredőjével</b>, karakterisztikus értékekkel: f = H/(V<sub>k</sub> + A′·c·ctgφ). A kitevő a H irányától függ (EC7 D melléklet): m<sub>B</sub> = (2 + B′/L′)/(1 + B′/L′), m<sub>L</sub> = (2 + L′/B′)/(1 + L′/B′), m = m<sub>L</sub>·cos²θ + m<sub>B</sub>·sin²θ, ahol cosθ = H<sub>L</sub>/H, sinθ = H<sub>B</sub>/H (sávalapnál m = 2). i<sub>γ</sub> = (1 − f)<sup>m+1</sup>, i<sub>q</sub> = (1 − f)<sup>m</sup>, i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1).</li>
+        <li>Alapsík-dőlés (α): b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tgφ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tgφ), α radiánban.</li>
+        <li>Drénezett: R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>. Drénezetlen (ha a talp alatti rétegnek van c<sub>u</sub>-ja): σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q, ahol s<sub>c</sub> = 1 + 0,2·B′/L′, b<sub>c</sub> = 1 − 2α/(π + 2), i<sub>c</sub> = 0,5·[1 + √(1 − H/(A′·c<sub>u</sub>))]; R<sub>d</sub> = σ<sub>t</sub>·A′/γ<sub>R</sub>. Megfelel, ha V<sub>d</sub> ≤ R<sub>d</sub>.</li>
+      </ul>
+      <h3>Elcsúszás (EQU)</h3>
+      <ul class="bullet">
+        <li>Az aktív földnyomás az alaptest h magasságú, L szélességű (sávalapnál 1 m) homlokfelületén, hatékony feszültségekkel, rétegenként K<sub>a</sub> = tg²(45° − φ/2) tényezővel adódik (a víznyomás a két oldalon kiegyenlítődik). Bekapcsolva állandó teherként H<sub>d</sub>-hez adódik: H<sub>d</sub> = γ<sub>H</sub>·H + γ<sub>G</sub>·E<sub>a,k</sub>, ahol H a vízszintes erők eredője — a földnyomást a biztonság javára teljes értékkel, iránytól függetlenül vesszük figyelembe.</li>
+        <li>Talp-súrlódást csak az állandó függőleges teher ad (V′<sub>k</sub> = G<sub>k</sub> az önsúllyal együtt), a kohéziót elhanyagoljuk: R<sub>d</sub> = V′<sub>k</sub>·tgδ / γ<sub>R;h</sub>, δ = φ (monolit) vagy ⅔·φ (előregyártott), a talp alatti réteg φ-jével.</li>
+        <li>Földellenállás az ellenálló oldalon választhatóan nincs, nyugalmi (K<sub>0</sub> = 1 − sinφ) vagy passzív (K<sub>p</sub> = tg²(45° + φ/2)), ugyanazon a homlokfelületen; R<sub>p;d</sub> = η·E<sub>k</sub>/γ<sub>R;h</sub>, ahol η a mobilizált hányad (a teljes passzív ellenállás csak nagy elmozdulásra mobilizálódik). Megfelel, ha H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.</li>
+        <li>Drénezetlen alternatíva: R<sub>d</sub> = A′·c<sub>u</sub>/γ<sub>R;h</sub>, és teljesülnie kell az R<sub>d</sub> ≤ 0,4·V<sub>d</sub> korlátnak — a program a kisebbet veszi figyelembe.</li>
+      </ul>
+      <h3>A 3D modell</h3>
+      <ul class="bullet">
+        <li>A talajtömb áttetsző, benne az alaptest és a fal/pillér tömör. Sávalapnál a fal és az alaptest a hossz mentén folytatódik, a számítás az 1 m hosszú kiemelt szakaszra vonatkozik. A nyilak a karakterisztikus terheket mutatják (V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub> a felszerkezetből és az önsúlyból, Q a külpontosságával, H<sub>B,k</sub> és H<sub>L,k</sub>), a feliratok a rétegek paramétereit és a mértékadó talajvizet.</li>
       </ul>
     </div>
   </section>
