@@ -271,6 +271,16 @@ table.dt th{background:var(--steel-dk)}
 .kst b{color:var(--rebar-dk);margin-right:4px}
 .kwarn{color:var(--rebar-dk);font-size:.84rem}
 @media print{.brandbar,.chaptertabs,.subnav,.kside,.kvt,.khint,.toplink,.foot{display:none!important}.chapter-page{display:block!important}.kwrap{grid-template-columns:1fr}.kcanvas{height:360px}}
+
+/* sorkizárt szövegek, nem törő képletek */
+main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:8 4 3}
+.hero p,.kside p,.kside li,.ktile *,.calc-row label,.res-row *,.cr *{text-align:left}
+.nowrap{white-space:nowrap}
+.kmth{padding:9px 14px;background:var(--steel-dk);color:#fff;display:flex;gap:4px 14px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.15)}
+.kmth b{font-family:'Fraunces',Georgia,serif;font-size:1.25rem;letter-spacing:.03em}
+.kmth small{font-size:.8rem;opacity:.9;font-weight:500}
+.kmth .ok{color:#CFE9BF;font-weight:700}
+.kmth .bad{color:#F6C2A6;font-weight:700}
 </style>
 </head>
 <body>
@@ -1934,9 +1944,11 @@ table.dt th{background:var(--steel-dk)}
         <li>Földellenállás az ellenálló oldalon választhatóan nincs, nyugalmi (K<sub>0</sub> = 1 − sinφ) vagy passzív (K<sub>p</sub> = tg²(45° + φ/2)), ugyanazon a homlokfelületen; R<sub>p;d</sub> = η·E<sub>k</sub>/γ<sub>R;h</sub>, ahol η a mobilizált hányad (a teljes passzív ellenállás csak nagy elmozdulásra mobilizálódik). Megfelel, ha H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.</li>
         <li>Drénezetlen alternatíva: R<sub>d</sub> = A′·c<sub>u</sub>/γ<sub>R;h</sub>, és teljesülnie kell az R<sub>d</sub> ≤ 0,4·V<sub>d</sub> korlátnak — a program a kisebbet veszi figyelembe.</li>
       </ul>
-      <h3>A 3D modell</h3>
+      <h3>A 3D modell és a 2D metszet</h3>
       <ul class="bullet">
         <li>A talajtömb áttetsző, benne az alaptest és a fal/pillér tömör. Sávalapnál a fal és az alaptest a hossz mentén folytatódik, a számítás az 1 m hosszú kiemelt szakaszra vonatkozik. A nyilak a karakterisztikus terheket mutatják (V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub> a felszerkezetből és az önsúlyból, Q a külpontosságával, H<sub>B,k</sub> és H<sub>L,k</sub>), a feliratok a rétegek paramétereit és a mértékadó talajvizet.</li>
+        <li>A <b>2D metszet</b> gomb ugyanazt az állapotot mutatja függőleges metszetben: rétegek, talajvíz, alaptest, dolgozó szélesség (B′), terhek; a 3D-modell forgatható, a 2D-metszet azonnal leolvasható.</li>
+        <li>Az ábrák fölötti <b>nagybetűs sáv</b> mindig kiírja, melyik ellenőrzés levezetése van megnyitva (teherbírás drénezett, drénezetlen, elcsúszás), mi az eredménye és a kihasználtság.</li>
       </ul>
     </div>
   </section>
@@ -2199,9 +2211,11 @@ const KALK = (function(){
       </aside>
       <div class="kmain">
         <div class="kview">
-          <div class="kvt"><span class="kt on">3D modell</span>
+          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D modell</button><button type="button" class="kt" data-v="2d">2D metszet</button>
             <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn" id="k-spin" title="Automatikus forgatás">▶ forgatás</button></div>
-          <div class="kcanvas"><canvas id="k-c3d"></canvas><div class="khint">húzd az egérrel / ujjaddal a forgatáshoz · görgetés = nagyítás</div></div>
+          <div class="kmth" id="k-mth"></div>
+          <div class="kcanvas" id="k-cwrap"><canvas id="k-c3d"></canvas><div class="khint">húzd az egérrel / ujjaddal a forgatáshoz · görgetés = nagyítás</div></div>
+          <div class="k2d" id="k-svg" style="display:none"></div>
           <div class="kcap" id="k-cap"></div>
         </div>
         <div class="ktiles" id="k-tiles"></div>
@@ -2223,7 +2237,8 @@ const KALK = (function(){
     $('reset').addEventListener('click',()=>{S.eQL=0;S.HL=0;Object.assign(S,JSON.parse(JSON.stringify(PRESETS.alap.s)));$('preset').value='';sync();onChange();});
     $('addlay').addEventListener('click',()=>{const n=S.layers.length;const last=S.layers[n-1];S.layers.splice(n-1,0,{name:(n)+'. réteg',t:1,g:last.g,gs:last.gs,phi:last.phi,c:last.c,cu:last.cu});renderLayers();onChange();});
     $('soil').addEventListener('change',()=>{const k=$('soil').value;if(!k)return;const s=SOILS[k];const n=S.layers.length;S.layers.splice(n-1,0,{name:s.n,t:1,g:s.g,gs:s.gs,phi:s.phi,c:s.c,cu:s.cu});$('soil').value='';renderLayers();onChange();});
-    host.querySelectorAll('.kt[data-d]').forEach(bt=>bt.addEventListener('click',()=>{S.detail=bt.dataset.d;host.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x===bt));renderSteps(compute());}));
+    host.querySelectorAll('.kt[data-d]').forEach(bt=>bt.addEventListener('click',()=>{S.detail=bt.dataset.d;host.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x===bt));const R=compute();renderSteps(R);renderMth(R);}));
+    host.querySelectorAll('.kt[data-v]').forEach(bt=>bt.addEventListener('click',()=>{S.view=bt.dataset.v;host.querySelectorAll('.kt[data-v]').forEach(x=>x.classList.toggle('on',x===bt));$('cwrap').style.display=S.view==='3d'?'':'none';$('svg').style.display=S.view==='2d'?'':'none';$('vreset').style.display=$('spin').style.display=S.view==='3d'?'':'none';onChange();}));
     $('vreset').addEventListener('click',()=>{V3.az=-0.5;V3.el=0.36;V3.zoom=1.15;draw();});
     $('spin').addEventListener('click',()=>{V3.spin=!V3.spin;$('spin').classList.toggle('on',V3.spin);if(V3.spin)spinLoop();});
 
@@ -2267,8 +2282,20 @@ const KALK = (function(){
     $('gw').disabled=$('gw-r').disabled=S.gwDeep;
     $('mob').disabled=$('mob-r').disabled=(S.pass==='none');
     const R=compute();
-    renderTiles(R); renderSteps(R); draw(R);
+    renderTiles(R); renderSteps(R); renderMth(R); draw(R);
+    if(S.view==='2d') $('svg').innerHTML=svg2d(R);
+    if(window.huTypo) window.huTypo(document.getElementById('kalk-host'));
   }
+  /* nagybetűs felirat az ábra fölött: melyik ellenőrzést mutatja a levezetés, és mi az eredménye */
+  function renderMth(R){
+    const u=R.u, geo=R.strip?'sávalap':'pilléralap';
+    let bg,t,sub;
+    if(S.detail==='dr'){ bg='#6E4E2E'; t='TEHERBÍRÁS — DRÉNEZETT ESET'; sub=`${geo} · ${sub2('R','d')} = ${F(R.Rd,0)}${u} ${R.okDr?'≥':'&lt;'} ${sub2('V','d')} = ${F(R.Vd,0)}${u} · <span class="${R.okDr?'ok':'bad'}">${R.okDr?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span> · kihasználtság ${F(R.utilDr,0)} %`; }
+    else if(S.detail==='ud'){ bg='#2E7D8A'; t='TEHERBÍRÁS — DRÉNEZETLEN ESET'; sub=R.hasCu?`${geo} · ${sub2('R','d')} = ${F(R.RdU,0)}${u} ${R.okUd?'≥':'&lt;'} ${sub2('V','d')} = ${F(R.Vd,0)}${u} · <span class="${R.okUd?'ok':'bad'}">${R.okUd?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span> · kihasználtság ${F(R.utilUd,0)} %`:`${geo} · az alapsík alatti rétegnek nincs c<sub>u</sub>-ja, a drénezetlen ellenőrzés nem értelmezhető`; }
+    else { bg='#5C7A52'; t='ELCSÚSZÁS-VIZSGÁLAT (EQU)'; sub=`${geo} · ${sub2('R','d')} + ${sub2('R','p;d')} = ${F(R.RsumS,0)}${u} ${R.okSl?'≥':'&lt;'} ${sub2('H','d')} = ${F(R.HdS,0)}${u} · <span class="${R.okSl?'ok':'bad'}">${R.okSl?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span> · kihasználtság ${F(R.utilSl,0)} %`; }
+    const el=$('mth'); if(el){ el.style.background=bg; el.innerHTML='<b>'+t+'</b><small>'+sub+'</small>'; }
+  }
+  const sub2=(b,x)=>`${b}<sub>${x}</sub>`;
   const tile=(lab,val,cls,sub2)=>`<div class="ktile ${cls||''}"><span class="kl">${lab}</span><span class="kv">${val}</span>${sub2?`<span class="ks2">${sub2}</span>`:''}</div>`;
   function verdictTile(lab,ok,util,valid){ if(valid===false) return tile(lab,'—','muted','nincs c<sub>u</sub> megadva'); return tile(lab,(ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'),ok?'ok':'bad',`kihasználtság ${F(util,0)} %`); }
   function renderTiles(R){
@@ -2346,7 +2373,7 @@ const KALK = (function(){
   function draw(R){
     R=R||lastR||compute(); lastR=R;
     { const cap=$('cap'); if(cap) cap.innerHTML=R.strip?'<b>Sávalap (L ≫ B):</b> a fal és az alaptest a hossz mentén folytatódik — a számítás egy <b>1 m hosszú szakaszra</b> vonatkozik (a modellen tömören kiemelve), ezért a terhek és az ellenállások <b>kN/m</b>-ben szerepelnek.':'<b>Pilléralap (B × L):</b> a teljes alaptest és a pillér látszik; a terhek és az ellenállások az egész alaptestre, <b>kN</b>-ban szerepelnek.'; }
-    if(!CV||CV.hidden) return;
+    if(S.view!=='3d'||!CV) return;
     const box=CV.parentElement.getBoundingClientRect(); const dpr=window.devicePixelRatio||1;
     const W=Math.max(300,box.width), H=Math.max(260,box.height);
     if(CV.width!==Math.round(W*dpr)||CV.height!==Math.round(H*dpr)){CV.width=Math.round(W*dpr);CV.height=Math.round(H*dpr);}
@@ -2528,7 +2555,7 @@ const KALK = (function(){
 
 /* ===================== MINTAPÉLDA MINI-KALKULÁTOROK ===================== */
 const num=id=>{const e=document.getElementById(id);return e?(parseFloat(e.value)||0):0;};
-function bindCalc(p,fn){document.querySelectorAll('#calc-'+p+' input').forEach(el=>{el.addEventListener('input',fn);el.addEventListener('change',fn);});}
+function bindCalc(p,fn){const f=()=>{fn();if(window.huTypo){const c=document.getElementById('calc-'+p);if(c)window.huTypo(c);}};document.querySelectorAll('#calc-'+p+' input').forEach(el=>{el.addEventListener('input',f);el.addEventListener('change',f);});}
 function rr(l,v,sub){return `<div class="res-row${sub?' subtle':''}"><span>${l}</span><span class="val">${v}</span></div>`;}
 function vbox(ok,rd,vd,u){return `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'MEGFELEL ✓':'NEM FELEL MEG ✗'}</span>R<sub>d</sub> = ${rd}${u} ${ok?'≥':'&lt;'} V<sub>d</sub> = ${vd}${u}</div>`;}
 
@@ -2741,7 +2768,7 @@ h1,h2,h3,h4{text-wrap:balance}
 /* Magyar tipográfia — automatikus sortörés-szabályok */
 (function(){
   "use strict";
-  var NBSP=' ', WJ='⁠';
+  var NBSP='\u00a0', WJ='\u2060';
   function math(s){return s.replace(/ (?=[=+−·×<>])/g,NBSP).replace(/([=+−·×<>]) /g,'$1'+NBSP);}
   function units(s){return s.replace(/(\d) (?=(?:kPa|MPa|GPa|kN\/m³|kN\/m²|kN|m³|m²|m\/s|cm|mm|km|kg|°C|°|%|m|t|óra|nap|hét|hónap|év)(?:[\s.,;:!?)\]–—]|$))/g,'$1'+NBSP);}
   function shortWords(s){return s.replace(/(^|[\s(„"'»–—])(a|az|s|e|é|és|is)(?: )(?=\S)/gi,'$1$2'+NBSP);}
@@ -2769,6 +2796,7 @@ h1,h2,h3,h4{text-wrap:balance}
     for(var i=0;i<arr.length-1;i++){var v=arr[i].nodeValue;if(SHORT.test(v)){var nv=arr[i+1].nodeValue;if(/^[^\s]/.test(nv))arr[i].nodeValue=v.replace(/ $/,NBSP);else if(/^ /.test(nv)){arr[i].nodeValue=v.replace(/ $/,NBSP);arr[i+1].nodeValue=nv.replace(/^ +/,'');}}}
   }
   function run(){if(!document.body)return;walk(document.body);across(document.body);}
+  window.huTypo=function(root){if(root){walk(root);across(root);}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
 </script>
