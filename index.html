@@ -277,14 +277,19 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 .hero p,.kside p,.kside li,.ktile *,.calc-row label,.res-row *,.cr *{text-align:left}
 .nowrap{white-space:nowrap}
 .kchecks{display:flex;flex-direction:column;gap:8px;margin:14px 0}
-.kchk{display:grid;grid-template-columns:minmax(140px,.9fr) minmax(280px,2.6fr) auto minmax(150px,1fr);gap:8px 16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--steel);border-radius:12px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow)}
+.kchk{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;min-width:0;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--steel);border-radius:12px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow)}
+.kchk>div{min-width:0}
+.kchk .knm{flex:0 0 150px}
+.kchk .kf2{flex:1 1 240px}
+.kchk .kvd{flex:0 0 auto}
+.kchk .kut{flex:1 1 150px;max-width:280px}
 .kchk.ok{border-left-color:var(--moss)}
 .kchk.bad{border-left-color:var(--rebar)}
 .kchk.muted{opacity:.7}
 .kchk.on{outline:2px solid var(--rebar-dk);outline-offset:-1px}
 .kchk .kg2{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-mute)}
 .kchk .kn{display:block;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.08rem;color:var(--steel-dk)}
-.kchk .kf2{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--steel-dk);white-space:nowrap}
+.kchk .kf2{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--steel-dk);overflow-wrap:anywhere}
 .kchk .kvd{font-weight:700;padding:5px 12px;border-radius:8px;white-space:nowrap;text-align:center}
 .kchk.ok .kvd{background:#D6E5CE;color:#2E4A1F}
 .kchk.bad .kvd{background:#EFC9B5;color:#6B2F12}
@@ -294,7 +299,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 .kchk .kbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:4px}
 .kchk .kbar i{display:block;height:100%;background:var(--moss)}
 .kchk.bad .kbar i{background:var(--rebar)}
-@media(max-width:760px){.kchk{grid-template-columns:1fr 1fr}.kchk .kf2{grid-column:1/-1;white-space:normal}}
+@media(max-width:760px){.kchk .knm{flex:1 1 100%}.kchk .kf2{flex:1 1 100%}.kchk .kut{max-width:none}}
 </style>
 </head>
 <body>
@@ -2309,7 +2314,7 @@ const KALK = (function(){
       const cls=valid===false?'muted':(ok?'ok':'bad');
       const w=valid===false?0:Math.min(100,Math.max(0,util));
       return `<div class="kchk ${cls} ${S.detail===key?'on':''}" data-d="${key}" title="a levezetés megnyitása">
-        <div><span class="kg2">${grp}</span><span class="kn">${name}</span></div>
+        <div class="knm"><span class="kg2">${grp}</span><span class="kn">${name}</span></div>
         <div class="kf2">${valid===false?'az alapsík alatti rétegnek nincs c<sub>u</sub>-ja':`${lhs} ${rel} ${rhs}`}</div>
         <div class="kvd">${valid===false?'—':(ok?'MEGFELEL ✓':'NEM FELEL MEG ✗')}</div>
         <div class="kut"><span>kihasználtság <b>${valid===false?'—':F(util,0)+' %'}</b></span><div class="kbar"><i style="width:${w}%"></i></div></div></div>`;
