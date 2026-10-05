@@ -2368,6 +2368,7 @@ const KALK = (function(){
     CV.addEventListener('touchstart',e=>{if(e.touches.length===2){pinch={d:Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY),z:V3.zoom};}},{passive:true});
     CV.addEventListener('touchmove',e=>{if(pinch&&e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);V3.zoom=clamp(pinch.z*d/pinch.d,0.5,2.6);e.preventDefault();draw();}},{passive:false});
     CV.addEventListener('touchend',()=>{pinch=null;});
+    if(window.ResizeObserver){ new ResizeObserver(()=>draw()).observe(CV.parentElement); }
   }
   function spinLoop(){ if(!V3.spin) return; V3.az+=0.006; draw(); requestAnimationFrame(spinLoop); }
   function draw(R){
@@ -2375,7 +2376,8 @@ const KALK = (function(){
     { const cap=$('cap'); if(cap) cap.innerHTML=R.strip?'<b>Sávalap (L ≫ B):</b> a fal és az alaptest a hossz mentén folytatódik — a számítás egy <b>1 m hosszú szakaszra</b> vonatkozik (a modellen tömören kiemelve), ezért a terhek és az ellenállások <b>kN/m</b>-ben szerepelnek.':'<b>Pilléralap (B × L):</b> a teljes alaptest és a pillér látszik; a terhek és az ellenállások az egész alaptestre, <b>kN</b>-ban szerepelnek.'; }
     if(S.view!=='3d'||!CV) return;
     const box=CV.parentElement.getBoundingClientRect(); const dpr=window.devicePixelRatio||1;
-    const W=Math.max(300,box.width), H=Math.max(260,box.height);
+    if(box.width<10||box.height<10) return;                /* rejtett fül: nem rajzolunk, a láthatóvá váláskor a ResizeObserver újrarajzol */
+    const W=box.width, H=box.height;
     if(CV.width!==Math.round(W*dpr)||CV.height!==Math.round(H*dpr)){CV.width=Math.round(W*dpr);CV.height=Math.round(H*dpr);}
     const ctx=CX; ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
     /* jelenet (m): X = B irány, Y = felfelé, Z = előre (a metszősík Z = 0, a tömb Z ≤ 0) */
@@ -2550,7 +2552,7 @@ const KALK = (function(){
     if(S.alpha) g+=`<text x="${cx-Bw/2-6}" y="${yB-dy+4}" font-size="11" font-weight="700" fill="#C0512A" text-anchor="end">α = ${F(S.alpha,1)}°</text>`;
     return `<svg viewBox="0 0 ${W} ${Hh}" xmlns="http://www.w3.org/2000/svg" font-family="Inter,system-ui,sans-serif" role="img" style="width:100%;height:auto;display:block">${g}</svg>`;
   }
-  return {build, S, compute, PRESETS};
+  return {build, S, compute, PRESETS, redraw:()=>draw()};
 })();
 
 /* ===================== MINTAPÉLDA MINI-KALKULÁTOROK ===================== */
@@ -2751,7 +2753,7 @@ function calcMP11(){
 const initCh=(location.hash||'#bevezetes').slice(1);
 setChapter(CHAPTERS.find(c=>c.id===initCh)?initCh:'bevezetes');
 KALK.build(document.getElementById('kalk-host'));
-function openPreset(k){ setChapter('kalkulator'); const p=document.getElementById('k-preset'); p.value=k; p.dispatchEvent(new Event('change')); }
+function openPreset(k){ setChapter('kalkulator'); if(window.KALK&&KALK.redraw) KALK.redraw(); const p=document.getElementById('k-preset'); p.value=k; p.dispatchEvent(new Event('change')); }
 /* vissza a tetejére */
 (function(){ const b=document.createElement('button'); b.className='toplink'; b.type='button'; b.title='Vissza a tetejére'; b.textContent='↑'; b.onclick=()=>window.scrollTo({top:0,behavior:'smooth'}); document.body.appendChild(b); window.addEventListener('scroll',()=>b.classList.toggle('show',window.scrollY>600),{passive:true}); })();
 /* aktív alfejezet-jelölés görgetéskor */
