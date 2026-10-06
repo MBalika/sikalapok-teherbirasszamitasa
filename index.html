@@ -858,7 +858,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <section class="subsection" id="kt-3">
     <h2>3. Teherferdeség: miért csökken a teherbírás?</h2>
-    <p>Ha az eredő erő nem merőleges az alapsíkra, a vízszintes összetevő <b>a talajt a H irányába tolja</b>: a mechanizmus <b>egyoldalúvá és laposabbá</b> válik, a csúszólap kisebb, sekélyebb talajtestet mozgat meg, és a súrlódási szög egy részét már az alapsík menti nyírás „elhasználja”. Kevesebb talaj tart ellen → kisebb teherbírás. Ezt fejezik ki az <b>i tényezők</b>, amelyek mind 1-nél kisebbek, és a H/V arány növekedésével gyorsan csökkennek. Ha δ eléri φ-t, már nem talajtörés, hanem <b>elcsúszás</b> következik be — ez az EQU-vizsgálat feladata.</p>
+    <p>Ha az eredő erő nem merőleges az alapsíkra, a vízszintes összetevő <b>a talajt a H irányába tolja</b>: a mechanizmus <b>egyoldalúvá és laposabbá</b> válik, a csúszólap kisebb, sekélyebb talajtestet mozgat meg, és a súrlódási szög egy részét már az alapsík menti nyírás „elhasználja”. Kevesebb talaj tart ellen → kisebb teherbírás. Ezt fejezik ki az <b>i tényezők</b>, amelyek mind 1-nél kisebbek, és a H/V arány növekedésével gyorsan csökkennek. Ha δ elérné φ-t, már nem talajtörés, hanem <b>elcsúszás</b> következne be — ez az EQU-vizsgálat feladata; ezért a csúszka legfeljebb 0,9·tg φ-ig engedi a H/V arányt, hogy mindig a talajtörés mechanizmusát lásd.</p>
     <div class="panel">
       <div class="dfbar"><button type="button" class="kbtn" id="kp-play3">⏸ Szünet</button><span class="ksp"></span><button type="button" class="kbtn" id="kp-vr3" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="kp-spin3">▶ forgatás</button></div>
       <div class="dfwrap">
@@ -2251,7 +2251,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <h3>„A képlet tagjai" fejezet 3D modelljei</h3>
       <ul class="bullet">
         <li>Törési mechanizmus: Prandtl-féle test sávalapra — aktív ék 45° + φ/2 szöggel, logaritmikus spirál r = r<sub>0</sub>·e<sup>θ·tg φ</sup> az alaptest széle körül π/2 szögelfordulással, passzív Rankine-ék 45° − φ/2 szöggel az alapsíkig; a test mérete és mélysége csak φ-től és B-től függ. A mozgás (alap süllyedése, a zónák elmozdulása, a felszín kidudorodása) szemléltető, nagyított animáció.</li>
-        <li>A három tag és minden tényező a kalkulátor képleteivel számolt: 0,5·γ·B·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub>, q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub>, c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; az alaki felfedezőben D = 0,5 m, a ferdeségiben D = 0,8 m, a mélységiben B = 2 m rögzített. A ferde teher mechanizmusa a H irányában egyoldalú, φ − 0,9·δ szöggel és az aktív ék eltolásával rajzolva (szemléltetés), az i tényezők pontosak; δ ≥ φ-nél a modell elcsúszást jelez.</li>
+        <li>A három tag és minden tényező a kalkulátor képleteivel számolt: 0,5·γ·B·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub>, q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub>, c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; az alaki felfedezőben D = 0,5 m, a ferdeségiben D = 0,8 m, a mélységiben B = 2 m rögzített. A ferde teher mechanizmusa a H irányában egyoldalú, φ − 0,9·δ szöggel és az aktív ék eltolásával rajzolva (szemléltetés), az i tényezők pontosak; a H/V arány legfeljebb 0,9·tg φ lehet (a csúszka φ-vel együtt szűkül), így mindig a talajtörés csúszólapja látszik.</li>
         <li>A pilléralap véglapjainak aránya az alapterülethez közelítő (2·A<sub>keresztmetszet</sub>/(B·L)); az alaki tényezők az EC7 D-melléklete szerintiek, φ = 0-nál s<sub>c</sub> = 1 + 0,2·B/L.</li>
         <li>Pórusvíznyomás: a teher minden növekménye először a pórusvízbe kerül (telített talaj, Δu = Δσ), és a talajra jellemző T<sub>c</sub> időállandóval szivárog el (dΔu/dt = dq/dt − Δu/T<sub>c</sub>); T<sub>c</sub> = 2 év agyagnál, 1 hónap iszapnál, fél nap homoknál. A hatékony feszültség többlete Δσ′ = q − Δu. Ez a valódi konszolidációnál egyszerűbb, elsőrendű közelítés.</li>
         <li>Drénezetlen szilárdság: c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′ (a konszolidációval növekvő szilárdság; agyag c<sub>u,0</sub> = 30 kPa, α = 0,25; iszap 45 kPa, 0,30). Drénezetlen teherbírás sávalapra: (2 + π)·c<sub>u</sub> + γ<sub>sat</sub>·D; drénezett: c′·N<sub>c</sub> + γ′·D·N<sub>q</sub> + 0,5·γ′·B·N<sub>γ</sub> (alaki, ferdeségi tényezők nélkül). A mértékadó a kettő közül a kisebb; homoknál csak a drénezett értelmezett.</li>
@@ -3575,7 +3575,7 @@ const KPL=(function(){
   const S3={phi:30,c:0,g:18,B:2,V:400,HV:0.25,tau:0,play:true,ph:0};
   const r3=R3($('cv3'));
   function draw3(){
-    const B=S3.B, D=0.8, delta=Math.atan(S3.HV)/rad; const phiE=Math.max(2,S3.phi-delta*0.9); const slid=S3.HV>=Math.tan(S3.phi*rad)*0.98;
+    const B=S3.B, D=0.8, delta=Math.atan(S3.HV)/rad; const phiE=Math.max(2,S3.phi-delta*0.9); const slid=false;
     const P0=prandtl(S3.phi,B), P=prandtl(phiE,B,Math.min(0.75,delta/Math.max(S3.phi,1)));
     const Wx=Math.max(2.4*P0.G.x+2,7), Wz=Math.max(1.2*B+3,4); const Ztot=D+Math.max(1.35*P0.ymax,2.2);
     r3.begin({Wx,Wz,yTop:2.8,yBot:-Ztot,hudW:250});
@@ -3594,7 +3594,7 @@ const KPL=(function(){
     const rl=1.3; r3.line([[sinkx-rl*Math.sin(Math.atan(S3.HV)),1.05+rl*Math.cos(Math.atan(S3.HV)),zc],[sinkx-0.02,1.05,zc]],'#2E2620',{w:2,arrow:true,ah:8,d:1e7,dash:[5,3]});
     blk.after();
     r3.label3('δ = '+F(delta,0)+'°',[sinkx-rl*Math.sin(Math.atan(S3.HV)),1.05+rl*Math.cos(Math.atan(S3.HV)),zc],-6,-10,'#2E2620','right',true,11);
-    { const base=r3.ctx.canvas.height-34; r3.label(slid?'δ ≥ φ: az alap elcsúszik, nincs talajtörés':'folytonos: egyoldalú, laposabb csúszólap a H irányában',8,base,'#1F5F68','left',true,11); r3.label('szaggatott: a függőleges teher mechanizmusa',8,base+16,'#6B6052','left',false,10.5); }
+    { const base=r3.ctx.canvas.height-34; r3.label('folytonos: egyoldalú, laposabb csúszólap a H irányában',8,base,'#1F5F68','left',true,11); r3.label('szaggatott: a függőleges teher mechanizmusa',8,base+16,'#6B6052','left',false,10.5); }
     r3.flush();
     const T=terms({phi:S3.phi,c:S3.c,g:S3.g,B,L:Infinity,D,V:S3.V,HV:S3.HV}), T0=terms({phi:S3.phi,c:S3.c,g:S3.g,B,L:Infinity,D});
     const h=r3.hud(r3.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
@@ -3604,9 +3604,9 @@ const KPL=(function(){
     let y=62; c.font='700 12px Inter'; c.fillStyle='#2E2620'; c.fillText('Teherferdeségi tényezők',bx,y); y+=8;
     fac.forEach(([nm,v,col,fm])=>{ const w=h.w-28; c.fillStyle='#EFE9DF'; c.fillRect(bx,y+4,w,12); c.fillStyle=col; c.fillRect(bx,y+4,w*Math.min(1,v),12); c.fillStyle='#2E2620'; c.font='700 11px Inter'; c.fillText(nm+' = '+F(v,3),bx,y+30); c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText(fm,bx+88,y+30); y+=40; });
     y=r3.bars(h,T3(T),y+6,{title:'A három tag i-vel [kPa]',bh:70,max:Math.max(T0.g,T0.qT,T0.c)});
-    c.font='10.5px Inter'; c.fillStyle=slid?'#B81E12':'#2E2620'; c.fillText(slid?'elcsúszás: H/V ≥ tg φ — ellenőrizd az EQU-t':'függőlegesen: '+F(T0.sum,0)+' kPa → ferdén '+F(T.sum,0)+' kPa (−'+F((1-T.sum/T0.sum)*100,0)+' %)',bx,y);
+    c.font='10.5px Inter'; c.fillStyle='#2E2620'; c.fillText('függőlegesen: '+F(T0.sum,0)+' kPa → ferdén '+F(T.sum,0)+' kPa (−'+F((1-T.sum/T0.sum)*100,0)+' %)',bx,y);
   }
-  function ui3(){ $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2)+' (H = '+F(S3.HV*S3.V,0)+' kN/m)'; }
+  function ui3(){ const hvMax=Math.floor(0.9*Math.tan(S3.phi*rad)*100)/100; $('3HV').max=hvMax; if(S3.HV>hvMax){ S3.HV=hvMax; } $('3HV').value=S3.HV; $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2)+' (H = '+F(S3.HV*S3.V,0)+' kN/m; legfeljebb 0,9·tg φ = '+F(hvMax,2)+')'; }
   [['3phi','phi'],['3c','c'],['3V','V'],['3HV','HV']].forEach(([id,k])=>{ const el=$(id); el.value=S3[k]; el.addEventListener('input',()=>{S3[k]=parseFloat(el.value);ui3();if(!S3.play)draw3();}); });
 
   /* ====================================================== 4. MÉLYSÉGI TAG — A TAKARÁS ====================================================== */
