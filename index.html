@@ -2251,7 +2251,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       </ul>
       <h3>„A képlet tagjai" fejezet 3D modelljei</h3>
       <ul class="bullet">
-        <li>Törési mechanizmus: Prandtl-féle test sávalapra — aktív ék 45° + φ/2 szöggel, logaritmikus spirál r = r<sub>0</sub>·e<sup>θ·tg φ</sup> az alaptest széle körül π/2 szögelfordulással, passzív Rankine-ék 45° − φ/2 szöggel az alapsíkig; a test mérete és mélysége csak φ-től és B-től függ. A mozgás (alap süllyedése, a zónák elmozdulása, a felszín kidudorodása) szemléltető, nagyított animáció.</li>
+        <li>Törési mechanizmus: Prandtl-féle test sávalapra — aktív ék 45° + φ/2 szöggel, logaritmikus spirál r = r<sub>0</sub>·e<sup>θ·tg φ</sup> az alaptest széle körül π/2 szögelfordulással, passzív Rankine-ék 45° − φ/2 szöggel az alapsíkig; a test mérete és mélysége csak φ-től és B-től függ. A mozgás szemléltető, nagyított animáció, de a mechanizmus kinematikáját követi: az aktív ék az alappal együtt süllyed; a radiális zóna a csúszólapon marad, belsejében a talaj az alaptest széle (E) körül fordulva „áramlik” (az ék mellett lefelé, a passzív ék felé felfelé-kifelé); a passzív ék és a felette lévő takarás együtt, a csúszólap irányában (45° − φ/2) felfelé-kifelé csúszik ki, elmozdulása a spirál mentén növekvő sebességgel (e<sup>π/2·tg φ</sup>-szeres) arányos; a terep a passzív zóna felett felpúposodik (a csúcs a zóna külső harmadánál); a csúszólap a helyén marad. A nyilak az elmozdulás irányát mutatják, hosszuk a mechanizmus méretéhez igazodik; a mélységi felfedezőben a terepre rajzolt vékony barna nyilak a takarás súlyát (q′) jelzik, nem elmozdulást.</li>
         <li>A három tag és minden tényező a kalkulátor képleteivel számolt: 0,5·γ·B·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub>, q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub>, c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; az alaki felfedezőben D = 0,5 m, a ferdeségiben D = 0,8 m, a mélységiben B = 2 m rögzített. A ferde teher mechanizmusa a H irányában egyoldalú, φ − 0,9·δ szöggel és az aktív ék eltolásával rajzolva (szemléltetés), az i tényezők pontosak; a H/V arány legfeljebb 0,9·tg φ lehet (a csúszka φ-vel együtt szűkül), így mindig a talajtörés csúszólapja látszik. Minden 3D modell (a siló-film is) átkapcsolható <b>2D metszetre</b>: ez ugyanannak a jelenetnek a függőleges, az alap tengelyén átmenő metszete (elölnézet forgatás nélkül), ugyanazokkal az elmozdulásokkal és feliratokkal.</li>
         <li>A pilléralap véglapjainak aránya az alapterülethez közelítő (2·A<sub>keresztmetszet</sub>/(B·L)); az alaki tényezők az EC7 D-melléklete szerintiek, φ = 0-nál s<sub>c</sub> = 1 + 0,2·B/L.</li>
         <li>Pórusvíznyomás: a teher minden növekménye először a pórusvízbe kerül (telített talaj, Δu = Δσ), és a talajra jellemző T<sub>c</sub> időállandóval szivárog el (dΔu/dt = dq/dt − Δu/T<sub>c</sub>); T<sub>c</sub> = 2 év agyagnál, 1 hónap iszapnál, fél nap homoknál. A hatékony feszültség többlete Δσ′ = q − Δu. Ez a valódi konszolidációnál egyszerűbb, elsőrendű közelítés.</li>
@@ -3170,7 +3170,7 @@ const DFILM=(function(){
     const Wx=Math.max(3*B,36), Wz=Math.max(2.4*B,30), zc=-Wz/2, xC=0;
     const R=0.38*B, siloH=Math.min(1.35*B,22), yFootBot=-D, yFootTop=-D+1.0, yTop=yFootTop+siloH, yCone=yTop+0.14*B;
     const flat=V.mode==='2d';
-    const hudW=250, padL=flat?205:54, padR=hudW+16, padT=52, padB=24; const az=flat?0:V.az, el=flat?0:V.el;
+    const hudW=250, padL=flat?26:54, padR=hudW+(flat?26:16), padT=52, padB=24; const az=flat?0:V.az, el=flat?0:V.el;
     const ca=Math.cos(az), sa=Math.sin(az), ce=Math.cos(el), se=Math.sin(el);
     const diag=flat?Wx:Math.hypot(Wx,Wz), vert=(Ztot+yCone+1.2)*ce+(flat?0:diag*se);
     const scale=Math.min((W-padL-padR)/diag,(H-padT-padB)/vert)*V.zoom;
@@ -3241,7 +3241,7 @@ const DFILM=(function(){
     /* ---- képernyő-térbeli elemek ---- */
     const label=(tx,x,y,col,al,bold,sz)=>{ sz=sz||12; ctx.font=(bold?'700 ':'600 ')+sz+'px Inter, system-ui, sans-serif'; ctx.textAlign=al||'left'; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineJoin='round'; const tw=ctx.measureText(tx).width; if(al==='left'||!al){ x=Math.min(x,W-hudW-6-tw); } ctx.strokeText(tx,x,y); ctx.fillStyle=col; ctx.fillText(tx,x,y); };
     { const p=proj(xC,yCone-sink+(filling?3.6:0.9),zc); label('q = '+F(q,0)+' kPa',p.x,p.y-6,'#2E2620','center',true,14); }
-    { const p=proj(-Wx/2,-clayT/2,0); label(S.soil==='homok'?'homok (jól drénez)':s.name+' — telített',p.x-8,p.y,'#3A2A1A','right',true,11); const p2=proj(-Wx/2,-clayT-sandT/2,0); label(S.soil==='homok'?'kavics':'homokos kavics — drénező réteg',p2.x-8,p2.y,'#3A2A1A','right',false,10.5); const p3=proj(-Wx/2,-0.5,-Wz); label('▼ talajvíz a terep közelében',p3.x-8,p3.y-4,'#1E78C8','right',true,11); }
+    { const eL=(tx,p,dy,col,bold,sz)=>flat?label(tx,p.x+8,p.y+dy,col,'left',bold,sz):label(tx,p.x-8,p.y+dy,col,'right',bold,sz); eL(S.soil==='homok'?'homok (jól drénez)':s.name+' — telített',proj(-Wx/2,-clayT/2,0),0,'#3A2A1A',true,11); eL(S.soil==='homok'?'kavics':'homokos kavics — drénező réteg',proj(-Wx/2,-clayT-sandT/2,0),0,'#3A2A1A',false,10.5); eL('▼ talajvíz a terep közelében',proj(-Wx/2,-0.5,-Wz),flat?-8:-4,'#1E78C8',true,11); }
     if(sink>0.05){ const p=proj(xC-B/2,yFootBot-sink/2,zc+B/2); label('süllyedés s = '+F(sett*100,0)+' cm ('+S.ex+'× nagyítva)',p.x-10,p.y+4,'#2E2620','right',true,11); }
     if(uF>0.02){ const p=proj(xC,yFootBot-sink-0.7*B,zc+0.65*B); label('pórusvíznyomás-többlet a talp alatt',p.x,p.y,'#1E78C8','center',true,11); }
     if(alpha>0.03&&!failed){ label(S.soil==='homok'?'→ a víz azonnal elszökik (Δu ≈ 0)':'→ a víz lassan kiszivárog a drénező réteg felé',padL,H-10,'#1E78C8','left',true,12); }
@@ -3374,12 +3374,12 @@ const KPL=(function(){
   /* ---------- közös 3D rajzoló (festő-algoritmus, forgatás) ---------- */
   function R3(cv){
     const ctx=cv.getContext('2d'); const V={az:-0.62,el:0.40,ph:0,spin:true,drag:null,onchange:null,mode:'3d'};
-    let polys=[],labels=[],W=0,H=0,scale=1,proj=null,viewDir=null,hudW=0;
+    let polys=[],labels=[],W=0,H=0,scale=1,proj=null,viewDir=null,hudW=0,lastExt=null;
     function begin(ext){
       W=cv.width;H=cv.height;hudW=ext.hudW||0; ctx.clearRect(0,0,W,H);
       const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#F7F4EE'); g.addColorStop(1,'#FFFFFF'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
       const flat=V.mode==='2d';
-      const padL=flat?Math.max(ext.padL||50,180):(ext.padL||50),padR=(ext.padR||16)+hudW,padT=ext.padT||40,padB=ext.padB||26; const az=flat?0:V.az, el=flat?0:V.el;
+      const padL=flat?26:(ext.padL||50),padR=(flat?26:(ext.padR||16))+hudW,padT=ext.padT||40,padB=ext.padB||26; lastExt=ext; const az=flat?0:V.az, el=flat?0:V.el;
       const ca=Math.cos(az),sa=Math.sin(az),ce=Math.cos(el),se=Math.sin(el);
       const diag=flat?ext.Wx:Math.hypot(ext.Wx,ext.Wz), vert=(ext.yTop-ext.yBot)*ce+(flat?0:diag*se);
       scale=Math.min((W-padL-padR)/diag,(H-padT-padB)/vert);
@@ -3395,6 +3395,8 @@ const KPL=(function(){
     const line=(pts,col,opt)=>poly(pts,null,col,opt&&opt.d!=null?opt.d:null,Object.assign({line:true},opt||{},{d:undefined}));
     const label=(tx,x,y,col,al,bold,sz)=>labels.push({tx,x,y,col,al:al||'left',bold,sz:sz||12});
     const label3=(tx,p3,dx,dy,col,al,bold,sz)=>{ const p=proj(p3[0],p3[1],p3[2]); label(tx,p.x+(dx||0),p.y+(dy||0),col,al,bold,sz); };
+    /* a tömb bal széléhez kötött felirat: 3D-ben kívül jobbra zárva, 2D metszetben belül balra zárva */
+    const edgeLab=(tx,y,col,bold,sz,z)=>{ const p=proj(-lastExt.Wx/2,y,z||0); if(V.mode==='2d') label(tx,p.x+8,p.y+4,col,'left',bold,sz); else label(tx,p.x-8,p.y+4,col,'right',bold,sz); };
     function box(x1,x2,y1,y2,z1,z2,col,alpha,dOff,tr){ /* y1<y2 */
       const fs=[[{x:0,y:0,z:1},[[x1,y2,z2],[x2,y2,z2],[x2,y1,z2],[x1,y1,z2]]],[{x:0,y:0,z:-1},[[x2,y2,z1],[x1,y2,z1],[x1,y1,z1],[x2,y1,z1]]],[{x:1,y:0,z:0},[[x2,y2,z2],[x2,y2,z1],[x2,y1,z1],[x2,y1,z2]]],[{x:-1,y:0,z:0},[[x1,y2,z1],[x1,y2,z2],[x1,y1,z2],[x1,y1,z1]]],[{x:0,y:1,z:0},[[x1,y2,z2],[x1,y2,z1],[x2,y2,z1],[x2,y2,z2]]],[{x:0,y:-1,z:0},[[x1,y1,z2],[x2,y1,z2],[x2,y1,z1],[x1,y1,z1]]]];
       fs.forEach(([n,p])=>{ if(!facing(n)&&(alpha==null||alpha>=1)) return; const pts=tr?p.map(tr):p; const P=pts.map(q=>proj(q[0],q[1],q[2])); const d=P.reduce((a,q)=>a+q.d,0)/P.length+(dOff||0); polys.push({P,fill:shade(col,n,alpha),stroke:alpha!=null&&alpha<1?'rgba(46,38,32,.35)':'#2E2620',d}); }); }
@@ -3435,7 +3437,7 @@ const KPL=(function(){
     cv.addEventListener('pointermove',e=>{ if(!V.drag) return; V.az=V.drag.az+(e.clientX-V.drag.x)*0.008; V.el=Math.min(1.3,Math.max(0.08,V.drag.el+(e.clientY-V.drag.y)*0.006)); if(V.onchange) V.onchange(); });
     const end=()=>{ V.drag=null; }; cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
     function tick(dt){ if(V.spin&&!V.drag&&V.mode!=='2d'){ V.ph+=dt*0.2; V.az=-0.62+0.35*Math.sin(V.ph); } }
-    return {V,ctx,begin,poly,line,label,label3,box,block,flush,hud,bars,shade,facing,tick,reset(){V.az=-0.62;V.el=0.40;V.ph=0;}};
+    return {V,ctx,begin,poly,line,label,label3,edgeLab,box,block,flush,hud,bars,shade,facing,tick,reset(){V.az=-0.62;V.el=0.40;V.ph=0;}};
   }
 
   /* ---------- Prandtl-féle törési mechanizmus (jobb fél, x > 0; y lefelé az alapsíktól) ---------- */
@@ -3462,47 +3464,71 @@ const KPL=(function(){
   }
   const T3=t=>({g:t.g,q:t.qT,c:t.c});
 
-  /* mechanizmus rajzolása: zónák az elülső lapon, csúszófelület-lemez a tömbön át, sebességnyilak, kiemelés */
-  function drawMech(r,P,o){ /* o={D,B,zF,zB,tau,amp,side,hl,alpha,flowPh,faint,showOver,labels} — a zónák elmozdulása és a felpúposodás nagyított */
-    const D=o.D, yd=y=>-D-y; const zF=o.zF, zB=o.zB; const a=o.alpha!=null?o.alpha:0.55; const tau=o.tau||0, amp=o.amp||0, hv=o.heave!=null?o.heave:1.5*amp;
+  /* mechanizmus rajzolása: zónák az elülső lapon, csúszófelület-lemez a tömbön át, elmozdulás-nyilak, kiemelés.
+     Kinematika (nagyítva): az alap és az aktív ék δ = τ·amp-ot süllyed; a radiális zóna a csúszólapon marad, belsejében a talaj az E alapél körül
+     „áramlik” (lefelé az ék mellett, felfelé-kifelé a passzív ék felé); a passzív ék és a felette lévő takarás együtt, a csúszólap (45° − φ/2)
+     irányában felfelé-kifelé csúszik ki, a terep a passzív zóna felett felpúposodik. A csúszólap a helyén marad. */
+  function drawMech(r,P,o){ /* o={D,B,zF,zB,tau,amp,side,hl,alpha,flowPh,faint,labels,dx} */
+    const D=o.D, yd=y=>-D-y; const zF=o.zF, zB=o.zB; const a=o.alpha!=null?o.alpha:0.55; const tau=o.tau||0, amp=o.amp||0, fx=o.dx||0;
     const sides=o.side==='right'?[1]:o.side==='left'?[-1]:[1,-1];
     const sk=o.faint?0.35:1; const onF=zF>=-1e-6; const dd=k=>onF?1e5+k:null;
+    const del=tau*amp; /* az alap süllyedése */
+    const r0=Math.hypot(P.C.x-P.E.x,P.C.y-P.E.y), rF=Math.hypot(P.F.x-P.E.x,P.F.y-P.E.y);
+    const rot=-del/r0; /* a radiális áramlás forgása E körül (rad): a C csúcsnál ≈ δ */
+    const dpm=del*rF/r0; /* a passzív ék elmozdulása: a sebesség a spirál mentén e^(θ·tg φ)-szeresére nő */
+    const dp={x:Math.cos(P.pr)*dpm,y:-Math.sin(P.pr)*dpm}; /* y lefelé pozitív → felfelé-kifelé, a csúszólappal párhuzamosan */
+    const dpy=-dp.y;
     /* aktív ék: az alappal együtt lefelé */
     const tri=[[-o.B/2,0],[o.B/2,0],[P.C.x,P.C.y]];
-    r.poly(tri.map(q=>[q[0],yd(q[1])-tau*amp,zF]),r.shade(COL.act,null,a*sk*(o.hl&&o.hl!=='c'?0.5:1)),'rgba(46,38,32,.5)',dd(0.3));
-    const peaks=[];
+    r.poly(tri.map(q=>[q[0]+fx,yd(q[1])-del,zF]),r.shade(COL.act,null,a*sk*(o.hl&&o.hl!=='c'?0.5:1)),'rgba(46,38,32,.5)',dd(0.3));
+    const peaks=[]; const ph=o.flowPh||0;
+    const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.9)',{w:2,arrow:true,ah:7,d:dd(0.6)}); };
+    const L=Math.min(0.55*o.B,0.9,0.42*P.ymax); /* a nyilak hossza a mechanizmus méretéhez igazodik */
+    const small=P.ymax<0.8*o.B; /* kis (lapos) mechanizmus: kevesebb nyíl */
     sides.forEach(s=>{
       const M=q=>[s*q.x,yd(q.y)];
-      /* radiális zóna: elfordul az alaptest széle (E) körül; passzív ék: a csúszólap irányában felfelé-kifelé csúszik */
-      const rot=-tau*0.14; const R=q=>{ const dx=q.x-P.E.x, dy=q.y-P.E.y; return {x:P.E.x+dx*Math.cos(rot)-dy*Math.sin(rot), y:P.E.y+dx*Math.sin(rot)+dy*Math.cos(rot)}; };
-      const radz=[P.E,R(P.C),...P.sp.map(R)].map(M); const dp={x:Math.cos(P.pr)*tau*amp*1.8, y:-Math.sin(P.pr)*tau*amp*1.8};
-      const pas=[P.E,P.F,P.G].map(q=>M({x:q.x+dp.x,y:q.y+dp.y}));
+      const R=q=>{ const dx=q.x-P.E.x, dy=q.y-P.E.y; return {x:P.E.x+dx*Math.cos(rot)-dy*Math.sin(rot), y:P.E.y+dx*Math.sin(rot)+dy*Math.cos(rot)}; };
+      const T=q=>({x:q.x+dp.x,y:q.y+dp.y});
+      const Fp=T(P.F), Gp=T(P.G);
+      /* felpúposodás profilja (terep-koordináta, y felfelé): az alap szélétől a kitolt passzív ék külső széléig, a csúcs a passzív zóna külső harmadánál */
+      const xi=P.E.x, xo=Gp.x; const hgt=x=>{ const u=Math.max(0,Math.min(1,(x-xi)/(xo-xi))); return dpy*(1.2*Math.sin(Math.PI*Math.pow(u,1.3))+0.15*(1-u)); };
+      const nb=14; const bump=[]; for(let k=nb;k>=0;k--){ const x=xi+(xo-xi)*k/nb; bump.push([s*x,tau>0.02?hgt(x):0]); } /* kívülről befelé */
       const gF=o.hl==='g'?1.15:1, hlq=o.hl==='q';
+      /* a terep fölé emelkedő talaj alapszíne (a tömb háttere ott már nincs meg) */
+      if(tau>0.02&&!o.faint){ const base=[[s*xo,0],...bump,[s*xi,0]]; r.poly(base.map(q=>[q[0],q[1],zF]),r.shade(D>0?COL.over:COL.soil,null,r.V.mode==='2d'?1:0.42),null,dd(0.2)); }
+      /* radiális zóna: a csúszólapon marad, két egyenes oldala az aktív ékkel (lesüllyedt sarok, C′) és a passzív ékkel (F′) együtt mozog */
+      const Cp={x:P.C.x+fx*s,y:P.C.y+del};
+      const radz=[M(P.E),[s*P.E.x+fx,yd(0)-del],M(Cp),...P.sp.slice(1,P.sp.length-1).map(M),M(P.F),M(Fp)];
       r.poly(radz.map(q=>[q[0],q[1],zF]),r.shade(COL.rad,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',dd(0.31));
-      r.poly(pas.map(q=>[q[0],q[1],zF]),r.shade(COL.pas,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',dd(0.32));
+      /* passzív ék: a csúszólap mentén felfelé-kifelé csúszik (D = 0-nál a teteje maga a felpúposodó terep) */
+      const pasF=a*sk*(o.hl==='c'?0.4:gF);
+      const pas=D>0?[M(P.E),M(P.F),M(Fp),M(Gp)]:[M(P.E),M(P.F),M(Fp),...bump];
+      r.poly(pas.map(q=>[q[0],q[1],zF]),r.shade(COL.pas,null,pasF),'rgba(46,38,32,.5)',dd(0.32));
+      /* a passzív ék feletti takarás: az ékkel együtt emelkedik, a terep felpúposodik */
+      if(D>0&&!o.faint){ const ov=[M(P.E),M(Gp),...bump]; r.poly(ov.map(q=>[q[0],q[1],zF]),`rgba(110,78,46,${hlq?0.55:0.32})`,'rgba(60,40,20,.5)',dd(0.33)); }
       /* csúszófelület (a helyén marad): lemez a tömbön át, a c-kiemelésnél vastag */
       const curve=[M(P.C),...P.sp.map(M),M(P.G)];
       for(let k=0;k<curve.length-1;k++){ const p0=curve[k],p1=curve[k+1]; r.poly([[p0[0],p0[1],zF],[p1[0],p1[1],zF],[p1[0],p1[1],zB],[p0[0],p0[1],zB]],`rgba(46,125,138,${(o.hl==='c'?0.55:0.22)*sk})`,null); }
       r.line(curve.map(q=>[q[0],q[1],zF]),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:dd(0.4),dash:o.faint?[5,4]:null});
       r.line(curve.map(q=>[q[0],q[1],zB]),'rgba(31,95,104,.5)',{w:1.2});
-      r.line([[-s*o.B/2,yd(0),zF],[s*P.C.x,yd(P.C.y),zF]],o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:dd(0.4)});
-      /* a passzív ék feletti takarás (felemelkedik) */
-      const x0=s*P.E.x, x1=s*P.G.x, lift=tau*amp*1.2;
-      if(D>0&&(hlq||o.showOver)){ r.poly([[x0,-D+lift,zF],[x1,-D+lift,zF],[x1,lift,zF],[x0,lift,zF]],`rgba(110,78,46,${hlq?0.55:0.3})`,'rgba(60,40,20,.5)',dd(0.33));
-        if(hlq){ const n=4; for(let k=0;k<n;k++){ const x=x0+(x1-x0)*(k+0.5)/n; r.line([[x,0.9+lift,zF],[x,0.08+lift,zF]],'#6E4E2E',{w:2,arrow:true,ah:7,d:dd(0.5)}); } } }
+      r.line([[-s*o.B/2+fx,yd(0)-del,zF],[s*Cp.x,yd(Cp.y),zF]],o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:dd(0.4)});
       /* felpúposodás: a terep a passzív zóna felett domborúan megemelkedik (3D-ben a hossz mentén is), az eredeti terepvonal szaggatva */
-      if(tau>0.02&&!o.faint){ const n=12; const base=D>0?lift:0; const hgt=x=>base+hv*tau*Math.sin(Math.PI*(x-x0)/(x1-x0));
-        for(let k=0;k<n;k++){ const xa=x0+(x1-x0)*k/n, xb=x0+(x1-x0)*(k+1)/n; r.poly([[xa,hgt(xa),zF],[xb,hgt(xb),zF],[xb,hgt(xb),zB],[xa,hgt(xa),zB]],r.shade('#C9D3A6',{x:0,y:1,z:0},0.95),'rgba(60,40,20,.25)'); r.poly([[xa,0,zF],[xb,0,zF],[xb,hgt(xb),zF],[xa,hgt(xa),zF]],r.shade(COL.over,{x:0,y:0,z:1},0.95),'rgba(60,40,20,.35)',dd(0.21)); }
-        r.line([[x0,0,zF],[x1,0,zF]],'rgba(46,38,32,.6)',{w:1,dash:[4,3],d:dd(0.22)});
-        const xm=x0+(x1-x0)*0.62; peaks.push([xm,hgt(xm),zF]); }
-      /* elmozdulás-nyilak (áramló): lefelé az ékben, körbe a radiális zónában, felfelé-kifelé a passzív ékben */
-      if(!o.faint){ const ph=o.flowPh||0; const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.9)',{w:2,arrow:true,ah:7,d:dd(0.6)}); };
-        const L=Math.min(0.55*o.B,0.9);
-        if(s===1){ arrow([0,yd(P.C.y*0.45)],[0,-1],L); arrow([-o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); arrow([o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); }
-        [0.25,0.55,0.85].forEach(f=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const mid={x:P.E.x+(p.x-P.E.x)*0.62,y:P.E.y+(p.y-P.E.y)*0.62}; const dx=mid.x-P.E.x, dy=mid.y-P.E.y; const nn=Math.hypot(dx,dy)||1; arrow([s*mid.x,yd(mid.y)],[s*dy/nn,dx/nn],L*0.9); });
-        const pm={x:(P.E.x+P.F.x+P.G.x)/3,y:(P.E.y+P.F.y+P.G.y)/3}; arrow([s*pm.x,yd(pm.y)],[s*Math.cos(P.pr),Math.sin(P.pr)],L*1.1); const pm2={x:(P.F.x+2*P.G.x)/3,y:P.F.y/3}; arrow([s*pm2.x,yd(pm2.y)],[s*Math.cos(P.pr),Math.sin(P.pr)],L*0.9); }
+      if(tau>0.02&&!o.faint){ for(let k=0;k<nb;k++){ const xa=xi+(xo-xi)*k/nb, xb=xi+(xo-xi)*(k+1)/nb; r.poly([[s*xa,hgt(xa),zF],[s*xb,hgt(xb),zF],[s*xb,hgt(xb),zB],[s*xa,hgt(xa),zB]],r.shade('#C9D3A6',{x:0,y:1,z:0},0.95),'rgba(60,40,20,.25)'); }
+        r.line([[s*xi,0,zF],[s*xo,0,zF]],'rgba(46,38,32,.6)',{w:1,dash:[4,3],d:dd(0.22)});
+        const xm=xi+(xo-xi)*0.59; peaks.push([s*xm,hgt(xm),zF]); }
+      /* a takarás súlya (q′) mint megoszló teher a felpúposodó terepen — csak a mélységi tag kiemelésénél */
+      if(D>0&&hlq&&!o.faint){ const n=5, tails=[]; for(let k=0;k<n;k++){ const x=xi+(xo-xi)*(k+0.5)/n; const h=tau>0.02?hgt(x):0; r.line([[s*x,h+0.78,zF],[s*x,h+0.08,zF]],'#6E4E2E',{w:1.6,arrow:true,ah:6,d:dd(0.5)}); tails.push([s*x,h+0.78,zF]); } r.line(tails,'#6E4E2E',{w:1.2,d:dd(0.5)}); }
+      /* elmozdulás-nyilak (áramló): lefelé az ékben, E körül a radiális zónában, a csúszólappal párhuzamosan felfelé-kifelé a passzív ékben és a takarásban */
+      if(!o.faint){
+        const dth=(small?0.3:0.26)*Math.PI/2; /* a radiális nyilak szögköze: a hosszuk legfeljebb az ívköz, így nem fedik egymást */
+        (small?[[0.2,0.6],[0.5,0.6],[0.8,0.6]]:[[0.12,0.55],[0.38,0.55],[0.64,0.55],[0.9,0.55],[0.28,0.85],[0.56,0.85],[0.82,0.85]]).forEach(([f,rho])=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const q={x:P.E.x+(p.x-P.E.x)*rho,y:P.E.y+(p.y-P.E.y)*rho}; const dx=q.x-P.E.x, dy=q.y-P.E.y; const nn=Math.hypot(dx,dy)||1; arrow([s*q.x,yd(q.y)],[s*dy/nn,dx/nn],Math.min(L*(0.55+0.5*nn/rF),0.95*nn*dth)); });
+        const dirP=[s*Math.cos(P.pr),Math.sin(P.pr)]; const W=(al,be)=>T({x:P.E.x+al*(P.F.x-P.E.x)+be*(P.G.x-P.E.x),y:P.E.y+al*(P.F.y-P.E.y)+be*(P.G.y-P.E.y)});
+        (small?[[0.4,0.3],[0.3,0.55]]:[[0.45,0.25],[0.22,0.55],[0.55,0.42]]).forEach(([al,be])=>{ const q=W(al,be); arrow([s*q.x,yd(q.y)],dirP,L*1.0); });
+        if(D>0.35){ const lo=Math.min(L*0.9,D/(Math.sin(P.pr)*1.7)); (small?[0.5]:[0.3,0.65]).forEach(u=>{ const x=xi+(xo-xi)*u; arrow([s*x,-D*0.55+0.5*dpy],dirP,lo); }); } }
     });
-    if(o.labels&&tau>0.25) peaks.forEach(p=>r.label3('felpúposodás',p,0,-6,'#3E5A1F','center',true,11));
+    /* aktív ék nyilai: a zónák után, hogy az áttetsző lapok ne halványítsák; az ék belsejében maradnak */
+    if(!o.faint){ arrow([fx,yd(P.C.y*0.35)-del],[0,-1],Math.min(L,0.4*P.C.y)); const ls=Math.min(L*0.8,0.32*P.C.y); arrow([fx-o.B*0.18,yd(P.C.y*0.15)-del],[0,-1],ls); arrow([fx+o.B*0.18,yd(P.C.y*0.15)-del],[0,-1],ls); }
+    if(o.labels&&tau>0.25) peaks.forEach((p,i)=>{ if(i===0||r.V.mode==='2d') r.label3('felpúposodás',p,0,-6,'#3E5A1F','center',true,11); });
   }
   function footing(r,B,D,zF,zB,sink,hA){ const top=D>0?-D+Math.min(hA||0.6,D):0.6; r.box(-B/2,B/2,-D-(sink||0),top-(sink||0),zB,zF,COL.foot,1,1e5+1); if(D>0&&top<0.6) r.box(-B*0.18,B*0.18,top-(sink||0),Math.max(top,0)+0.6-(sink||0),zB+(zF-zB)*0.3,zF-(zF-zB)*0.3,COL.col,1,1e5+1.1); }
   function loadArrow(r,x,yTop,z,len,col,txt){ r.line([[x,yTop+len,z],[x,yTop+0.05,z]],col,{w:4,arrow:true,ah:11,d:1e7}); if(txt) r.label3(txt,[x,yTop+len,z],0,-8,col,'center',true,13); }
@@ -3517,15 +3543,15 @@ const KPL=(function(){
     const layers=D>0?[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}]:[{y1:0,y2:-Ztot,col:COL.soil}];
     const blk=r1.block(Wx,Wz,layers,{frontAlpha:0.22});
     const tau=S1.tau, amp=0.2*S1.B;
-    drawMech(r1,P,{D,B:S1.B,zF:0,zB:-Wz,tau,amp,side:'both',hl:S1.hl,flowPh:S1.ph,showOver:true,labels:true});
+    drawMech(r1,P,{D,B:S1.B,zF:0,zB:-Wz,tau,amp,side:'both',hl:S1.hl,flowPh:S1.ph,labels:true});
     footing(r1,S1.B,D,0,-Wz,tau*amp,0.6);
     loadArrow(r1,0,D>0?Math.max(-D+0.6,0)+0.6-tau*amp:0.6-tau*amp,-Wz/2,1.2,'#1E63B0','V');
     blk.after();
     /* feliratok */
     r1.label3('aktív ék',[0,-D-P.h-tau*amp,0],0,16,'#7A2E12','center',true,11);
     { const k=Math.round(0.55*(P.sp.length-1)); r1.label3('radiális nyírási zóna',[P.sp[k].x,-D-P.sp[k].y,0],8,14,'#6E4E2E','left',true,11); }
-    r1.label3('passzív ék',[P.E.x+0.72*(P.G.x-P.E.x),-D+0.1,0],0,-4,'#6B5B1E','center',true,11);
-    if(D>0) r1.label3('takarás: q′ = γ·D = '+F(S1.g*D,0)+' kPa',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11);
+    r1.label3('passzív ék',[P.E.x+0.7*(P.G.x-P.E.x),-D-0.12*P.F.y,0],0,4,'#6B5B1E','center',true,11);
+    if(D>0) r1.edgeLab('takarás: q′ = γ·D = '+F(S1.g*D,0)+' kPa',-D/2,'#6E4E2E',true,11);
     r1.label3('csúszólap',[-P.F.x,-D-P.F.y,0],-8,14,'#1F5F68','right',true,11);
     r1.label3('B = '+F(S1.B,1)+' m',[0,-D-0.02,0],0,13,'#2E2620','center',true,11);
     r1.flush();
@@ -3553,18 +3579,18 @@ const KPL=(function(){
     const tau=S2.tau, amp=0.1*B;
     /* a mechanizmus a hossz mentén: az elülső véglap a z = zF síkban (nem a tömb elülső lapján) */
     drawMech(r2,P,{D,B,zF,zB,tau,amp,side:'both',flowPh:S2.ph,alpha:0.5});
-    /* hátsó véglap zónái */
-    const yd=y=>-D-y; [1,-1].forEach(s=>{ const M=q=>[s*q.x,yd(q.y),zB]; r2.poly([M(P.E),M(P.C),...P.sp.map(M)],r2.shade(COL.rad,null,0.45),'rgba(46,38,32,.4)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.45),'rgba(46,38,32,.4)'); });
-    r2.poly([[-B/2,-D,zB],[B/2,-D,zB],[P.C.x,yd(P.C.y),zB]],r2.shade(COL.act,null,0.45),'rgba(46,38,32,.4)');
+    /* hátsó véglap zónái (2D metszetben nem látszanak) */
+    const yd=y=>-D-y; const flat2=r2.V.mode==='2d'; if(!flat2) [1,-1].forEach(s=>{ const M=q=>[s*q.x,yd(q.y),zB]; r2.poly([M(P.E),M(P.C),...P.sp.map(M)],r2.shade(COL.rad,null,0.45),'rgba(46,38,32,.4)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.45),'rgba(46,38,32,.4)'); });
+    if(!flat2) r2.poly([[-B/2,-D,zB],[B/2,-D,zB],[P.C.x,yd(P.C.y),zB]],r2.shade(COL.act,null,0.45),'rgba(46,38,32,.4)');
     /* végmechanizmus a rövid oldalakon: negyed-fordulattal (B irányú szelvény a z tengely mentén) */
-    [1,-1].forEach(s=>{ const z0=s>0?zF:zB; const M=q=>[0,yd(q.y),z0+s*q.x]; const zone=[M(P.E),M(P.C),...P.sp.map(M)]; r2.poly(zone,r2.shade(COL.rad,null,0.35),'rgba(46,38,32,.35)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.35),'rgba(46,38,32,.35)'); r2.poly([[-B/2,-D,z0],[B/2,-D,z0],[0,yd(P.C.y),z0]],r2.shade(COL.act,null,0.4),'rgba(46,38,32,.35)'); const curve=[M(P.C),...P.sp.map(M),M(P.G)]; r2.line(curve,'rgba(31,95,104,.9)',{w:1.6}); });
+    if(!flat2) [1,-1].forEach(s=>{ const z0=s>0?zF:zB; const M=q=>[0,yd(q.y),z0+s*q.x]; const zone=[M(P.E),M(P.C),...P.sp.map(M)]; r2.poly(zone,r2.shade(COL.rad,null,0.35),'rgba(46,38,32,.35)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.35),'rgba(46,38,32,.35)'); r2.poly([[-B/2,-D,z0],[B/2,-D,z0],[0,yd(P.C.y),z0]],r2.shade(COL.act,null,0.4),'rgba(46,38,32,.35)'); const curve=[M(P.C),...P.sp.map(M),M(P.G)]; r2.line(curve,'rgba(31,95,104,.9)',{w:1.6}); });
     /* véglapok kiemelése: nyírási ellenállás a rövid oldalakon */
     const endA=P.ymax*P.G.x*1.1; /* közelítő keresztmetszet-terület */
     r2.box(-B/2,B/2,-D,-D+0.5,zB,zF,COL.foot,1,1e5+1); r2.box(-B*0.18,B*0.18,-D+0.5,1.0,zc-Math.min(L,B)*0.18,zc+Math.min(L,B)*0.18,COL.col,1,1e5+1.1);
     loadArrow(r2,0,1.0,zc,1.2,'#1E63B0','V');
     blk.after();
-    r2.label3('L = '+F(L,1)+' m',[B/2+0.2,-D+0.5,zc],8,0,'#2E2620','left',true,11); r2.label3('B = '+F(B,1)+' m',[0,-D-0.15,zF],0,14,'#2E2620','center',true,11);
-    r2.label('színezett véglapok a rövid oldalakon: itt is csúszólap és nyírási ellenállás ébred',8,r2.ctx.canvas.height-22,'#1F5F68','left',true,11);
+    if(!flat2) r2.label3('L = '+F(L,1)+' m',[B/2+0.2,-D+0.5,zc],8,0,'#2E2620','left',true,11); r2.label3('B = '+F(B,1)+' m',[0,-D-0.15,zF],0,14,'#2E2620','center',true,11);
+    r2.label(flat2?'metszet a hossz felénél; L = '+F(L,1)+' m a metszet síkjára merőleges':'színezett véglapok a rövid oldalakon: itt is csúszólap és nyírási ellenállás ébred',8,r2.ctx.canvas.height-22,'#1F5F68','left',true,11);
     r2.flush();
     const T=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L,D}); const T0=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L:Infinity,D});
     const h=r2.hud(r2.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
@@ -3594,8 +3620,8 @@ const KPL=(function(){
     /* szellem: a függőleges teher mechanizmusa (szaggatott) */
     drawMech(r3,P0,{D,B,zF:0,zB:-Wz,tau:0,amp,side:'both',faint:true,alpha:0.3});
     /* ferde teher: egyoldalú, laposabb mechanizmus a H irányában */
-    if(!slid) drawMech(r3,P,{D,B,zF:0,zB:-Wz,tau,amp,side:'right',flowPh:S3.ph,alpha:0.6});
     const sinkx=slid?tau*0.35*B:tau*amp*0.6;
+    if(!slid) drawMech(r3,P,{D,B,zF:0,zB:-Wz,tau,amp,side:'right',flowPh:S3.ph,alpha:0.6,dx:sinkx});
     r3.box(-B/2+sinkx,B/2+sinkx,-D-(slid?0:tau*amp),-D+0.5-(slid?0:tau*amp),-Wz,0,COL.foot,1,1e5+1); r3.box(-B*0.18+sinkx,B*0.18+sinkx,-D+0.5,1.0,-Wz*0.65,-Wz*0.35,COL.col,1,1e5+1.1);
     /* V és H nyilak */
     const zc=-Wz/2; loadArrow(r3,sinkx,1.0,zc,1.3,'#1E63B0',null); r3.label3('V = '+S3.V+' kN/m',[sinkx,2.3,zc],10,-2,'#1E63B0','left',true,13);
@@ -3630,12 +3656,12 @@ const KPL=(function(){
     const tau=S4.tau, amp=0.18*B;
     drawMech(r4,P,{D,B,zF:0,zB:-Wz,tau,amp,side:'both',hl:'q',flowPh:S4.ph,alpha:0.5,labels:true});
     /* talajvíz */
-    if(S4.gw){ r4.line([[-Wx/2,-0.02,0],[Wx/2,-0.02,0]],'#1E78C8',{w:1.8,dash:[7,4],d:1e5+0.9}); r4.label3('▼ talajvíz a terepszinten → γ′ = γ − 10',[-Wx/2,0,0],-8,-4,'#1E78C8','right',true,11); }
+    if(S4.gw){ r4.line([[-Wx/2,-0.02,0],[Wx/2,-0.02,0]],'#1E78C8',{w:1.8,dash:[7,4],d:1e5+0.9}); r4.label('▼ talajvíz a terepszinten (kék szaggatott vonal) → γ′ = γ − 10 kN/m³',8,r4.ctx.canvas.height-24,'#1E78C8','left',true,11); }
     footing(r4,B,D,0,-Wz,tau*amp,0.6);
     loadArrow(r4,0,D>0?Math.max(-D+0.6,0)+0.6-tau*amp:0.6-tau*amp,-Wz/2,1.2,'#1E63B0','V');
     blk.after();
     const gq=S4.gw?S4.g-10:S4.g; const q=gq*D;
-    if(D>0){ r4.label3('takarás vastagsága D = '+F(D,1)+' m',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11); r4.label3('q′ = γ′·D = '+F(q,0)+' kPa',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,-6,'#6E4E2E','center',true,12); r4.label3('ezt a súlyt kell a passzív éknek felemelnie',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,8,'#6E4E2E','center',false,10.5); }
+    if(D>0){ r4.edgeLab('takarás vastagsága D = '+F(D,1)+' m',-D/2,'#6E4E2E',true,11); r4.label3('q′ = γ′·D = '+F(q,0)+' kPa',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,-6,'#6E4E2E','center',true,12); r4.label3('ezt a súlyt kell a passzív éknek felemelnie',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,8,'#6E4E2E','center',false,10.5); }
     else r4.label3('D = 0: nincs takarás, a mélységi tag nulla',[0,0.9,0],0,-6,'#B81E12','center',true,12);
     r4.flush();
     const T=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D}); const Tref=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D:4});
