@@ -302,6 +302,37 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 .kchk .kbar i{display:block;height:100%;background:var(--moss)}
 .kchk.bad .kbar i{background:var(--rebar)}
 @media(max-width:760px){.kchk .knm{flex:1 1 100%}.kchk .kf2{flex:1 1 100%}.kchk .kut{max-width:none}}
+
+/* ===== drénezett–drénezetlen film ===== */
+.dfwrap{display:grid;grid-template-columns:1fr 290px;gap:16px;align-items:start}
+@media(max-width:980px){.dfwrap{grid-template-columns:1fr}}
+.dfcv{background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;overflow:hidden}
+.dfcv canvas{display:block;width:100%;height:auto}
+.dfcv3d canvas{touch-action:none;cursor:grab}
+.dfbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.dfbar input[type=range]{flex:1;min-width:140px;accent-color:var(--rebar)}
+.dfsc{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.dfsc button{border:1px solid var(--line-strong);background:#fff;border-radius:8px;padding:6px 10px;font:inherit;font-size:.84rem;cursor:pointer;color:var(--ink);text-align:left}
+.dfsc button.on{background:var(--steel-dk);border-color:var(--steel-dk);color:#fff}
+.dfsl{display:grid;gap:2px;margin:8px 0 2px}
+.dfsl label{font-size:.84rem;display:flex;justify-content:space-between;gap:8px;color:var(--ink)}
+.dfsl .v{font-family:'JetBrains Mono';font-weight:600;color:var(--steel-dk)}
+.dfsl input[type=range]{width:100%;accent-color:var(--rebar)}
+.dfchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.dfchip{font-family:'JetBrains Mono';font-size:.78rem;border:1px solid var(--line);border-radius:8px;background:#fff;padding:5px 8px;color:var(--ink-mute)}
+.dfchip b{color:var(--ink)}
+.dfchip.bad{border-color:var(--rebar);background:#FBE9E2}.dfchip.bad b{color:var(--rebar-dk)}
+.dfchip.ok{border-color:var(--moss);background:#EAF2E4}.dfchip.ok b{color:#3E5A1F}
+.dfstate{font-weight:700;padding:6px 10px;border-radius:8px;font-size:.88rem;white-space:nowrap}
+.dfstate.ok{background:#E8F1E3;color:#3E5A1F}.dfstate.bad{background:#F7E1D8;color:var(--rebar-dk)}
+.dfcmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.dfcmp{grid-template-columns:1fr}}
+.dfcmp .panel{margin:0}
+.dfcmp .hd{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--steel-dk);margin-bottom:6px;font-size:1.02rem}
+.dfcmp .hd i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.dftab{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0}
+.dftab th,.dftab td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.dftab th{background:#F4EFE7;font-weight:600}
 </style>
 </head>
 <body>
@@ -336,7 +367,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <span><b>Tárgy</b> Alapozás BSc · BMEEOGMAT45</span>
     </div>
     <div class="stats"><span><b>11</b> mintapélda</span><span><b>1</b> rétegzett kalkulátor 3D-modellel</span><span><b>EC7</b> · MSZ EN 1997-1</span></div>
-    <div class="cta"><a onclick="setChapter('menete')">A számítás menete</a><a class="ghost" onclick="setChapter('mintapeldak')">Mintapéldák</a><a class="ghost" onclick="setChapter('kalkulator')">Kalkulátor</a></div>
+    <div class="cta"><a onclick="setChapter('menete')">A számítás menete</a><a class="ghost" onclick="setChapter('drenezes')">Drénezett vagy drénezetlen?</a><a class="ghost" onclick="setChapter('mintapeldak')">Mintapéldák</a><a class="ghost" onclick="setChapter('kalkulator')">Kalkulátor</a></div>
   </div>
 
   <section class="subsection" id="b-utmutato">
@@ -645,6 +676,125 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 </div>
 
 <!-- ===================== MINTAPÉLDÁK ===================== -->
+<div class="chapter-page" id="page-drenezes" data-ch="drenezes">
+
+  <section class="subsection" id="dr-1">
+    <h2>1. Miért kell kétféleképpen számolni?</h2>
+    <p class="lead">A talaj szilárdsága nem a rá ható teljes nyomástól függ, hanem attól, hogy ebből mennyit <b>visel a szemcseváz</b> és mennyit a pórusokban lévő <b>víz</b>. Ez a Terzaghi-féle hatékony feszültség elve: <span class="inline-math">σ = σ′ + u</span>. A nyírószilárdságot csak a hatékony feszültség adja: <span class="inline-math">τ<sub>f</sub> = c′ + σ′·tg φ′</span>. Amikor egy alapot megterhelünk, az a kérdés, hogy a víz <b>el tud-e szökni</b> a teher felhordásának ideje alatt — ha igen, a szemcseváz veszi át a terhet és erősödik; ha nem, a víz veszi át, és a talaj szilárdsága nem nő.</p>
+    <div class="grid c2">
+      <div class="panel" style="margin:8px 0;border-top:4px solid var(--moss)">
+        <h3 style="margin-top:0"><span class="tag moss">drénezett</span> a víz elszökik</h3>
+        <p style="font-size:.93rem">A pórusvíz a teherrel egy ütemben távozik, a pórusvíznyomás a kiindulási értéken marad (<span class="nowrap">Δu ≈ 0</span>). A teher azonnal <b>hatékony feszültséggé</b> válik, a talaj a terheléssel együtt <b>erősödik</b>. Így viselkedik a <b>homok és a kavics</b> mindig, és a kötött talaj is <b>hosszú idő után</b>, amikor a konszolidáció lezajlott.</p>
+        <div class="callout formula" style="margin:6px 0;font-size:.86rem">σ′ nő &nbsp;→&nbsp; τ<sub>f</sub> = c′ + σ′·tg φ′ nő &nbsp;→&nbsp; számítás c′, φ′, γ′ és q′ hatékony értékekkel</div>
+      </div>
+      <div class="panel" style="margin:8px 0;border-top:4px solid var(--rebar)">
+        <h3 style="margin-top:0"><span class="tag rebar">drénezetlen</span> a víz bent reked</h3>
+        <p style="font-size:.93rem">A teher gyorsabban jön, mint ahogy a víz távozni tudna: a telített talaj térfogata nem változhat, ezért a <b>víz veszi át a többletet</b> (<span class="nowrap">Δu ≈ Δσ</span>). A hatékony feszültség és vele a szilárdság <b>nem nő</b>: a talaj a terhelés pillanatában ugyanolyan gyenge, mint előtte. Így viselkedik a <b>telített agyag és iszap</b> az építés rövid ideje alatt.</p>
+        <div class="callout formula" style="margin:6px 0;font-size:.86rem">σ′ állandó &nbsp;→&nbsp; τ<sub>f</sub> = c<sub>u</sub> (φ<sub>u</sub> = 0) &nbsp;→&nbsp; számítás teljes feszültségekkel, c<sub>u</sub>-val</div>
+      </div>
+    </div>
+    <h3>A sebességek versenye dönt</h3>
+    <p>Hogy melyik eset áll fenn, az a <b>terhelés sebességének</b> és a talaj <b>vízáteresztő képességének</b> versenye. A konszolidációhoz szükséges idő a vízáteresztő képességtől és a drénezési úthossztól függ: <span class="inline-math">t ∝ H² / c<sub>v</sub></span>. Homokban ez percek–órák, iszapban hetek–hónapok, agyagban évek vagy évtizedek. Ezért:</p>
+    <div class="grid c3">
+      <div class="step"><h4>Kavics, homok</h4><p>Olyan gyorsan drénez, hogy gyakorlatilag <b>mindig drénezett</b>. Csak a drénezett számítás kell (c′ = 0, φ′).</p></div>
+      <div class="step"><h4>Iszap, iszapos homok</h4><p>Átmeneti: a feltöltés ütemétől függ. <b>Mindkét</b> eset számítandó, gyakran a drénezett a mértékadó.</p></div>
+      <div class="step"><h4>Telített agyag</h4><p>Az építés ideje alatt <b>drénezetlen</b>, hosszú távon drénezett. Terhelésnél a <b>drénezetlen</b> (rövid távú) eset szokott a mértékadó lenni — a kalkulátor mindkettőt számolja.</p></div>
+    </div>
+    <div class="callout warn"><b>Miért a drénezetlen a veszélyes terhelésnél?</b> Mert a teher felhordásakor a talaj a leggyengébb: a szilárdság még a régi, a teher már az új. Ahogy a víz lassan kiszivárog, a hatékony feszültség és vele a szilárdság nő — a helyzet csak javul. Tehermentesítésnél (munkagödör, bevágás) fordítva: ott a hosszú távú, drénezett eset a mértékadó, mert a pórusvíznyomás idővel visszaáll és a talaj gyengül.</div>
+  </section>
+
+  <section class="subsection" id="dr-2">
+    <h2>2. A siló filmje — gyors vagy lassú feltöltés?</h2>
+    <p class="lead">Egy gabonasiló áll puha, telített agyagon — a modell háromdimenziós és forgatható (húzd az egérrel vagy az ujjaddal). Ha <b>hetek alatt</b> töltik fel, a víz nem tud elszökni az alap alól: a pórusvíznyomás a teherrel együtt nő, a talaj szilárdsága nem — és ha a teher eléri a drénezetlen teherbírást, a siló megdől. Ha <b>évek alatt</b>, ütemezve töltik, a víz közben kiszivárog, a talaj erősödik, és ugyanaz a teher már elbírható. Játszd le a forgatókönyveket, és figyeld a <b>teher és a teherbírás versenyét</b> a diagramon.</p>
+    <div class="panel">
+      <div class="dfsc" id="df-sc">
+        <button type="button" class="on" data-s="transcona">Gyors feltöltés agyagon (Transcona, 1913)</button>
+        <button type="button" data-s="lassu">Lassú feltöltés agyagon</button>
+        <button type="button" data-s="szakaszos">Két ütemben, pihentetéssel</button>
+        <button type="button" data-s="homok">Ugyanez homokon</button>
+      </div>
+      <div class="dfbar">
+        <button type="button" class="kbtn" id="df-play">▶ Lejátszás</button>
+        <button type="button" class="kbtn" id="df-reset">⏮ Elölről</button>
+        <input type="range" id="df-t" min="0" max="1000" step="1" value="0" aria-label="idő">
+        <span id="df-tt" style="font-family:'JetBrains Mono';font-size:.84rem;min-width:170px"></span>
+        <span id="df-state" class="dfstate ok">—</span>
+        <button type="button" class="kbtn" id="df-vreset" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="df-spin" title="Lassú körbeforgatás">▶ forgatás</button>
+      </div>
+      <div class="dfwrap">
+        <div>
+          <div class="dfcv dfcv3d"><canvas id="df-cv" width="880" height="470"></canvas></div>
+          <div class="dfcv" style="margin-top:10px"><canvas id="df-ch" width="880" height="230"></canvas></div>
+          <div class="dfchips" id="df-chips"></div>
+        </div>
+        <div class="dfside">
+          <div class="dfsl"><label>Talaj az alap alatt</label></div>
+          <div class="dfsc" id="df-soil"><button type="button" class="on" data-s="agyag">puha, telített agyag</button><button type="button" data-s="iszap">iszap</button><button type="button" data-s="homok">homok</button></div>
+          <div class="dfsl"><label>Végső talpfeszültség q<sub>max</sub> <span class="v" id="df-qv"></span></label><input type="range" id="df-q" min="50" max="400" step="10"></div>
+          <div class="dfsl"><label>A feltöltés ideje <span class="v" id="df-tfv"></span></label><input type="range" id="df-tf" min="0" max="7" step="1"></div>
+          <div class="dfsl"><label>Alapszélesség B <span class="v" id="df-Bv"></span></label><input type="range" id="df-B" min="4" max="30" step="1"></div>
+          <div class="dfsl"><label>Feltöltés módja</label></div>
+          <div class="dfsc" id="df-mode"><button type="button" class="on" data-m="lin">folyamatos</button><button type="button" data-m="step">két ütemben, pihentetéssel</button></div>
+          <div class="dfsl"><label>Lejátszás sebessége</label></div>
+          <div class="dfsc" id="df-speed"><button type="button" data-v="0.5">½×</button><button type="button" class="on" data-v="1">1×</button><button type="button" data-v="2">2×</button></div>
+          <p class="knote" id="df-soilnote"></p>
+          <p class="knote">A film egy egyszerűsített modell: a teher többlete először a pórusvízbe megy, amely a talajra jellemző idő alatt szivárog el; a hatékony feszültség növekedésével a drénezetlen szilárdság is nő (c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′). A teherbírásokat a kalkulátor képletei adják sávalapra (részletek a Számítási konvenciókban).</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><b>Mit nézz a filmen:</b> az áttetsző talajtömbben látszik az alaplemez, fölötte a siló, amelyben a gabona szintje a teherrel együtt emelkedik; a <b>piezométer</b> (a kék vízoszlop az alap mellett) a pórusvíznyomás többletét mutatja — gyors feltöltésnél a teherrel együtt szökik fel, aztán lassan apad; a <b>sávok</b> a talp alatti teher megoszlását (barna: a szemcseváz viseli, kék: a víz viseli) és mellette a pillanatnyi <b>teherbírást</b>; a <b>diagramon</b> a fekete teher-görbe és a narancs drénezetlen teherbírás-görbe versenyez: ahol a teher föléje kerül, ott jön a talajtörés. A zöld szaggatott a drénezett (hosszú távú) teherbírás — ezt agyagon csak akkor „kapjuk meg", ha a víz már elszökött.</div>
+  </section>
+
+  <section class="subsection" id="dr-3">
+    <h2>3. Így számolunk a két esetben</h2>
+    <div class="dfcmp">
+      <div class="panel">
+        <div class="hd"><i style="background:var(--moss)"></i>Drénezett eset — hatékony feszültségek</div>
+        <div class="callout formula" style="font-size:.84rem;margin:8px 0">R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c′·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub></div>
+        <ul class="bullet" style="font-size:.92rem">
+          <li><b>Paraméterek:</b> c′ és φ′ (hatékony nyírószilárdsági jellemzők), a térfogatsúly a talajvíz alatt γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</li>
+          <li><b>Teherbírási tényezők:</b> N<sub>q</sub> = e<sup>π·tg φ′</sup>·tg²(45° + φ′/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·ctg φ′, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tg φ′ — mindhárom tag a terheléssel és a szélességgel nő.</li>
+          <li><b>q′:</b> az alapsík fölötti talaj <b>hatékony</b> geosztatikus nyomása; a talajvíz közelsége a γ′ tagot is csökkenti (t<sub>wd</sub>/B′ szabály).</li>
+          <li><b>Mikor:</b> homok, kavics mindig; iszap és agyag hosszú távon.</li>
+        </ul>
+        <div class="kbar" style="margin-top:8px"><button type="button" class="kbtn" onclick="openPreset('mp1')">MP1 drénezett sávalap a kalkulátorban</button></div>
+      </div>
+      <div class="panel">
+        <div class="hd"><i style="background:var(--rebar)"></i>Drénezetlen eset — teljes feszültségek</div>
+        <div class="callout formula" style="font-size:.84rem;margin:8px 0">σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q &nbsp;&nbsp; (φ<sub>u</sub> = 0 → N<sub>c</sub> = 2 + π = 5,14)</div>
+        <ul class="bullet" style="font-size:.92rem">
+          <li><b>Paraméter:</b> egyetlen szám, a c<sub>u</sub> drénezetlen nyírószilárdság (laborból vagy szondázásból); φ<sub>u</sub> = 0, ezért nincs N<sub>q</sub>- és N<sub>γ</sub>-tag — a teherbírás <b>független a szélességtől</b> és a mélységgel is csak a q tag miatt nő.</li>
+          <li><b>q:</b> az alapsík fölötti talaj <b>teljes</b> nyomása (γ<sub>sat</sub>-tal, a víz felhajtóereje nélkül), mert a teljes feszültségekkel számolunk.</li>
+          <li><b>Alaki és ferdeségi tényezők:</b> s<sub>c</sub> = 1 + 0,2·B′/L′, i<sub>c</sub> = 0,5·[1 + √(1 − H/(A′·c<sub>u</sub>))], b<sub>c</sub> = 1 − 2α/(π + 2).</li>
+          <li><b>Mikor:</b> telített agyag, iszap — az építés és a terhelés rövid ideje alatt.</li>
+        </ul>
+        <div class="kbar" style="margin-top:8px"><button type="button" class="kbtn" onclick="openPreset('mp2')">MP2 drénezetlen sávalap a kalkulátorban</button></div>
+      </div>
+    </div>
+    <h3>Melyiket mikor? — döntési táblázat</h3>
+    <table class="dftab">
+      <thead><tr><th>Talaj</th><th>Terhelés (építés, feltöltés)</th><th>Tehermentesítés (munkagödör)</th><th>Mit számolunk</th></tr></thead>
+      <tbody>
+        <tr><td><b>kavics, homok</b></td><td>drénezett</td><td>drénezett</td><td>csak drénezett (c′ = 0, φ′)</td></tr>
+        <tr><td><b>iszap, iszapos homok</b></td><td>rövid távon drénezetlen lehet, hosszú távon drénezett</td><td>drénezett</td><td>mindkettő, a kisebb ellenállás a mértékadó</td></tr>
+        <tr><td><b>telített agyag</b></td><td><b>drénezetlen</b> a mértékadó (rövid táv), hosszú távon drénezett</td><td><b>drénezett</b> a mértékadó (hosszú táv)</td><td>mindkettő (c<sub>u</sub>, valamint c′, φ′)</td></tr>
+        <tr><td><b>telítetlen agyag</b> (talajvíz felett)</td><td>közelítőleg drénezett, de a szívás változhat</td><td>drénezett</td><td>drénezett, óvatos paraméterekkel</td></tr>
+      </tbody>
+    </table>
+    <div class="callout success"><b>A kalkulátor így dolgozik:</b> mindig kiszámolja a drénezett teherbírást, és ha az alapsík alatti rétegnek van c<sub>u</sub>-ja, a drénezetlent is; az ábra alatti két sor egymás alatt mutatja a kettőt, és a kisebb ellenállású eset a mértékadó. Mindkettőben ugyanaz a γ<sub>R</sub> = 1,4 ellenállási tényező és a V<sub>d</sub> tervezési teher.</div>
+  </section>
+
+  <section class="subsection" id="dr-4">
+    <h2>4. Egy híres eset: a transconai gabonasiló, 1913</h2>
+    <div class="task-card">
+      <div class="task-head"><h3 style="margin-top:18px">Ami a filmben történik, az valóban megtörtént</h3><span class="task-num">Winnipeg, Kanada</span></div>
+      <p>A transconai gabonasilót 1913 őszén, az elkészülte után rögtön elkezdték feltölteni, és <b>egy hónap alatt</b> majdnem tele hordták. A lemezalap alatt vastag, puha, telített agyag feküdt. A gyors feltöltés drénezetlen állapotot hozott létre: a pórusvíz nem tudott elszökni, a talaj szilárdsága nem nőtt a teherrel. Amikor az átlagos talpfeszültség kb. <b>300 kPa</b> körüli értéket ért el, a talaj az egyik oldalon kitört, a másikon felpúposodott, és az épület néhány óra alatt mintegy <b>27°-ot dőlt</b> — maga a vasbeton siló szinte sértetlen maradt.</p>
+      <p>Évtizedekkel később a talajmintákon mért c<sub>u</sub> értékekkel visszaszámolt drénezetlen teherbírás a tényleges törőfeszültséggel <b>jó egyezést</b> mutatott — ez lett a drénezetlen (φ<sub>u</sub> = 0) teherbírás-számítás egyik klasszikus igazolása. A silót később aláalapozással kiegyenesítették, és évtizedekig használták.</p>
+      <div class="callout note" style="margin:10px 0 4px"><b>Tanulság:</b> telített agyagon a feltöltés <b>üteme</b> ugyanolyan fontos, mint a teher nagysága. Ugyanaz a siló, ugyanaz a talaj — lassan, ütemezve feltöltve a víz elszökött volna, a talaj erősödött volna, és a siló állna. A „Két ütemben, pihentetéssel" forgatókönyv pontosan ezt mutatja.</div>
+    </div>
+  </section>
+</div>
+
 <div class="chapter-page" id="page-mintapeldak" data-ch="mintapeldak">
 
   <h1>Mintapéldák</h1>
@@ -1977,6 +2127,13 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <li>A <b>2D metszet</b> gomb ugyanazt az állapotot mutatja függőleges metszetben: rétegek, talajvíz, alaptest, dolgozó szélesség (B′), terhek; a 3D-modell forgatható, a 2D-metszet azonnal leolvasható.</li>
         <li>Az ábra alatt az <b>ellenőrzések</b> egymás alatt, sorban: drénezett teherbírás, drénezetlen teherbírás, elcsúszás; mindegyik sorban az ellenállás és a teher összevetése, az ítélet és a kihasználtsági sáv. A sorra kattintva a hozzá tartozó levezetés nyílik meg; a tervezési teher, a külpontosság és a dolgozó keresztmetszet a levezetés 1–3. lépésében szerepel.</li>
       </ul>
+      <h3>A drénezett–drénezetlen film (3D siló)</h3>
+      <ul class="bullet">
+        <li>Szemléltető modell: a siló terhe B × B méretű, D = 1 m mélyen fekvő lemezen hat, a talajvíz a terepszinten. A teher q(t) a feltöltés ideje alatt lineárisan nő q<sub>max</sub>-ig (két ütemű módban két lépcsőben, köztük pihentetéssel, amelynek hossza a talaj konszolidációs idejének kétszerese, legfeljebb 2 év).</li>
+        <li>Pórusvíznyomás: a teher minden növekménye először a pórusvízbe kerül (telített talaj, Δu = Δσ), és a talajra jellemző T<sub>c</sub> időállandóval szivárog el (dΔu/dt = dq/dt − Δu/T<sub>c</sub>); T<sub>c</sub> = 2 év agyagnál, 1 hónap iszapnál, fél nap homoknál. A hatékony feszültség többlete Δσ′ = q − Δu. Ez a valódi konszolidációnál egyszerűbb, elsőrendű közelítés.</li>
+        <li>Drénezetlen szilárdság: c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′ (a konszolidációval növekvő szilárdság; agyag c<sub>u,0</sub> = 30 kPa, α = 0,25; iszap 45 kPa, 0,30). Drénezetlen teherbírás sávalapra: (2 + π)·c<sub>u</sub> + γ<sub>sat</sub>·D; drénezett: c′·N<sub>c</sub> + γ′·D·N<sub>q</sub> + 0,5·γ′·B·N<sub>γ</sub> (alaki, ferdeségi tényezők nélkül). A mértékadó a kettő közül a kisebb; homoknál csak a drénezett értelmezett.</li>
+        <li>Talajtörés akkor következik be, amikor a teher eléri a pillanatnyi mértékadó teherbírást (részleges tényezők nélkül, a tényleges törést mutatva); a film ekkor megáll, a siló 24°-ot dől, a −X oldalon felpúposodik a talaj és megjelenik a csúszólap. A 3D jelenet rajzszabályai a kalkulátor 3D modelljével egyeznek (áttetsző tömb, festő-algoritmus).</li>
+      </ul>
     </div>
   </section>
 </div>
@@ -1996,6 +2153,12 @@ const CHAPTERS = [
     {id:'me-3', label:'3. Dolgozó km. és talajvíz'},
     {id:'me-4', label:'4. Megfelelőség'},
     {id:'me-5', label:'5. Elcsúszás-vizsgálat'},
+  ]},
+  {id:'drenezes', label:'Drénezett vagy drénezetlen?', subsections:[
+    {id:'dr-1', label:'1. Miért kétféle?'},
+    {id:'dr-2', label:'2. A siló filmje (3D)'},
+    {id:'dr-3', label:'3. Így számolunk'},
+    {id:'dr-4', label:'4. Transcona, 1913'},
   ]},
   {id:'mintapeldak', label:'Mintapéldák', subsections:[
     {id:'s-mp1', label:'MP1'},
@@ -2805,6 +2968,245 @@ function calcMP11(){
 [['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9],['mp10',calcMP10],['mp10u',calcMP10u],['mp11',calcMP11]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
 });
+
+/* ===================== DRÉNEZETT–DRÉNEZETLEN 3D FILM (siló puha agyagon) ===================== */
+const DFILM=(function(){
+  'use strict';
+  const $=id=>document.getElementById('df-'+id);
+  const F=(v,d=1)=>fmt(v,d);
+  const SOIL={
+    agyag:{name:'puha, telített agyag',Tc:730,cu0:30,alpha:0.25,c:5,phi:24,gsat:18,col:'#AEB8C4',note:'vízáteresztő képesség k ≈ 10⁻⁹ m/s, a konszolidáció ideje évek — az építés alatt drénezetlen, hosszú távon drénezett.'},
+    iszap:{name:'iszap',Tc:30,cu0:45,alpha:0.30,c:5,phi:28,gsat:19,col:'#C9BE9E',note:'k ≈ 10⁻⁷ m/s, a konszolidáció hetek–hónapok — a feltöltés ütemétől függ, mindkét esetet számoljuk.'},
+    homok:{name:'homok',Tc:0.02,cu0:null,alpha:0,c:0,phi:33,gsat:20,col:'#E6D28E',note:'k ≈ 10⁻⁴ m/s, a víz órák alatt elszökik — gyakorlatilag mindig drénezett, pórusvíznyomás-többlet nem alakul ki.'}
+  };
+  const TF=[1,3,10,30,100,365,730,1825];
+  const tfName=d=>d<30?d+' nap':d<365?Math.round(d/30)+' hónap':(d/365).toLocaleString('hu-HU',{maximumFractionDigits:1})+' év';
+  const S={soil:'agyag',qmax:250,tfi:3,B:12,mode:'lin',speed:1,D:1,gw:10};
+  const SCEN={
+    transcona:{soil:'agyag',qmax:250,tfi:3,B:12,mode:'lin'},
+    lassu:{soil:'agyag',qmax:250,tfi:7,B:12,mode:'lin'},
+    szakaszos:{soil:'agyag',qmax:250,tfi:3,B:12,mode:'step'},
+    homok:{soil:'homok',qmax:250,tfi:3,B:12,mode:'lin'}
+  };
+  let SIM=null, ti=0, playing=false, rafId=0, lastTs=0, failAnim=0;
+  const cv=$('cv'), ctx=cv.getContext('2d'), ch=$('ch'), cctx=ch.getContext('2d');
+  const V={az:-0.62,el:0.40,zoom:1,spin:true,drag:null};
+
+  /* ---- teherbírások (sávalap, D = 1 m, talajvíz a terepszinten) ---- */
+  function qfd(){ const s=SOIL[S.soil]; const N=nFactors(s.phi); const g1=s.gsat-S.gw; return s.c*N.Nc+g1*S.D*N.Nq+0.5*g1*S.B*N.Ng; }
+  function qfu(cu){ const s=SOIL[S.soil]; return (2+Math.PI)*cu+s.gsat*S.D; }
+
+  /* ---- szimuláció: teher, pórusvíznyomás, hatékony feszültség, c_u az idő függvényében ---- */
+  function simulate(tOverride){
+    const s=SOIL[S.soil], tf=TF[S.tfi], Tc=s.Tc;
+    const hold=S.mode==='step'?Math.min(730,Math.max(2*Tc,30)):0;
+    let tEnd=S.mode==='step'?tf+hold+tf+1.5*Tc:Math.max(2.5*tf,tf+2.5*Tc);
+    if(S.soil==='homok') tEnd=S.mode==='step'?tf+hold+tf+5:3*tf;
+    tEnd=Math.min(tEnd,2600); if(tOverride) tEnd=tOverride;
+    const qAt=t=>{ if(S.mode==='lin') return S.qmax*Math.min(1,t/tf);
+      if(t<=tf) return 0.5*S.qmax*t/tf; if(t<=tf+hold) return 0.5*S.qmax; return 0.5*S.qmax+0.5*S.qmax*Math.min(1,(t-tf-hold)/tf); };
+    const N=1000, dt=tEnd/N, out={t:[],q:[],u:[],sp:[],cu:[],qfu:[],tEnd,tf,hold,qfd:qfd(),fail:-1,failT:null};
+    let u=0, qPrev=0;
+    for(let i=0;i<=N;i++){
+      const t=i*dt, q=qAt(t);
+      const sub=Math.max(1,Math.ceil(dt/Math.max(Tc/20,1e-3)));
+      const dq=(q-qPrev)/sub, ddt=dt/sub;
+      for(let k=0;k<sub;k++){ u+=dq; u-=u*(1-Math.exp(-ddt/Tc)); }
+      u=Math.max(0,u); qPrev=q;
+      const sp=q-u; const cu=s.cu0==null?null:s.cu0+s.alpha*Math.max(0,sp); const cap=cu==null?out.qfd:Math.min(qfu(cu),out.qfd);
+      out.t.push(t);out.q.push(q);out.u.push(u);out.sp.push(sp);out.cu.push(cu);out.qfu.push(cu==null?null:qfu(cu));
+      if(out.fail<0&&q>cap&&q>1){ out.fail=i; out.failT=t; }
+    }
+    if(!tOverride&&out.fail>=0&&out.tEnd>out.failT*1.35+2) return simulate(Math.max(out.failT*1.35,out.failT+2));
+    return out;
+  }
+
+  /* ---- 3D jelenet ---- */
+  function drawScene(){
+    const W=cv.width,H=cv.height; const s=SOIL[S.soil]; const i=Math.min(ti,SIM.t.length-1);
+    const t=SIM.t[i], q=SIM.q[i], u=SIM.u[i], sp=SIM.sp[i], cu=SIM.cu[i];
+    const cap=cu==null?SIM.qfd:Math.min(SIM.qfu[i],SIM.qfd);
+    const failed=SIM.fail>=0&&i>=SIM.fail; const fa=failed?Math.min(1,failAnim):0;
+    const filling=!failed&&i<SIM.t.length-1&&SIM.q[i+1]>q+1e-6;
+    ctx.clearRect(0,0,W,H);
+    const sky=ctx.createLinearGradient(0,0,0,H); sky.addColorStop(0,'#F7F4EE'); sky.addColorStop(1,'#FFFFFF'); ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
+    /* geometria [m]: X a metszet mentén, Y felfelé (terep y = 0), Z a mélységi irány; a tömb Z ∈ [−Wz, 0] */
+    const B=S.B, D=S.D, clayT=12, sandT=4, Ztot=clayT+sandT;
+    const Wx=Math.max(3*B,36), Wz=Math.max(2.4*B,30), zc=-Wz/2, xC=0;
+    const R=0.38*B, siloH=Math.min(1.35*B,22), yFootBot=-D, yFootTop=-D+1.0, yTop=yFootTop+siloH, yCone=yTop+0.14*B;
+    const hudW=236, padL=56, padR=hudW+18, padT=46, padB=18;
+    const ca=Math.cos(V.az), sa=Math.sin(V.az), ce=Math.cos(V.el), se=Math.sin(V.el);
+    const diag=Math.hypot(Wx,Wz), vert=(Ztot+yCone+1.2)*ce+diag*se;
+    const scale=Math.min((W-padL-padR)/diag,(H-padT-padB)/vert)*V.zoom;
+    const yOff=(Ztot-yCone)/2, cxs=padL+(W-padL-padR)/2, cys=padT+(H-padT-padB)/2;
+    const proj=(x,y,z)=>{ const y0=y+yOff; const x1=x*ca+z*sa, z1=-x*sa+z*ca; const y2=y0*ce-z1*se, z2=y0*se+z1*ce; return {x:cxs+x1*scale,y:cys-y2*scale,d:z2}; };
+    const light={x:-0.45,y:0.8,z:0.55};
+    const shade=(hex,n,a)=>{ const c=parseInt(hex.slice(1),16); let r=c>>16,g=(c>>8)&255,b=c&255; const k=n?0.7+0.3*Math.max(0,n.x*light.x+n.y*light.y+n.z*light.z):1; r=Math.round(r*k);g=Math.round(g*k);b=Math.round(b*k); return a==null||a>=1?`rgb(${r},${g},${b})`:`rgba(${r},${g},${b},${a})`; };
+    const viewDir={x:-sa*ce,y:se,z:ca*ce}; const facing=n=>(n.x*viewDir.x+n.y*viewDir.y+n.z*viewDir.z)>0;
+    const polys=[];
+    const push=(pts,fill,stroke,d,extra)=>{ const P=pts.map(p=>proj(p[0],p[1],p[2])); polys.push(Object.assign({P,fill,stroke,d:d!=null?d:P.reduce((a,p)=>a+p.d,0)/P.length},extra||{})); };
+    /* törés: a siló és az alaptest elfordítása a −X oldali alsó él körül, kis süllyedéssel */
+    const ang=-fa*24*Math.PI/180, pivX=xC-B/2, pivY=yFootBot, sink=fa*0.5;
+    const T=p=>{ if(!fa) return p; const dx=p[0]-pivX, dy=p[1]-pivY; return [pivX+dx*Math.cos(ang)-dy*Math.sin(ang), pivY+dx*Math.sin(ang)+dy*Math.cos(ang)-sink, p[2]]; };
+    /* talajtömb lapjai: rétegenként */
+    const layers=[{y1:0,y2:-clayT,col:s.col},{y1:-clayT,y2:-Ztot,col:'#E6D28E'}];
+    const faces=[
+      {n:{x:0,y:0,z:1},  q:(y1,y2)=>[[-Wx/2,y1,0],[Wx/2,y1,0],[Wx/2,y2,0],[-Wx/2,y2,0]]},
+      {n:{x:0,y:0,z:-1}, q:(y1,y2)=>[[Wx/2,y1,-Wz],[-Wx/2,y1,-Wz],[-Wx/2,y2,-Wz],[Wx/2,y2,-Wz]]},
+      {n:{x:1,y:0,z:0},  q:(y1,y2)=>[[Wx/2,y1,0],[Wx/2,y1,-Wz],[Wx/2,y2,-Wz],[Wx/2,y2,0]]},
+      {n:{x:-1,y:0,z:0}, q:(y1,y2)=>[[-Wx/2,y1,-Wz],[-Wx/2,y1,0],[-Wx/2,y2,0],[-Wx/2,y2,-Wz]]}
+    ];
+    const soilFace=(fc,alpha,dOff)=>{ const c=fc.q(0,-Ztot); const fd=proj((c[0][0]+c[2][0])/2,-Ztot/2,(c[0][2]+c[2][2])/2).d+dOff; layers.forEach(L=>push(fc.q(L.y1,L.y2),shade(L.col,fc.n,alpha),'rgba(60,40,20,.3)',fd)); push(fc.q(-0.5,-0.5),null,alpha<1?'rgba(30,120,200,.6)':'#1E78C8',fd+0.001,{line:true,dash:[7,4],w:1.6}); };
+    const topFace=(alpha,dOff)=>push([[-Wx/2,0,0],[Wx/2,0,0],[Wx/2,0,-Wz],[-Wx/2,0,-Wz]],shade('#C9D3A6',{x:0,y:1,z:0},alpha),'rgba(60,40,20,.3)',proj(0,0,-Wz/2).d+dOff);
+    faces.forEach(fc=>{ if(!facing(fc.n)) soilFace(fc,0.14,-1e6); });
+    /* tömör elemek */
+    const box=(x1,x2,y1,y2,z1,z2,col,alpha,tr)=>{ /* y1 < y2 */
+      const fs=[[{x:0,y:0,z:1},[[x1,y2,z2],[x2,y2,z2],[x2,y1,z2],[x1,y1,z2]]],[{x:0,y:0,z:-1},[[x2,y2,z1],[x1,y2,z1],[x1,y1,z1],[x2,y1,z1]]],[{x:1,y:0,z:0},[[x2,y2,z2],[x2,y2,z1],[x2,y1,z1],[x2,y1,z2]]],[{x:-1,y:0,z:0},[[x1,y2,z1],[x1,y2,z2],[x1,y1,z2],[x1,y1,z1]]],[{x:0,y:1,z:0},[[x1,y2,z2],[x1,y2,z1],[x2,y2,z1],[x2,y2,z2]]],[{x:0,y:-1,z:0},[[x1,y1,z2],[x2,y1,z2],[x2,y1,z1],[x1,y1,z1]]]];
+      fs.forEach(([n,p])=>{ const pts=tr?p.map(tr):p; push(pts,shade(col,n,alpha),alpha!=null&&alpha<1?'rgba(46,38,32,.35)':'#2E2620'); }); };
+    /* alaptest (B × B lemez), a talaj belsejében */
+    box(xC-B/2,xC+B/2,yFootBot,yFootTop,zc-B/2,zc+B/2,'#B5BBC0',1,T);
+    /* siló: gabona (belső henger) + fal (áttetsző) + kúp */
+    const N=28; const fillF=Math.min(1,q/S.qmax); const gh=Math.max(0,(siloH-0.4)*fillF);
+    for(let k=0;k<N;k++){ const a0=2*Math.PI*k/N, a1=2*Math.PI*(k+1)/N; const n={x:Math.cos((a0+a1)/2),y:0,z:Math.sin((a0+a1)/2)};
+      const r=R*0.94; if(gh>0.02){ const p=[[xC+r*Math.cos(a0),yFootTop+gh,zc+r*Math.sin(a0)],[xC+r*Math.cos(a1),yFootTop+gh,zc+r*Math.sin(a1)],[xC+r*Math.cos(a1),yFootTop,zc+r*Math.sin(a1)],[xC+r*Math.cos(a0),yFootTop,zc+r*Math.sin(a0)]].map(T); push(p,shade('#D2A040',n,1),null); }
+      const w=[[xC+R*Math.cos(a0),yTop,zc+R*Math.sin(a0)],[xC+R*Math.cos(a1),yTop,zc+R*Math.sin(a1)],[xC+R*Math.cos(a1),yFootTop,zc+R*Math.sin(a1)],[xC+R*Math.cos(a0),yFootTop,zc+R*Math.sin(a0)]].map(T); push(w,shade('#D9DEE2',n,0.42),'rgba(46,38,32,.25)');
+      const c=[[xC+R*Math.cos(a0),yTop,zc+R*Math.sin(a0)],[xC+R*Math.cos(a1),yTop,zc+R*Math.sin(a1)],[xC,yCone,zc]].map(T); const nc={x:n.x*0.7,y:0.7,z:n.z*0.7}; push(c,shade('#8C9BA7',nc,1),'rgba(46,38,32,.3)'); }
+    if(gh>0.02){ const top=[]; for(let k=0;k<N;k++){ const a=2*Math.PI*k/N; top.push(T([xC+R*0.94*Math.cos(a),yFootTop+gh,zc+R*0.94*Math.sin(a)])); } push(top,shade('#E0B45A',{x:0,y:1,z:0},1),null,proj(xC,yFootTop+gh,zc).d+0.02); }
+    /* töltőcső + hulló szemcsék */
+    if(filling){ const pipe=[[xC+R+4,yCone+2.5,zc],[xC+0.6,yCone+2.5,zc],[xC+0.6,yCone-0.2,zc]]; push(pipe,null,'#6B5B3E',proj(xC+2,yCone+2,zc).d,{line:true,w:5});
+      for(let k=0;k<8;k++){ const ph=((t*41+k*59)%100)/100; const y=yCone-0.3-ph*(yCone-0.3-(yFootTop+gh)); push([[xC+0.6+((k*7)%5)*0.1-0.2,y,zc]],null,null,proj(xC,y,zc).d+0.03,{dot:true,col:'#D2A040'}); } }
+    /* piezométer: fehér cső a talp mellett, benne a vízoszlop (Δu/γw méterben) */
+    const pxm=xC+B/2+2.2, pTop=8, pBot=-(D+2); box(pxm-0.25,pxm+0.25,pBot,pTop,zc-0.25,zc+0.25,'#FFFFFF',0.55);
+    const uH=Math.min(pTop-0.2,u/S.gw); box(pxm-0.2,pxm+0.2,pBot+0.05,uH,zc-0.2,zc+0.2,'#1E78C8',0.95);
+    /* szivárgási nyilak a talp alatt (intenzitás ∝ a pórusvíznyomás apadási üteme) */
+    const rateNorm=u/s.Tc/Math.max(1e-6,S.qmax/SIM.tf);
+    const alpha=Math.min(1,rateNorm*1.2)*(S.soil==='homok'?(filling?1:0):1);
+    if(alpha>0.03&&!failed){ const col=`rgba(30,120,200,${0.3+0.7*alpha})`; for(let r=0;r<3;r++) for(let c=0;c<5;c++){ const x=xC-B/2+(c+0.5)*B/5, y=-(D+1.6+r*2.4); const dir=c<1?-1:(c>3?1:0); const ex=x+dir*1.2, ey=y-(dir?0.9:1.5); push([[x,y,zc],[ex,ey,zc]],null,col,proj(x,y,zc).d+0.05,{line:true,w:1.8,arrow:true}); } }
+    /* törés: felpúposodó talaj és csúszólap a −X oldalon */
+    if(fa>0){ const edge=xC-B/2, toe=edge-0.95*B, hmax=0.11*B*fa; const nx=7, nz=7;
+      for(let a=0;a<nx;a++) for(let b=0;b<nz;b++){ const x0=edge+(toe-edge)*a/nx, x1=edge+(toe-edge)*(a+1)/nx, z0=zc-0.65*B+1.3*B*b/nz, z1=zc-0.65*B+1.3*B*(b+1)/nz;
+        const h=(x,z)=>hmax*Math.sin(Math.PI*(x-edge)/(toe-edge))*Math.cos(Math.PI*(z-zc)/(1.3*B))*(Math.abs(z-zc)<0.65*B?1:0);
+        push([[x0,h(x0,z0),z0],[x1,h(x1,z0),z0],[x1,h(x1,z1),z1],[x0,h(x0,z1),z1]],shade('#B9A27A',{x:-0.3,y:0.9,z:0},1),'rgba(90,70,40,.25)'); }
+      const cxr=xC-0.1*B, cyr=-D+0.45*B, Rr=Math.hypot(xC+B/2-cxr,-D-cyr); const a0=Math.atan2(-D-cyr,xC+B/2-cxr); const toeA=Math.atan2(0-cyr,toe-cxr); let a1=toeA; if(a1>a0) a1-=2*Math.PI;
+      const M=16, zA=zc-0.5*B, zB=zc+0.5*B; for(let k=0;k<M;k++){ const t0=a0+(a1-a0)*k/M, t1=a0+(a1-a0)*(k+1)/M; const p0=[cxr+Rr*Math.cos(t0),cyr+Rr*Math.sin(t0)], p1=[cxr+Rr*Math.cos(t1),cyr+Rr*Math.sin(t1)];
+        push([[p0[0],p0[1],zA],[p1[0],p1[1],zA],[p1[0],p1[1],zB],[p0[0],p0[1],zB]],`rgba(184,30,18,${0.22*fa})`,null); push([[p0[0],p0[1],zB],[p1[0],p1[1],zB]],null,`rgba(184,30,18,${0.9*fa})`,null,{line:true,dash:[6,4],w:2}); } }
+    /* elülső talajlapok áttetszően + terep + élek */
+    faces.forEach(fc=>{ if(facing(fc.n)) soilFace(fc,0.30,1e5); }); topFace(0.22,1e5);
+    const E=[[[-Wx/2,0,0],[Wx/2,0,0]],[[Wx/2,0,0],[Wx/2,0,-Wz]],[[Wx/2,0,-Wz],[-Wx/2,0,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,0,0]],[[-Wx/2,0,0],[-Wx/2,-Ztot,0]],[[Wx/2,0,0],[Wx/2,-Ztot,0]],[[Wx/2,0,-Wz],[Wx/2,-Ztot,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,0],[Wx/2,-Ztot,0]],[[Wx/2,-Ztot,0],[Wx/2,-Ztot,-Wz]],[[Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,0]]];
+    E.forEach(e=>push(e,null,'rgba(60,40,20,.45)',1e6,{line:true,w:0.8}));
+    /* rajzolás hátulról előre */
+    polys.sort((a,b)=>a.d-b.d);
+    polys.forEach(p=>{ if(p.dot){ ctx.fillStyle=p.col; ctx.beginPath(); ctx.arc(p.P[0].x,p.P[0].y,2.4,0,6.3); ctx.fill(); return; }
+      ctx.beginPath(); p.P.forEach((q2,k)=>k?ctx.lineTo(q2.x,q2.y):ctx.moveTo(q2.x,q2.y));
+      if(p.line){ ctx.setLineDash(p.dash||[]); ctx.strokeStyle=p.stroke; ctx.lineWidth=p.w||1.5; ctx.lineCap='round'; ctx.stroke(); ctx.setLineDash([]); if(p.arrow){ const a=p.P[0],b=p.P[1]; const an=Math.atan2(b.y-a.y,b.x-a.x); ctx.fillStyle=p.stroke; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x-7*Math.cos(an-0.5),b.y-7*Math.sin(an-0.5)); ctx.lineTo(b.x-7*Math.cos(an+0.5),b.y-7*Math.sin(an+0.5)); ctx.closePath(); ctx.fill(); } return; }
+      ctx.closePath(); if(p.fill){ ctx.fillStyle=p.fill; ctx.fill(); } if(p.stroke){ ctx.strokeStyle=p.stroke; ctx.lineWidth=0.8; ctx.stroke(); } });
+    /* feliratok (képernyő-térben, fehér kontúrral) */
+    const label=(tx,x,y,col,al,bold,sz)=>{ sz=sz||12; ctx.font=(bold?'700 ':'600 ')+sz+'px Inter, system-ui, sans-serif'; ctx.textAlign=al||'left'; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineJoin='round'; const tw=ctx.measureText(tx).width; if(al==='left'||!al){ x=Math.min(x,W-hudW-6-tw); } ctx.strokeText(tx,x,y); ctx.fillStyle=col; ctx.fillText(tx,x,y); };
+    { const p=proj(xC,yCone+(filling?3.6:0.9),zc); label('q = '+F(q,0)+' kPa',p.x,p.y-6,'#2E2620','center',true,13); }
+    { const p=proj(pxm,pTop+0.3,zc); label('piezométer',p.x+6,p.y-12,'#1E78C8','left',true,11); const p2=proj(pxm,Math.max(0.3,uH),zc); label('Δu = '+F(u,0)+' kPa',p2.x+8,Math.max(p2.y+4,p.y+6),'#1E78C8','left',true,12); }
+    { const p=proj(-Wx/2,-clayT/2,0); label(S.soil==='homok'?'homok (jól drénez)':s.name+' — telített',p.x-8,p.y,'#3A2A1A','right',true,11); const p2=proj(-Wx/2,-clayT-sandT/2,0); label(S.soil==='homok'?'kavics':'homokos kavics — drénező réteg',p2.x-8,p2.y,'#3A2A1A','right',false,10.5); const p3=proj(Wx/2,-0.5,-Wz); label('▼ talajvíz a terep közelében',p3.x+8,p3.y-4,'#1E78C8','left',true,11); }
+    if(alpha>0.03&&!failed){ label(S.soil==='homok'?'→ a víz azonnal elszökik (Δu ≈ 0)':'→ a víz lassan kiszivárog a drénező réteg felé',padL,H-16,'#1E78C8','left',true,12); }
+    if(fa>0){ ctx.globalAlpha=Math.min(1,fa*1.5); ctx.font='800 22px Inter'; ctx.textAlign='left'; ctx.fillStyle='#B81E12'; ctx.fillText('TALAJTÖRÉS',padL,H-30); ctx.font='600 12px Inter'; ctx.fillText(cu==null?'a drénezett teherbírás kimerült':'a drénezetlen teherbírás kimerült — a siló megdől, a talaj felpúposodik',padL,H-12); ctx.globalAlpha=1; }
+    /* HUD: sávok a jobb oldalon */
+    const bx=W-hudW+14, by=H-62, bh=152, sc=bh/Math.max(400,S.qmax,SIM.qfd,cap*1.05);
+    ctx.fillStyle='rgba(255,255,255,.82)'; ctx.fillRect(W-hudW,0,hudW,H); ctx.strokeStyle='#E6E0D6'; ctx.beginPath(); ctx.moveTo(W-hudW,0); ctx.lineTo(W-hudW,H); ctx.stroke();
+    const hq=q*sc, hu=u*sc, hc=cap*sc;
+    ctx.fillStyle='#A0785A'; ctx.fillRect(bx,by-(hq-hu),52,hq-hu); ctx.fillStyle='#1E78C8'; ctx.fillRect(bx,by-hq,52,hu);
+    ctx.strokeStyle=q>cap?'#B81E12':'#2E2620'; ctx.lineWidth=q>cap?2.5:1; ctx.strokeRect(bx,by-hq,52,hq);
+    ctx.fillStyle=q>cap?'#B81E12':'#5C7A52'; ctx.fillRect(bx+82,by-hc,52,hc); ctx.strokeStyle='#2E2620'; ctx.lineWidth=1; ctx.strokeRect(bx+82,by-hc,52,hc);
+    ctx.fillStyle='#2E2620'; ctx.font='600 10.5px Inter'; ctx.textAlign='center'; ctx.fillText('teher q',bx+26,by+14); ctx.fillText(F(q,0)+' kPa',bx+26,by-hq-5);
+    ctx.fillText('teherbírás',bx+108,by+14); ctx.fillText(cu==null?'(drénezett)':'(drénezetlen)',bx+108,by+26); ctx.fillText(F(cap,0)+' kPa',bx+108,by-hc-5);
+    ctx.font='700 12px Inter'; ctx.textAlign='left'; ctx.fillText('t = '+tfName(Math.round(t)),W-hudW+12,22);
+    ctx.font='10.5px Inter'; ctx.fillStyle='#5C6B79'; ctx.fillText(failed?'a siló megdőlt — itt megáll':(filling?'feltöltés folyik':(q>=S.qmax-0.5?'a siló tele, a víz szivárog':'pihentetés')),W-hudW+12,38);
+    ctx.font='10px Inter'; ctx.fillStyle='#1E78C8'; ctx.fillText('kék: a víz viseli (Δu = '+F(u,0)+' kPa)',W-hudW+12,58); ctx.fillStyle='#A0785A'; ctx.fillText('barna: a szemcseváz (Δσ′ = '+F(sp,0)+' kPa)',W-hudW+12,72);
+    if(cu!=null){ ctx.fillStyle='#8F3A1B'; ctx.fillText('c_u = '+F(cu,0)+' kPa',W-hudW+12,92); ctx.fillText('(2+π)·c_u + γ·D = '+F(SIM.qfu[i],0)+' kPa',W-hudW+12,106); ctx.fillStyle='#3E5A1F'; ctx.fillText('drénezett (hosszú táv): '+F(SIM.qfd,0)+' kPa',W-hudW+12,120); }
+    else { ctx.fillStyle='#3E5A1F'; ctx.fillText('homok: Δu ≈ 0, mindig drénezett',W-hudW+12,92); ctx.fillText('teherbírás: '+F(SIM.qfd,0)+' kPa',W-hudW+12,106); }
+    ctx.fillStyle='#8C9BA7'; ctx.font='10px Inter'; ctx.fillText('húzd az egérrel a forgatáshoz',W-hudW+12,H-8);
+  }
+
+  /* ---- diagram ---- */
+  function drawChart(){
+    const W=ch.width,H=ch.height,mL=58,mR=18,mT=22,mB=30,pw=W-mL-mR,ph=H-mT-mB; const i=Math.min(ti,SIM.t.length-1);
+    cctx.clearRect(0,0,W,H); cctx.fillStyle='#fff'; cctx.fillRect(0,0,W,H);
+    const yMax=Math.max(S.qmax,SIM.qfd,...SIM.qfu.filter(v=>v!=null),100)*1.08; const tEnd=SIM.tEnd;
+    const X=t=>mL+t/tEnd*pw, Y=v=>mT+ph-v/yMax*ph;
+    cctx.strokeStyle='#EFE9DF'; for(let k=1;k<=4;k++){ cctx.beginPath(); cctx.moveTo(mL,Y(yMax*k/4)); cctx.lineTo(mL+pw,Y(yMax*k/4)); cctx.stroke(); }
+    if(SIM.fail>=0){ cctx.fillStyle='rgba(184,30,18,.08)'; cctx.fillRect(X(SIM.failT),mT,mL+pw-X(SIM.failT),ph); }
+    const line=(arr,col,dash,w)=>{ cctx.strokeStyle=col; cctx.lineWidth=w||2; cctx.setLineDash(dash||[]); cctx.beginPath(); let st=false; for(let k=0;k<arr.length;k++){ if(arr[k]==null){st=false;continue;} const x=X(SIM.t[k]),y=Y(arr[k]); if(!st){cctx.moveTo(x,y);st=true;} else cctx.lineTo(x,y); } cctx.stroke(); cctx.setLineDash([]); };
+    line(SIM.t.map(()=>SIM.qfd),'#5C7A52',[7,5],1.6);
+    if(SIM.qfu[0]!=null) line(SIM.qfu,'#C4552B');
+    line(SIM.u,'#1E78C8',[2,3],1.6);
+    line(SIM.q,'#2E2620',null,2.4);
+    cctx.strokeStyle='#2E2620'; cctx.lineWidth=1.2; cctx.beginPath(); cctx.moveTo(mL,mT); cctx.lineTo(mL,mT+ph); cctx.lineTo(mL+pw,mT+ph); cctx.stroke();
+    cctx.fillStyle='#5C6B79'; cctx.font='10px JetBrains Mono'; cctx.textAlign='right'; for(let k=0;k<=4;k++) cctx.fillText(Math.round(yMax*k/4)+' kPa',mL-5,Y(yMax*k/4)+3);
+    const unitDay=tEnd<=120; const step=unitDay?(tEnd<=40?5:20):(tEnd<=800?90:365); cctx.textAlign='center';
+    for(let tt=0;tt<=tEnd+1e-6;tt+=step){ cctx.fillText(unitDay?tt+' nap':(step===90?(Math.round(tt/30))+' hó':(tt/365).toLocaleString('hu-HU',{maximumFractionDigits:1})+' év'),X(tt),H-10); }
+    const tc=SIM.t[i]; cctx.strokeStyle='#B81E12'; cctx.setLineDash([4,3]); cctx.lineWidth=1.2; cctx.beginPath(); cctx.moveTo(X(tc),mT); cctx.lineTo(X(tc),mT+ph); cctx.stroke(); cctx.setLineDash([]);
+    const dot=(v,col)=>{ if(v==null) return; cctx.fillStyle=col; cctx.beginPath(); cctx.arc(X(tc),Y(v),4,0,6.3); cctx.fill(); };
+    dot(SIM.q[i],'#2E2620'); dot(SIM.qfu[i],'#C4552B'); dot(SIM.u[i],'#1E78C8');
+    if(SIM.fail>=0){ cctx.fillStyle='#B81E12'; cctx.beginPath(); cctx.arc(X(SIM.failT),Y(SIM.q[SIM.fail]),6,0,6.3); cctx.fill(); cctx.font='700 11px Inter'; cctx.textAlign='left'; cctx.fillText('talajtörés: '+tfName(Math.round(SIM.failT)),Math.min(X(SIM.failT)+9,mL+pw-150),Y(SIM.q[SIM.fail])-9); }
+    cctx.font='600 10.5px Inter'; cctx.textAlign='left'; let lx=mL+8; const leg=[['#2E2620','teher q(t)'],['#C4552B','teherbírás drénezetlen (2+π)·c_u(t) + γ·D'],['#5C7A52','teherbírás drénezett (hosszú táv)'],['#1E78C8','pórusvíznyomás-többlet Δu(t)']];
+    leg.forEach(([c,tx])=>{ if(c==='#C4552B'&&SIM.qfu[0]==null) return; cctx.fillStyle=c; cctx.fillRect(lx,mT-14,14,4); cctx.fillStyle='#2E2620'; cctx.fillText(tx,lx+18,mT-9); lx+=cctx.measureText(tx).width+36; });
+  }
+
+  function renderChips(){
+    const i=Math.min(ti,SIM.t.length-1); const cu=SIM.cu[i]; const cap=cu==null?SIM.qfd:Math.min(SIM.qfu[i],SIM.qfd); const q=SIM.q[i];
+    const fs=q>1?cap/q:Infinity; const failed=SIM.fail>=0&&i>=SIM.fail;
+    const chip=(l,v,cls)=>`<span class="dfchip ${cls||''}">${l}: <b>${v}</b></span>`;
+    $('chips').innerHTML=chip('idő',tfName(Math.round(SIM.t[i])))+chip('teher q',F(q,0)+' kPa')+chip('Δu',F(SIM.u[i],0)+' kPa')+chip('Δσ′',F(SIM.sp[i],0)+' kPa')+
+      (cu!=null?chip('c_u',F(cu,0)+' kPa')+chip('drénezetlen teherbírás',F(SIM.qfu[i],0)+' kPa'):'')+chip('drénezett teherbírás',F(SIM.qfd,0)+' kPa')+
+      chip('biztonság (teherbírás / teher)',isFinite(fs)?F(fs,2):'—',failed||fs<1?'bad':(fs<1.4?'':'ok'));
+    const st=$('state'); if(failed){ st.className='dfstate bad'; st.textContent='TALAJTÖRÉS '+tfName(Math.round(SIM.failT))+' után'; }
+    else { st.className='dfstate ok'; st.textContent=SIM.fail>=0?'még áll — a törés '+tfName(Math.round(SIM.failT))+' után jön':'biztonságos végig'; }
+    $('tt').textContent='t = '+tfName(Math.round(SIM.t[i]))+' / '+tfName(Math.round(SIM.tEnd));
+    $('t').value=i;
+  }
+  function render(){ drawScene(); drawChart(); renderChips(); }
+
+  /* ---- lejátszás ---- */
+  function frame(ts){
+    if(!playing) return;
+    const dt=lastTs?Math.min(0.1,(ts-lastTs)/1000):0; lastTs=ts;
+    if(V.spin&&!V.drag) V.az+=dt*0.08;
+    const stopAt=SIM.fail>=0?SIM.fail:SIM.t.length-1;
+    if(ti>=stopAt){ if(SIM.fail>=0&&failAnim<1){ failAnim=Math.min(1,failAnim+dt*0.8); render(); rafId=requestAnimationFrame(frame); return; } if(V.spin){ render(); rafId=requestAnimationFrame(frame); return; } playing=false; $('play').textContent='▶ Lejátszás'; render(); return; }
+    ti=Math.min(stopAt,ti+dt*S.speed*(SIM.t.length/14));
+    render(); rafId=requestAnimationFrame(frame);
+  }
+  function play(){ if(ti>=(SIM.fail>=0?SIM.fail:SIM.t.length-1)){ ti=0; failAnim=0; } playing=true; lastTs=0; $('play').textContent='⏸ Szünet'; cancelAnimationFrame(rafId); rafId=requestAnimationFrame(frame); }
+  function pause(){ playing=false; $('play').textContent='▶ Lejátszás'; }
+  function rebuild(keepT){ SIM=simulate(); if(!keepT){ ti=0; failAnim=0; } else { ti=Math.min(ti,SIM.t.length-1); failAnim=SIM.fail>=0&&ti>=SIM.fail?1:0; } syncUI(); render(); }
+  function syncUI(){
+    $('qv').textContent=S.qmax+' kPa'; $('q').value=S.qmax; $('tfv').textContent=tfName(TF[S.tfi]); $('tf').value=S.tfi; $('Bv').textContent=S.B+' m'; $('B').value=S.B;
+    document.querySelectorAll('#df-soil button').forEach(b=>b.classList.toggle('on',b.dataset.s===S.soil));
+    document.querySelectorAll('#df-mode button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
+    $('soilnote').innerHTML='<b>'+SOIL[S.soil].name+':</b> '+SOIL[S.soil].note+(SOIL[S.soil].cu0!=null?' Kiindulási c<sub>u,0</sub> = '+SOIL[S.soil].cu0+' kPa, α = '+F(SOIL[S.soil].alpha,2)+'; drénezett paraméterek c′ = '+SOIL[S.soil].c+' kPa, φ′ = '+SOIL[S.soil].phi+'°.':' Drénezett paraméterek: c′ = 0, φ′ = '+SOIL[S.soil].phi+'°.');
+    if(window.huTypo) window.huTypo($('soilnote'));
+  }
+  function applyScen(k){ Object.assign(S,SCEN[k]); document.querySelectorAll('#df-sc button').forEach(b=>b.classList.toggle('on',b.dataset.s===k)); rebuild(false); play(); }
+  /* események */
+  document.querySelectorAll('#df-sc button').forEach(b=>b.addEventListener('click',()=>applyScen(b.dataset.s)));
+  document.querySelectorAll('#df-soil button').forEach(b=>b.addEventListener('click',()=>{S.soil=b.dataset.s;pause();rebuild(false);}));
+  document.querySelectorAll('#df-mode button').forEach(b=>b.addEventListener('click',()=>{S.mode=b.dataset.m;pause();rebuild(false);}));
+  document.querySelectorAll('#df-speed button').forEach(b=>b.addEventListener('click',()=>{S.speed=parseFloat(b.dataset.v);document.querySelectorAll('#df-speed button').forEach(x=>x.classList.toggle('on',x===b));}));
+  $('q').addEventListener('input',()=>{S.qmax=parseFloat($('q').value);pause();rebuild(true);});
+  $('tf').addEventListener('input',()=>{S.tfi=parseInt($('tf').value);pause();rebuild(false);});
+  $('B').addEventListener('input',()=>{S.B=parseFloat($('B').value);pause();rebuild(true);});
+  $('t').addEventListener('input',()=>{pause();ti=Math.min(parseInt($('t').value),SIM.fail>=0?SIM.fail:SIM.t.length-1);failAnim=SIM.fail>=0&&ti>=SIM.fail?1:0;render();});
+  $('play').addEventListener('click',()=>{ if(playing) pause(); else play(); });
+  $('reset').addEventListener('click',()=>{pause();ti=0;failAnim=0;render();});
+  $('vreset').addEventListener('click',()=>{V.az=-0.62;V.el=0.40;V.zoom=1;render();});
+  $('spin').addEventListener('click',()=>{V.spin=!V.spin;$('spin').classList.toggle('on',V.spin);if(V.spin&&!playing){playing=true;lastTs=0;rafId=requestAnimationFrame(frame);}});
+  /* forgatás egérrel / ujjal */
+  cv.addEventListener('pointerdown',e=>{ cv.setPointerCapture(e.pointerId); V.drag={x:e.clientX,y:e.clientY,az:V.az,el:V.el}; e.preventDefault(); });
+  cv.addEventListener('pointermove',e=>{ if(!V.drag) return; V.az=V.drag.az+(e.clientX-V.drag.x)*0.008; V.el=Math.min(1.3,Math.max(0.08,V.drag.el+(e.clientY-V.drag.y)*0.006)); if(!playing) render(); });
+  const endDrag=()=>{ V.drag=null; }; cv.addEventListener('pointerup',endDrag); cv.addEventListener('pointercancel',endDrag);
+  rebuild(false);
+  /* első megjelenéskor automatikus lejátszás; rejtett fülön nem fut */
+  if(window.IntersectionObserver){ let started=false; const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting&&!started){ started=true; play(); } if(!e.isIntersecting&&playing) pause(); }); },{threshold:0.3}); io.observe(cv); }
+  return {S,V,rebuild,play,pause};
+})();
+
 /* ===================== INDÍTÁS ===================== */
 const initCh=(location.hash||'#bevezetes').slice(1);
 setChapter(CHAPTERS.find(c=>c.id===initCh)?initCh:'bevezetes');
