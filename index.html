@@ -221,6 +221,8 @@ table.dt th{background:var(--steel-dk)}
 .kf{display:grid;grid-template-columns:112px 1fr 64px 30px;gap:6px;align-items:center;margin:3px 0;font-size:.85rem}
 .kf label{line-height:1.15}
 .kf label small{display:block;font-size:.68rem;color:var(--ink-mute);font-weight:400}
+.kf label small .klim{font-style:normal;font-weight:600;color:var(--rebar);white-space:nowrap}
+.kf label small .klim:empty{display:none}
 .kf input[type=range]{width:100%;min-width:0;accent-color:var(--rebar);cursor:pointer}
 .kf input[type=text],.kf select{width:100%;min-width:0;padding:5px 6px;border:1px solid var(--line-strong);border-radius:6px;font:inherit;font-family:'JetBrains Mono',monospace;font-size:.8rem;text-align:right;background:#fff;color:var(--steel-dk)}
 .kf input:disabled{opacity:.4}
@@ -1943,6 +1945,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <li>Bekapcsolt önsúly esetén az alaptest (G<sub>b,k</sub> = B·L·h·γ<sub>b</sub>, γ<sub>b</sub> = 25 kN/m³) és a felette lévő feltöltés (G<sub>f,k</sub> = (B·L − b·l)·Σγ<sub>i</sub>·t<sub>i</sub> a D − h vastagságban, a nedves térfogatsúllyal, a felhajtóerő elhanyagolásával) állandó teherként a G<sub>k</sub>-hoz adódik — a gyakorlati anyag szerint.</li>
         <li>Tervezési értékek: V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub>; a vízszintes teher az eredővel: H<sub>d</sub> = γ<sub>H</sub>·√(H<sub>B,k</sub>² + H<sub>L,k</sub>²). Alapértékek: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,5, γ<sub>R</sub> = 1,4 (talajtörés), γ<sub>R;h</sub> = 1,1 (elcsúszás) — mind átírható.</li>
       </ul>
+      <h3>Bemeneti tartományok és egymástól függő korlátok</h3>
+      <ul class="bullet">
+        <li>A méretek megengedett tartománya: B = 0,5–5 m, L = 0,5–5 m, D = 0,5–4 m, h = 0,5–3,5 m, b = 0,2–1,0 m. A csúszkák ezeken belül mozognak, a beírt érték a tartomány szélére vágódik.</li>
+        <li>A méretek egymást korlátozzák, hogy ne lehessen értelmetlen alaptestet felvenni: az alaptest magassága nem lehet nagyobb az alapsík mélységénél (h ≤ D — ha D-t csökkentjük, h vele együtt csökken); a fal vagy pillér nem lóghat ki az alaptestből (b ≤ B, pilléralapnál b ≤ L is); a Q<sub>k</sub> külpontossága nem lehet nagyobb az alaptest félszélességénél (e<sub>Q</sub> ≤ B/2, e<sub>Q,L</sub> ≤ L/2), vagyis a teher nem kerülhet az alaptesten kívülre. A függő méret határa a mező alatt olvasható, és a vezérlő méret változásakor azonnal igazodik.</li>
+        <li>A 3D modell és a 2D metszet léptéke minden beállításnál a méretekhez igazodik: a talajtömb szélessége és mélysége B, L, D, a rétegvastagságok és a talajvíz szerint nő, nagy alaptestnél a nyilak és a feliratok távolsága arányosan nagyobb, a 2D metszetben az alaptest legfeljebb a rajz középső sávját foglalja el, így a rétegfeliratok és a méretfeliratok mindig elférnek.</li>
+      </ul>
       <h3>Külpontosság — két irányban</h3>
       <ul class="bullet">
         <li>A vízszintes erők az alaptest tetején hatnak (karjuk az alapsíkra h), a Q<sub>k</sub> pedig e<sub>Q</sub> (B irány) és e<sub>Q,L</sub> (L irány) külpontossággal. A nyomatéki egyenletből irányonként: e<sub>B</sub> = |H<sub>B,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q</sub>| / V<sub>k</sub> és e<sub>L</sub> = |H<sub>L,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q,L</sub>| / V<sub>k</sub>, ahol V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub>; a ∓ előjelet a kapcsoló dönti el (ellentétes vagy azonos irányú nyomatékok).</li>
@@ -2190,22 +2198,22 @@ const KALK = (function(){
         <div class="kbar"><select id="k-preset"><option value="">Mintapélda betöltése…</option>${Object.entries(PRESETS).map(([k,p])=>`<option value="${k}">${p.name}</option>`).join('')}</select><button type="button" class="kbtn" id="k-reset" title="Alapértékek">↺</button></div>
         <details open class="kg"><summary>Alaptest</summary>
           ${sel('type','Típus',[['sav','Sávalap (L ≫ B)'],['pont','Pilléralap (B × L)']])}
-          ${fld('B','B','0.4','6','0.05','m','szélesség (a H irányában)')}
-          ${fld('L','L','0.4','8','0.05','m','hossz')}
-          ${fld('h','h','0.3','3','0.05','m','alaptest magassága')}
-          ${fld('D','D','0.3','6','0.05','m','alapsík mélysége')}
-          ${fld('b','b','0.1','2','0.05','m','fal / pillér szélessége')}
+          ${fld('B','B','0.5','5','0.05','m','szélesség (a H irányában), 0,5–5 m')}
+          ${fld('L','L','0.5','5','0.05','m','hossz, 0,5–5 m')}
+          ${fld('D','D','0.5','4','0.05','m','alapsík mélysége, 0,5–4 m')}
+          ${fld('h','h','0.5','3.5','0.05','m','alaptest magassága, 0,5–3,5 m <em class="klim" data-l="h"></em>')}
+          ${fld('b','b','0.2','1','0.05','m','fal / pillér szélessége, 0,2–1,0 m <em class="klim" data-l="b"></em>')}
           ${fld('alpha','α','0','20','0.5','°','alapsík dőlése')}
         </details>
         <details open class="kg"><summary>Terhek (karakterisztikus, az alaptest tetején)</summary>
           ${fld('Gk',sub('G','k'),'0','5000','10','kN','állandó függőleges')}
           ${fld('Qk',sub('Q','k'),'0','3000','10','kN','esetleges függőleges')}
-          ${fld('eQ',sub('e','Q'),'0','1.5','0.05','m',`a ${sub('Q','k')} külpontossága`)}
+          ${fld('eQ',sub('e','Q'),'0','2.5','0.01','m',`a ${sub('Q','k')} külpontossága <em class="klim" data-l="eQ"></em>`)}
           ${fld('Hk',sub('H','B,k'),'0','1500','5','kN','vízszintes erő (B irányban)')}
           ${sel('Htype','H jellege',[['G','állandó (γ<sub>G</sub>)'],['Q','esetleges (γ<sub>Q</sub>)']])}
           ${chk('Hopp',`a ${sub('H','B')}·h és a ${sub('Q','k')}·${sub('e','Q')} nyomaték <b>ellentétes</b> irányú`)}
           <div class="ksub" id="k-biax"><b>Kétirányú külpontosság</b> (csak pilléralapnál)
-          ${fld('eQL',sub('e','Q,L'),'0','1.5','0.05','m',`a ${sub('Q','k')} külpontossága L irányban`)}
+          ${fld('eQL',sub('e','Q,L'),'0','2.5','0.01','m',`a ${sub('Q','k')} külpontossága L irányban <em class="klim" data-l="eQL"></em>`)}
           ${fld('HL',sub('H','L,k'),'0','1500','5','kN','vízszintes erő (L irányban)')}
           ${chk('HoppL',`a ${sub('H','L')}·h és a ${sub('Q','k')}·${sub('e','Q,L')} nyomaték <b>ellentétes</b> irányú`)}</div>
           ${chk('self',`alaptest (γ<sub>b</sub> = 25 kN/m³) és feltöltés önsúlyának automatikus hozzáadása`)}
@@ -2270,6 +2278,7 @@ const KALK = (function(){
   function sync(){
     ['B','L','h','D','b','alpha','Gk','Qk','eQ','Hk','eQL','HL','gw','mob','gG','gQ','gR','gRh'].forEach(id=>{$(id).value=F(S[id],dec(id));$(id+'-r').value=S[id];});
     ['type','Htype','delta','pass'].forEach(id=>$(id).value=S[id]);
+    applyLimits();
     ['Hopp','HoppL','self','gwDeep','incEa'].forEach(id=>$(id).checked=!!S[id]);
     document.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x.dataset.d===S.detail));
     renderLayers();
@@ -2293,8 +2302,32 @@ const KALK = (function(){
       row.querySelector('.kx').addEventListener('click',()=>{S.layers.splice(i,1);renderLayers();onChange();});
     });
   }
+  /* ---------- bemeneti tartományok és egymástól függő korlátok ----------
+     B, L: 0,5–5 m; D: 0,5–4 m; h: 0,5–3,5 m, de h ≤ D; b: 0,2–1,0 m, de b ≤ B (és pilléralapnál b ≤ L);
+     e_Q ≤ B/2, e_Q,L ≤ L/2 — a teher nem kerülhet az alaptesten kívülre. A csúszkák határai élőben követik
+     a többi méretet, a beírt érték a határra vágódik, a függő méret (h, b, e) a vezérlő méret után igazodik. */
+  function limits(){
+    const strip=S.type==='sav';
+    const bmax=Math.min(1,S.B,strip?Infinity:S.L);
+    return {
+      B:{min:0.5,max:5}, L:{min:0.5,max:5}, D:{min:0.5,max:4},
+      h:{min:0.5,max:Math.min(3.5,S.D),why:S.D<3.5?`≤ D = ${F(S.D,2)} m`:''},
+      b:{min:0.2,max:bmax,why:bmax<1?`≤ ${(!strip&&S.L<S.B)?'L':'B'} = ${F(bmax,2)} m`:''},
+      eQ:{min:0,max:Math.floor(S.B*50)/100,why:`≤ B/2 = ${F(Math.floor(S.B*50)/100,2)} m`},
+      eQL:{min:0,max:strip?0:Math.floor(S.L*50)/100,why:strip?'':`≤ L/2 = ${F(Math.floor(S.L*50)/100,2)} m`}
+    };
+  }
+  function applyLimits(){
+    const lim=limits();
+    Object.entries(lim).forEach(([id,l])=>{
+      const r=$(id+'-r'), t=$(id); if(!r||!t) return;
+      S[id]=Math.round(clamp(S[id],l.min,l.max)*1000)/1000;
+      r.min=l.min; r.max=l.max; r.value=S[id]; t.value=F(S[id],dec(id));
+      const e=document.querySelector(`.klim[data-l="${id}"]`); if(e) e.textContent=l.why||'';
+    });
+  }
   function onChange(){
-    if(S.D<S.h){S.D=S.h;$('D').value=F(S.D,2);$('D-r').value=S.D;}
+    applyLimits();
     $('L').disabled=$('L-r').disabled=(S.type==='sav');
     $('biax').classList.toggle('koff',S.type==='sav'); ['eQL','HL'].forEach(id=>{$(id).disabled=$(id+'-r').disabled=(S.type==='sav');}); $('HoppL').disabled=(S.type==='sav');
     $('gw').disabled=$('gw-r').disabled=S.gwDeep;
@@ -2402,13 +2435,18 @@ const KALK = (function(){
     const strip=R.strip, B=S.B, L=strip?null:S.L, h=Math.min(S.h,S.D), D=S.D, b=Math.min(S.b,B), l=strip?null:Math.min(S.b,S.L);
     const bl=bounds(); const layH=bl.slice(0,-1).reduce((a,x)=>a+x.L.t,0);
     const Ztot=Math.max(D+1.3*B, D+1.4, layH+0.8, (S.gwDeep?0:S.gw)+0.5, 2.6);
-    const Wx=Math.max(3.2*B, B+2.6, 3.5); const Wz=strip?Math.max(1.4*B+1.2, 2.6):Math.max(L+1.4, 1.8*B, 2.6);
-    const colTop=strip?0.55:0.8;                            /* fal / pillér a terep felett */
+    const Wx=Math.max(2.6*B, B+2.6, 3.5); const Wz=strip?Math.max(1.4*B+1.2, 2.6):Math.max(L+1.4, 1.6*B, 2.6);
+    const k3=Math.max(1,Ztot/5);                            /* nagy tömbnél a nyilak, kiállások, felirat-távolságok arányosan nőnek */
+    const colTop=(strip?0.55:0.8)*k3;                       /* fal / pillér a terep felett */
     /* kamera */
     const ca=Math.cos(V3.az), sa=Math.sin(V3.az), ce=Math.cos(V3.el), se=Math.sin(V3.el);
-    const scale=Math.min(W/(1.9*(Wx+Wz*0.7)), H/(1.3*(Ztot+colTop+1.0)))*V3.zoom;
-    const cxs=W*((-sa*ce)>0?0.42:0.58), cys=H*0.52;
-    const yOff=(Ztot-colTop)/2; /* függőleges középre igazítás */
+    /* lépték: a tömb átlója (bármely forgatásnál ez a vízszintes kiterjedés felső korlátja) és a függőleges kiterjedés
+       (tömb + pillér + tehernyíl + felirat) a vászonba illesztve; jobbra a rétegfeliratoknak, balra a talajvíz/terep feliratainak hely marad */
+    const diag=Math.hypot(Wx,Wz), vert=(Ztot+colTop+1.25*k3)*ce+diag*se;
+    const padL=Math.min(90,0.12*W), padR=Math.min(205,0.3*W), padT=26, padB=14;
+    const scale=Math.min((W-padL-padR)/diag, (H-padT-padB)/vert)*V3.zoom;
+    const yOff=(Ztot-colTop)/2; /* függőleges középre igazítás: a tömb+pillér közepe y0 = 0 */
+    const cxs=padL+(W-padL-padR)/2, cys=padT+(H-padT-padB)/2+0.62*k3*ce*scale;
     const proj=(x,y,z)=>{ /* forgatás az Y tengely körül (az), majd X körül (el) */
       const y0=y+yOff; const x1=x*ca+z*sa, z1=-x*sa+z*ca; const y2=y0*ce-z1*se, z2=y0*se+z1*ce;
       return {x:cxs+x1*scale, y:cys-y2*scale, d:z2}; };
@@ -2507,7 +2545,7 @@ const KALK = (function(){
     polys.forEach(drawP);
     colPolys.sort((a,b)=>a.d-b.d).forEach(drawP);
     /* --- teher-nyilak (képernyő-térben, a pillér tetejéhez kötve) --- */
-    const top=proj(0,colTop,zcol), topE=proj(0,colTop+0.85,zcol);
+    const top=proj(0,colTop,zcol), topE=proj(0,colTop+0.85*k3,zcol);
     const arrow=(a,c,col,w)=>{ ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(c.x,c.y);ctx.stroke(); const ang=Math.atan2(c.y-a.y,c.x-a.x); ctx.beginPath();ctx.moveTo(c.x,c.y);ctx.lineTo(c.x-11*Math.cos(ang-0.4),c.y-11*Math.sin(ang-0.4));ctx.lineTo(c.x-11*Math.cos(ang+0.4),c.y-11*Math.sin(ang+0.4));ctx.closePath();ctx.fill(); };
     /* felirat alsó indexszel: a „_{...}" részek kisebb betűvel, lejjebb rajzolódnak (pl. γ_{sat}, c_{u}) */
     const label=(t,x,y,col,al2,bold,sz)=>{
@@ -2520,23 +2558,23 @@ const KALK = (function(){
     };
     arrow(topE,{x:top.x,y:top.y+2},'#1E63B0',4);
     label(`V_{k} = G_{k} + Q_{k} = ${F(R.Vk,0)}${R.u}`,topE.x,topE.y-7,'#1E63B0','center');
-    if(S.Qk>0&&(S.eQ>0||(!strip&&S.eQL>0))){ const qz=zcol+(strip?0:S.eQL*(S.HoppL?1:-1)); const qa=proj(S.eQ,colTop+0.75,qz), qb=proj(S.eQ,colTop+0.02,qz); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e_{Q} = ${F(S.eQ,2)}${!strip&&S.eQL>0?`; e_{Q,L} = ${F(S.eQL,2)}`:''} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
-    if(!strip&&S.HL>0){ const hs=proj(0,colTop-0.02,zcol+l/2+1.0), he=proj(0,colTop-0.02,zcol+l/2+0.03); arrow(hs,he,'#C0512A',3.5); label(`H_{L,k} = ${F(S.HL,0)} kN`,hs.x,hs.y+16,'#C0512A','center'); }
-    if(S.Hk>0){ const hs=proj(-b/2-1.0,colTop-0.02,zcol), he=proj(-b/2-0.03,colTop-0.02,zcol); arrow(hs,he,'#C0512A',3.5); label(`H_{${strip?'k':'B,k'}} = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
+    if(S.Qk>0&&(S.eQ>0||(!strip&&S.eQL>0))){ const qz=zcol+(strip?0:S.eQL*(S.HoppL?1:-1)); const qa=proj(S.eQ,colTop+0.75*k3,qz), qb=proj(S.eQ,colTop+0.02,qz); arrow(qa,qb,'#2E7D8A',2.5); label(`Q (e_{Q} = ${F(S.eQ,2)}${!strip&&S.eQL>0?`; e_{Q,L} = ${F(S.eQL,2)}`:''} m)`,qb.x+8,qb.y-10,'#2E7D8A'); }
+    if(!strip&&S.HL>0){ const hs=proj(0,colTop-0.02,zcol+l/2+1.0*k3), he=proj(0,colTop-0.02,zcol+l/2+0.03); arrow(hs,he,'#C0512A',3.5); label(`H_{L,k} = ${F(S.HL,0)} kN`,hs.x,hs.y+16,'#C0512A','center'); }
+    if(S.Hk>0){ const hs=proj(-b/2-1.0*k3,colTop-0.02,zcol), he=proj(-b/2-0.03,colTop-0.02,zcol); arrow(hs,he,'#C0512A',3.5); label(`H_{${strip?'k':'B,k'}} = ${F(S.Hk,0)}${R.u}`,hs.x-4,hs.y-8,'#C0512A','right'); }
     /* --- feliratok --- */
     if(frontVisible||xray){
       const zl=xray?fzF:0;
-      const pB=proj(0,-(D+Math.abs(dy))-0.28,zl); label(`B = ${F(B,2)} m${strip?'':' · L = '+F(S.L,2)+' m'}`,pB.x,pB.y,'#2E2620','center');
-      const pD=proj(-B/2-0.15,-D/2,zl); label(`D = ${F(D,2)} m`,pD.x,pD.y,'#2E2620','right');
-      const ph=proj(B/2+0.12,-(D-h/2),zl); label(`h = ${F(h,2)} m`,ph.x,ph.y,'#2E2620');
-      if(S.alpha){ const pa=proj(-B/2-0.15,-D-0.3,zl); label(`α = ${F(S.alpha,1)}°`,pa.x,pa.y,'#C0512A','right'); }
+      const pB=proj(0,-(D+Math.abs(dy))-0.28*k3,zl); label(`B = ${F(B,2)} m${strip?'':' · L = '+F(S.L,2)+' m'}`,pB.x,pB.y,'#2E2620','center');
+      const pD=proj(-B/2-0.15*k3,-D/2,zl); label(`D = ${F(D,2)} m`,pD.x,pD.y,'#2E2620','right');
+      const ph=proj(B/2+0.12*k3,-(D-h/2),zl); label(`h = ${F(h,2)} m`,ph.x,ph.y,'#2E2620');
+      if(S.alpha){ const pa=proj(-B/2-0.15*k3,-D-0.3*k3,zl); label(`α = ${F(S.alpha,1)}°`,pa.x,pa.y,'#C0512A','right'); }
       if(xray&&!strip){ const pL=proj(B/2+0.1,-(D-h)-0.02,zc-L/2); label(`L = ${F(S.L,2)} m`,pL.x+4,pL.y-4,'#2E2620'); }
       if(xray&&strip){ /* az 1 m-es vizsgált szakasz méretvonala */
         const a=proj(B/2+0.18,-D-0.02,zc+0.5), c=proj(B/2+0.18,-D-0.02,zc-0.5);
         ctx.strokeStyle='#8F3A1B'; ctx.lineWidth=1.6; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.stroke();
         [a,c].forEach(q=>{ ctx.beginPath(); ctx.arc(q.x,q.y,2.6,0,6.3); ctx.fillStyle='#8F3A1B'; ctx.fill(); });
         const m=proj(B/2+0.22,-D-0.02,zc); label('1,0 m',m.x+4,m.y+4,'#8F3A1B','left',true);
-        const m2=proj(0,-D-0.6,zc+0.5); label('vizsgált 1 m-es szakasz',m2.x,m2.y,'#8F3A1B','center',true,11);
+        const m2=proj(0,-D-0.6*k3,zc+0.5); label('vizsgált 1 m-es szakasz',m2.x,m2.y,'#8F3A1B','center',true,11);
       }
     }
     /* rétegnevek a tömbön kívül, a látható oldal mellett */
@@ -2551,11 +2589,11 @@ const KALK = (function(){
     const W=760, Hh=440, x0=30, x1=640, yS=120;
     const bl=bounds(); const layH=bl.slice(0,-1).reduce((a,x)=>a+x.L.t,0);
     const depth=Math.max(D+1.3*B, layH+0.8, (S.gwDeep?0:S.gw)+0.5, 2.5);
-    const s=Math.min((Hh-yS-16)/depth, 300/Math.max(B,0.8));
-    const cx=330, yB=yS+D*s, yT=yB-h*s, Bw=B*s, bw=Math.max(b*s,10);
+    const s=Math.min((Hh-yS-16)/depth, 260/Math.max(B,0.8));          /* az alaptest legfeljebb 260 px széles: a rétegfeliratok (bal) és a méretfeliratok (jobb) mindig elférnek */
+    const cx=400, yB=yS+D*s, yT=yB-h*s, Bw=B*s, bw=Math.max(b*s,10);
     let g=`<defs><marker id="k2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1E63B0"/></marker><marker id="k2r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0512A"/></marker></defs>`;
     bl.forEach((x,i)=>{ const yA=yS+x.top*s, yZ=Math.min(Hh-10,yS+(isFinite(x.bot)?x.bot:depth)*s); if(yZ<=yA) return; g+=`<rect x="${x0}" y="${yA}" width="${x1-x0}" height="${yZ-yA}" fill="${LAYCOL[i%LAYCOL.length]}"/>`; if(isFinite(x.bot)) g+=`<line x1="${x0}" y1="${yZ}" x2="${x1}" y2="${yZ}" stroke="#9A6B1E" stroke-width="1.3"/>`;
-      const Ly=x.L; let ty=(yA+yZ)/2; if(Math.abs(ty-yB)<14) ty=yB+18; g+=`<text x="${x0+8}" y="${ty}" font-size="11" font-weight="700" fill="#3A2A1A">${i+1}. ${Ly.name}</text><text x="${x0+8}" y="${ty+13}" font-size="9.5" fill="#3A2A1A">γ=${F(Ly.g,1)} | γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=${F(Ly.gs,1)} | φ=${F(Ly.phi,0)}° | c=${F(Ly.c,0)}${Ly.cu?' | c<tspan baseline-shift="sub" font-size="7">u</tspan>='+F(Ly.cu,0):''}</text>`; });
+      const Ly=x.L; const thick=(yZ-yA)>=44; let ty=Math.max(yA+12,(yA+yZ)/2-(thick?8:0)); if(Math.abs(ty-yB)<14) ty=yB+18; const cuS=Ly.cu?' | c<tspan baseline-shift="sub" font-size="7">u</tspan>='+F(Ly.cu,0):''; g+=`<text x="${x0+8}" y="${ty}" font-size="11" font-weight="700" fill="#3A2A1A" paint-order="stroke" stroke="rgba(255,255,255,.85)" stroke-width="3">${i+1}. ${Ly.name}</text>`+(thick?`<text x="${x0+8}" y="${ty+13}" font-size="9.5" fill="#3A2A1A" paint-order="stroke" stroke="rgba(255,255,255,.85)" stroke-width="3">γ=${F(Ly.g,1)} | γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=${F(Ly.gs,1)} kN/m³</text><text x="${x0+8}" y="${ty+26}" font-size="9.5" fill="#3A2A1A" paint-order="stroke" stroke="rgba(255,255,255,.85)" stroke-width="3">φ=${F(Ly.phi,0)}° | c=${F(Ly.c,0)}${cuS} kPa</text>`:`<text x="${x0+8}" y="${ty+13}" font-size="9.5" fill="#3A2A1A" paint-order="stroke" stroke="rgba(255,255,255,.85)" stroke-width="3">γ=${F(Ly.g,1)} | γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=${F(Ly.gs,1)} | φ=${F(Ly.phi,0)}° | c=${F(Ly.c,0)}${cuS}</text>`); });
     g+=`<line x1="${x0}" y1="${yS}" x2="${x1}" y2="${yS}" stroke="#8A7B5E" stroke-width="1.6"/><text x="${x0+4}" y="${yS-6}" font-size="10" fill="#6B6052">terepszint</text>`;
     if(!S.gwDeep&&S.gw<depth){ const yw=yS+S.gw*s; g+=`<line x1="${x0}" y1="${yw}" x2="${x1}" y2="${yw}" stroke="#1E78C8" stroke-width="1.6" stroke-dasharray="8,4"/><path d="M${x1-22},${yw-11} l8,11 l8,-11 z" fill="#1E78C8"/><text x="${x1-26}" y="${yw-4}" font-size="10" fill="#1E78C8" text-anchor="end">MTV ${F(S.gw,1)} m</text>`; }
     const al=S.alpha*Math.PI/180, dy=Math.tan(al)*Bw/2;
