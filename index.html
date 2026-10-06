@@ -3386,7 +3386,7 @@ const KPL=(function(){
     const shade=(hex,n,a)=>{ const c=parseInt(hex.slice(1),16); let r=c>>16,g=(c>>8)&255,b=c&255; const k=n?0.7+0.3*Math.max(0,n.x*light.x+n.y*light.y+n.z*light.z):1; r=Math.round(r*k);g=Math.round(g*k);b=Math.round(b*k); return a==null||a>=1?`rgb(${r},${g},${b})`:`rgba(${r},${g},${b},${a})`; };
     const facing=n=>(n.x*viewDir.x+n.y*viewDir.y+n.z*viewDir.z)>0;
     const poly=(pts,fill,stroke,d,extra)=>{ const P=pts.map(p=>proj(p[0],p[1],p[2])); polys.push(Object.assign({P,fill,stroke,d:d!=null?d:P.reduce((a,p)=>a+p.d,0)/P.length},extra||{})); };
-    const line=(pts,col,opt)=>poly(pts,null,col,opt&&opt.d!=null?opt.d:null,Object.assign({line:true},opt||{}));
+    const line=(pts,col,opt)=>poly(pts,null,col,opt&&opt.d!=null?opt.d:null,Object.assign({line:true},opt||{},{d:undefined}));
     const label=(tx,x,y,col,al,bold,sz)=>labels.push({tx,x,y,col,al:al||'left',bold,sz:sz||12});
     const label3=(tx,p3,dx,dy,col,al,bold,sz)=>{ const p=proj(p3[0],p3[1],p3[2]); label(tx,p.x+(dx||0),p.y+(dy||0),col,al,bold,sz); };
     function box(x1,x2,y1,y2,z1,z2,col,alpha,dOff,tr){ /* y1<y2 */
@@ -3457,31 +3457,31 @@ const KPL=(function(){
     const D=o.D, yd=y=>-D-y; const zF=o.zF, zB=o.zB; const a=o.alpha!=null?o.alpha:0.55; const tau=o.tau||0;
     const sides=o.side==='right'?[1]:o.side==='left'?[-1]:[1,-1];
     const tri=[[-o.B/2,0],[o.B/2,0],[P.C.x,P.C.y]];
-    const sk=o.faint?0.35:1;
+    const sk=o.faint?0.35:1; const onF=zF>=-1e-6; const dd=k=>onF?1e5+k:null;
     /* aktív ék (egyszer) */
-    const act=tri.map(q=>[q[0],yd(q[1])-tau*o.amp,zF]); r.poly(act,r.shade(COL.act,null,a*sk*(o.hl&&o.hl!=='c'?0.5:1)),'rgba(46,38,32,.5)',1e5+0.3);
+    const act=tri.map(q=>[q[0],yd(q[1])-tau*o.amp,zF]); r.poly(act,r.shade(COL.act,null,a*sk*(o.hl&&o.hl!=='c'?0.5:1)),'rgba(46,38,32,.5)',dd(0.3));
     sides.forEach(s=>{
       const M=q=>[s*q.x,yd(q.y)];
       const radz=[M(P.E),M(P.C),...P.sp.map(M)]; const pas=[M(P.E),M(P.F),M(P.G)];
       /* sebesség-eltolás: radiális zóna kissé elfordul E körül, passzív ék felfelé-kifelé csúszik */
       const dp=[s*Math.cos(P.pr),Math.sin(P.pr)].map(v=>v*tau*o.amp);
       const gF=o.hl==='g'?1.15:1, hlq=o.hl==='q';
-      r.poly(radz.map(q=>[q[0],q[1],zF]),r.shade(COL.rad,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',1e5+0.31);
-      r.poly(pas.map(q=>[q[0]+dp[0],q[1]+dp[1],zF]),r.shade(COL.pas,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',1e5+0.32);
+      r.poly(radz.map(q=>[q[0],q[1],zF]),r.shade(COL.rad,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',dd(0.31));
+      r.poly(pas.map(q=>[q[0]+dp[0],q[1]+dp[1],zF]),r.shade(COL.pas,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',dd(0.32));
       /* csúszófelület: lemez a tömbön át (3D), a c-kiemelésnél vastag */
       const curve=[M(P.C),...P.sp.map(M),M(P.G)];
       for(let k=0;k<curve.length-1;k++){ const p0=curve[k],p1=curve[k+1]; r.poly([[p0[0],p0[1],zF],[p1[0],p1[1],zF],[p1[0],p1[1],zB],[p0[0],p0[1],zB]],`rgba(46,125,138,${(o.hl==='c'?0.55:0.22)*sk})`,null); }
-      r.line(curve.map(q=>[q[0],q[1],zF]),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:1e5+0.4,dash:o.faint?[5,4]:null});
+      r.line(curve.map(q=>[q[0],q[1],zF]),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:dd(0.4),dash:o.faint?[5,4]:null});
       r.line(curve.map(q=>[q[0],q[1],zB]),'rgba(31,95,104,.5)',{w:1.2});
       /* ék oldala (A–C) */
-      r.line([[-s*o.B/2,yd(0),zF],[P.C.x*0+s*P.C.x,yd(P.C.y),zF]].map(q=>q),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:1e5+0.4});
+      r.line([[-s*o.B/2,yd(0),zF],[s*P.C.x,yd(P.C.y),zF]],o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:dd(0.4)});
       /* takarás a passzív ék felett (q-kiemelés) */
-      if(D>0&&(hlq||o.showOver)){ const x0=s*P.E.x, x1=s*P.G.x; r.poly([[x0,-D,zF],[x1,-D,zF],[x1,0,zF],[x0,0,zF]].map(q=>[q[0],q[1]+(x0!==x1?tau*o.amp*0.9:0),q[2]]),`rgba(110,78,46,${hlq?0.55:0.25})`,'rgba(60,40,20,.5)',1e5+0.33);
-        if(hlq){ const n=4; for(let k=0;k<n;k++){ const x=x0+(x1-x0)*(k+0.5)/n; r.line([[x,0.9,zF],[x,0.08,zF]],'#6E4E2E',{w:2,arrow:true,ah:7,d:1e5+0.5}); } } }
+      if(D>0&&(hlq||o.showOver)){ const x0=s*P.E.x, x1=s*P.G.x; r.poly([[x0,-D,zF],[x1,-D,zF],[x1,0,zF],[x0,0,zF]].map(q=>[q[0],q[1]+(x0!==x1?tau*o.amp*0.9:0),q[2]]),`rgba(110,78,46,${hlq?0.55:0.25})`,'rgba(60,40,20,.5)',dd(0.33));
+        if(hlq){ const n=4; for(let k=0;k<n;k++){ const x=x0+(x1-x0)*(k+0.5)/n; r.line([[x,0.9,zF],[x,0.08,zF]],'#6E4E2E',{w:2,arrow:true,ah:7,d:dd(0.5)}); } } }
       /* felszíni kidudorodás a passzív zóna felett (3D) */
-      if(tau>0.02){ const x0=s*P.E.x, x1=s*P.G.x, n=10; const hgt=x=>o.amp*0.9*tau*Math.sin(Math.PI*(x-x0)/(x1-x0)); for(let k=0;k<n;k++){ const xa=x0+(x1-x0)*k/n, xb=x0+(x1-x0)*(k+1)/n; r.poly([[xa,hgt(xa),zF],[xb,hgt(xb),zF],[xb,hgt(xb),zB],[xa,hgt(xa),zB]],r.shade('#C9D3A6',{x:0,y:1,z:0},0.9),'rgba(60,40,20,.25)'); r.poly([[xa,0,zF],[xb,0,zF],[xb,hgt(xb),zF],[xa,hgt(xa),zF]],r.shade(COL.over,{x:0,y:0,z:1},0.9),null,1e5+0.2); } }
+      if(tau>0.02){ const x0=s*P.E.x, x1=s*P.G.x, n=10; const hgt=x=>o.amp*0.9*tau*Math.sin(Math.PI*(x-x0)/(x1-x0)); for(let k=0;k<n;k++){ const xa=x0+(x1-x0)*k/n, xb=x0+(x1-x0)*(k+1)/n; r.poly([[xa,hgt(xa),zF],[xb,hgt(xb),zF],[xb,hgt(xb),zB],[xa,hgt(xa),zB]],r.shade('#C9D3A6',{x:0,y:1,z:0},0.9),'rgba(60,40,20,.25)'); r.poly([[xa,0,zF],[xb,0,zF],[xb,hgt(xb),zF],[xa,hgt(xa),zF]],r.shade(COL.over,{x:0,y:0,z:1},0.9),null,dd(0.2)); } }
       /* sebességnyilak (áramló) */
-      if(!o.faint){ const ph=o.flowPh||0; const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.85)',{w:1.6,arrow:true,ah:6,d:1e5+0.6}); };
+      if(!o.faint){ const ph=o.flowPh||0; const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.85)',{w:1.6,arrow:true,ah:6,d:dd(0.6)}); };
         const L=Math.min(0.5*o.B,0.8);
         if(s===1){ arrow([0,yd(P.C.y*0.45)],[0,-1],L); arrow([-o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); arrow([o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); }
         [0.3,0.65].forEach(f=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const mid={x:(p.x+P.E.x)/2*1.0+(p.x-P.E.x)*0.15,y:(p.y+P.E.y)/2+(p.y-P.E.y)*0.15}; const tx=-(mid.y-P.E.y), ty=(mid.x-P.E.x); const nn=Math.hypot(tx,ty)||1; arrow([s*mid.x,yd(mid.y)],[s*tx/nn,-ty/nn],L*0.9); });
@@ -3531,7 +3531,7 @@ const KPL=(function(){
   const S2={phi:30,c:10,g:18,B:2,LB:6,tau:0,play:true,ph:0,morph:null};
   const r2=R3($('cv2'));
   function draw2(){
-    const B=S2.B, L=S2.LB*B, P=prandtl(S2.phi,B); const D=0.5; const Wx=Math.max(2.2*P.G.x+2,6), Wz=Math.max(L+2*P.G.x*0.9+2,6); const zc=-Wz/2, zF=zc+L/2, zB=zc-L/2; const Ztot=D+Math.max(1.35*P.ymax,2.2);
+    const B=S2.B, L=S2.LB*B, P=prandtl(S2.phi,B); const D=0.5; const Wx=Math.max(2*P.G.x+4,6), Wz=Math.max(L+2*P.G.x+3,6); const zc=-Wz/2, zF=zc+L/2, zB=zc-L/2; const Ztot=D+Math.max(1.35*P.ymax,2.2);
     r2.begin({Wx,Wz,yTop:1.9,yBot:-Ztot,hudW:250});
     const blk=r2.block(Wx,Wz,[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}],{frontAlpha:0.2});
     const tau=S2.tau, amp=0.1*B;
@@ -3548,7 +3548,7 @@ const KPL=(function(){
     loadArrow(r2,0,1.0,zc,1.2,'#1E63B0','V');
     blk.after();
     r2.label3('L = '+F(L,1)+' m',[B/2+0.2,-D+0.5,zc],8,0,'#2E2620','left',true,11); r2.label3('B = '+F(B,1)+' m',[0,-D-0.15,zF],0,14,'#2E2620','center',true,11);
-    r2.label3('véglap: itt is nyírási ellenállás',[0,-D-P.ymax*0.5,zF+P.G.x*0.6],0,0,'#1F5F68','center',true,11);
+    r2.label('színezett véglapok a rövid oldalakon: itt is csúszólap és nyírási ellenállás ébred',8,r2.ctx.canvas.height-22,'#1F5F68','left',true,11);
     r2.flush();
     const T=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L,D}); const T0=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L:Infinity,D});
     const h=r2.hud(r2.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
@@ -3665,7 +3665,7 @@ const KPL=(function(){
     if(window.IntersectionObserver){ const io=new IntersectionObserver(es=>es.forEach(e=>{ a.vis=e.isIntersecting; if(a.vis) a.draw(); }),{threshold:0.15}); io.observe(a.cv); } else a.vis=true; });
   ui1(); ui2(); ui3(); ui4(); draw5(); draw1(); draw2(); draw3(); draw4();
   requestAnimationFrame(loop);
-  return {S1,S2,S3,S4,terms,prandtl};
+  return {S1,S2,S3,S4,terms,prandtl,_r2:r2,_draw2:draw2};
 })();
 
 /* ===================== INDÍTÁS ===================== */
