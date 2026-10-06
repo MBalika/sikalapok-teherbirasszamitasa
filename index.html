@@ -3419,7 +3419,7 @@ const KPL=(function(){
         ctx.beginPath(); p.P.forEach((q,k)=>k?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));
         if(p.line){ ctx.setLineDash(p.dash||[]); ctx.strokeStyle=p.stroke; ctx.lineWidth=p.w||1.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke(); ctx.setLineDash([]); if(p.arrow){ const a=p.P[p.P.length-2],b=p.P[p.P.length-1]; const an=Math.atan2(b.y-a.y,b.x-a.x); const s=p.ah||8; ctx.fillStyle=p.stroke; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x-s*Math.cos(an-0.45),b.y-s*Math.sin(an-0.45)); ctx.lineTo(b.x-s*Math.cos(an+0.45),b.y-s*Math.sin(an+0.45)); ctx.closePath(); ctx.fill(); } return; }
         ctx.closePath(); if(p.fill){ ctx.fillStyle=p.fill; ctx.fill(); } if(p.stroke){ ctx.strokeStyle=p.stroke; ctx.lineWidth=p.w||0.8; ctx.stroke(); } });
-      labels.forEach(l=>{ ctx.font=(l.bold?'700 ':'600 ')+l.sz+'px Inter, system-ui, sans-serif'; ctx.textAlign=l.al; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineJoin='round'; let x=l.x; const tw=ctx.measureText(l.tx).width; if(l.al==='left') x=Math.min(x,W-hudW-6-tw); if(l.al==='right') x=Math.max(x,6+tw); ctx.strokeText(l.tx,x,l.y); ctx.fillStyle=l.col; ctx.fillText(l.tx,x,l.y); });
+      labels.forEach(l=>{ ctx.font=(l.bold?'700 ':'600 ')+l.sz+'px Inter, system-ui, sans-serif'; ctx.textAlign=l.al; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineJoin='round'; let x=l.x; const tw=ctx.measureText(l.tx).width; if(l.al==='left') x=Math.min(x,W-hudW-6-tw); if(l.al==='right') x=Math.max(x,6+tw); if(l.al==='center') x=Math.max(6+tw/2,Math.min(x,W-hudW-6-tw/2)); ctx.strokeText(l.tx,x,l.y); ctx.fillStyle=l.col; ctx.fillText(l.tx,x,l.y); });
       ctx.fillStyle='#8C9BA7'; ctx.font='10px Inter'; ctx.textAlign='left'; ctx.fillText(V.mode==='2d'?'2D metszet (függőleges metszet az alap tengelyén át)':'húzd az egérrel a forgatáshoz',8,H-6);
     }
     function hud(x0,w){ ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fillRect(x0,0,w,H); ctx.strokeStyle='#E6E0D6'; ctx.beginPath(); ctx.moveTo(x0,0); ctx.lineTo(x0,H); ctx.stroke(); return {ctx,x0,w,H}; }
@@ -3635,7 +3635,7 @@ const KPL=(function(){
     loadArrow(r4,0,D>0?Math.max(-D+0.6,0)+0.6-tau*amp:0.6-tau*amp,-Wz/2,1.2,'#1E63B0','V');
     blk.after();
     const gq=S4.gw?S4.g-10:S4.g; const q=gq*D;
-    if(D>0){ r4.label3('takarás vastagsága D = '+F(D,1)+' m',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11); r4.label3('q′ = γ′·D = '+F(q,0)+' kPa',[P.E.x+(P.G.x-P.E.x)*0.85,1.9,0],0,-6,'#6E4E2E','center',true,12); r4.label3('ezt a súlyt kell a passzív éknek felemelnie',[P.E.x+(P.G.x-P.E.x)*0.85,1.9,0],0,8,'#6E4E2E','center',false,10.5); }
+    if(D>0){ r4.label3('takarás vastagsága D = '+F(D,1)+' m',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11); r4.label3('q′ = γ′·D = '+F(q,0)+' kPa',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,-6,'#6E4E2E','center',true,12); r4.label3('ezt a súlyt kell a passzív éknek felemelnie',[-(P.E.x+(P.G.x-P.E.x)*0.6),2.1,0],0,8,'#6E4E2E','center',false,10.5); }
     else r4.label3('D = 0: nincs takarás, a mélységi tag nulla',[0,0.9,0],0,-6,'#B81E12','center',true,12);
     r4.flush();
     const T=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D}); const Tref=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D:4});
