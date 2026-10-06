@@ -367,7 +367,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <span><b>Tárgy</b> Alapozás BSc · BMEEOGMAT45</span>
     </div>
     <div class="stats"><span><b>11</b> mintapélda</span><span><b>1</b> rétegzett kalkulátor 3D-modellel</span><span><b>EC7</b> · MSZ EN 1997-1</span></div>
-    <div class="cta"><a onclick="setChapter('menete')">A számítás menete</a><a class="ghost" onclick="setChapter('drenezes')">Drénezett vagy drénezetlen?</a><a class="ghost" onclick="setChapter('mintapeldak')">Mintapéldák</a><a class="ghost" onclick="setChapter('kalkulator')">Kalkulátor</a></div>
+    <div class="cta"><a onclick="setChapter('menete')">A számítás menete</a><a class="ghost" onclick="setChapter('drenezes')">Drénezett vagy drénezetlen?</a><a class="ghost" onclick="setChapter('keplet')">A képlet tagjai</a><a class="ghost" onclick="setChapter('mintapeldak')">Mintapéldák</a><a class="ghost" onclick="setChapter('kalkulator')">Kalkulátor</a></div>
   </div>
 
   <section class="subsection" id="b-utmutato">
@@ -792,6 +792,122 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>Évtizedekkel később a talajmintákon mért c<sub>u</sub> értékekkel visszaszámolt drénezetlen teherbírás a tényleges törőfeszültséggel <b>jó egyezést</b> mutatott — ez lett a drénezetlen (φ<sub>u</sub> = 0) teherbírás-számítás egyik klasszikus igazolása. A silót később aláalapozással kiegyenesítették, és évtizedekig használták.</p>
       <div class="callout note" style="margin:10px 0 4px"><b>Tanulság:</b> telített agyagon a feltöltés <b>üteme</b> ugyanolyan fontos, mint a teher nagysága. Ugyanaz a siló, ugyanaz a talaj — lassan, ütemezve feltöltve a víz elszökött volna, a talaj erősödött volna, és a siló állna. A „Két ütemben, pihentetéssel" forgatókönyv pontosan ezt mutatja.</div>
     </div>
+  </section>
+</div>
+
+<div class="chapter-page" id="page-keplet" data-ch="keplet">
+
+  <section class="subsection" id="kt-0">
+    <h2>A képlet tagjai — mi honnan jön?</h2>
+    <p class="lead">A síkalap teherbírási képlete nem egy „fekete doboz”: minden tagja és minden tényezője egy-egy jól látható fizikai hatást fejez ki. Ebben a fejezetben a <b>törési mechanizmust</b> rajzoljuk meg háromdimenziós, forgatható modelleken, és egyenként megmutatjuk, honnan származik a <b>szélességi</b>, a <b>mélységi</b> és a <b>kohéziós</b> tag, miért kellenek az <b>alaki</b>, a <b>teherferdeségi</b> és az alapsík-dőlési tényezők, és hogyan változtatják meg a csúszólapot.</p>
+    <div class="callout formula" style="text-align:center;font-size:0.98rem">
+      R<sub>k</sub> / (B′·L′) = <span style="color:var(--rebar)">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub></span> &nbsp;+&nbsp; <span style="color:#6E4E2E">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub></span> &nbsp;+&nbsp; <span style="color:var(--azure)">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub></span>
+    </div>
+    <div class="grid c3">
+      <div class="step" style="border-left-color:var(--rebar)"><h4>Szélességi tag</h4><p>A csúszólap feletti <b>talajtest súlya</b> tart ellen a kinyomásnak. Minél szélesebb az alap, annál nagyobb (és mélyebb) a törési test → B-vel arányos.</p></div>
+      <div class="step" style="border-left-color:#6E4E2E"><h4>Mélységi tag</h4><p>A passzív éknek az alapsík feletti <b>takarást</b> is fel kell emelnie: ennek súlya q′ = γ′·D. Minél mélyebb az alap, annál nagyobb.</p></div>
+      <div class="step" style="border-left-color:var(--azure)"><h4>Kohéziós tag</h4><p>A <b>csúszólap teljes hossza</b> mentén a kohézió is ellenáll — a súrlódástól függetlenül, ezért a c tag akkor is van, ha φ = 0.</p></div>
+    </div>
+    <div class="callout note">Minden modell <b>forgatható</b> (húzd az egérrel vagy az ujjaddal), lejátszáskor a mechanizmus „mozog”: az alap süllyed, az aktív ék lefelé nyomul, a radiális zóna elfordul, a passzív ék a felszínt kidudorítja. A nyilak a talaj elmozdulás-irányát mutatják. A jobb oldali sávdiagram mindig a három tag pillanatnyi értékét adja kPa-ban, sávalapra, a kalkulátor képleteivel.</div>
+  </section>
+
+  <section class="subsection" id="kt-1">
+    <h2>1. A törési mechanizmus és a három tag</h2>
+    <p>Amikor a teher eléri a teherbírást, az alap alatt egy jellegzetes <b>Prandtl-féle</b> törési test alakul ki: az alaptesttel együtt lefelé mozgó <b>aktív ék</b> (oldalai 45° + φ/2 szöget zárnak be az alapsíkkal), a körülötte elforduló <b>radiális nyírási zóna</b> (logaritmikus spirál), és a kifelé-felfelé kinyomott <b>passzív ék</b> (45° − φ/2). A talajtörés ellen három dolog dolgozik: a kinyomott talajtest <b>súlya</b>, a fölötte lévő <b>takarás</b> súlya és a csúszólap mentén működő <b>kohézió</b>. Ez a három a képlet három tagja. Állítsd φ-t: nagyobb súrlódási szögnél a spirál nagyobbra nyílik, a test mélyebb és szélesebb lesz — ezért nőnek rohamosan az N tényezők.</p>
+    <div class="panel">
+      <div class="dfbar"><button type="button" class="kbtn" id="kp-play1">⏸ Szünet</button><span class="ksp"></span><button type="button" class="kbtn" id="kp-vr1" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="kp-spin1">▶ forgatás</button></div>
+      <div class="dfwrap">
+        <div><div class="dfcv dfcv3d"><canvas id="kp-cv1" width="880" height="470"></canvas></div><div class="dfchips" id="kp-chips1"></div></div>
+        <div class="dfside">
+          <div class="dfsl"><label>Melyik tagot emeljük ki?</label></div>
+          <div class="dfsc" id="kp-hl1"><button type="button" class="on" data-h="all">mind a három</button><button type="button" data-h="g">szélességi (γ)</button><button type="button" data-h="q">mélységi (q′)</button><button type="button" data-h="c">kohéziós (c)</button></div>
+          <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v1phi"></span></label><input type="range" id="kp-1phi" min="0" max="40" step="1"></div>
+          <div class="dfsl"><label>Kohézió c <span class="v" id="kp-v1c"></span></label><input type="range" id="kp-1c" min="0" max="50" step="1"></div>
+          <div class="dfsl"><label>Térfogatsúly γ <span class="v" id="kp-v1g"></span></label><input type="range" id="kp-1g" min="16" max="22" step="0.5"></div>
+          <div class="dfsl"><label>Alapszélesség B <span class="v" id="kp-v1B"></span></label><input type="range" id="kp-1B" min="0.5" max="5" step="0.1"></div>
+          <div class="dfsl"><label>Alapozási mélység D <span class="v" id="kp-v1D"></span></label><input type="range" id="kp-1D" min="0" max="3" step="0.1"></div>
+          <p class="knote">Próbáld: φ = 0 (drénezetlen eset) — a spirál körré válik, N<sub>γ</sub> = 0, a szélességi tag eltűnik, csak a kohézió (N<sub>c</sub> = 5,14) és a takarás marad. Aztán D = 0: a mélységi tag is eltűnik.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid c3">
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--rebar)"><h4 style="margin-top:0">Miért 0,5·B·γ·N<sub>γ</sub>?</h4><p style="font-size:.9rem;margin:0">A törési test minden mérete B-vel arányos, a térfogata tehát B²-tel, a súlya γ·B²-tel; az alap egységnyi területére vetítve (osztva B-vel) γ·B marad. Az N<sub>γ</sub> a geometriából (φ-ből) adódó szorzó, a 0,5 a hagyományos írásmód része.</p></div>
+      <div class="panel" style="margin:8px 0;border-top:3px solid #6E4E2E"><h4 style="margin-top:0">Miért q′·N<sub>q</sub>?</h4><p style="font-size:.9rem;margin:0">A passzív ék a felszín felé mozdul, és magával emeli az alapsík feletti talajt. Ennek súlya egyenletes teherként (q′ = γ′·D) hat a passzív ékre; N<sub>q</sub> mondja meg, hogy ebből a mechanizmuson át mennyi ellenállás jut az alapsíkra.</p></div>
+      <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)"><h4 style="margin-top:0">Miért c·N<sub>c</sub>?</h4><p style="font-size:.9rem;margin:0">A csúszólap minden pontján a kohézió nyírási ellenállást ad, a hossza és az alakja pedig csak φ-től függ — ezért N<sub>c</sub> = (N<sub>q</sub> − 1)·ctg φ. Az N<sub>c</sub> és az N<sub>q</sub> ugyanabból a mechanizmusból származtatható (Prandtl–Reissner), az N<sub>γ</sub> közelítő.</p></div>
+    </div>
+  </section>
+
+  <section class="subsection" id="kt-2">
+    <h2>2. Alaki tényezők: sávalapból pilléralap</h2>
+    <p>A képletet <b>sávalapra</b> vezették le: a törési test a hossz mentén „végtelen”, a talaj csak az alapra merőleges síkban mozog. Egy <b>pilléralapnál</b> (B × L) a test véges hosszú: a két <b>rövid oldalán is</b> csúszólap alakul ki, és ott is nyírási ellenállás ébred, a talaj pedig három dimenzióban terül szét. Az <b>alaki tényezők</b> ezt számolják el a B/L aránnyal. Nyomd meg a „Sávalapból pilléralap” gombot, vagy húzd az L/B csúszkát, és figyeld, hogyan jelennek meg a véglapok és hogyan változnak a tényezők.</p>
+    <div class="panel">
+      <div class="dfbar"><button type="button" class="kbtn" id="kp-play2">⏸ Szünet</button><button type="button" class="kbtn" id="kp-morph2">▶ Film: sávalapból pilléralap</button><span class="ksp"></span><button type="button" class="kbtn" id="kp-vr2" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="kp-spin2">▶ forgatás</button></div>
+      <div class="dfwrap">
+        <div><div class="dfcv dfcv3d"><canvas id="kp-cv2" width="880" height="470"></canvas></div></div>
+        <div class="dfside">
+          <div class="dfsl"><label>Hossz / szélesség L/B <span class="v" id="kp-v2LB"></span></label><input type="range" id="kp-2LB" min="1" max="10" step="0.1"></div>
+          <div class="dfsl"><label>Alapszélesség B <span class="v" id="kp-v2B"></span></label><input type="range" id="kp-2B" min="1" max="4" step="0.1"></div>
+          <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v2phi"></span></label><input type="range" id="kp-2phi" min="5" max="40" step="1"></div>
+          <div class="dfsl"><label>Kohézió c <span class="v" id="kp-v2c"></span></label><input type="range" id="kp-2c" min="0" max="30" step="1"></div>
+          <p class="knote"><b>s<sub>q</sub> és s<sub>c</sub> &gt; 1:</b> a véglapokon többlet nyírási ellenállás ébred, és a takarás a rövid oldalakon is „tart” — a mélységi és a kohéziós tag nő. <b>s<sub>γ</sub> &lt; 1:</b> a térbeli törési test fajlagosan kisebb, kevesebb talajsúly dolgozik az alap egységnyi területére — a szélességi tag csökken (kísérleti eredmény, de Beer). Négyzetes alapnál: s<sub>γ</sub> = 0,7, s<sub>q</sub> = 1 + sin φ.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout">A tényezőkben mindig a <b>dolgozó</b> B′/L′ szerepel, és B az az oldal, amelynek irányában a vízszintes erő hat (a mintapéldák konvenciója). Sávalapnál B/L → 0, minden alaki tényező 1.</div>
+  </section>
+
+  <section class="subsection" id="kt-3">
+    <h2>3. Teherferdeség: miért csökken a teherbírás?</h2>
+    <p>Ha az eredő erő nem merőleges az alapsíkra, a vízszintes összetevő <b>a talajt a H irányába tolja</b>: a mechanizmus <b>egyoldalúvá és laposabbá</b> válik, a csúszólap kisebb, sekélyebb talajtestet mozgat meg, és a súrlódási szög egy részét már az alapsík menti nyírás „elhasználja”. Kevesebb talaj tart ellen → kisebb teherbírás. Ezt fejezik ki az <b>i tényezők</b>, amelyek mind 1-nél kisebbek, és a H/V arány növekedésével gyorsan csökkennek. Ha δ eléri φ-t, már nem talajtörés, hanem <b>elcsúszás</b> következik be — ez az EQU-vizsgálat feladata.</p>
+    <div class="panel">
+      <div class="dfbar"><button type="button" class="kbtn" id="kp-play3">⏸ Szünet</button><span class="ksp"></span><button type="button" class="kbtn" id="kp-vr3" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="kp-spin3">▶ forgatás</button></div>
+      <div class="dfwrap">
+        <div><div class="dfcv dfcv3d"><canvas id="kp-cv3" width="880" height="470"></canvas></div></div>
+        <div class="dfside">
+          <div class="dfsl"><label>Teherferdeség H/V <span class="v" id="kp-v3HV"></span></label><input type="range" id="kp-3HV" min="0" max="0.6" step="0.01"></div>
+          <div class="dfsl"><label>Függőleges teher V <span class="v" id="kp-v3V"></span></label><input type="range" id="kp-3V" min="100" max="1000" step="10"></div>
+          <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v3phi"></span></label><input type="range" id="kp-3phi" min="10" max="40" step="1"></div>
+          <div class="dfsl"><label>Kohézió c <span class="v" id="kp-v3c"></span></label><input type="range" id="kp-3c" min="0" max="30" step="1"></div>
+          <p class="knote">i<sub>γ</sub> = (1 − f)<sup>m+1</sup>, i<sub>q</sub> = (1 − f)<sup>m</sup>, i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1), ahol f = H/(V + A′·c·ctg φ), sávalapnál m = 2. A kohézió a nevezőben „segít”: ugyanakkora H kötött talajon kisebb f-et ad. A modellen a csúszólap laposodása szemléltető (φ − δ-val számolt mechanizmus), a tényezők pontosak.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout warn"><b>Miért csökkentő tényező?</b> Függőleges tehernél a teljes φ a talajtörés ellen dolgozik. Ferde tehernél a nyírás egy része már az alapsíkon elindul (ahogy az elcsúszásnál), a törési test kisebb és aszimmetrikus — a mozgósítható ellenállás kisebb. A szélességi tag érzékenyebb (m + 1 kitevő), mert a kinyomott talajtest a legjobban zsugorodik.</div>
+  </section>
+
+  <section class="subsection" id="kt-4">
+    <h2>4. A mélységi tag: a takarás súlya</h2>
+    <p>Az alapsík feletti talaj, a <b>takarás</b>, két módon segít: a súlya egyenletes teherként nehezedik a passzív ékre, amelyet a törésnek <b>fel kell emelnie</b>, és a nyírószilárdságával is ellenáll a mozgásnak. Az EC7 képlete csak az elsőt veszi figyelembe: q′ = γ′·D (a takarás nyírószilárdságát biztonság javára elhanyagolja, ezért nincs külön „d” mélységi tényező). Húzd a D csúszkát: a takarás vastagodik, a q′·N<sub>q</sub> tag lineárisan nő, és a passzív éknek egyre nagyobb tömeget kell kinyomnia. Talajvízzel a takarás „könnyebb” (γ′ = γ − γ<sub>w</sub>), a tag kisebb.</p>
+    <div class="panel">
+      <div class="dfbar"><button type="button" class="kbtn" id="kp-play4">⏸ Szünet</button><button type="button" class="kbtn" id="kp-gw4">talajvíz a terepszinten</button><span class="ksp"></span><button type="button" class="kbtn" id="kp-vr4" title="Nézet visszaállítása">⟲ nézet</button><button type="button" class="kbtn on" id="kp-spin4">▶ forgatás</button></div>
+      <div class="dfwrap">
+        <div><div class="dfcv dfcv3d"><canvas id="kp-cv4" width="880" height="470"></canvas></div></div>
+        <div class="dfside">
+          <div class="dfsl"><label>Alapozási mélység D <span class="v" id="kp-v4D"></span></label><input type="range" id="kp-4D" min="0" max="4" step="0.1"></div>
+          <div class="dfsl"><label>Térfogatsúly γ <span class="v" id="kp-v4g"></span></label><input type="range" id="kp-4g" min="16" max="22" step="0.5"></div>
+          <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v4phi"></span></label><input type="range" id="kp-4phi" min="10" max="40" step="1"></div>
+          <p class="knote">A gyakorlatban ezért az egyik leghatékonyabb eszköz az alapsík mélyítése: nemcsak q′ nő, hanem sokszor jobb (mélyebb) teherbíró rétegre is kerül az alap. A képlet q′ tagja csak az alap <b>melletti</b> talaj súlyát veszi; magának az alaptestnek és a rajta lévő feltöltésnek a súlya a <b>teher</b> oldalán szerepel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subsection" id="kt-5">
+    <h2>5. Az N tényezők és az alapsík dőlése</h2>
+    <p>Mindhárom teherbírási tényező kizárólag φ-től függ, és φ-vel <b>exponenciálisan</b> nő — a logaritmikus spirál miatt. A diagramon logaritmikus a függőleges skála: 30°-ról 40°-ra az N<sub>γ</sub> több mint háromszorosára nő. Ezért érdemes a φ-t gondosan meghatározni, és ezért tilos „kerekíteni”.</p>
+    <div class="panel">
+      <div class="sim" style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start">
+        <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px"><svg id="kp-svg5" viewBox="0 0 560 360" role="img" aria-label="N tényezők a φ függvényében" style="width:100%;height:auto;display:block"></svg></div>
+        <div>
+          <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v5phi"></span></label><input type="range" id="kp-5phi" min="0" max="45" step="1"></div>
+          <div class="callout formula" style="font-size:.86rem;margin-top:10px">N<sub>q</sub> = e<sup>π·tg φ</sup>·tg²(45° + φ/2)<br>N<sub>c</sub> = (N<sub>q</sub> − 1)·ctg φ<br>N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tg φ</div>
+          <p style="font-size:.9rem">Az e<sup>π·tg φ</sup> a spirál π/2 szögelfordulásából jön (r = r<sub>0</sub>·e<sup>θ·tg φ</sup>), a tg²(45° + φ/2) az aktív és a passzív Rankine-ék feszültségarányából.</p>
+        </div>
+      </div>
+    </div>
+    <h3>Az alapsík dőlése (b tényezők)</h3>
+    <p>Ha az alapsík α szöggel dől, a teher egy része a dőlt síkon „lecsúszó” irányba esik, és a mechanizmus a lejtő felé ferdül: a teherbírás csökken. Az EC7: b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tg φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tg φ), α radiánban — kis dőlésnél (5°) a csökkenés néhány százalék (lásd MP7).</p>
+    <div class="callout success"><b>Összefoglalva:</b> a képlet három tagja a három ellenálló hatás (talajsúly, takarás, kohézió); az N tényezők a mechanizmus geometriáját, az s tényezők a térbeliséget, az i tényezők a ferde teher miatt zsugorodó mechanizmust, a b tényezők a dőlt alapsíkot számolják el. A kalkulátorban mindez együtt, lépésről lépésre látszik.</div>
   </section>
 </div>
 
@@ -2131,6 +2247,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <ul class="bullet">
         <li>Szemléltető modell: a siló terhe B × B méretű, D = 1 m mélyen fekvő lemezen hat, a talajvíz a terepszinten. A teher q(t) a feltöltés ideje alatt lineárisan nő q<sub>max</sub>-ig (két ütemű módban két lépcsőben, köztük pihentetéssel, amelynek hossza a talaj konszolidációs idejének kétszerese, legfeljebb 2 év).</li>
         <li>Süllyedés a filmben: s = (0,12·q + 0,88·Δσ′)·1,2·B/(2·E<sub>oed</sub>) — kis azonnali (torzulási) rész és a hatékony feszültséggel arányos konszolidációs rész; E<sub>oed</sub> = 4 MPa agyagra, 8 MPa iszapra, 30 MPa homokra. A 3D jeleneten a süllyedés 3-szoros nagyítással látszik, az eredeti alapsíkot szaggatott vonal jelöli; a talp alatti kék tartomány telítettsége a pórusvíznyomás-többlettel arányos, a piezométer vízoszlopa Δu-t mutatja q<sub>max</sub>-ig skálázva.</li>
+      </ul>
+      <h3>„A képlet tagjai" fejezet 3D modelljei</h3>
+      <ul class="bullet">
+        <li>Törési mechanizmus: Prandtl-féle test sávalapra — aktív ék 45° + φ/2 szöggel, logaritmikus spirál r = r<sub>0</sub>·e<sup>θ·tg φ</sup> az alaptest széle körül π/2 szögelfordulással, passzív Rankine-ék 45° − φ/2 szöggel az alapsíkig; a test mérete és mélysége csak φ-től és B-től függ. A mozgás (alap süllyedése, a zónák elmozdulása, a felszín kidudorodása) szemléltető, nagyított animáció.</li>
+        <li>A három tag és minden tényező a kalkulátor képleteivel számolt: 0,5·γ·B·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub>, q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub>, c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; az alaki felfedezőben D = 0,5 m, a ferdeségiben D = 0,8 m, a mélységiben B = 2 m rögzített. A ferde teher mechanizmusa a H irányában egyoldalú, φ − 0,9·δ szöggel és az aktív ék eltolásával rajzolva (szemléltetés), az i tényezők pontosak; δ ≥ φ-nél a modell elcsúszást jelez.</li>
+        <li>A pilléralap véglapjainak aránya az alapterülethez közelítő (2·A<sub>keresztmetszet</sub>/(B·L)); az alaki tényezők az EC7 D-melléklete szerintiek, φ = 0-nál s<sub>c</sub> = 1 + 0,2·B/L.</li>
         <li>Pórusvíznyomás: a teher minden növekménye először a pórusvízbe kerül (telített talaj, Δu = Δσ), és a talajra jellemző T<sub>c</sub> időállandóval szivárog el (dΔu/dt = dq/dt − Δu/T<sub>c</sub>); T<sub>c</sub> = 2 év agyagnál, 1 hónap iszapnál, fél nap homoknál. A hatékony feszültség többlete Δσ′ = q − Δu. Ez a valódi konszolidációnál egyszerűbb, elsőrendű közelítés.</li>
         <li>Drénezetlen szilárdság: c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′ (a konszolidációval növekvő szilárdság; agyag c<sub>u,0</sub> = 30 kPa, α = 0,25; iszap 45 kPa, 0,30). Drénezetlen teherbírás sávalapra: (2 + π)·c<sub>u</sub> + γ<sub>sat</sub>·D; drénezett: c′·N<sub>c</sub> + γ′·D·N<sub>q</sub> + 0,5·γ′·B·N<sub>γ</sub> (alaki, ferdeségi tényezők nélkül). A mértékadó a kettő közül a kisebb; homoknál csak a drénezett értelmezett.</li>
         <li>Talajtörés akkor következik be, amikor a teher eléri a pillanatnyi mértékadó teherbírást (részleges tényezők nélkül, a tényleges törést mutatva); a film ekkor megáll, a siló 24°-ot dől, a −X oldalon felpúposodik a talaj és megjelenik a csúszólap. A 3D jelenet rajzszabályai a kalkulátor 3D modelljével egyeznek (áttetsző tömb, festő-algoritmus).</li>
@@ -2160,6 +2282,14 @@ const CHAPTERS = [
     {id:'dr-2', label:'2. Gyors vagy lassú feltöltés?'},
     {id:'dr-3', label:'3. Így számolunk'},
     {id:'dr-4', label:'4. Transcona, 1913'},
+  ]},
+  {id:'keplet', label:'A képlet tagjai', subsections:[
+    {id:'kt-0', label:'Áttekintés'},
+    {id:'kt-1', label:'1. Mechanizmus és a három tag'},
+    {id:'kt-2', label:'2. Alaki tényezők'},
+    {id:'kt-3', label:'3. Teherferdeség'},
+    {id:'kt-4', label:'4. Mélységi tag'},
+    {id:'kt-5', label:'5. N tényezők, alapsík dőlése'},
   ]},
   {id:'mintapeldak', label:'Mintapéldák', subsections:[
     {id:'s-mp1', label:'MP1'},
@@ -3227,6 +3357,315 @@ const DFILM=(function(){
   rebuild(false);
   if(window.IntersectionObserver){ let started=false; const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting&&!started){ started=true; play(); } if(!e.isIntersecting&&playing) pause(); }); },{threshold:0.3}); io.observe(cv); }
   return {S,V,rebuild,play,pause};
+})();
+
+/* ===================== A KÉPLET TAGJAI — 3D FELFEDEZŐK (törési mechanizmus, alaki, ferdeségi, mélységi) ===================== */
+const KPL=(function(){
+  'use strict';
+  const $=id=>document.getElementById('kp-'+id);
+  const F=(v,d=1)=>fmt(v,d), rad=Math.PI/180;
+  const COL={act:'#C4552B',rad:'#D2A040',pas:'#EDD46A',slip:'#2E7D8A',soil:'#D9C77A',over:'#B9A27A',foot:'#B5BBC0',col:'#A9B2B8'};
+
+  /* ---------- közös 3D rajzoló (festő-algoritmus, forgatás) ---------- */
+  function R3(cv){
+    const ctx=cv.getContext('2d'); const V={az:-0.62,el:0.40,ph:0,spin:true,drag:null,onchange:null};
+    let polys=[],labels=[],W=0,H=0,scale=1,proj=null,viewDir=null,hudW=0;
+    function begin(ext){
+      W=cv.width;H=cv.height;hudW=ext.hudW||0; ctx.clearRect(0,0,W,H);
+      const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#F7F4EE'); g.addColorStop(1,'#FFFFFF'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      const padL=ext.padL||50,padR=(ext.padR||16)+hudW,padT=ext.padT||40,padB=ext.padB||26;
+      const ca=Math.cos(V.az),sa=Math.sin(V.az),ce=Math.cos(V.el),se=Math.sin(V.el);
+      const diag=Math.hypot(ext.Wx,ext.Wz), vert=(ext.yTop-ext.yBot)*ce+diag*se;
+      scale=Math.min((W-padL-padR)/diag,(H-padT-padB)/vert);
+      const yOff=-(ext.yTop+ext.yBot)/2, cxs=padL+(W-padL-padR)/2, cys=padT+(H-padT-padB)/2;
+      proj=(x,y,z)=>{ const y0=y+yOff; const x1=x*ca+z*sa, z1=-x*sa+z*ca; const y2=y0*ce-z1*se, z2=y0*se+z1*ce; return {x:cxs+x1*scale,y:cys-y2*scale,d:z2}; };
+      viewDir={x:-sa*ce,y:se,z:ca*ce}; polys=[];labels=[];
+      return {proj,W,H,scale};
+    }
+    const light={x:-0.45,y:0.8,z:0.55};
+    const shade=(hex,n,a)=>{ const c=parseInt(hex.slice(1),16); let r=c>>16,g=(c>>8)&255,b=c&255; const k=n?0.7+0.3*Math.max(0,n.x*light.x+n.y*light.y+n.z*light.z):1; r=Math.round(r*k);g=Math.round(g*k);b=Math.round(b*k); return a==null||a>=1?`rgb(${r},${g},${b})`:`rgba(${r},${g},${b},${a})`; };
+    const facing=n=>(n.x*viewDir.x+n.y*viewDir.y+n.z*viewDir.z)>0;
+    const poly=(pts,fill,stroke,d,extra)=>{ const P=pts.map(p=>proj(p[0],p[1],p[2])); polys.push(Object.assign({P,fill,stroke,d:d!=null?d:P.reduce((a,p)=>a+p.d,0)/P.length},extra||{})); };
+    const line=(pts,col,opt)=>poly(pts,null,col,opt&&opt.d!=null?opt.d:null,Object.assign({line:true},opt||{}));
+    const label=(tx,x,y,col,al,bold,sz)=>labels.push({tx,x,y,col,al:al||'left',bold,sz:sz||12});
+    const label3=(tx,p3,dx,dy,col,al,bold,sz)=>{ const p=proj(p3[0],p3[1],p3[2]); label(tx,p.x+(dx||0),p.y+(dy||0),col,al,bold,sz); };
+    function box(x1,x2,y1,y2,z1,z2,col,alpha,dOff,tr){ /* y1<y2 */
+      const fs=[[{x:0,y:0,z:1},[[x1,y2,z2],[x2,y2,z2],[x2,y1,z2],[x1,y1,z2]]],[{x:0,y:0,z:-1},[[x2,y2,z1],[x1,y2,z1],[x1,y1,z1],[x2,y1,z1]]],[{x:1,y:0,z:0},[[x2,y2,z2],[x2,y2,z1],[x2,y1,z1],[x2,y1,z2]]],[{x:-1,y:0,z:0},[[x1,y2,z1],[x1,y2,z2],[x1,y1,z2],[x1,y1,z1]]],[{x:0,y:1,z:0},[[x1,y2,z2],[x1,y2,z1],[x2,y2,z1],[x2,y2,z2]]],[{x:0,y:-1,z:0},[[x1,y1,z2],[x2,y1,z2],[x2,y1,z1],[x1,y1,z1]]]];
+      fs.forEach(([n,p])=>{ if(!facing(n)&&(alpha==null||alpha>=1)) return; const pts=tr?p.map(tr):p; const P=pts.map(q=>proj(q[0],q[1],q[2])); const d=P.reduce((a,q)=>a+q.d,0)/P.length+(dOff||0); polys.push({P,fill:shade(col,n,alpha),stroke:alpha!=null&&alpha<1?'rgba(46,38,32,.35)':'#2E2620',d}); }); }
+    /* talajtömb: rétegek (y1>y2), hátsó lapok halványan, elülsők áttetszően a végén */
+    function block(Wx,Wz,layers,opts){
+      opts=opts||{}; const Ztot=-layers[layers.length-1].y2;
+      const faces=[{n:{x:0,y:0,z:1},q:(a,b)=>[[-Wx/2,a,0],[Wx/2,a,0],[Wx/2,b,0],[-Wx/2,b,0]]},{n:{x:0,y:0,z:-1},q:(a,b)=>[[Wx/2,a,-Wz],[-Wx/2,a,-Wz],[-Wx/2,b,-Wz],[Wx/2,b,-Wz]]},{n:{x:1,y:0,z:0},q:(a,b)=>[[Wx/2,a,0],[Wx/2,a,-Wz],[Wx/2,b,-Wz],[Wx/2,b,0]]},{n:{x:-1,y:0,z:0},q:(a,b)=>[[-Wx/2,a,-Wz],[-Wx/2,a,0],[-Wx/2,b,0],[-Wx/2,b,-Wz]]}];
+      const sf=(fc,alpha,dOff)=>{ const c=fc.q(0,-Ztot); const fd=proj((c[0][0]+c[2][0])/2,-Ztot/2,(c[0][2]+c[2][2])/2).d+dOff; layers.forEach(L=>polys.push({P:fc.q(L.y1,L.y2).map(p=>proj(p[0],p[1],p[2])),fill:shade(L.col,fc.n,alpha),stroke:'rgba(60,40,20,.3)',d:fd})); };
+      faces.forEach(fc=>{ if(!facing(fc.n)) sf(fc,0.14,-1e6); });
+      opts.after=()=>{ faces.forEach(fc=>{ if(facing(fc.n)) sf(fc,opts.frontAlpha||0.28,1e5); }); polys.push({P:[[-Wx/2,0,0],[Wx/2,0,0],[Wx/2,0,-Wz],[-Wx/2,0,-Wz]].map(p=>proj(p[0],p[1],p[2])),fill:shade('#C9D3A6',{x:0,y:1,z:0},0.2),stroke:'rgba(60,40,20,.3)',d:proj(0,0,-Wz/2).d+1e5});
+        const E=[[[-Wx/2,0,0],[Wx/2,0,0]],[[Wx/2,0,0],[Wx/2,0,-Wz]],[[Wx/2,0,-Wz],[-Wx/2,0,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,0,0]],[[-Wx/2,0,0],[-Wx/2,-Ztot,0]],[[Wx/2,0,0],[Wx/2,-Ztot,0]],[[Wx/2,0,-Wz],[Wx/2,-Ztot,-Wz]],[[-Wx/2,0,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,0],[Wx/2,-Ztot,0]],[[Wx/2,-Ztot,0],[Wx/2,-Ztot,-Wz]],[[Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,-Wz]],[[-Wx/2,-Ztot,-Wz],[-Wx/2,-Ztot,0]]];
+        E.forEach(e=>line(e,'rgba(60,40,20,.45)',{d:1e6,w:0.8})); };
+      return opts;
+    }
+    function flush(){
+      polys.sort((a,b)=>a.d-b.d);
+      polys.forEach(p=>{ if(p.dot){ ctx.fillStyle=p.col; ctx.beginPath(); ctx.arc(p.P[0].x,p.P[0].y,p.r||2.4,0,6.3); ctx.fill(); return; }
+        ctx.beginPath(); p.P.forEach((q,k)=>k?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));
+        if(p.line){ ctx.setLineDash(p.dash||[]); ctx.strokeStyle=p.stroke; ctx.lineWidth=p.w||1.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke(); ctx.setLineDash([]); if(p.arrow){ const a=p.P[p.P.length-2],b=p.P[p.P.length-1]; const an=Math.atan2(b.y-a.y,b.x-a.x); const s=p.ah||8; ctx.fillStyle=p.stroke; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x-s*Math.cos(an-0.45),b.y-s*Math.sin(an-0.45)); ctx.lineTo(b.x-s*Math.cos(an+0.45),b.y-s*Math.sin(an+0.45)); ctx.closePath(); ctx.fill(); } return; }
+        ctx.closePath(); if(p.fill){ ctx.fillStyle=p.fill; ctx.fill(); } if(p.stroke){ ctx.strokeStyle=p.stroke; ctx.lineWidth=p.w||0.8; ctx.stroke(); } });
+      labels.forEach(l=>{ ctx.font=(l.bold?'700 ':'600 ')+l.sz+'px Inter, system-ui, sans-serif'; ctx.textAlign=l.al; ctx.lineWidth=3.5; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineJoin='round'; let x=l.x; const tw=ctx.measureText(l.tx).width; if(l.al==='left') x=Math.min(x,W-hudW-6-tw); if(l.al==='right') x=Math.max(x,6+tw); ctx.strokeText(l.tx,x,l.y); ctx.fillStyle=l.col; ctx.fillText(l.tx,x,l.y); });
+      ctx.fillStyle='#8C9BA7'; ctx.font='10px Inter'; ctx.textAlign='left'; ctx.fillText('húzd az egérrel a forgatáshoz',8,H-6);
+    }
+    function hud(x0,w){ ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fillRect(x0,0,w,H); ctx.strokeStyle='#E6E0D6'; ctx.beginPath(); ctx.moveTo(x0,0); ctx.lineTo(x0,H); ctx.stroke(); return {ctx,x0,w,H}; }
+    /* három tag sávdiagramja a HUD-ban */
+    function bars(h,T,y0,opt){ opt=opt||{}; const c=h.ctx, bw=h.w-28, bx=h.x0+14; const maxT=Math.max(50,T.g,T.q,T.c,opt.max||0); const items=[['szélességi',T.g,COL.act],['mélységi',T.q,'#6E4E2E'],['kohéziós',T.c,COL.slip]]; const bh=opt.bh||86; const sl=(bw-20)/3; const top=y0+24;
+      c.font='700 12px Inter'; c.fillStyle='#2E2620'; c.textAlign='left'; c.fillText(opt.title||'A három tag [kPa]',bx,y0);
+      items.forEach(([nm,v,col],k)=>{ const x=bx+k*(sl+10), hh=Math.max(0,v)/maxT*bh; c.fillStyle=col; c.globalAlpha=opt.dim!=null&&opt.dim!==k?0.35:1; c.fillRect(x,top+bh-hh,sl,hh); c.globalAlpha=1; c.strokeStyle='#2E2620'; c.lineWidth=1; c.strokeRect(x,top+bh-hh,sl,hh); c.fillStyle='#2E2620'; c.font='600 10px Inter'; c.textAlign='center'; c.fillText(F(v,0),x+sl/2,top+bh-hh-4); c.fillText(nm,x+sl/2,top+bh+13); });
+      c.strokeStyle='#2E2620'; c.beginPath(); c.moveTo(bx,top+bh); c.lineTo(bx+bw,top+bh); c.stroke();
+      c.font='700 12px Inter'; c.textAlign='left'; c.fillStyle='#2E2620'; c.fillText('Σ = R_k/A′ = '+F(T.g+T.q+T.c,0)+' kPa',bx,top+bh+32);
+      return top+bh+42; }
+    /* forgatás */
+    cv.addEventListener('pointerdown',e=>{ cv.setPointerCapture(e.pointerId); V.drag={x:e.clientX,y:e.clientY,az:V.az,el:V.el}; V.spin=false; if(V.onspin) V.onspin(false); e.preventDefault(); });
+    cv.addEventListener('pointermove',e=>{ if(!V.drag) return; V.az=V.drag.az+(e.clientX-V.drag.x)*0.008; V.el=Math.min(1.3,Math.max(0.08,V.drag.el+(e.clientY-V.drag.y)*0.006)); if(V.onchange) V.onchange(); });
+    const end=()=>{ V.drag=null; }; cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
+    function tick(dt){ if(V.spin&&!V.drag){ V.ph+=dt*0.2; V.az=-0.62+0.35*Math.sin(V.ph); } }
+    return {V,ctx,begin,poly,line,label,label3,box,block,flush,hud,bars,shade,facing,tick,reset(){V.az=-0.62;V.el=0.40;V.ph=0;}};
+  }
+
+  /* ---------- Prandtl-féle törési mechanizmus (jobb fél, x > 0; y lefelé az alapsíktól) ---------- */
+  function prandtl(phi,B,skew){
+    const ps=(45+phi/2)*rad, tf=Math.tan(phi*rad), pr=(45-phi/2)*rad;
+    const h=(B/2)*Math.tan(ps); const E={x:B/2,y:0}, C={x:(skew||0)*B/2,y:h};
+    const r0=Math.hypot(C.x-E.x,C.y-E.y), b0=Math.atan2(C.y-E.y,C.x-E.x);
+    const sp=[]; const N=26; for(let k=0;k<=N;k++){ const th=k/N*Math.PI/2; const r=r0*Math.exp(th*tf); sp.push({x:E.x+r*Math.cos(b0-th),y:E.y+r*Math.sin(b0-th)}); }
+    const Fp=sp[N]; const G={x:Fp.x+Fp.y/Math.tan(pr),y:0};
+    const ymax=Math.max(h,...sp.map(p=>p.y));
+    return {ps,pr,tf,h,E,C,sp,F:Fp,G,ymax};
+  }
+  /* a tagok és tényezők */
+  function terms(p){
+    const N=nFactors(p.phi); const strip=!isFinite(p.L); const r=strip?0:p.B/p.L; const sphi=Math.sin(p.phi*rad);
+    const sg=1-0.3*r, sq=1+r*sphi, sc=N.Nq>1?(sq*N.Nq-1)/(N.Nq-1):1+0.2*r;
+    const m=strip?2:(2+r)/(1+r); const cot=p.phi>0?1/Math.tan(p.phi*rad):0;
+    const V=p.V||1, H=(p.HV||0)*V; const A=strip?p.B:p.B*p.L; const f=V>0?H/(V+A*p.c*cot):0;
+    const ig=Math.pow(Math.max(1-f,0),m+1), iq=Math.pow(Math.max(1-f,0),m), ic=N.Nq>1?(iq*N.Nq-1)/(N.Nq-1):Math.max(1-f,0);
+    const al=(p.alpha||0)*rad; const bq=Math.pow(1-al*Math.tan(p.phi*rad),2), bc=(p.phi>0&&N.Nc>0)?bq-(1-bq)/(N.Nc*Math.tan(p.phi*rad)):1;
+    const q=p.q!=null?p.q:p.g*(p.D||0);
+    const g0=0.5*p.g*p.B*N.Ng, q0=q*N.Nq, c0=p.c*N.Nc;
+    return {N,r,sg,sq,sc,m,f,ig,iq,ic,bq,bg:bq,bc,q,g:g0*sg*ig*bq,qT:q0*sq*iq*bq,c:c0*sc*ic*bc,g0,q0,c0,get sum(){return this.g+this.qT+this.c;}};
+  }
+  const T3=t=>({g:t.g,q:t.qT,c:t.c});
+
+  /* mechanizmus rajzolása: zónák az elülső lapon, csúszófelület-lemez a tömbön át, sebességnyilak, kiemelés */
+  function drawMech(r,P,o){ /* o={D,zF,zB,tau,side:'both'|'right'|'left',hl:'g'|'q'|'c'|null, skew, alpha, flowPh, faint} */
+    const D=o.D, yd=y=>-D-y; const zF=o.zF, zB=o.zB; const a=o.alpha!=null?o.alpha:0.55; const tau=o.tau||0;
+    const sides=o.side==='right'?[1]:o.side==='left'?[-1]:[1,-1];
+    const tri=[[-o.B/2,0],[o.B/2,0],[P.C.x,P.C.y]];
+    const sk=o.faint?0.35:1;
+    /* aktív ék (egyszer) */
+    const act=tri.map(q=>[q[0],yd(q[1])-tau*o.amp,zF]); r.poly(act,r.shade(COL.act,null,a*sk*(o.hl&&o.hl!=='c'?0.5:1)),'rgba(46,38,32,.5)',1e5+0.3);
+    sides.forEach(s=>{
+      const M=q=>[s*q.x,yd(q.y)];
+      const radz=[M(P.E),M(P.C),...P.sp.map(M)]; const pas=[M(P.E),M(P.F),M(P.G)];
+      /* sebesség-eltolás: radiális zóna kissé elfordul E körül, passzív ék felfelé-kifelé csúszik */
+      const dp=[s*Math.cos(P.pr),Math.sin(P.pr)].map(v=>v*tau*o.amp);
+      const gF=o.hl==='g'?1.15:1, hlq=o.hl==='q';
+      r.poly(radz.map(q=>[q[0],q[1],zF]),r.shade(COL.rad,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',1e5+0.31);
+      r.poly(pas.map(q=>[q[0]+dp[0],q[1]+dp[1],zF]),r.shade(COL.pas,null,a*sk*(o.hl==='c'?0.4:gF)),'rgba(46,38,32,.5)',1e5+0.32);
+      /* csúszófelület: lemez a tömbön át (3D), a c-kiemelésnél vastag */
+      const curve=[M(P.C),...P.sp.map(M),M(P.G)];
+      for(let k=0;k<curve.length-1;k++){ const p0=curve[k],p1=curve[k+1]; r.poly([[p0[0],p0[1],zF],[p1[0],p1[1],zF],[p1[0],p1[1],zB],[p0[0],p0[1],zB]],`rgba(46,125,138,${(o.hl==='c'?0.55:0.22)*sk})`,null); }
+      r.line(curve.map(q=>[q[0],q[1],zF]),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:1e5+0.4,dash:o.faint?[5,4]:null});
+      r.line(curve.map(q=>[q[0],q[1],zB]),'rgba(31,95,104,.5)',{w:1.2});
+      /* ék oldala (A–C) */
+      r.line([[-s*o.B/2,yd(0),zF],[P.C.x*0+s*P.C.x,yd(P.C.y),zF]].map(q=>q),o.hl==='c'?'#1F5F68':'rgba(31,95,104,.9)',{w:o.hl==='c'?3.2:1.6,d:1e5+0.4});
+      /* takarás a passzív ék felett (q-kiemelés) */
+      if(D>0&&(hlq||o.showOver)){ const x0=s*P.E.x, x1=s*P.G.x; r.poly([[x0,-D,zF],[x1,-D,zF],[x1,0,zF],[x0,0,zF]].map(q=>[q[0],q[1]+(x0!==x1?tau*o.amp*0.9:0),q[2]]),`rgba(110,78,46,${hlq?0.55:0.25})`,'rgba(60,40,20,.5)',1e5+0.33);
+        if(hlq){ const n=4; for(let k=0;k<n;k++){ const x=x0+(x1-x0)*(k+0.5)/n; r.line([[x,0.9,zF],[x,0.08,zF]],'#6E4E2E',{w:2,arrow:true,ah:7,d:1e5+0.5}); } } }
+      /* felszíni kidudorodás a passzív zóna felett (3D) */
+      if(tau>0.02){ const x0=s*P.E.x, x1=s*P.G.x, n=10; const hgt=x=>o.amp*0.9*tau*Math.sin(Math.PI*(x-x0)/(x1-x0)); for(let k=0;k<n;k++){ const xa=x0+(x1-x0)*k/n, xb=x0+(x1-x0)*(k+1)/n; r.poly([[xa,hgt(xa),zF],[xb,hgt(xb),zF],[xb,hgt(xb),zB],[xa,hgt(xa),zB]],r.shade('#C9D3A6',{x:0,y:1,z:0},0.9),'rgba(60,40,20,.25)'); r.poly([[xa,0,zF],[xb,0,zF],[xb,hgt(xb),zF],[xa,hgt(xa),zF]],r.shade(COL.over,{x:0,y:0,z:1},0.9),null,1e5+0.2); } }
+      /* sebességnyilak (áramló) */
+      if(!o.faint){ const ph=o.flowPh||0; const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.85)',{w:1.6,arrow:true,ah:6,d:1e5+0.6}); };
+        const L=Math.min(0.5*o.B,0.8);
+        if(s===1){ arrow([0,yd(P.C.y*0.45)],[0,-1],L); arrow([-o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); arrow([o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); }
+        [0.3,0.65].forEach(f=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const mid={x:(p.x+P.E.x)/2*1.0+(p.x-P.E.x)*0.15,y:(p.y+P.E.y)/2+(p.y-P.E.y)*0.15}; const tx=-(mid.y-P.E.y), ty=(mid.x-P.E.x); const nn=Math.hypot(tx,ty)||1; arrow([s*mid.x,yd(mid.y)],[s*tx/nn,-ty/nn],L*0.9); });
+        const pm={x:(P.E.x+P.F.x+P.G.x)/3,y:(P.E.y+P.F.y+P.G.y)/3}; arrow([s*pm.x,yd(pm.y)],[s*Math.cos(P.pr),Math.sin(P.pr)],L); }
+    });
+  }
+  function footing(r,B,D,zF,zB,sink,hA){ const top=D>0?-D+Math.min(hA||0.6,D):0.6; r.box(-B/2,B/2,-D-(sink||0),top-(sink||0),zB,zF,COL.foot,1,1e5+1); if(D>0&&top<0.6) r.box(-B*0.18,B*0.18,top-(sink||0),Math.max(top,0)+0.6-(sink||0),zB+(zF-zB)*0.3,zF-(zF-zB)*0.3,COL.col,1,1e5+1.1); }
+  function loadArrow(r,x,yTop,z,len,col,txt){ r.line([[x,yTop+len,z],[x,yTop+0.05,z]],col,{w:4,arrow:true,ah:11,d:1e7}); if(txt) r.label3(txt,[x,yTop+len,z],0,-8,col,'center',true,13); }
+
+  /* ====================================================== 1. MECHANIZMUS ÉS A HÁROM TAG ====================================================== */
+  const S1={phi:30,c:10,g:18,B:2,D:1,hl:null,tau:0,play:true,ph:0};
+  const r1=R3($('cv1'));
+  function draw1(){
+    const P=prandtl(S1.phi,S1.B); const D=S1.D; const half=P.G.x; const Wx=Math.max(2.2*half+2,6), Wz=Math.max(1.2*S1.B+3,4); const Ztot=D+Math.max(1.35*P.ymax,2.2);
+    const yTop=Math.max(0.6,0.6)+1.3; const ext={Wx,Wz,yTop,yBot:-Ztot,hudW:250};
+    r1.begin(ext);
+    const layers=D>0?[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}]:[{y1:0,y2:-Ztot,col:COL.soil}];
+    const blk=r1.block(Wx,Wz,layers,{frontAlpha:0.22});
+    const tau=S1.tau, amp=0.12*S1.B;
+    drawMech(r1,P,{D,B:S1.B,zF:0,zB:-Wz,tau,amp,side:'both',hl:S1.hl,flowPh:S1.ph,showOver:true});
+    footing(r1,S1.B,D,0,-Wz,tau*amp,0.6);
+    loadArrow(r1,0,D>0?Math.max(-D+0.6,0)+0.6-tau*amp:0.6-tau*amp,-Wz/2,1.2,'#1E63B0','V');
+    blk.after();
+    /* feliratok */
+    r1.label3('aktív ék',[0,-D-P.h-tau*amp,0],0,16,'#7A2E12','center',true,11);
+    { const k=Math.round(0.55*(P.sp.length-1)); r1.label3('radiális nyírási zóna',[P.sp[k].x,-D-P.sp[k].y,0],8,14,'#6E4E2E','left',true,11); }
+    r1.label3('passzív ék',[P.E.x+0.72*(P.G.x-P.E.x),-D+0.1,0],0,-4,'#6B5B1E','center',true,11);
+    if(D>0) r1.label3('takarás: q′ = γ·D = '+F(S1.g*D,0)+' kPa',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11);
+    r1.label3('csúszólap',[-P.F.x,-D-P.F.y,0],-8,14,'#1F5F68','right',true,11);
+    r1.label3('B = '+F(S1.B,1)+' m',[0,-D-0.02,0],0,13,'#2E2620','center',true,11);
+    r1.flush();
+    /* HUD */
+    const T=terms({phi:S1.phi,c:S1.c,g:S1.g,B:S1.B,L:Infinity,D}); const h=r1.hud(r1.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
+    c.fillStyle='#2E2620'; c.font='700 13px Inter'; c.textAlign='left'; c.fillText('Sávalap, φ = '+S1.phi+'°, c = '+S1.c+' kPa',bx,24);
+    c.font='10.5px Inter'; c.fillStyle='#5C6B79'; c.fillText('N_γ = '+F(T.N.Ng,2)+' · N_q = '+F(T.N.Nq,2)+' · N_c = '+F(T.N.Nc,2),bx,42);
+    let y=r1.bars(h,T3(T),66,{dim:S1.hl==='g'?0:S1.hl==='q'?1:S1.hl==='c'?2:null});
+    c.font='11px Inter'; c.fillStyle='#2E2620'; const lines=S1.hl==='g'?['Szélességi tag = a csúszólap feletti','talajtest súlya tart ellen: minél','szélesebb B, annál nagyobb a test','(0,5·γ·B·N_γ).']:S1.hl==='q'?['Mélységi tag = a passzív éknek fel kell','emelnie az alapsík feletti takarást:','q′ = γ·D, az ellenállás q′·N_q.','D = 0-nál a tag eltűnik.']:S1.hl==='c'?['Kohéziós tag = a csúszólap teljes','hossza mentén működő kohézió:','c·N_c, N_c = (N_q − 1)·ctg φ.','φ = 0-nál N_c = 5,14.']:['Kattints egy tagra a bal oldali','gombokkal: az ábrán kiemeljük,','honnan származik az ellenállás.'];
+    lines.forEach((l,k)=>c.fillText(l,bx,y+4+k*15));
+    y+=4+lines.length*15+10; c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText('mechanizmus mélysége: '+F(P.ymax,2)+' m,',bx,y); c.fillText('szélessége: '+F(2*P.G.x,2)+' m',bx,y+13);
+  }
+  function ui1(){ $('v1phi').textContent=S1.phi+'°'; $('v1c').textContent=S1.c+' kPa'; $('v1g').textContent=S1.g+' kN/m³'; $('v1B').textContent=F(S1.B,1)+' m'; $('v1D').textContent=F(S1.D,1)+' m'; const T=terms({phi:S1.phi,c:S1.c,g:S1.g,B:S1.B,L:Infinity,D:S1.D});
+    $('chips1').innerHTML=`<span class="dfchip">0,5·γ·B·N_γ = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N_q = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N_c = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R_k/A′ = <b>${F(T.sum,0)} kPa</b></span>`; }
+  [['1phi','phi'],['1c','c'],['1g','g'],['1B','B'],['1D','D']].forEach(([id,k])=>{ const el=$(id); el.value=S1[k]; el.addEventListener('input',()=>{S1[k]=parseFloat(el.value);ui1();if(!S1.play)draw1();}); });
+  document.querySelectorAll('#kp-hl1 button').forEach(b=>b.addEventListener('click',()=>{ S1.hl=b.dataset.h==='all'?null:b.dataset.h; document.querySelectorAll('#kp-hl1 button').forEach(x=>x.classList.toggle('on',x===b)); if(!S1.play) draw1(); }));
+
+  /* ====================================================== 2. ALAKI TÉNYEZŐK ====================================================== */
+  const S2={phi:30,c:10,g:18,B:2,LB:6,tau:0,play:true,ph:0,morph:null};
+  const r2=R3($('cv2'));
+  function draw2(){
+    const B=S2.B, L=S2.LB*B, P=prandtl(S2.phi,B); const D=0.5; const Wx=Math.max(2.2*P.G.x+2,6), Wz=Math.max(L+2*P.G.x*0.9+2,6); const zc=-Wz/2, zF=zc+L/2, zB=zc-L/2; const Ztot=D+Math.max(1.35*P.ymax,2.2);
+    r2.begin({Wx,Wz,yTop:1.9,yBot:-Ztot,hudW:250});
+    const blk=r2.block(Wx,Wz,[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}],{frontAlpha:0.2});
+    const tau=S2.tau, amp=0.1*B;
+    /* a mechanizmus a hossz mentén: az elülső véglap a z = zF síkban (nem a tömb elülső lapján) */
+    drawMech(r2,P,{D,B,zF,zB,tau,amp,side:'both',flowPh:S2.ph,alpha:0.5});
+    /* hátsó véglap zónái */
+    const yd=y=>-D-y; [1,-1].forEach(s=>{ const M=q=>[s*q.x,yd(q.y),zB]; r2.poly([M(P.E),M(P.C),...P.sp.map(M)],r2.shade(COL.rad,null,0.45),'rgba(46,38,32,.4)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.45),'rgba(46,38,32,.4)'); });
+    r2.poly([[-B/2,-D,zB],[B/2,-D,zB],[P.C.x,yd(P.C.y),zB]],r2.shade(COL.act,null,0.45),'rgba(46,38,32,.4)');
+    /* végmechanizmus a rövid oldalakon: negyed-fordulattal (B irányú szelvény a z tengely mentén) */
+    [1,-1].forEach(s=>{ const z0=s>0?zF:zB; const M=q=>[0,yd(q.y),z0+s*q.x]; const zone=[M(P.E),M(P.C),...P.sp.map(M)]; r2.poly(zone,r2.shade(COL.rad,null,0.35),'rgba(46,38,32,.35)'); r2.poly([M(P.E),M(P.F),M(P.G)],r2.shade(COL.pas,null,0.35),'rgba(46,38,32,.35)'); r2.poly([[-B/2,-D,z0],[B/2,-D,z0],[0,yd(P.C.y),z0]],r2.shade(COL.act,null,0.4),'rgba(46,38,32,.35)'); const curve=[M(P.C),...P.sp.map(M),M(P.G)]; r2.line(curve,'rgba(31,95,104,.9)',{w:1.6}); });
+    /* véglapok kiemelése: nyírási ellenállás a rövid oldalakon */
+    const endA=P.ymax*P.G.x*1.1; /* közelítő keresztmetszet-terület */
+    r2.box(-B/2,B/2,-D,-D+0.5,zB,zF,COL.foot,1,1e5+1); r2.box(-B*0.18,B*0.18,-D+0.5,1.0,zc-Math.min(L,B)*0.18,zc+Math.min(L,B)*0.18,COL.col,1,1e5+1.1);
+    loadArrow(r2,0,1.0,zc,1.2,'#1E63B0','V');
+    blk.after();
+    r2.label3('L = '+F(L,1)+' m',[B/2+0.2,-D+0.5,zc],8,0,'#2E2620','left',true,11); r2.label3('B = '+F(B,1)+' m',[0,-D-0.15,zF],0,14,'#2E2620','center',true,11);
+    r2.label3('véglap: itt is nyírási ellenállás',[0,-D-P.ymax*0.5,zF+P.G.x*0.6],0,0,'#1F5F68','center',true,11);
+    r2.flush();
+    const T=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L,D}); const T0=terms({phi:S2.phi,c:S2.c,g:S2.g,B,L:Infinity,D});
+    const h=r2.hud(r2.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
+    c.fillStyle='#2E2620'; c.font='700 13px Inter'; c.textAlign='left'; c.fillText(S2.LB>=9.95?'Sávalap (L ≫ B)':'Pilléralap B × L, B/L = '+F(T.r,2),bx,24);
+    c.font='10.5px Inter'; c.fillStyle='#5C6B79'; c.fillText('a véglapok aránya az alapterülethez: '+F(2*endA/(B*L)*100,0)+' %',bx,42);
+    const fac=[['s_γ',T.sg,COL.act,'1 − 0,3·B/L'],['s_q',T.sq,'#6E4E2E','1 + (B/L)·sin φ'],['s_c',T.sc,COL.slip,'(s_q·N_q − 1)/(N_q − 1)']];
+    let y=62; c.font='700 12px Inter'; c.fillStyle='#2E2620'; c.fillText('Alaki tényezők',bx,y); y+=8;
+    fac.forEach(([nm,v,col,fm])=>{ const w=h.w-28; c.fillStyle='#EFE9DF'; c.fillRect(bx,y+4,w,12); c.fillStyle=col; c.fillRect(bx,y+4,w*Math.min(1,v/1.6),12); c.strokeStyle='#2E2620'; c.lineWidth=1; c.beginPath(); c.moveTo(bx+w/1.6,y+2); c.lineTo(bx+w/1.6,y+18); c.stroke(); c.fillStyle='#2E2620'; c.font='700 11px Inter'; c.fillText(nm+' = '+F(v,2),bx,y+30); c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText(fm,bx+70,y+30); y+=40; });
+    c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText('a függőleges vonal az 1,0 (sávalap)',bx,y); y+=14;
+    y=r2.bars(h,T3(T),y+8,{title:'A három tag alaki tényezővel [kPa]',bh:70,max:Math.max(T0.g,T0.qT,T0.c)});
+    c.font='10.5px Inter'; c.fillStyle='#2E2620'; c.fillText('sávalapként: '+F(T0.sum,0)+' kPa → most '+F(T.sum,0)+' kPa ('+(T.sum>=T0.sum?'+':'')+F((T.sum/T0.sum-1)*100,0)+' %)',bx,y);
+  }
+  function ui2(){ $('v2phi').textContent=S2.phi+'°'; $('v2c').textContent=S2.c+' kPa'; $('v2B').textContent=F(S2.B,1)+' m'; $('v2LB').textContent=S2.LB>=9.95?'∞ (sávalap)':F(S2.LB,1)+' → L = '+F(S2.LB*S2.B,1)+' m'; }
+  [['2phi','phi'],['2c','c'],['2B','B'],['2LB','LB']].forEach(([id,k])=>{ const el=$(id); el.value=S2[k]; el.addEventListener('input',()=>{S2[k]=parseFloat(el.value);S2.morph=null;ui2();if(!S2.play)draw2();}); });
+  $('morph2').addEventListener('click',()=>{ S2.morph={t:0}; S2.play=true; $('play2').textContent='⏸ Szünet'; });
+
+  /* ====================================================== 3. TEHERFERDESÉG ====================================================== */
+  const S3={phi:30,c:0,g:18,B:2,V:400,HV:0.25,tau:0,play:true,ph:0};
+  const r3=R3($('cv3'));
+  function draw3(){
+    const B=S3.B, D=0.8, delta=Math.atan(S3.HV)/rad; const phiE=Math.max(2,S3.phi-delta*0.9); const slid=S3.HV>=Math.tan(S3.phi*rad)*0.98;
+    const P0=prandtl(S3.phi,B), P=prandtl(phiE,B,Math.min(0.75,delta/Math.max(S3.phi,1)));
+    const Wx=Math.max(2.4*P0.G.x+2,7), Wz=Math.max(1.2*B+3,4); const Ztot=D+Math.max(1.35*P0.ymax,2.2);
+    r3.begin({Wx,Wz,yTop:2.6,yBot:-Ztot,hudW:250});
+    const blk=r3.block(Wx,Wz,[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}],{frontAlpha:0.2});
+    const tau=S3.tau, amp=0.1*B;
+    /* szellem: a függőleges teher mechanizmusa (szaggatott) */
+    drawMech(r3,P0,{D,B,zF:0,zB:-Wz,tau:0,amp,side:'both',faint:true,alpha:0.3});
+    /* ferde teher: egyoldalú, laposabb mechanizmus a H irányában */
+    if(!slid) drawMech(r3,P,{D,B,zF:0,zB:-Wz,tau,amp,side:'right',flowPh:S3.ph,alpha:0.6});
+    const sinkx=slid?tau*0.35*B:tau*amp*0.6;
+    r3.box(-B/2+sinkx,B/2+sinkx,-D-(slid?0:tau*amp),-D+0.5-(slid?0:tau*amp),-Wz,0,COL.foot,1,1e5+1); r3.box(-B*0.18+sinkx,B*0.18+sinkx,-D+0.5,1.0,-Wz*0.65,-Wz*0.35,COL.col,1,1e5+1.1);
+    /* V és H nyilak */
+    const zc=-Wz/2; loadArrow(r3,sinkx,1.0,zc,1.3,'#1E63B0',null); r3.label3('V = '+S3.V+' kN/m',[sinkx,2.3,zc],10,-2,'#1E63B0','left',true,13);
+    const hl=Math.min(1.3*S3.HV/0.6+0.3,1.6); r3.line([[-B*0.18+sinkx-hl,0.95,zc],[-B*0.18+sinkx-0.05,0.95,zc]],'#C0512A',{w:4,arrow:true,ah:11,d:1e7}); r3.label3('H = '+F(S3.HV*S3.V,0)+' kN/m',[-B*0.18+sinkx-hl,0.95,zc],-6,-8,'#C0512A','right',true,13);
+    /* eredő */
+    const rl=1.3; r3.line([[sinkx-rl*Math.sin(Math.atan(S3.HV)),1.05+rl*Math.cos(Math.atan(S3.HV)),zc],[sinkx-0.02,1.05,zc]],'#2E2620',{w:2,arrow:true,ah:8,d:1e7,dash:[5,3]});
+    blk.after();
+    r3.label3('δ = '+F(delta,0)+'°',[sinkx-rl*Math.sin(Math.atan(S3.HV)),1.05+rl*Math.cos(Math.atan(S3.HV)),zc],-6,-10,'#2E2620','right',true,11);
+    { const base=r3.ctx.canvas.height-34; r3.label(slid?'δ ≥ φ: az alap elcsúszik, nincs talajtörés':'folytonos: egyoldalú, laposabb csúszólap a H irányában',8,base,'#1F5F68','left',true,11); r3.label('szaggatott: a függőleges teher mechanizmusa',8,base+16,'#6B6052','left',false,10.5); }
+    r3.flush();
+    const T=terms({phi:S3.phi,c:S3.c,g:S3.g,B,L:Infinity,D,V:S3.V,HV:S3.HV}), T0=terms({phi:S3.phi,c:S3.c,g:S3.g,B,L:Infinity,D});
+    const h=r3.hud(r3.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
+    c.fillStyle='#2E2620'; c.font='700 13px Inter'; c.textAlign='left'; c.fillText('H/V = '+F(S3.HV,2)+' → δ = '+F(delta,1)+'°',bx,24);
+    c.font='10.5px Inter'; c.fillStyle='#5C6B79'; c.fillText('f = H/(V + B·c·ctg φ) = '+F(T.f,3)+' · m = 2',bx,42);
+    const fac=[['i_γ',T.ig,COL.act,'(1 − f)^(m+1)'],['i_q',T.iq,'#6E4E2E','(1 − f)^m'],['i_c',T.ic,COL.slip,'(i_q·N_q − 1)/(N_q − 1)']];
+    let y=62; c.font='700 12px Inter'; c.fillStyle='#2E2620'; c.fillText('Teherferdeségi tényezők',bx,y); y+=8;
+    fac.forEach(([nm,v,col,fm])=>{ const w=h.w-28; c.fillStyle='#EFE9DF'; c.fillRect(bx,y+4,w,12); c.fillStyle=col; c.fillRect(bx,y+4,w*Math.min(1,v),12); c.fillStyle='#2E2620'; c.font='700 11px Inter'; c.fillText(nm+' = '+F(v,3),bx,y+30); c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText(fm,bx+88,y+30); y+=40; });
+    y=r3.bars(h,T3(T),y+6,{title:'A három tag i-vel [kPa]',bh:70,max:Math.max(T0.g,T0.qT,T0.c)});
+    c.font='10.5px Inter'; c.fillStyle=slid?'#B81E12':'#2E2620'; c.fillText(slid?'elcsúszás: H/V ≥ tg φ — ellenőrizd az EQU-t':'függőlegesen: '+F(T0.sum,0)+' kPa → ferdén '+F(T.sum,0)+' kPa (−'+F((1-T.sum/T0.sum)*100,0)+' %)',bx,y);
+  }
+  function ui3(){ $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2)+' (H = '+F(S3.HV*S3.V,0)+' kN/m)'; }
+  [['3phi','phi'],['3c','c'],['3V','V'],['3HV','HV']].forEach(([id,k])=>{ const el=$(id); el.value=S3[k]; el.addEventListener('input',()=>{S3[k]=parseFloat(el.value);ui3();if(!S3.play)draw3();}); });
+
+  /* ====================================================== 4. MÉLYSÉGI TAG — A TAKARÁS ====================================================== */
+  const S4={phi:30,g:18,c:0,B:2,D:1.5,gw:false,tau:0,play:true,ph:0};
+  const r4=R3($('cv4'));
+  function draw4(){
+    const B=S4.B, D=S4.D, P=prandtl(S4.phi,B); const Wx=Math.max(2.2*P.G.x+2,7), Wz=Math.max(1.2*B+3,4); const Ztot=D+Math.max(1.35*P.ymax,2.2);
+    r4.begin({Wx,Wz,yTop:Math.max(1.6,D*0.3+1.2),yBot:-Ztot,hudW:250});
+    const layers=D>0?[{y1:0,y2:-D,col:COL.over},{y1:-D,y2:-Ztot,col:COL.soil}]:[{y1:0,y2:-Ztot,col:COL.soil}];
+    const blk=r4.block(Wx,Wz,layers,{frontAlpha:0.2});
+    const tau=S4.tau, amp=0.12*B;
+    drawMech(r4,P,{D,B,zF:0,zB:-Wz,tau,amp,side:'both',hl:'q',flowPh:S4.ph,alpha:0.5});
+    /* talajvíz */
+    if(S4.gw){ r4.line([[-Wx/2,-0.02,0],[Wx/2,-0.02,0]],'#1E78C8',{w:1.8,dash:[7,4],d:1e5+0.9}); r4.label3('▼ talajvíz a terepszinten → γ′ = γ − 10',[-Wx/2,0,0],-8,-4,'#1E78C8','right',true,11); }
+    footing(r4,B,D,0,-Wz,tau*amp,0.6);
+    loadArrow(r4,0,D>0?Math.max(-D+0.6,0)+0.6-tau*amp:0.6-tau*amp,-Wz/2,1.2,'#1E63B0','V');
+    blk.after();
+    const gq=S4.gw?S4.g-10:S4.g; const q=gq*D;
+    if(D>0){ r4.label3('takarás vastagsága D = '+F(D,1)+' m',[-Wx/2,-D/2,0],-8,4,'#6E4E2E','right',true,11); r4.label3('q′ = γ′·D = '+F(q,0)+' kPa',[P.E.x+(P.G.x-P.E.x)*0.8,1.0,0],0,-6,'#6E4E2E','center',true,12); r4.label3('ezt a súlyt kell a passzív éknek felemelnie',[P.E.x+(P.G.x-P.E.x)*0.8,1.0,0],0,8,'#6E4E2E','center',false,10.5); }
+    else r4.label3('D = 0: nincs takarás, a mélységi tag nulla',[0,0.9,0],0,-6,'#B81E12','center',true,12);
+    r4.flush();
+    const T=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D}); const Tref=terms({phi:S4.phi,c:S4.c,g:gq,B,L:Infinity,D:4});
+    const h=r4.hud(r4.ctx.canvas.width-250,250); const c=h.ctx; const bx=h.x0+14;
+    c.fillStyle='#2E2620'; c.font='700 13px Inter'; c.textAlign='left'; c.fillText('D = '+F(D,1)+' m, q′ = '+F(q,0)+' kPa',bx,24);
+    c.font='10.5px Inter'; c.fillStyle='#5C6B79'; c.fillText('q′·N_q = '+F(q,0)+' · '+F(T.N.Nq,2)+' = '+F(T.qT,0)+' kPa',bx,42);
+    let y=r4.bars(h,T3(T),66,{dim:1,max:Math.max(Tref.qT,Tref.g,Tref.c)});
+    c.font='11px Inter'; c.fillStyle='#2E2620'; ['A mélységi tag D-vel lineárisan nő:','minden méter takarás γ′·N_q kPa-val','több ellenállás. A takarás nyíró-','szilárdságát az EC7 nem számítja','(nincs d-tényező) — biztonság javára.'].forEach((l,k)=>c.fillText(l,bx,y+4+k*15));
+    y+=4+5*15+8; c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText('γ′·N_q = '+F(gq*T.N.Nq,1)+' kPa / m takarás',bx,y);
+  }
+  function ui4(){ $('v4phi').textContent=S4.phi+'°'; $('v4g').textContent=S4.g+' kN/m³'; $('v4D').textContent=F(S4.D,1)+' m'; }
+  [['4phi','phi'],['4g','g'],['4D','D']].forEach(([id,k])=>{ const el=$(id); el.value=S4[k]; el.addEventListener('input',()=>{S4[k]=parseFloat(el.value);ui4();if(!S4.play)draw4();}); });
+  $('gw4').addEventListener('click',()=>{ S4.gw=!S4.gw; $('gw4').classList.toggle('on',S4.gw); if(!S4.play) draw4(); });
+
+  /* ====================================================== 5. N-TÉNYEZŐK GÖRBÉI (SVG) ====================================================== */
+  const S5={phi:30};
+  function draw5(){
+    const svg=$('svg5'); const px={x0:56,x1:540,y0:20,y1:330}; const X=p=>px.x0+p/45*(px.x1-px.x0); const lg=v=>Math.log10(Math.max(v,0.1)); const Y=v=>px.y1-(lg(v)-lg(0.1))/(lg(300)-lg(0.1))*(px.y1-px.y0);
+    let g='';
+    [0.1,1,10,100].forEach(v=>{ g+=`<line x1="${px.x0}" y1="${Y(v)}" x2="${px.x1}" y2="${Y(v)}" stroke="#E6E0D6"/><text x="${px.x0-6}" y="${Y(v)+4}" text-anchor="end" font-size="10" fill="#6B6052">${v}</text>`; });
+    for(let p=0;p<=45;p+=5) g+=`<line x1="${X(p)}" y1="${px.y0}" x2="${X(p)}" y2="${px.y1}" stroke="#F1EAE0"/><text x="${X(p)}" y="${px.y1+14}" text-anchor="middle" font-size="10" fill="#6B6052">${p}°</text>`;
+    const curve=(fn,col)=>{ let d=''; for(let p=0;p<=45;p+=0.5){ const v=fn(p); if(v<=0.12) continue; d+=(d?' L':'M')+X(p).toFixed(1)+' '+Y(v).toFixed(1); } return `<path d="${d}" fill="none" stroke="${col}" stroke-width="2.4"/>`; };
+    g+=curve(p=>nFactors(p).Ng,COL.act)+curve(p=>nFactors(p).Nq,'#6E4E2E')+curve(p=>nFactors(p).Nc,COL.slip);
+    const N=nFactors(S5.phi); g+=`<line x1="${X(S5.phi)}" y1="${px.y0}" x2="${X(S5.phi)}" y2="${px.y1}" stroke="#B81E12" stroke-dasharray="5,3"/>`;
+    { const its=[['N_γ',N.Ng,COL.act],['N_q',N.Nq,'#6E4E2E'],['N_c',N.Nc,COL.slip]].filter(it=>it[1]>0.12).map(it=>({n:it[0],v:it[1],c:it[2],y:Y(it[1])})).sort((a,b)=>a.y-b.y); let prev=-1e9; its.forEach(it=>{ it.ly=Math.max(it.y,prev+15); prev=it.ly; }); its.forEach(it=>{ g+=`<circle cx="${X(S5.phi)}" cy="${it.y}" r="4" fill="${it.c}"/><text x="${X(S5.phi)+9}" y="${it.ly+4}" font-size="11" font-weight="700" fill="${it.c}">${it.n} = ${F(it.v,2)}</text>`; }); }
+    g+=`<text x="${(px.x0+px.x1)/2}" y="${px.y1+30}" text-anchor="middle" font-size="11" fill="#6B6052">belső súrlódási szög φ</text><text x="14" y="${(px.y0+px.y1)/2}" text-anchor="middle" font-size="11" fill="#6B6052" transform="rotate(-90 14 ${(px.y0+px.y1)/2})">N tényező (log skála)</text>`;
+    svg.innerHTML=g; $('v5phi').textContent=S5.phi+'°';
+  }
+  $('5phi').value=S5.phi; $('5phi').addEventListener('input',()=>{S5.phi=parseFloat($('5phi').value);draw5();});
+
+  /* ---------- animáció ---------- */
+  const anims=[{S:S1,r:r1,draw:draw1,cv:$('cv1'),play:$('play1'),spin:$('spin1'),reset:$('vr1')},{S:S2,r:r2,draw:draw2,cv:$('cv2'),play:$('play2'),spin:$('spin2'),reset:$('vr2')},{S:S3,r:r3,draw:draw3,cv:$('cv3'),play:$('play3'),spin:$('spin3'),reset:$('vr3')},{S:S4,r:r4,draw:draw4,cv:$('cv4'),play:$('play4'),spin:$('spin4'),reset:$('vr4')}];
+  let last=0;
+  function loop(ts){ const dt=last?Math.min(0.1,(ts-last)/1000):0; last=ts;
+    anims.forEach(a=>{ if(!a.vis||!a.S.play) return; a.S.ph+=dt; const cyc=(a.S.ph%4)/4; a.S.tau=cyc<0.75?Math.sin(cyc/0.75*Math.PI/2):(1-(cyc-0.75)/0.25);
+      if(a.S===S2&&S2.morph){ S2.morph.t+=dt; const m=Math.min(1,S2.morph.t/5); S2.LB=10-9*m; $('2LB').value=S2.LB; ui2(); if(m>=1) S2.morph=null; }
+      a.r.tick(dt); a.draw(); });
+    requestAnimationFrame(loop); }
+  anims.forEach(a=>{ a.r.V.onchange=()=>{ if(!a.S.play) a.draw(); }; a.r.V.onspin=on=>a.spin.classList.toggle('on',on);
+    a.play.addEventListener('click',()=>{ a.S.play=!a.S.play; a.play.textContent=a.S.play?'⏸ Szünet':'▶ Lejátszás'; if(!a.S.play) a.draw(); });
+    a.spin.addEventListener('click',()=>{ a.r.V.spin=!a.r.V.spin; a.spin.classList.toggle('on',a.r.V.spin); });
+    a.reset.addEventListener('click',()=>{ a.r.reset(); a.draw(); });
+    if(window.IntersectionObserver){ const io=new IntersectionObserver(es=>es.forEach(e=>{ a.vis=e.isIntersecting; if(a.vis) a.draw(); }),{threshold:0.15}); io.observe(a.cv); } else a.vis=true; });
+  ui1(); ui2(); ui3(); ui4(); draw5(); draw1(); draw2(); draw3(); draw4();
+  requestAnimationFrame(loop);
+  return {S1,S2,S3,S4,terms,prandtl};
 })();
 
 /* ===================== INDÍTÁS ===================== */
