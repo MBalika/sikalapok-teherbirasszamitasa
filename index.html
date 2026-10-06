@@ -693,8 +693,8 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <div class="callout formula" style="margin:6px 0;font-size:.86rem">σ′ állandó &nbsp;→&nbsp; τ<sub>f</sub> = c<sub>u</sub> (φ<sub>u</sub> = 0) &nbsp;→&nbsp; számítás teljes feszültségekkel, c<sub>u</sub>-val</div>
       </div>
     </div>
-    <h3>A sebességek versenye dönt</h3>
-    <p>Hogy melyik eset áll fenn, az a <b>terhelés sebességének</b> és a talaj <b>vízáteresztő képességének</b> versenye. A konszolidációhoz szükséges idő a vízáteresztő képességtől és a drénezési úthossztól függ: <span class="inline-math">t ∝ H² / c<sub>v</sub></span>. Homokban ez percek–órák, iszapban hetek–hónapok, agyagban évek vagy évtizedek. Ezért:</p>
+    <h3>A sebességek „versenye” dönt</h3>
+    <p>Hogy melyik eset áll fenn, az a <b>terhelés sebességének</b> és a talaj <b>vízáteresztő képességének</b> „versenye”. A konszolidációhoz szükséges idő a vízáteresztő képességtől és a drénezési úthossztól függ: <span class="inline-math">t ∝ H² / c<sub>v</sub></span>. Homokban ez percek–órák, iszapban hetek–hónapok, agyagban évek vagy évtizedek. Ezért:</p>
     <div class="grid c3">
       <div class="step"><h4>Kavics, homok</h4><p>Olyan gyorsan drénez, hogy gyakorlatilag <b>mindig drénezett</b>. Csak a drénezett számítás kell (c′ = 0, φ′).</p></div>
       <div class="step"><h4>Iszap, iszapos homok</h4><p>Átmeneti: a feltöltés ütemétől függ. <b>Mindkét</b> eset számítandó, gyakran a drénezett a mértékadó.</p></div>
@@ -705,7 +705,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <section class="subsection" id="dr-2">
     <h2>2. Gyors vagy lassú feltöltés?</h2>
-    <p class="lead">Egy gabonasiló áll puha, telített agyagon — a modell háromdimenziós és forgatható (húzd az egérrel vagy az ujjaddal). Ha <b>hetek alatt</b> töltik fel, a víz nem tud elszökni az alap alól: a pórusvíznyomás a teherrel együtt nő, a talaj szilárdsága nem — és ha a teher eléri a drénezetlen teherbírást, a siló megdől. Ha <b>évek alatt</b>, ütemezve töltik, a víz közben kiszivárog, a talaj erősödik, és ugyanaz a teher már elbírható. Játszd le a forgatókönyveket, és figyeld a <b>teher és a teherbírás versenyét</b> a diagramon.</p>
+    <p class="lead">Egy gabonasiló áll puha, telített agyagon — a modell háromdimenziós és forgatható (húzd az egérrel vagy az ujjaddal). Ha <b>hetek alatt</b> töltik fel, a víz nem tud elszökni az alap alól: a pórusvíznyomás a teherrel együtt nő, a talaj szilárdsága nem — és ha a teher eléri a drénezetlen teherbírást, a siló megdől. Ha <b>évek alatt</b>, ütemezve töltik, a víz közben kiszivárog, a talaj erősödik, és ugyanaz a teher már elbírható. Játszd le a forgatókönyveket, és figyeld a <b>teher és a teherbírás „versenyét”</b> a diagramon.</p>
     <div class="panel">
       <div class="dfsc" id="df-sc">
         <button type="button" class="on" data-s="transcona">Gyors feltöltés agyagon (Transcona, 1913)</button>
@@ -742,7 +742,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         </div>
       </div>
     </div>
-    <div class="callout"><b>Mit nézz a filmen:</b> az áttetsző talajtömbben látszik az alaplemez, fölötte a siló, amelyben a gabona szintje a teherrel együtt emelkedik; a <b>piezométer</b> (a kék vízoszlop az alap mellett) a pórusvíznyomás többletét mutatja — gyors feltöltésnél a teherrel együtt szökik fel, aztán lassan apad; a <b>sávok</b> a talp alatti teher megoszlását (barna: a szemcseváz viseli, kék: a víz viseli) és mellette a pillanatnyi <b>teherbírást</b>; a <b>diagramon</b> a fekete teher-görbe és a narancs drénezetlen teherbírás-görbe versenyez: ahol a teher föléje kerül, ott jön a talajtörés. A zöld szaggatott a drénezett (hosszú távú) teherbírás — ezt agyagon csak akkor „kapjuk meg", ha a víz már elszökött.</div>
+    <div class="callout"><b>Mit nézz a filmen:</b> az áttetsző talajtömbben látszik az alaplemez, fölötte a siló, amelyben a gabona szintje a teherrel együtt emelkedik; a <b>piezométer</b> (a kék vízoszlop az alap mellett) a pórusvíznyomás többletét mutatja — gyors feltöltésnél a teherrel együtt szökik fel, aztán lassan apad; a <b>sávok</b> a talp alatti teher megoszlását (barna: a szemcseváz viseli, kék: a víz viseli) és mellette a pillanatnyi <b>teherbírást</b>; a <b>diagramon</b> a fekete teher-görbe és a narancs drénezetlen teherbírás-görbe „versenyez”: ahol a teher föléje kerül, ott jön a talajtörés. A zöld szaggatott a drénezett (hosszú távú) teherbírás — ezt agyagon csak akkor „kapjuk meg", ha a víz már elszökött.</div>
   </section>
 
   <section class="subsection" id="dr-3">
@@ -3118,7 +3118,7 @@ const DFILM=(function(){
       const hw=Math.min(gh-6,u/uMax*(gh-6)); ctx.fillStyle='#1E78C8'; ctx.fillRect(gx-7,gBot-3-hw,14,hw);
       for(let k=0;k<=4;k++){ const y=gBot-3-(gh-6)*k/4; ctx.strokeStyle='#2E2620'; ctx.beginPath(); ctx.moveTo(gx+9,y); ctx.lineTo(gx+14,y); ctx.stroke(); ctx.fillStyle='#5C6B79'; ctx.font='9px Inter'; ctx.textAlign='left'; ctx.fillText(F(uMax*k/4,0),gx+16,y+3); }
       label('piezométer',gx,gTop-8,'#1E78C8','center',true,11); label('Δu = '+F(u,0)+' kPa',gx-14,gBot-3-hw+4,'#1E78C8','right',true,12); }
-    /* ---- HUD: a feszültség megoszlása és a teherbírás versenye ---- */
+    /* ---- HUD: a feszültség megoszlása és a teherbírás „versenye” ---- */
     const hx=W-hudW; ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fillRect(hx,0,hudW,H); ctx.strokeStyle='#E6E0D6'; ctx.beginPath(); ctx.moveTo(hx,0); ctx.lineTo(hx,H); ctx.stroke();
     ctx.fillStyle='#2E2620'; ctx.font='700 14px Inter'; ctx.textAlign='left'; ctx.fillText('t = '+tfName(Math.round(t)),hx+14,24);
     ctx.font='11px Inter'; ctx.fillStyle='#5C6B79'; ctx.fillText(failed?'a siló megdőlt — itt megáll':(filling?'feltöltés folyik':(q>=S.qmax-0.5?'a siló tele, a víz szivárog':'pihentetés')),hx+14,41);
