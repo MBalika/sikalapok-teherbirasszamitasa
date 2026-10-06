@@ -1947,7 +1947,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       </ul>
       <h3>Bemeneti tartományok és egymástól függő korlátok</h3>
       <ul class="bullet">
-        <li>A méretek megengedett tartománya: B = 0,5–5 m, L = 0,5–5 m, D = 0,5–4 m, h = 0,5–3,5 m, b = 0,2–1,0 m. A csúszkák ezeken belül mozognak, a beírt érték a tartomány szélére vágódik.</li>
+        <li>A méretek megengedett tartománya: B = 0,5–5 m, L = 0,5–5 m, D = 0,5–4 m, h = 0,5–4 m, b = 0,2–1,0 m. A csúszkák ezeken belül mozognak, a beírt érték a tartomány szélére vágódik.</li>
         <li>A méretek egymást korlátozzák, hogy ne lehessen értelmetlen alaptestet felvenni: az alaptest magassága nem lehet nagyobb az alapsík mélységénél (h ≤ D — ha D-t csökkentjük, h vele együtt csökken); a fal vagy pillér nem lóghat ki az alaptestből (b ≤ B, pilléralapnál b ≤ L is); a Q<sub>k</sub> külpontossága nem lehet nagyobb az alaptest félszélességénél (e<sub>Q</sub> ≤ B/2, e<sub>Q,L</sub> ≤ L/2), vagyis a teher nem kerülhet az alaptesten kívülre. A függő méret határa a mező alatt olvasható, és a vezérlő méret változásakor azonnal igazodik.</li>
         <li>A 3D modell és a 2D metszet léptéke minden beállításnál a méretekhez igazodik: a talajtömb szélessége és mélysége B, L, D, a rétegvastagságok és a talajvíz szerint nő, nagy alaptestnél a nyilak és a feliratok távolsága arányosan nagyobb, a 2D metszetben az alaptest legfeljebb a rajz középső sávját foglalja el, így a rétegfeliratok és a méretfeliratok mindig elférnek.</li>
       </ul>
@@ -2201,7 +2201,7 @@ const KALK = (function(){
           ${fld('B','B','0.5','5','0.05','m','szélesség (a H irányában), 0,5–5 m')}
           ${fld('L','L','0.5','5','0.05','m','hossz, 0,5–5 m')}
           ${fld('D','D','0.5','4','0.05','m','alapsík mélysége, 0,5–4 m')}
-          ${fld('h','h','0.5','3.5','0.05','m','alaptest magassága, 0,5–3,5 m <em class="klim" data-l="h"></em>')}
+          ${fld('h','h','0.5','4','0.05','m','alaptest magassága, 0,5–4 m <em class="klim" data-l="h"></em>')}
           ${fld('b','b','0.2','1','0.05','m','fal / pillér szélessége, 0,2–1,0 m <em class="klim" data-l="b"></em>')}
           ${fld('alpha','α','0','20','0.5','°','alapsík dőlése')}
         </details>
@@ -2303,7 +2303,7 @@ const KALK = (function(){
     });
   }
   /* ---------- bemeneti tartományok és egymástól függő korlátok ----------
-     B, L: 0,5–5 m; D: 0,5–4 m; h: 0,5–3,5 m, de h ≤ D; b: 0,2–1,0 m, de b ≤ B (és pilléralapnál b ≤ L);
+     B, L: 0,5–5 m; D: 0,5–4 m; h: 0,5–4 m, de h ≤ D; b: 0,2–1,0 m, de b ≤ B (és pilléralapnál b ≤ L);
      e_Q ≤ B/2, e_Q,L ≤ L/2 — a teher nem kerülhet az alaptesten kívülre. A csúszkák határai élőben követik
      a többi méretet, a beírt érték a határra vágódik, a függő méret (h, b, e) a vezérlő méret után igazodik. */
   function limits(){
@@ -2311,7 +2311,7 @@ const KALK = (function(){
     const bmax=Math.min(1,S.B,strip?Infinity:S.L);
     return {
       B:{min:0.5,max:5}, L:{min:0.5,max:5}, D:{min:0.5,max:4},
-      h:{min:0.5,max:Math.min(3.5,S.D),why:S.D<3.5?`≤ D = ${F(S.D,2)} m`:''},
+      h:{min:0.5,max:Math.min(4,S.D),why:S.D<4?`≤ D = ${F(S.D,2)} m`:''},
       b:{min:0.2,max:bmax,why:bmax<1?`≤ ${(!strip&&S.L<S.B)?'L':'B'} = ${F(bmax,2)} m`:''},
       eQ:{min:0,max:Math.floor(S.B*50)/100,why:`≤ B/2 = ${F(Math.floor(S.B*50)/100,2)} m`},
       eQL:{min:0,max:strip?0:Math.floor(S.L*50)/100,why:strip?'':`≤ L/2 = ${F(Math.floor(S.L*50)/100,2)} m`}
