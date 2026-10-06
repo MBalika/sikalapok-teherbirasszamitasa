@@ -3499,7 +3499,7 @@ const KPL=(function(){
       if(!o.faint){ const ph=o.flowPh||0; const arrow=(p,v,len)=>{ const t=((ph*0.6)%1); const q=[p[0]+v[0]*len*t*0.5,p[1]+v[1]*len*t*0.5]; r.line([[q[0],q[1],zF],[q[0]+v[0]*len,q[1]+v[1]*len,zF]],'rgba(46,38,32,.9)',{w:2,arrow:true,ah:7,d:dd(0.6)}); };
         const L=Math.min(0.55*o.B,0.9);
         if(s===1){ arrow([0,yd(P.C.y*0.45)],[0,-1],L); arrow([-o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); arrow([o.B*0.22,yd(P.C.y*0.25)],[0,-1],L*0.8); }
-        [0.25,0.55,0.85].forEach(f=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const mid={x:P.E.x+(p.x-P.E.x)*0.62,y:P.E.y+(p.y-P.E.y)*0.62}; const tx=-(mid.y-P.E.y), ty=(mid.x-P.E.x); const nn=Math.hypot(tx,ty)||1; arrow([s*mid.x,yd(mid.y)],[s*tx/nn,-ty/nn],L*0.9); });
+        [0.25,0.55,0.85].forEach(f=>{ const k=Math.round(f*(P.sp.length-1)); const p=P.sp[k]; const mid={x:P.E.x+(p.x-P.E.x)*0.62,y:P.E.y+(p.y-P.E.y)*0.62}; const dx=mid.x-P.E.x, dy=mid.y-P.E.y; const nn=Math.hypot(dx,dy)||1; arrow([s*mid.x,yd(mid.y)],[s*dy/nn,dx/nn],L*0.9); });
         const pm={x:(P.E.x+P.F.x+P.G.x)/3,y:(P.E.y+P.F.y+P.G.y)/3}; arrow([s*pm.x,yd(pm.y)],[s*Math.cos(P.pr),Math.sin(P.pr)],L*1.1); const pm2={x:(P.F.x+2*P.G.x)/3,y:P.F.y/3}; arrow([s*pm2.x,yd(pm2.y)],[s*Math.cos(P.pr),Math.sin(P.pr)],L*0.9); }
     });
     if(o.labels&&tau>0.25) peaks.forEach(p=>r.label3('felpúposodás',p,0,-6,'#3E5A1F','center',true,11));
