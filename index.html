@@ -2459,27 +2459,30 @@ const KALK = (function(){
     R.M=Math.abs(S.Hk*h+(S.Hopp?-1:1)*S.Qk*S.eQ);
     R.ML=strip?0:Math.abs(S.HL*h+(S.HoppL?-1:1)*S.Qk*S.eQL); R.eL=(R.Vk>0&&!strip)?R.ML/R.Vk:0;
     R.eB=R.Vk>0?R.M/R.Vk:0; R.Bp=Math.max(B-2*R.eB,0.05); R.Lp=strip?1:Math.max(L-2*R.eL,0.05); R.Ap=R.Bp*R.Lp;
+    /* a teherbírási képletekben B′ mindig a KISEBBIK hatékony oldal (EC7 konvenció) */
+    R.Bf=strip?R.Bp:Math.min(R.Bp,R.Lp); R.Lf=strip?R.Lp:Math.max(R.Bp,R.Lp); R.swap=!strip&&R.Bp>R.Lp;
     R.eOK=R.eB<=B/3&&(strip||R.eL<=L/3);
     /* talajvíz, q′, γ′ */
     const base=layerAt(D); R.base=base; R.baseIdx=base.i;
     R.twd=gwd()-D;
     R.q=sigV(D,true); R.qStr=sigVStr(D,true); R.qTot=sigV(D,false); R.qTotStr=sigVStr(D,false);
     const g1=base.L.gs-GW;
-    if(!isFinite(R.twd)||R.twd>=1.5*R.Bp){R.gp=base.L.g;R.gpCase=`t<sub>wd</sub> ≥ 1,5·B′ → γ′ = γ`;}
-    else if(R.twd<=0.5*R.Bp){R.gp=g1;R.gpCase=`t<sub>wd</sub> ≤ 0,5·B′ → γ′ = γ<sub>sat</sub> − γ<sub>w</sub>`;}
-    else {R.gp=g1+(base.L.g-g1)*(R.twd/R.Bp-0.5);R.gpCase=`0,5·B′ &lt; t<sub>wd</sub> &lt; 1,5·B′ → lineáris átmenet`;}
+    if(!isFinite(R.twd)||R.twd>=1.5*R.Bf){R.gp=base.L.g;R.gpCase=`t<sub>wd</sub> ≥ 1,5·B′ → γ′ = γ`;}
+    else if(R.twd<=0.5*R.Bf){R.gp=g1;R.gpCase=`t<sub>wd</sub> ≤ 0,5·B′ → γ′ = γ<sub>sat</sub> − γ<sub>w</sub>`;}
+    else {R.gp=g1+(base.L.g-g1)*(R.twd/R.Bf-0.5);R.gpCase=`0,5·B′ &lt; t<sub>wd</sub> &lt; 1,5·B′ → lineáris átmenet`;}
     /* ---- drénezett ---- */
     const phi=base.L.phi, c=base.L.c, N=nFac(phi); R.N=N; R.phi=phi; R.c=c;
-    const r=strip?0:R.Bp/R.Lp; R.ratio=r;
+    const r=strip?0:R.Bf/R.Lf; R.ratio=r;                    /* alaki tényezőkhöz: min/max ≤ 1 */
+    const rm=strip?0:R.Bp/R.Lp;                               /* m-hez: fizikai irányok szerint */
     R.sg=strip?1:1-0.3*r; R.sq=strip?1:1+r*Math.sin(phi*Math.PI/180); R.sc=(strip||N.Nq<=1)?1:(R.sq*N.Nq-1)/(N.Nq-1);
-    R.mB=strip?2:(2+r)/(1+r); R.mL=strip?1:(2+1/r)/(1+1/r);
+    R.mB=strip?2:(2+rm)/(1+rm); R.mL=strip?1:(2+1/rm)/(1+1/rm);
     if(strip||R.Hres<=0){ R.m=R.mB; R.cos2=0; R.sin2=1; } else { R.cos2=Math.pow(R.HL/R.Hres,2); R.sin2=Math.pow(R.HB/R.Hres,2); R.m=R.mL*R.cos2+R.mB*R.sin2; }
     const cot=phi>0?1/tg(phi):0;
     R.f=R.Vk>0?R.Hres/(R.Vk+R.Ap*c*cot):0;
     R.ig=Math.pow(Math.max(1-R.f,0),R.m+1); R.iq=Math.pow(Math.max(1-R.f,0),R.m); R.ic=N.Nq>1?(R.iq*N.Nq-1)/(N.Nq-1):Math.max(1-R.f,0);
     const al=S.alpha*Math.PI/180;
     R.bq=Math.pow(1-al*tg(phi),2); R.bc=(phi>0&&N.Nc>0)?R.bq-(1-R.bq)/(N.Nc*tg(phi)):1;
-    R.tw=0.5*R.gp*R.Bp*N.Ng*R.sg*R.ig*R.bq; R.td=R.q*N.Nq*R.sq*R.iq*R.bq; R.tc=c*N.Nc*R.sc*R.ic*R.bc;
+    R.tw=0.5*R.gp*R.Bf*N.Ng*R.sg*R.ig*R.bq; R.td=R.q*N.Nq*R.sq*R.iq*R.bq; R.tc=c*N.Nc*R.sc*R.ic*R.bc;
     R.RkA=R.tw+R.td+R.tc; R.Rk=R.RkA*R.Ap; R.Rd=R.Rk/S.gR; R.utilDr=R.Vd/R.Rd*100; R.okDr=R.Rd>=R.Vd;
     /* ---- drénezetlen ---- */
     const cu=base.L.cu; R.cu=cu; R.hasCu=cu>0;
@@ -2679,7 +2682,7 @@ const KALK = (function(){
     const u=R.u; let h='';
     h+=step(1,`Önsúly: ${sub('G','f,k')} = ${S.self?`(${R.strip?`${F(S.B,2)} − ${F(Math.min(S.b,S.B),2)}`:`${F(S.B,2)}·${F(S.L,2)} − ${F(Math.min(S.b,S.B),2)}·${F(Math.min(S.b,S.L),2)}`})·Σγ·t = <b>${F(R.Gf,1)}${u}</b>`:'0 (nincs bekapcsolva)'}; ${sub('G','b,k')} = ${S.self?`${F(S.B,2)}·${R.strip?'':F(S.L,2)+'·'}${F(Math.min(S.h,S.D),2)}·25 = <b>${F(R.Gb,1)}${u}</b>`:'0'} → ${sub('G','k')} = ${F(S.Gk,0)} + ${F(R.Gf,1)} + ${F(R.Gb,1)} = <b>${F(R.Gk,1)}${u}</b>`);
     h+=step(2,`Tervezési teher: ${sub('V','d')} = ${F(S.gG,2)}·${F(R.Gk,1)} + ${F(S.gQ,2)}·${F(S.Qk,0)} = <b>${F(R.Vd,1)}${u}</b> &nbsp;(${sub('V','k')} = ${F(R.Vk,1)}${u})`);
-    h+=step(3,`Külpontosság B irányban: ${sub('e','B')} = |${sub('H','B,k')}·h ${S.Hopp?'−':'+'} ${sub('Q','k')}·${sub('e','Q')}| / ${sub('V','k')} = |${F(S.Hk,0)}·${F(Math.min(S.h,S.D),2)} ${S.Hopp?'−':'+'} ${F(S.Qk,0)}·${F(S.eQ,2)}| / ${F(R.Vk,1)} = <b>${F(R.eB,3)} m</b> → B′ = B − 2·${sub('e','B')} = <b>${F(R.Bp,3)} m</b>${R.strip?'':(R.ML>0?`<br>Külpontosság L irányban: ${sub('e','L')} = |${sub('H','L,k')}·h ${S.HoppL?'−':'+'} ${sub('Q','k')}·${sub('e','Q,L')}| / ${sub('V','k')} = |${F(S.HL,0)}·${F(Math.min(S.h,S.D),2)} ${S.HoppL?'−':'+'} ${F(S.Qk,0)}·${F(S.eQL,2)}| / ${F(R.Vk,1)} = <b>${F(R.eL,3)} m</b> → L′ = L − 2·${sub('e','L')} = <b>${F(R.Lp,3)} m</b>`:` · L′ = L = ${F(R.Lp,2)} m (L irányban nincs külpontosság)`)+` · A′ = B′·L′ = <b>${F(R.Ap,3)} m²</b>`}${R.eOK?'':' <span class="kwarn">⚠ a külpontosság meghaladja a B/3 (ill. L/3) határt — a dolgozó keresztmetszet modellje itt már nem érvényes</span>'}`);
+    h+=step(3,`Külpontosság B irányban: ${sub('e','B')} = |${sub('H','B,k')}·h ${S.Hopp?'−':'+'} ${sub('Q','k')}·${sub('e','Q')}| / ${sub('V','k')} = |${F(S.Hk,0)}·${F(Math.min(S.h,S.D),2)} ${S.Hopp?'−':'+'} ${F(S.Qk,0)}·${F(S.eQ,2)}| / ${F(R.Vk,1)} = <b>${F(R.eB,3)} m</b> → B′ = B − 2·${sub('e','B')} = <b>${F(R.Bp,3)} m</b>${R.strip?'':(R.ML>0?`<br>Külpontosság L irányban: ${sub('e','L')} = |${sub('H','L,k')}·h ${S.HoppL?'−':'+'} ${sub('Q','k')}·${sub('e','Q,L')}| / ${sub('V','k')} = |${F(S.HL,0)}·${F(Math.min(S.h,S.D),2)} ${S.HoppL?'−':'+'} ${F(S.Qk,0)}·${F(S.eQL,2)}| / ${F(R.Vk,1)} = <b>${F(R.eL,3)} m</b> → L′ = L − 2·${sub('e','L')} = <b>${F(R.Lp,3)} m</b>`:` · L′ = L = ${F(R.Lp,2)} m (L irányban nincs külpontosság)`)+` · A′ = B′·L′ = <b>${F(R.Ap,3)} m²</b>`+(R.swap?`<br><em>Mivel itt B′ &gt; L′, a teherbírási képletekben a kisebbik hatékony oldal veszi át B′ szerepét (EC7 konvenció): a továbbiakban B′ = ${F(R.Bf,3)} m és L′ = ${F(R.Lf,3)} m.</em>`:'')}${R.eOK?'':' <span class="kwarn">⚠ a külpontosság meghaladja a B/3 (ill. L/3) határt — a dolgozó keresztmetszet modellje itt már nem érvényes</span>'}`);
     return h;
   }
   function renderSteps(R){
