@@ -1,0 +1,623 @@
+# index.html – az oldal HTML-szövegei és attribútumai (magyar → brit angol, EC7-szakszavak)
+# formátum: <azonosító = a magyar szöveg sha1-ének első 7 jegye><TAB><angol>; "=" változatlan; ⏎ = sortörés
+eef4759	=
+bc79b44	Bearing resistance of shallow foundations — practical guide
+88954a0	<span class="uni">BME · Faculty of Civil Engineering · Department of Engineering Geology and Geotechnics</span>⏎        <span class="course">Foundation Engineering BSc · Bearing resistance of shallow foundations</span>
+7602eb9	<a class="pill langsw" id="langSw" href="en" hreflang="en" lang="en" aria-label="Magyar változat"><span>HU</span><b>EN</b></a>⏎      <span class="pill rebar" onclick="setChapter('kalkulator')">calculator</span>
+f35a04c	Bearing resistance of shallow foundations
+b2a5ad4	Determining the resistance of strip and pad footings against bearing failure according to Eurocode&nbsp;7 — through the worked examples presented in the practical classes, with a multi-layer interactive calculator and a 3D model.
+0d1ef1b	<span><b>Course</b> Foundation Engineering BSc · BMEEOGMAT45</span>
+ca97030	<span><b>11</b> worked examples</span><span><b>1</b> multi-layer calculator with a 3D model</span><span><b>EC7</b> · MSZ EN 1997-1</span>
+5175e44	<a onclick="setChapter('menete')">The calculation procedure</a><a class="ghost" onclick="setChapter('drenezes')">Drained or undrained?</a><a class="ghost" onclick="setChapter('keplet')">The terms of the formula</a><a class="ghost" onclick="setChapter('mintapeldak')">Worked examples</a><a class="ghost" onclick="setChapter('kalkulator')">Calculator</a>
+a98edaa	How to use this material
+5cfa61b	The top bar lets you switch between the <b>main chapters</b>, and the sub-menu that appears beneath it lets you move between the sections of a given chapter. Beyond the introduction, three content chapters build on one another:
+f25bb54	<b>The calculation procedure</b> — the design workflow, then the complete formula for the <b>bearing resistance</b> of a shallow foundation against bearing failure for the <b>drained</b> and <b>undrained</b> cases, the treatment of the effective foundation area and the groundwater, the verification of adequacy, and finally the <b>sliding check</b> (drained and undrained).
+e024c3a	<b>Worked examples</b> — <b>11 examples</b> reconstructed from the practical material and derived step by step: drained and undrained strip and pad footings, concentric and eccentric, vertical and inclined loads, the effect and depth of groundwater, the effect of the direction of the horizontal force, the required foundation width, and the <b>sliding check</b> (drained and undrained) with passive earth resistance.
+56597dd	<b>Calculator</b> — a multi-layer, interactive calculator: any number of soil layers, strip or pad footing, eccentric and horizontal loads, groundwater; the program computes the drained and the undrained design resistance R<sub>d</sub> and the sliding check at the same time, derived step by step. The model can be rotated in 3D, and the data of the worked examples can be loaded with one click.
+270747b	1. The calculation procedure
+0c39f92	Designing a shallow foundation consists of successive, interdependent steps. This chapter details the theory of two of them — <b>bearing resistance (bearing failure)</b> and <b>sliding</b> — for both the drained and the undrained case.
+c46a557	The usual design workflow
+39c8641	choosing the <b>foundation level</b> (bearing stratum, groundwater, frost depth)
+5b767ea	selecting the <b>foundation type</b>
+1208cab	determining the <b>foundation width</b> — with bearing resistance (bearing failure) and settlement checks
+6d4433c	<b>structural design</b> of the foundation (material, depth, reinforcement)
+d87dd55	checking <b>stability</b> — sliding, overturning, uplift (flotation)
+d55bb5f	Structure of this chapter: the <b>bearing resistance calculation</b> (drained and undrained case), the treatment of the <b>effective foundation area</b> and the <b>groundwater</b>, the <b>verification of adequacy</b>, and finally the <b>sliding check</b> (drained and undrained).
+5be0151	2. Bearing resistance calculation
+0b2a27f	Depending on the rate of loading and the degree of water saturation, the shear strength of the soil can be accounted for in two ways — for the drained and the undrained case.
+39b6831	2.1 Drained case
+a615989	The <b>drained</b> case is typical of slow loading / granular soils: the shear strength of the soil is described by the <span class="inline-math">φ – c</span> pair, and the favourable effect of water buoyancy may be taken into account. The resistance of the shallow foundation against bearing failure, according to EC7 (MSZ EN 1997-1), is:
+f4d1a46	Width (self-weight) term
+630f405	0.5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">comes from the foundation width and the weight of the soil beneath it</span>
+ce363d6	Surcharge (depth) term
+ec29c3f	q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">the effect of the overburden pressure q′ beside the foundation base (foundation depth)</span>
+0d5f0d8	Cohesion term
+3fd51c4	c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">the resistance arising from the cohesion of the soil</span>
+2363ce6	Input parameters
+656e1df	<b>γ′</b> — effective unit weight of the soil beneath the foundation
+0540e71	<b>B / L</b> — actual width / length of the foundation; <b>B′ / L′</b> — dimensions of the effective foundation area
+06c582d	<b>q′</b> — effective overburden (geostatic) pressure acting beside the foundation at the foundation level
+e9a3042	<b>c</b> — cohesion of the soil beneath the foundation; <b>φ</b> — its angle of shearing resistance
+5f09ae6	Bearing resistance (bearing capacity) factors
+add7e3d	N<sub>q</sub> = e<sup>π·tanφ</sup> · tan²(45° + φ/2)<br>⏎      N<sub>γ</sub> = 2 · (N<sub>q</sub> − 1) · tanφ<br>⏎      N<sub>c</sub> = (N<sub>q</sub> − 1) · cotφ
+47f3ecf	All three factors depend solely on the angle of shearing resistance (φ) and rise steeply as φ increases. A few representative values:
+cdc2b02	Correction factors
+163f678	Shape factors (s)
+b05bcaa	=
+4cb5b11	For a strip footing (L ≫ B): s<sub>γ</sub> = s<sub>q</sub> = s<sub>c</sub> ≈ 1.
+e2f2b2d	Load-inclination factors (i)
+e2d53e8	i<sub>γ</sub> = (1 − f)<sup>m+1</sup><br>⏎          i<sub>q</sub> = (1 − f)<sup>m</sup><br>⏎          i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)<br>⏎          f = R<sub>h</sub> / (R<sub>v</sub> + B′·L′·c·cotφ)
+e9b322e	For a vertical load only, R<sub>h</sub> = 0 → f = 0 → i = 1.<br>m: for a strip footing m<sub>B</sub> ≈ 2, for a pad footing 1.5.
+5aeb728	Base-inclination factors (b)
+bbdc89d	b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tanφ)²<br>⏎          b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tanφ)
+c47ba75	For a horizontal foundation base, α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.
+5263705	The load-inclination exponent (m)
+8ae14cb	The <b>m</b> exponent in the load-inclination (i) factors depends on the aspect ratio of the effective area, according to whether the horizontal force is parallel to side B or side L:
+ecf2a2a	m<sub>B</sub> = [2 + (B′/L′)] / [1 + (B′/L′)] &nbsp;&nbsp;(if the horizontal force is parallel to B)<br>⏎      m<sub>L</sub> = [2 + (L′/B′)] / [1 + (L′/B′)] &nbsp;&nbsp;(if parallel to L)
+6e75f8c	Foundation type
+9011f70	m<sub>B</sub> (H parallel to B)
+c9a2585	m<sub>L</sub> (H parallel to L)
+e9f8576	Strip footing (L ≫ B)
+27883d1	Square pad footing (L = B)
+7561366	2.2 Undrained case
+f3e6df4	The <b>undrained</b> case is typical of rapid loading / fine-grained (cohesive) soils: the shear strength of the soil is described by the undrained shear strength <span class="inline-math">c<sub>u</sub></span>, with <span class="inline-math">φ = 0</span>. Water buoyancy <b>must not</b> be taken into account — we work with total stresses.
+6f918fc	Factors (undrained)
+3aefc75	α must be entered in the formula in radians.
+d94b518	Notation
+681f37d	<b>q</b> — the <i>total</i> overburden (geostatic) pressure acting beside the foundation at the foundation level
+5e1284e	<b>c<sub>u</sub></b> — undrained shear strength
+09234ee	<b>A′ = B′·L′</b> — the effective foundation area
+f512bef	3. Effective foundation area and treatment of groundwater
+9f270fe	3.1 Effective foundation area — eccentricity
+bfd9fd7	Under eccentric loading the load does not act at the centroid of the cross-section. For the calculation we use the <b>effective foundation area</b>, whose centroid coincides with the point of application of the resultant force:
+85ab2cd	side view
+dbf0e5f	actual cross-section
+71f42e8	B&#160;&#160;&#160;width
+4361af3	L&#160;&#160;&#160;length
+a13532d	eccentricity
+878609b	e<tspan baseline-shift="sub" font-size="8">B</tspan>&#160;&#160;&#160;in the B direction
+04a39c9	e<tspan baseline-shift="sub" font-size="8">L</tspan>&#160;&#160;&#160;in the L direction
+5bd3640	effective area
+c0e0b30	B′&#160;&#160;&#160;width
+24ecece	L′&#160;&#160;&#160;length
+2af3825	The eccentricity follows from the <b>moment equation</b> written about the foundation base. If a horizontal force H<sub>k</sub> and an eccentric load Q<sub>k</sub> act:
+e3594b8	<b>Watch the signs!</b> The moments of the horizontal force and of the eccentric vertical load can act in <i>opposite</i> directions — in that case the eccentricity decreases.
+119402b	3.2 Effect of groundwater — the effective γ′
+445c554	The value of γ′ in the width term is influenced by the depth of the groundwater below the foundation base (t<sub>wd</sub>). The failure zone extends to a depth of B′; γ′ varies linearly with the ratio t<sub>wd</sub>/B′:
+733d382	=
+5ce152e	=
+f0be16b	t<sub>wd</sub> ≤ 0.5·B′ &nbsp;→&nbsp; γ′ = γ<sub>sat</sub> − γ<sub>w</sub> &nbsp;&nbsp;(water within the failure zone)<br>⏎      0.5·B′ &lt; t<sub>wd</sub> &lt; 1.5·B′ &nbsp;→&nbsp; γ′ = (γ<sub>sat</sub> − γ<sub>w</sub>) + (γ<sub>m</sub> − (γ<sub>sat</sub> − γ<sub>w</sub>))·(t<sub>wd</sub>/B′ − 0.5) &nbsp;&nbsp;(linear transition)<br>⏎      1.5·B′ ≤ t<sub>wd</sub> &nbsp;→&nbsp; γ′ = γ<sub>m</sub> &nbsp;&nbsp;(water deep, no effect)
+4fdc1a8	A negative t<sub>wd</sub> means the groundwater is <i>above</i> the foundation base — then γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.
+47a995c	4. Verification of adequacy
+cb17b3f	The bearing resistance (GEO) limit state is satisfied if the <b>design load</b> does not exceed the <b>design resistance</b>:
+448246f	Design load — V<sub>d</sub>
+ddf50cb	Partial factors: for permanent actions <b>γ<sub>G</sub> = 1.35</b>, for variable (imposed) actions <b>γ<sub>Q</sub> = 1.5</b>. G<sub>k</sub> includes the self-weight of the superstructure, the foundation, and the overlying soil (fill).
+d09fbce	Design resistance — R<sub>d</sub>
+48467d9	The resistance partial factor for bearing failure of shallow foundations is <b>γ<sub>R</sub> = 1.4</b>. The characteristic resistance R<sub>k</sub> follows from the bearing resistance formula.
+49008e9	<b>If V<sub>d</sub> &gt; R<sub>d</sub>:</b> the foundation is inadequate. There are two remedies — <b>(1)</b> lower the foundation level (q′ increases), or <b>(2)</b> widen the foundation (B increases). In practice, widening is usually the more practical option.
+74c34d5	5. Sliding check (EQU)
+8632fe1	If the force acting on the foundation base has a <b>horizontal component</b> (it is not perpendicular to the base), the safety against <b>sliding</b> must be checked. The condition for adequacy is:
+488f708	<b>H<sub>d</sub></b> — the design value of the horizontal load acting on the foundation base; it must also include the design value of the <b>active earth pressure</b> acting on the foundation.
+a3ed4a8	<b>R<sub>d</sub></b> — the design value of the <b>shearing (base) resistance</b> mobilised at the foundation base.
+42bde9e	<b>R<sub>p;d</sub></b> — the design value of the resistance arising from the <b>(passive) earth pressure</b> acting on the side face of the foundation.
+b6eb553	<b>Use R<sub>p;d</sub> with caution!</b> The soil in front of the face can be removed by erosion or human intervention, and in clay seasonal shrinkage can separate it from the face. The full passive earth resistance is mobilised only at large displacements, so in clay often only one-half to two-thirds of it may be relied upon.
+5117343	Drained case — base friction
+e908326	R<sub>d</sub> = V′<sub>k</sub> · tan δ<sub>k</sub> / γ<sub>R;h</sub>
+a97271e	<b>V′<sub>k</sub></b> — the characteristic value of the vertical load; only the variable load that is <i>certainly concurrent</i> with H<sub>d</sub> may be included.
+0e9a48b	<b>δ<sub>k</sub></b> — the base–soil friction angle: for a <b>cast-in-situ</b> foundation δ<sub>k</sub> = φ′<sub>k</sub>, for a <b>precast</b> one δ<sub>k</sub> = ⅔·φ′<sub>k</sub>.
+65be408	The <b>cohesion c′ at the base is neglected on the safe side</b>.
+6e132c7	<b>γ<sub>R;h</sub> = 1.1</b> (DA-2*).
+2b673b3	Undrained case — base adhesion
+24960f7	<b>A<sub>c</sub></b> — the compressed base area (B·L, or the effective A′).
+378a677	<b>c<sub>u;k</sub></b> — the characteristic undrained shear strength at the foundation base.
+8dc3a73	<b>Limit:</b> because of the gap between base and soil (water, air), the condition <b>R<sub>d</sub>&nbsp;≤&nbsp;0.4·V<sub>d</sub></b> must also be satisfied.
+78b83db	1. Why calculate in two ways?
+410e739	The strength of soil does not depend on the total pressure acting on it, but on how much of it is <b>carried by the soil skeleton</b> and how much by the <b>water</b> in the pores. This is Terzaghi’s principle of effective stress: <span class="inline-math">σ = σ′ + u</span>. Shear strength comes from the effective stress alone: <span class="inline-math">τ<sub>f</sub> = c′ + σ′·tan φ′</span>. When a foundation is loaded, the question is whether the water <b>“can escape”</b> while the load is being applied — if it can, the soil skeleton takes over the load and gains strength; if not, the water takes it over and the strength of the soil does not increase.
+592c53c	<span class="tag moss">drained</span> <span class="nowrap">“the water escapes”</span>
+387d451	The pore water drains away as fast as the load is applied, and the pore water pressure stays at its initial value (<span class="nowrap">Δu ≈ 0</span>). The load immediately becomes <b>effective stress</b>, and the soil <b>gains strength</b> as it is loaded. This is how <b>sand and gravel</b> always behave, and cohesive soil too <b>after a long time</b>, once consolidation has finished.
+1ffc77e	σ′ increases &nbsp;→&nbsp; τ<sub>f</sub> = c′ + σ′·tan φ′ increases &nbsp;→&nbsp; calculation with the effective values c′, φ′, γ′ and q′
+d50467b	<span class="tag rebar">undrained</span> <span class="nowrap">“the water is trapped”</span>
+5c5ed1c	The load increases faster than the water could drain away: the volume of the saturated soil cannot change, so the <b>water takes up the excess</b> (<span class="nowrap">Δu ≈ Δσ</span>). The effective stress, and with it the strength, <b>does not increase</b>: at the moment of loading the soil is just as weak as before. This is how <b>saturated clay and silt</b> behave during the short period of construction.
+2d4b5bf	σ′ constant &nbsp;→&nbsp; τ<sub>f</sub> = c<sub>u</sub> (φ<sub>u</sub> = 0) &nbsp;→&nbsp; calculation in total stresses, with c<sub>u</sub>
+ce8fc0c	The “race” of rates decides
+5f140cc	Which case applies is decided by a “race” between the <b>rate of loading</b> and the <b>permeability</b> of the soil. The time needed for consolidation depends on the permeability and on the length of the drainage path: <span class="inline-math">t ∝ H² / c<sub>v</sub></span>. In sand this means minutes to hours, in silt weeks to months, in clay years or decades. Therefore:
+62d0b8e	Gravel, sand
+5049056	Drains so quickly that it is practically <b>always drained</b>. Only the drained calculation is needed (c′ = 0, φ′).
+e3ea50c	Silt, silty sand
+14428a1	Transitional: it depends on the rate of filling. <b>Both</b> cases have to be calculated; the drained one often governs.
+41c9dfb	Saturated clay
+e52da6a	<b>Undrained</b> during construction, drained in the long term. Under loading the <b>undrained</b> (short-term) case usually governs — the calculator computes both.
+d8eadf9	<b>Why is the undrained case the dangerous one under loading?</b> Because the soil is at its weakest while the load is being applied: the strength is still the old one, but the load is already the new one. As the water slowly seeps out, the effective stress, and with it the strength, increases — the situation can only improve. For unloading (excavation, cutting) it is the other way round: there the long-term, drained case governs, because the pore water pressure recovers over time and the soil weakens.
+cf7da5a	2. Fast or slow filling?
+efee91a	A grain silo stands on soft, saturated clay — the model is three-dimensional and can be rotated (drag it with the mouse or your finger). If it is filled <b>within weeks</b>, the water cannot escape from beneath the foundation: the pore water pressure rises with the load, but the strength of the soil does not — and when the load reaches the undrained bearing resistance, the silo tilts. If it is filled in stages <b>over years</b>, the water seeps out in the meantime, the soil gains strength, and the same load can then be carried. Play the scenarios and watch the <b>“race” between load and bearing resistance</b> on the chart.
+9aea7cd	Fast filling on clay (Transcona, 1913)
+8dfedd3	Slow filling on clay
+28712e5	In two stages, with a rest period
+96e6c78	The same on sand
+dca1c67	▶ Play
+7bf1def	⏮ Restart
+8adc649	time
+b4f75a6	3D model
+1732a20	2D section
+99a0e82	Reset view
+6b393ca	⟲ view
+dfa5db7	Slow rotation
+a3a69cb	▶ rotate
+bd48f91	Soil beneath the foundation
+d7f0e00	soft, saturated clay
+eb6970c	silt
+413c75e	=
+2e85273	<span>Final contact pressure q<sub>max</sub></span> <span class="v" id="df-qv"></span>
+a967448	Filling time <span class="v" id="df-tfv"></span>
+4f85ead	Foundation width B <span class="v" id="df-Bv"></span>
+5eb0bcb	Filling method
+7556348	continuous
+b558302	in two stages, with a rest period
+0ddde77	Playback speed
+f2312be	The film is a simplified model: the excess load first goes into the pore water, which seeps away over a time characteristic of the soil; as the effective stress increases, the undrained strength increases too (c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′). The bearing resistances come from the calculator’s formulas for a strip footing (details in the Calculation conventions).
+d6a0c85	<b>What to watch in the film:</b> the transparent block of soil shows the foundation raft with the silo above it, in which the grain level rises with the load; the <b>piezometer</b> (the blue water column beside the foundation) shows the excess pore water pressure — with fast filling it shoots up together with the load, then slowly falls; the <b>bars</b> show how the load beneath the base is shared (brown: carried by the soil skeleton, blue: carried by the water) and, next to them, the current <b>bearing resistance</b>; on the <b>chart</b> the black load curve and the orange undrained bearing resistance curve “race”: where the load rises above it, bearing failure follows. The green dashed line is the drained (long-term) bearing resistance — on clay we only “get” it once the water has escaped.
+48fea0f	3. How we calculate in the two cases
+500c1fe	<i style="background:var(--moss)"></i>Drained case — effective stresses
+fd68322	<b>Parameters:</b> c′ and φ′ (effective shear strength parameters); below the groundwater the unit weight is γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.
+e83f491	<b>Bearing resistance factors:</b> N<sub>q</sub> = e<sup>π·tan φ′</sup>·tan²(45° + φ′/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cot φ′, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tan φ′ — all three terms grow with the load and with the width.
+c3e30c4	<b>q′:</b> the <b>effective</b> overburden pressure of the soil above the foundation base; groundwater close by also reduces the γ′ term (t<sub>wd</sub>/B′ rule).
+0005635	<b>When:</b> sand and gravel always; silt and clay in the long term.
+a447f77	WE1 drained strip footing in the calculator
+992e228	<i style="background:var(--rebar)"></i>Undrained case — total stresses
+ba2c715	<b>Parameter:</b> a single number, the undrained shear strength c<sub>u</sub> (from laboratory tests or penetration tests); φ<sub>u</sub> = 0, so there are no N<sub>q</sub> and N<sub>γ</sub> terms — the bearing resistance is <b>independent of the width</b>, and it increases with depth only through the q term.
+bbfcb56	<b>q:</b> the <b>total</b> pressure of the soil above the foundation base (with γ<sub>sat</sub>, without water buoyancy), because we work with total stresses.
+8ab6cc8	<b>Shape and inclination factors:</b> s<sub>c</sub> = 1 + 0.2·B′/L′, i<sub>c</sub> = 0.5·[1 + √(1 − H/(A′·c<sub>u</sub>))], b<sub>c</sub> = 1 − 2α/(π + 2).
+a38d304	<b>When:</b> saturated clay and silt — during the short period of construction and loading.
+479f355	WE2 undrained strip footing in the calculator
+d6f2f62	Which one when? — decision table
+55125f8	Soil
+07a276a	Loading (construction, filling)
+2f9c6b7	Unloading (excavation)
+8fd0cab	What we calculate
+4b7b736	<b>gravel, sand</b>
+016823e	drained
+60964b4	drained only (c′ = 0, φ′)
+1dfabf4	<b>silt, silty sand</b>
+abebd44	may be undrained in the short term, drained in the long term
+6f86e83	both; the lower resistance governs
+a420bfd	<b>saturated clay</b>
+dfa20bb	<b>undrained</b> governs (short term), drained in the long term
+0effbf1	<b>drained</b> governs (long term)
+2e12182	both (c<sub>u</sub>, and c′, φ′)
+1f3e3cf	<b>unsaturated clay</b> (above the groundwater)
+77c2c70	approximately drained, but the suction may change
+44b9c45	drained, with cautious parameters
+9b246d6	<b>How the calculator works:</b> it always calculates the drained bearing resistance and, if the layer below the foundation base has a c<sub>u</sub>, the undrained one too; the two rows below the figure show them one under the other, and the case with the lower resistance governs. Both use the same resistance factor γ<sub>R</sub> = 1.4 and the same design load V<sub>d</sub>.
+3eedcef	4. A famous case: the Transcona grain elevator, 1913
+a0314f2	What happens in the film really happened
+6e44377	Winnipeg, Canada
+5b4f112	Filling of the Transcona grain elevator began in the autumn of 1913, straight after it was completed, and it was almost full <b>within a month</b>. Beneath the raft lay thick, soft, saturated clay. The fast filling created undrained conditions: the pore water could not escape, and the strength of the soil did not increase with the load. When the average contact pressure reached about <b>300 kPa</b>, the soil was pushed out on one side and heaved on the other, and within a few hours the building tilted by some <b>27°</b> — the reinforced concrete silo itself remained almost undamaged.
+e7ae390	Decades later, the undrained bearing resistance back-calculated from c<sub>u</sub> values measured on soil samples showed <b>good agreement</b> with the actual failure pressure — this became one of the classic confirmations of the undrained (φ<sub>u</sub> = 0) bearing resistance calculation. The silo was later straightened by underpinning and remained in use for decades.
+99339f0	<b>Lesson:</b> on saturated clay the <b>rate</b> of filling matters just as much as the magnitude of the load. The same silo, the same soil — filled slowly, in stages, the water would have escaped, the soil would have gained strength, and the silo would still be standing upright. The “In two stages, with a rest period” scenario shows exactly this.
+4dd5b2c	The terms of the formula — where does each one come from?
+8d17c5a	The bearing resistance formula of a shallow foundation is not a “black box”: each of its terms and factors expresses a clearly visible physical effect. In this chapter we draw the <b>failure mechanism</b> on three-dimensional, rotatable models, and show one by one where the <b>width</b>, the <b>depth</b> and the <b>cohesion</b> terms come from, why the <b>shape</b>, <b>load-inclination</b> and base-inclination factors are needed, and how they change the slip surface.
+3b0cc67	The <b>weight of the soil mass</b> above the slip surface resists being pushed out. The wider the foundation, the larger (and deeper) the failure mass → proportional to B.
+ea10b04	The passive wedge also has to lift the <b>overburden</b> above the foundation base: its weight is q′ = γ′·D. The deeper the foundation, the larger it is.
+0f389a2	Cohesion also resists along the <b>whole length of the slip surface</b> — independently of friction, which is why the c term exists even when φ = 0.
+3928f29	Every model can be <b>rotated</b> (drag it with the mouse or your finger), and during playback the mechanism “moves”: the foundation settles, the active wedge pushes downwards, the radial zone rotates and the passive wedge heaves the surface. The arrows show the direction in which the soil moves. The bar chart on the right always gives the current value of the three terms in kPa, for a strip footing, with the calculator’s formulas.
+051faf8	1. The failure mechanism and the three terms
+04b2608	When the load reaches the bearing resistance, a characteristic <b>Prandtl</b> failure mass forms beneath the foundation: an <b>active wedge</b> moving downwards together with the foundation (its sides make an angle of 45° + φ/2 with the foundation base), a <b>radial shear zone</b> rotating around it (logarithmic spiral), and a <b>passive wedge</b> pushed outwards and upwards (45° − φ/2). Three things work against bearing failure: the <b>weight</b> of the soil mass being pushed out, the weight of the <b>overburden</b> above it, and the <b>cohesion</b> acting along the slip surface. These three are the three terms of the formula. Adjust φ: with a larger friction angle the spiral opens wider and the mass becomes deeper and wider — that is why the N factors increase so steeply.
+d873e8e	⏸ Pause
+63c22dc	Which term should we highlight?
+3ed34a3	all three
+b4aaeb9	width (γ)
+3af8b30	depth (q′)
+8003cca	cohesion (c)
+e7c5c5d	Angle of shearing resistance φ <span class="v" id="kp-v1phi"></span>
+cf5fae1	Cohesion c <span class="v" id="kp-v1c"></span>
+8787d11	Unit weight γ <span class="v" id="kp-v1g"></span>
+f0c8888	Foundation width B <span class="v" id="kp-v1B"></span>
+8188dce	Foundation depth D <span class="v" id="kp-v1D"></span>
+56c6d20	Try φ = 0 (undrained case) — the spiral becomes a circle, N<sub>γ</sub> = 0, the width term disappears, and only the cohesion (N<sub>c</sub> = 5.14) and the overburden remain. Then D = 0: the depth term disappears as well.
+6fde452	Why 0.5·B·γ·N<sub>γ</sub>?
+875f0c3	Every dimension of the failure mass is proportional to B, so its volume is proportional to B² and its weight to γ·B²; per unit area of the foundation (divided by B), γ·B remains. N<sub>γ</sub> is a multiplier that follows from the geometry (from φ), and the 0.5 is part of the traditional notation.
+c03aef4	Why q′·N<sub>q</sub>?
+261a3a3	The passive wedge moves towards the surface and lifts the soil above the foundation base with it. Its weight acts on the passive wedge as a uniform surcharge (q′ = γ′·D); N<sub>q</sub> tells how much resistance this transfers to the foundation base through the mechanism.
+fd8d273	Why c·N<sub>c</sub>?
+5dfc037	At every point of the slip surface the cohesion provides shear resistance, and the length and shape of the surface depend only on φ — hence N<sub>c</sub> = (N<sub>q</sub> − 1)·cot φ. N<sub>c</sub> and N<sub>q</sub> can be derived from the same mechanism (Prandtl–Reissner); N<sub>γ</sub> is approximate.
+4ec3e41	2. Shape factors: from strip footing to pad footing
+c743bc3	The formula was derived for a <b>strip footing</b>: the failure mass is “infinite” along its length, and the soil moves only in the plane perpendicular to the foundation. For a <b>pad footing</b> (B × L) the mass has a finite length: slip surfaces also form on its two <b>short sides</b>, shear resistance develops there as well, and the soil spreads out in three dimensions. The <b>shape factors</b> account for this through the B/L ratio. Press the “From strip to pad footing” button, or drag the L/B slider, and watch how the end faces appear and how the factors change.
+e890fdc	▶ Film: from strip to pad footing
+24c2b7a	Length / width L/B <span class="v" id="kp-v2LB"></span>
+fd842fc	Foundation width B <span class="v" id="kp-v2B"></span>
+2cda29f	Angle of shearing resistance φ <span class="v" id="kp-v2phi"></span>
+857802f	Cohesion c <span class="v" id="kp-v2c"></span>
+e30de74	<b>s<sub>q</sub> and s<sub>c</sub> &gt; 1:</b> extra shear resistance develops on the end faces, and the overburden “holds” on the short sides too — the depth and cohesion terms increase. <b>s<sub>γ</sub> &lt; 1:</b> the three-dimensional failure mass is relatively smaller, so less soil weight acts per unit area of the foundation — the width term decreases (an experimental result, De Beer). For a square foundation: s<sub>γ</sub> = 0.7, s<sub>q</sub> = 1 + sin φ.
+c49ac04	The factors always contain the <b>effective</b> B′/L′, and B is the side in whose direction the horizontal force acts (the convention of the worked examples). For a strip footing B/L → 0, and all shape factors are 1.
+e6c6fb1	3. Load inclination: why does the bearing resistance decrease?
+f4aaf0f	If the resultant force is not perpendicular to the foundation base, the horizontal component <b>pushes the soil in the direction of H</b>: the mechanism becomes <b>one-sided and flatter</b>, the slip surface moves a smaller, shallower soil mass, and part of the friction angle is already “used up” by shear along the foundation base. Less soil resists → lower bearing resistance. This is what the <b>i factors</b> express: they are all less than 1, and they decrease rapidly as the H/V ratio grows. If δ reached φ, the result would no longer be bearing failure but <b>sliding</b> — that is the task of the EQU check; this is why the slider allows H/V only up to 0.9·tan φ, so that you always see the bearing failure mechanism.
+2289c94	Load inclination H/V <span class="v" id="kp-v3HV"></span>
+a3753a7	Vertical load V <span class="v" id="kp-v3V"></span>
+8b96208	Angle of shearing resistance φ <span class="v" id="kp-v3phi"></span>
+68a71cf	Cohesion c <span class="v" id="kp-v3c"></span>
+168dbc7	i<sub>γ</sub> = (1 − f)<sup>m+1</sup>, i<sub>q</sub> = (1 − f)<sup>m</sup>, i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1), where f = H/(V + A′·c·cot φ), and m = 2 for a strip footing. Cohesion “helps” in the denominator: the same H gives a smaller f on cohesive soil. On the model the flattening of the slip surface is illustrative (a mechanism calculated with φ − δ); the factors are exact.
+ecd2e13	<b>Why is it a reduction factor?</b> Under a vertical load the full φ works against bearing failure. Under an inclined load part of the shearing already starts at the foundation base (as in sliding), and the failure mass is smaller and asymmetric — the resistance that can be mobilised is smaller. The width term is the most sensitive (exponent m + 1), because the soil mass being pushed out shrinks the most.
+bb6ac3c	4. The depth term: the weight of the overburden
+9f7dbdb	The soil above the foundation base, the <b>overburden</b>, helps in two ways: its weight presses as a uniform surcharge on the passive wedge, which the failure <b>has to lift</b>, and its shear strength also resists the movement. The EC7 formula takes only the first into account: q′ = γ′·D (the shear strength of the overburden is neglected on the safe side, which is why there is no separate depth factor “d”). Drag the D slider: the overburden gets thicker, the q′·N<sub>q</sub> term increases linearly, and the passive wedge has to push out an ever larger mass. With groundwater the overburden is “lighter” (γ′ = γ − γ<sub>w</sub>), and the term is smaller.
+b8ac2ec	groundwater at ground level
+da6a62b	Foundation depth D <span class="v" id="kp-v4D"></span>
+0365db6	Unit weight γ <span class="v" id="kp-v4g"></span>
+ef2c040	Angle of shearing resistance φ <span class="v" id="kp-v4phi"></span>
+933c75b	In practice, therefore, one of the most effective tools is to lower the foundation level: not only does q′ increase, but the foundation often reaches a better (deeper) bearing stratum as well. The q′ term of the formula takes only the weight of the soil <b>beside</b> the foundation; the weight of the foundation itself and of the fill on top of it appears on the <b>load</b> side.
+b0a9c59	5. The N factors
+e126649	All three bearing resistance factors depend solely on φ and grow <b>exponentially</b> with φ — because of the logarithmic spiral. The chart shows them on a decimal (linear) scale: below 25° the curves are flat, above it they “take off” — from 30° to 40°, N<sub>γ</sub> more than triples. This is why φ should be determined carefully, and why it must not be “rounded”.
+31717e3	N factors as a function of φ
+2aa3db7	Angle of shearing resistance φ <span class="v" id="kp-v5phi"></span>
+407bcb8	N<sub>q</sub> = e<sup>π·tan φ</sup>·tan²(45° + φ/2)<br>N<sub>c</sub> = (N<sub>q</sub> − 1)·cot φ<br>N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tan φ
+cb19e1f	The e<sup>π·tan φ</sup> comes from the π/2 rotation of the spiral (r = r<sub>0</sub>·e<sup>θ·tan φ</sup>), and tan²(45° + φ/2) from the stress ratio of the active and passive Rankine wedges.
+1640765	6. Inclination of the foundation base: the b factors
+33a56a9	If the foundation base is inclined at an angle α, one edge of the foundation lies higher and the other lower relative to the horizontal ground surface. Failure starts towards the <b>higher edge</b>: there the ground “falls away” relative to the foundation base, so the spiral of the radial zone rotates only through <b>π/2 − α</b>, the slip surface is shorter and the passive wedge smaller — <b>less soil resists</b>, and the resistance that can be mobilised decreases. The <b>b factors</b>, which are less than 1, account for this. Drag the α slider: the inclined foundation moves an ever smaller mechanism (the symmetric mechanism of a horizontal base is shown dashed for comparison), and the bar chart on the right shows how much bearing resistance is lost.
+807891c	Inclination of the foundation base α <span class="v" id="kp-v6al"></span>
+b974180	Angle of shearing resistance φ <span class="v" id="kp-v6phi"></span>
+fea08e4	Cohesion c <span class="v" id="kp-v6c"></span>
+f9f1757	b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ), with α in radians (EC7 Annex D). On the model B = 2 m, D = 1 m; the foundation settles perpendicular to its base, and the mechanism is one-sided, towards the higher edge. For a small inclination (5°) the reduction is a few per cent; at 15° it is already 20–30%.
+85856f6	<b>Vertical load on an inclined base:</b> V also has a <b>component parallel to the foundation base</b> (H = V·sin α), which the load-inclination factors i account for — the b factors additionally express the effect of the inclined plane itself. In the calculation V and H always mean the components perpendicular and parallel to the foundation base (see WE7).
+cc656a5	<b>In summary:</b> the three terms of the formula are the three resisting effects (soil weight, overburden, cohesion); the N factors account for the geometry of the mechanism, the s factors for its three-dimensional nature, the i factors for the mechanism shrinking under an inclined load, and the b factors for the inclined foundation base. In the calculator you can see all of this together, step by step.
+8452c38	Worked examples
+fb6ae9c	<b>11</b> worked examples derived in detail from the practical material — drained and undrained strip and pad footings, concentric and eccentric, vertical and inclined loads, the effect and depth of groundwater, the effect of the direction of the horizontal force, the required foundation width, and the sliding check (drained and undrained) with passive earth resistance. Each example comes with a figure reconstructed from the practical material and a step-by-step solution.
+45ffd8a	Worked Example 1 — Checking a drained strip footing
+76523fd	Task
+a628f08	Check the adequacy against bearing failure, in the drained case, of the <b>strip footing</b> (L&nbsp;≫&nbsp;B) shown in the figure. Loads: <b>G<sub>v,k</sub> = 220 kN/m</b>, <b>Q<sub>v,k</sub> = 70 kN/m</b> (concentric, vertical). Geometry: b = 0.3 m, B = 1.1 m, h = 0.6 m, with the foundation base 1.1 m below ground level. γ<sub>b</sub> = 25 kN/m³. The groundwater is deep. <b>sandy gravel fill:</b> γ = 17 kN/m³, φ = 30°, c = 10 kPa. <b>silty sand:</b> γ = 18 kN/m³, φ = 24°, c = 12 kPa.
+cbe3d6c	WE1
+1958827	Figure
+7834224	ground surface
+8eac697	=
+94fb0d3	base −1.10 m (rel.)
+1dbb14c	=
+d257cf1	=
+9fefb71	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=0.8m
+bf49af9	sandy gravel fill
+d7a883b	=
+ce3f633	silty sand
+5f41c15	=
+267d7d4	Solution
+dba9189	1. Action side — the design load
+e41955c	Weight of fill: G<sub>f,k</sub> = (B−b)·t·γ = (1.1−0.3)·0.5·17 = <b>6.8 kN/m</b>
+bd6c3b8	Weight of the foundation: G<sub>b,k</sub> = B·h·γ<sub>b</sub> = 1.1·0.6·25 = <b>16.5 kN/m</b>
+b8b8e7b	Permanent loads: G<sub>k</sub> = 220 + 6.8 + 16.5 = <b>243.3 kN/m</b>
+a7e867f	V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub> = 1.35·243.3 + 1.5·70 = <b>434 kN/m</b>
+891a4de	2. Geometry and overburden pressure
+89b6d0d	Concentric load → B = B′, A′ = B′·L′ = 1.1 m²/m.
+3bc443b	q′ = Σγ<sub>i</sub>·t<sub>i</sub> = 17·0.8 + 18·0.3 = <b>19 kPa</b>
+e60c923	Groundwater deep: t<sub>wd</sub>/B′ &gt; 1.5 → γ′ = γ<sub>m</sub> = <b>18 kN/m³</b>
+6d7cd55	3. Bearing resistance factors (φ = 24°)
+2c760bc	N<sub>q</sub> = e<sup>π·tan24°</sup>·tan²(45°+12°) = <b>9.60</b>; &nbsp; N<sub>c</sub> = (N<sub>q</sub>−1)·cot24° = <b>19.32</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan24° = <b>7.66</b>
+bb80c96	Strip footing, concentric load, horizontal base → s = i = b ≈ 1.
+e64017e	4. Characteristic and design resistance
+8a656f4	=
+37d1d90	R<sub>k</sub> = 490·1.1 = 539 kN/m → R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub> = 539/1.4 = <b>385 kN/m</b>
+744cba2	<b>Result (B = 1.1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 434 kN/m → <b>NOT ADEQUATE.</b>
+622ad51	5. Remedy: widen the foundation — B = 1.3 m
+8d37d0c	New weights: G<sub>f,k</sub> = (1.3−0.3)·0.5·17 = 8.5; &nbsp; G<sub>b,k</sub> = 1.3·0.6·25 = 19.5 → G<sub>k</sub> = 248 → V<sub>d</sub> = 1.35·248 + 1.5·70 = <b>440 kN/m</b>
+517bdff	R<sub>k</sub>/A′ = 0.5·18·1.3·7.66 + 19·9.60 + 12·19.32 = 90 + 182 + 232 = 504 kPa
+953ee59	R<sub>k</sub> = 504·1.3 = 655 → R<sub>d</sub> = 655/1.4 = <b>468 kN/m</b>
+6d3da54	<b>Result (B = 1.3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m → <b>ADEQUATE.</b> ✓
+7d41766	Mini calculator
+1b2e5a8	⚙ Load the data into the multi-layer calculator (3D)
+dbc02dd	WE1 — checking a drained strip footing
+e9602b6	=
+eba3ee3	B width (m)
+189cba2	q′ overburden (kPa)
+0d66c93	=
+f53ced8	γ′ below the foundation (kN/m³)
+abc7585	=
+83cde71	c cohesion (kPa)
+9f6e506	Constants (for self-weight): b = 0.3; h = 0.6; t = 0.5 m; γ<sub>fill</sub> = 17; γ<sub>b</sub> = 25 kN/m³
+8f1c792	Worked Example 2 — Checking an undrained strip footing
+d1f9d04	<b>Same geometry and loading</b> as WE1, but the soil beneath the foundation is now cohesive clay: φ<sub>u</sub>&nbsp;=&nbsp;0°, <b>c<sub>u</sub>&nbsp;=&nbsp;150&nbsp;kPa</b>.<br>Check the strip footing in the <b>undrained</b> case (B&nbsp;=&nbsp;1.1&nbsp;m).
+d3a53fd	WE2
+9746b08	1. Action side
+72f8cb5	Same as WE1: G<sub>k</sub> = 243.3 kN/m → V<sub>d</sub> = 1.35·243.3 + 1.5·70 = <b>434 kN/m</b>
+6244903	2. Overburden pressure (total stress!)
+41989ef	Undrained case → we work with <i>total</i> stresses; water buoyancy is not taken into account.
+dc5a06f	q = Σγ<sub>i</sub>·t<sub>i</sub> = 17·0.8 + 18·0.3 = <b>19 kPa</b>
+7495b88	3. Undrained resistance
+76c575c	Strip footing → s<sub>c</sub> = 1; horizontal base → b<sub>c</sub> = 1; vertical load → i<sub>c</sub> = 1.
+b0082b2	=
+62433e6	R<sub>k</sub> = 790·1.1 = 869 kN/m → R<sub>d</sub> = 869/1.4 = <b>620 kN/m</b>
+94f777c	<b>Result:</b> R<sub>d</sub> = 620 kN/m &gt; V<sub>d</sub> = 434 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; In the undrained state the stiff cohesive soil can carry the load even with a width of 1.1 m.
+f3f58a1	WE2 — checking an undrained strip footing
+b94bbe0	undrained
+2535d42	q overburden (kPa)
+041b138	c<sub>u</sub> undrained shear str. (kPa)
+6a88e49	Constants (for self-weight): b = 0.3; h = 0.6; t = 0.5 m; γ<sub>fill</sub> = 17; γ<sub>b</sub> = 25 kN/m³; total stress (φ = 0)
+9cb3efe	Worked Example 3 — Eccentric and inclined load, with groundwater
+c56d5ba	Check the <b>strip footing</b> in the drained case. Loads: <b>G<sub>z,k</sub> = 250 kN/m</b> (concentric), <b>Q<sub>z,k</sub> = 170 kN/m</b> applied eccentrically (e<sub>q</sub> = 0.3 m), and a horizontal force of <b>G<sub>x,k</sub> = 30 kN/m</b>. Geometry: b = 0.3 m, B = 1.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. The groundwater is 0.6 m above the foundation base.<br><b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa. <b>silty sand:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa.
+79786dc	WE3
+3f75bcb	groundwater
+1f4206a	=
+e5eddb5	=
+5570dd0	=
+62b6d54	=
+88ca8a2	h<tspan baseline-shift="sub" font-size="7">GWL</tspan>=0.6m
+2be8fe1	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.1m
+fa7c0a9	sand fill
+f5617e0	=
+bdd0c1a	=
+116b492	Strip footing
+52083f0	G<sub>f,k</sub> = (1.3−0.3)·0.4·18 = 7.2; &nbsp; G<sub>b,k</sub> = 1.3·1.0·25 = 32.5 → G<sub>k</sub> = 250 + 7.2 + 32.5 = <b>289.7 kN/m</b>
+9553d9c	V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b>
+389b855	2. Eccentricity of the resultant force
+0141769	Characteristic vertical load: V<sub>k</sub> = G<sub>z,k</sub>+G<sub>f,k</sub>+G<sub>b,k</sub>+Q<sub>z,k</sub> = 250+7.2+32.5+170 = <b>459.7 kN/m</b>
+d3259e4	Horizontal load: H<sub>k</sub> = G<sub>x,k</sub> = <b>30 kN/m</b>
+e614f6b	Moment equation about the axis of the foundation base: e<sub>B,k</sub> = |(H<sub>k</sub>·h) − (Q<sub>z,k</sub>·e<sub>q</sub>)| / V<sub>k</sub> = |(30·1.0) − (170·0.3)| / 459.7 = 21/459.7 = <b>0.046 m</b>
+c7937bd	Effective width: B′ = B − 2·e<sub>B,k</sub> = 1.3 − 2·0.046 = <b>1.208 m</b>; &nbsp; A′ = 1.208 m²/m
+612888f	3. Overburden pressure and γ′ (water above the base)
+1565879	q′ = Σγ′<sub>i</sub>·t<sub>i</sub> = 18·0.8 + (19−10)·0.3 + (20−10)·0.3 = <b>20.1 kPa</b>
+a29d498	Water above the base → t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b>
+188b09b	4. Factors (φ = 26°)
+de8d3ae	N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; Strip footing → s ≈ 1; horizontal base → b ≈ 1.
+06da1c8	f = H<sub>k</sub>/(V<sub>k</sub> + B′·L′·c·cotφ) = 30/(459.7 + 1.208·30·cot26°) = 30/534 = <b>0.0562</b>
+48a69c0	m<sub>B</sub> = 2 (strip footing) → i<sub>γ</sub> = (1−f)<sup>3</sup> = <b>0.841</b>; &nbsp; i<sub>q</sub> = (1−f)<sup>2</sup> = <b>0.891</b>; &nbsp; i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub>−1)/(N<sub>q</sub>−1) = <b>0.881</b>
+830dc83	5. Resistance
+3fb5fa9	= 0.5·10·1.208·10.59·0.841 + 20.1·11.85·0.891 + 30·22.25·0.881 ≈ 54 + 212 + 588 = <b>854 kPa</b>
+dd84978	R<sub>k</sub> = 854·1.208 = 1031 kN/m → R<sub>d</sub> = 1031/1.4 = <b>736 kN/m</b>
+2e97c3b	<b>Result:</b> R<sub>d</sub> = 736 kN/m &gt; V<sub>d</sub> = 646.1 kN/m → <b>ADEQUATE.</b> ✓
+b9f1942	WE3 — eccentric + inclined load, with groundwater
+4f78d61	G<sub>z,k</sub> concentric (kN/m)
+b9b563a	Q<sub>z,k</sub> eccentric (kN/m)
+782d3b9	e<sub>q</sub> eccentricity of Q (m)
+96e5b31	G<sub>x,k</sub> horizontal force (kN/m)
+4c41394	Constants (for self-weight): b = 0.3; h = 1.0; t = 0.4 m; γ<sub>fill</sub> = 18; γ<sub>b</sub> = 25 kN/m³; strip footing, m<sub>B</sub> = 2
+12d3c26	Worked Example 4 — Effect of the design groundwater depth
+93c8578	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. Loads: G<sub>z,k</sub> = 250 kN/m (concentric), Q<sub>z,k</sub> = 170 kN/m (e<sub>q</sub> = 0.3 m), G<sub>x,k</sub> = 30 kN/m. Soils: sand fill γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa; silty sand γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa. <b>The only difference:</b> the design groundwater is now <b>2 m deeper</b> — 1.4 m below the foundation base (t<sub>wd</sub> = 1.4 m). <b>Question: how does R<sub>d</sub> change?</b>
+e227d52	WE4
+5b18304	t<tspan baseline-shift="sub" font-size="7">wd</tspan>=1.4m
+1edc716	1. Action side — unchanged (same as WE3)
+b6c067d	V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(the load does not depend on the groundwater)</span>
+ee64d64	2. Eccentricity — unchanged
+ea565bc	3. q′ and γ′ with the deeper groundwater — <u>this changes!</u>
+6fe127d	The groundwater is 1.4 m below the foundation base (t<sub>wd</sub> = 1.4 m), so there is <b>no water above the base</b> → q′ with the moist unit weights:
+606f23e	q′ = 18·1.1 + 18·0.3 = <b>25.2 kPa</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 20.1 kPa)</span>
+7f6bc02	γ′ for the silty sand layer beneath the foundation: since 0.5·B′ &lt; t<sub>wd</sub> &lt; 1.5·B′ → <b>linear transition</b>:
+5884263	γ′ = (20−10) + (18−(20−10))·(1.4/1.208 − 0.5) = 10 + 8·0.659 = <b>15.3 kN/m³</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 10 kN/m³)</span>
+6dab64e	4. Factors (φ = 26°) — unchanged
+a5240cf	N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; f = 0.056 → i<sub>γ</sub> = 0.841; i<sub>q</sub> = 0.891; i<sub>c</sub> = 0.881. &nbsp; Strip footing → s ≈ 1.
+43924e8	R<sub>k</sub>/A′ = 0.5·15.3·1.208·10.59·0.841 + 25.2·11.85·0.891 + 30·22.25·0.881 ≈ 82 + 266 + 588 = <b>936 kPa</b>
+2b80f74	R<sub>k</sub> = 936·1.208 = 1131 kN/m → R<sub>d</sub> = 1131/1.4 = <b>808 kN/m</b>
+6ebb065	<b>Result:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the deeper groundwater, R<sub>d</sub> <b>increased</b> (WE3: 736 → WE4: 808 kN/m): less buoyancy → larger γ′ and q′ → higher bearing resistance.
+860351a	WE4 — strip footing, deeper groundwater
+8558ad4	Constants: b = 0.3; h = 1.0; t = 0.4 m; γ<sub>fill</sub> = 18; γ<sub>b</sub> = 25 kN/m³; strip footing. &nbsp; Effect of the deeper groundwater: q′ = 25.2 kPa, γ′ = 15.3 kN/m³ (in WE3 they were 20.1 and 10). Reset to these to recover the WE3 value.
+7b74fd7	Worked Example 5 — Effect of the direction of the horizontal force
+0ea63b8	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³; G<sub>z,k</sub> = 250 kN/m (concentric), Q<sub>z,k</sub> = 170 kN/m (e<sub>q</sub> = 0.3 m), G<sub>x,k</sub> = 30 kN/m; groundwater 0.6 m above the foundation base; sand fill (γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa) and silty sand (γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa). <b>The only difference:</b> the direction of the horizontal force G<sub>x,k</sub> is <b>reversed</b>. <b>Question: how does R<sub>d</sub> change?</b>
+28d76c3	WE5
+a1fc9eb	G<tspan baseline-shift="sub" font-size="8">x,k</tspan>=30 kN/m (reversed)
+03a9615	1. Action side — unchanged
+fa09354	G<sub>k</sub> = 250 + 7.2 + 32.5 = <b>289.7 kN/m</b>; &nbsp; V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(the magnitude of the load is unchanged)</span>
+1fa607a	2. Eccentricity — <u>this changes!</u>
+cdf8a50	Originally (WE3) the moments of G<sub>x</sub> and of the eccentric Q acted in <b>opposite</b> directions, so they partly cancelled:
+b741e26	e<sub>B</sub> (WE3) = |H<sub>k</sub>·h − Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.3|/459.7 = 21/459.7 = <b>0.046 m</b>
+d482c1e	If the direction of G<sub>x</sub> is reversed, the two moments act in the <b>same direction</b>, so they <b>add up</b>:
+6fde3ff	e<sub>B</sub> (reversed) = |H<sub>k</sub>·h + Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 + 170·0.3|/459.7 = 81/459.7 = <b>0.176 m</b>
+3ddebac	B′ = 1.3 − 2·0.176 = <b>0.948 m</b>; &nbsp; A′ = 0.948 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.208 m)</span>
+1fe8790	3. q′, γ′ and the factors — unchanged
+6d52253	q′ = 20.1 kPa; γ′ = 10 kN/m³ (groundwater above the base); φ = 26° → N<sub>q</sub>=11.85, N<sub>c</sub>=22.25, N<sub>γ</sub>=10.59. The load magnitude is the same → i<sub>γ</sub>≈0.84, i<sub>q</sub>≈0.89, i<sub>c</sub>≈0.88.
+4dcf703	4. Resistance with the smaller B′
+095f594	R<sub>k</sub>/A′ = 0.5·10·0.948·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 42 + 211 + 585 = <b>839 kPa</b>
+35c98bb	R<sub>k</sub> = 839·0.948 = 795 kN/m → R<sub>d</sub> = 795/1.4 = <b>568 kN/m</b>
+e0aa36c	<b>Result:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>NOT ADEQUATE!</b> &nbsp; Reversing G<sub>x</sub> <b>significantly reduces</b> R<sub>d</sub> (WE3: 736 → 568 kN/m): the two moments add up, the eccentricity grows (0.046 → 0.176 m), so the effective width B′ (and with it the bearing resistance) decreases.
+89a8e44	WE5 — reversed G<sub>x</sub> (eccentricities add up)
+43a5586	Because of the <b>reversed</b> G<sub>x</sub>, the eccentricity follows from the <b>sum</b> of the two moments: e<sub>B</sub> = |H<sub>k</sub>·h + Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub>. Constants: b=0.3; h=1.0; t=0.4 m; γ<sub>fill</sub>=18; γ<sub>b</sub>=25 kN/m³; strip footing.
+99c8876	Worked Example 6 — Effect of increasing the eccentricity
+e0e91f4	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³; G<sub>z,k</sub> = 250 kN/m, Q<sub>z,k</sub> = 170 kN/m, G<sub>x,k</sub> = 30 kN/m; groundwater 0.6 m above the foundation base; sand fill and silty sand. <b>The only difference:</b> the eccentricity of the load Q<sub>z,k</sub> increases from e<sub>q</sub> = 0.3 m <b>to 0.5 m (50 cm)</b>. <b>Question: how does R<sub>d</sub> change?</b>
+a3f86a4	WE6
+ebfddf7	2. Eccentricity — <u>this grows!</u>
+368717e	Because of the larger e<sub>q</sub>, the moment of Q (170·0.5 = 85) is now <b>larger</b> than the moment of G<sub>x</sub> (30·1.0 = 30):
+a27b053	e<sub>B</sub> = |H<sub>k</sub>·h − Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.5|/459.7 = 55/459.7 = <b>0.120 m</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 0.046 m)</span>
+2775086	B′ = 1.3 − 2·0.120 = <b>1.06 m</b>; &nbsp; A′ = 1.06 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.208 m)</span>
+e132af0	q′ = 20.1 kPa; γ′ = 10 kN/m³; φ = 26° → N<sub>q</sub>=11.85, N<sub>c</sub>=22.25, N<sub>γ</sub>=10.59; i<sub>γ</sub>≈0.84, i<sub>q</sub>≈0.89, i<sub>c</sub>≈0.88.
+044f683	R<sub>k</sub>/A′ = 0.5·10·1.06·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 47 + 212 + 587 = <b>845 kPa</b>
+f1f07e0	R<sub>k</sub> = 845·1.06 = 896 kN/m → R<sub>d</sub> = 896/1.4 = <b>640 kN/m</b>
+ccfde24	<b>Result:</b> R<sub>d</sub> = 640 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>only just NOT ADEQUATE!</b> &nbsp; Because of the larger eccentricity, R<sub>d</sub> <b>decreased</b> (WE3: 736 → WE6: 640 kN/m): larger e<sub>q</sub> → larger e<sub>B</sub> → smaller effective width (B′) → lower bearing resistance.
+a4cd104	WE6 — larger eccentricity e<sub>q</sub>
+fff5f5a	Set the e<sub>q</sub> field to 0.3 to see the WE3 case (R<sub>d</sub> = 736). Constants: b=0.3; h=1.0; t=0.4 m; γ<sub>fill</sub>=18; γ<sub>b</sub>=25 kN/m³; strip footing.
+c9dc3ff	Worked Example 7 — Effect of an inclined foundation base
+d08c924	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³; G<sub>z,k</sub> = 250 kN/m, Q<sub>z,k</sub> = 170 kN/m (e<sub>q</sub> = 0.3 m), G<sub>x,k</sub> = 30 kN/m; groundwater 0.6 m above the foundation base; sand fill and silty sand. <b>The only difference:</b> the foundation base is <b>inclined at 5°</b> (sloping base). <b>Question: how does R<sub>d</sub> change?</b>
+d694689	WE7
+115a090	inclined base
+581ce43	1–2. Loads and eccentricity — unchanged
+d07b7ee	V<sub>d</sub> = <b>646.1 kN/m</b>; &nbsp; e<sub>B</sub> = 0.046 m → B′ = <b>1.208 m</b> (as in WE3).
+355f2a7	3. q′, γ′ and the i factors — unchanged
+34d4426	4. Base-inclination factors (b) — <u>this is the new part!</u>
+dfb1797	α = 5° = 0.0873 rad. &nbsp; b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)² = (1 − 0.0873·tan26°)² = (1 − 0.0426)² = <b>0.917</b>
+5d1cc24	b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ) = 0.917 − 0.083/10.86 = <b>0.909</b>
+9ba41de	5. Resistance with the b factors
+94927e5	R<sub>k</sub>/A′ = 54·0.917 + 212·0.917 + 588·0.909 ≈ 49 + 195 + 535 = <b>779 kPa</b>
+f22fc26	R<sub>k</sub> = 779·1.208 = 941 kN/m → R<sub>d</sub> = 941/1.4 = <b>672 kN/m</b>
+de10b17	<b>Result:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the inclined base, R<sub>d</sub> <b>decreases</b> (WE3: 736 → WE7: 672 kN/m): the b &lt; 1 base-inclination factors reduce all three terms — but the margin is still sufficient, so the foundation is adequate.
+6511ab4	WE7 — inclined base (base-inclination factors)
+91323f4	α base inclination (°)
+680910a	Set α to 0 to see the WE3 case (R<sub>d</sub> = 736). The base-inclination factors: b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ).
+bf52889	Worked Example 8 — Pad footing, checked in both directions
+655727b	Check the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) against bearing failure in the drained case. Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 1000 kN</b> (concentric) and a horizontal force <b>Q<sub>x,k</sub> = 100 kN</b> (parallel to side B). The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa; <b>sandy gravel:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 32°, c = 0 kPa. Since the horizontal load “weakens” the longer side, <b>both directions (B and L) must be checked</b>.
+807bff7	WE8
+c5fbda6	Figure — cross-section
+2f2fee4	=
+31cfdf4	=
+2386217	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.5m
+230e044	sandy gravel
+e8123d2	=
+2aefefa	Pad footing (L = 1.5 m)
+83656a2	Figure — plan view
+2f43ef5	plan view
+8912339	the check must be carried out in both the B and L directions
+82d4828	1. Vertical load acting at the foundation base
+a34bcb4	Fill: G<sub>f,k</sub> = (B·L − b·l)·t·γ = (2·1.5 − 0.4·0.4)·0.4·18 = <b>20.5 kN</b>; &nbsp; Foundation: G<sub>b,k</sub> = B·L·h·γ<sub>b</sub> = 2·1.5·1.2·25 = <b>90 kN</b>
+9b170aa	G<sub>k</sub> = 1000 + 20.5 + 90 = <b>1110.5 kN</b>; &nbsp; V<sub>d</sub> = 1.35·1110.5 + 1.5·0 = <b>1499 kN</b> &nbsp;<span style="color:var(--ink-mute)">(buoyancy is neglected)</span>
+2c195e9	V<sub>k</sub> = G<sub>k</sub> = 1110.5 kN; &nbsp; H<sub>k</sub> = Q<sub>x,k</sub> = 100 kN
+0b7ca4e	3. q′ and γ′ (with groundwater)
+95ec0ae	q′ = 18·1.0 + (19−10)·0.5 + (20−10)·0.1 = 18 + 4.5 + 1.0 = <b>23.5 kPa</b>
+0743c9d	Water above the base → t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b>
+5f9d4a0	4. Bearing resistance factors (sandy gravel: φ = 32°, c = 0)
+65f7d08	N<sub>q</sub> = 23.17; N<sub>c</sub> = 35.48; N<sub>γ</sub> = 27.71. &nbsp; Horizontal base → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.
+cf2d44d	5. Checking both directions
+41f20a3	<b>Side B</b> (weakened by Q<sub>x</sub> — governing): s<sub>γ</sub>=0.64, s<sub>q</sub>=1.63, s<sub>c</sub>=1.66; &nbsp; f = H<sub>k</sub>/V<sub>k</sub> = 0.09 → i<sub>γ</sub>=0.793, i<sub>q</sub>=0.871, i<sub>c</sub>=0.865.
+29b39d0	R<sub>k</sub>/A′ = 0.5·10·1.78·27.71·0.64·0.793 + 23.5·23.17·1.63·0.871 + 0 = 125 + 773 + 0 = <b>898 kPa</b>
+66e460c	R<sub>k,B</sub> = 898·2.67 = 2398 kN → R<sub>d,B</sub> = 2398/1.4 = <b>1713 kN</b>
+3c5fdfe	<b>Side L:</b> s<sub>γ</sub>=0.75, s<sub>q</sub>=1.46, s<sub>c</sub>=1.48; the horizontal load is parallel to B, so in the L direction i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. Hence <b>side B</b> governs.
+6ce5cb3	<b>Result:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1713 kN &gt; V<sub>d</sub> = 1499 kN → <b>ADEQUATE.</b> ✓ &nbsp; Side B governs, because the horizontal Q<sub>x</sub> is parallel to this direction (i &lt; 1).
+705a170	WE8 — pad footing, side B (governing)
+94b65a2	L length (m)
+a5c9cd3	G<sub>k</sub> permanent load (kN)
+7853a98	Q<sub>z,k</sub> variable (kN)
+829d781	H<sub>k</sub> = Q<sub>x,k</sub> horizontal (kN)
+58ad898	h footing height (m)
+85d5d21	The horizontal force is parallel to side B; the shape (s) and inclination (i) factors are taken into account. Side B governs.
+605adb0	Worked Example 9 — Determining the required foundation width
+43e9467	Determine the required width B of the <b>strip footing</b>. The load given is a <b>design value</b> that already includes the self-weight of the foundation and the overlying soil: <b>V<sub>d</sub> = 255 kN/m</b>, e<sub>B</sub> = 0.02 m. b = 0.3 m, t<sub>fill</sub> = 1.65 m, γ<sub>b</sub> = 25 kN/m³. The <b>groundwater is at the foundation level</b>. Layer 1 (fill): γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 15°, c = 5 kPa; <b>Layer 2 (bearing stratum, below the base):</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 30°, c = 0 kPa. We design for the governing (just-adequate) condition: <b>V<sub>d</sub> = R<sub>d</sub></b>.
+2a9038c	WE9
+efe33c1	=
+f36f526	=
+1653658	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.65m
+3c656bd	Layer 1 (fill)
+2e5019b	=
+9d7a221	Layer 2 (bearing stratum)
+f261513	=
+148c939	strip footing (L ≫ B)
+ef80d3d	1. The design condition
+eaa9604	In the governing condition V<sub>d</sub> = R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>, so the required characteristic resistance is: R<sub>k</sub> = V<sub>d</sub>·γ<sub>R</sub> = 255·1.4 = <b>357 kN/m</b>
+1346843	2. q′ and γ′ (groundwater at the base)
+c6a66d1	q′ = γ·t<sub>fill</sub> = 19·1.65 = <b>31.35 kPa</b> &nbsp;(water at the base → moist unit weight above it)
+f469378	The bearing Layer 2: φ = 30°, c = 0; t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b>
+7d22784	3. Bearing resistance factors (φ = 30°)
+2068b56	N<sub>q</sub> = e<sup>π·tan φ</sup>·tan²(45°+φ/2) = <b>18.40</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan φ = <b>20.09</b>. &nbsp; Strip footing → s ≈ 1; concentric (no inclined load) → i ≈ 1; c = 0 → the cohesion term vanishes.
+fb885d2	4. The bearing resistance formula — now B′ is the unknown
+8f25ad1	With the numerical values: 0 = 100.45·(B′)² + 576.84·B′ − 357 &nbsp;<span style="color:var(--ink-mute)">(quadratic equation)</span>
+dd4b9bb	5. Solving the quadratic equation
+79abfcb	B′<sub>1,2</sub> = [−576.84 ± √(576.84² + 4·100.45·357)] / (2·100.45) &nbsp;→&nbsp; B′<sub>1</sub> = −6.31 (meaningless), <b>B′<sub>2</sub> = 0.56 m</b>
+7647f6c	<b>Result:</b> the required foundation width is <b>B ≈ 0.60 m</b>. In practice we round up to the chosen module (e.g. 0.6–0.7 m).
+6b2bc4f	WE9 — required foundation width
+0d5172b	design
+87a8f81	V<sub>d</sub> design load (kN/m)
+74e69a1	e<sub>B</sub> eccentricity (m)
+3ec5dc2	We design for the governing (just-adequate) condition: V<sub>d</sub> = R<sub>d</sub>. The solution follows from a quadratic equation (B = B′ + 2·e<sub>B</sub>).
+14187e9	Worked Example 10 — Sliding check (EQU, drained)
+9ca4224	Check the adequacy of the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) shown in the figure against <b>horizontal sliding</b> (EQU limit state, drained case). Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads (characteristic): <b>G<sub>z,k</sub> = 320 kN</b> vertical (including the self-weight of the foundation and the soil) and <b>Q<sub>x,k</sub> = 100 kN</b> horizontal column load. The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 0 kPa; <b>silty sand:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 28°, c = 0 kPa. The condition for adequacy: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.
+e687d4e	WE10
+6d67b37	=
+da8f515	=
+a976930	R<tspan baseline-shift="sub" font-size="7">d</tspan> (base friction)
+5edd64c	=
+18cfa7f	=
+76da62b	the horizontal load is parallel to side B
+f23d625	1. Governing horizontal load at the foundation base
+e0f74eb	Horizontal column load: Q<sub>x,k</sub> = 100 kN. &nbsp; Earth-pressure coefficients of the <b>active earth pressure</b> acting on the foundation:
+db59db5	sand fill: K<sub>a1</sub> = tan²(45°−φ/2) = tan²(45°−15°) = <b>0.333</b>; &nbsp; silty sand: K<sub>a2</sub> = tan²(45°−14°) = <b>0.361</b>
+9272f67	The resultant active earth pressure over the height of the foundation: E<sub>a,k</sub> = G<sub>x,k</sub> = <b>10.08 kN</b>
+0cbd3a0	The design value of the horizontal action: H<sub>d</sub> = γ<sub>G</sub>·G<sub>x,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·10.08 + 1.5·100 = <b>163.6 kN</b>
+a5e0dfe	2. Sliding resistance — base friction
+fb7cc4c	R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub>, &nbsp; where V′<sub>k</sub> = G<sub>z,k</sub> = 320 kN (includes the self-weight of the foundation and the soil).
+a2d5619	Cast-in-situ reinforced-concrete foundation → δ<sub>k</sub> = φ = 28° → tan δ<sub>k</sub> = <b>0.532</b>; &nbsp; γ<sub>R;h</sub> = 1.1
+36f56bb	R<sub>d</sub> = (320·0.532)/1.1 = <b>155 kN</b> &nbsp; <span style="color:var(--ink-mute)">→ R<sub>d</sub> = 155 &lt; H<sub>d</sub> = 163.6, so on its own it is <b>not enough</b>.</span>
+f966f02	3. Adding earth resistance (at-rest earth pressure)
+a90d147	R<sub>pd</sub> from at-rest or passive earth pressure? On the safe side we use the <b>at-rest</b> earth pressure: K<sub>0</sub> = 1 − sin φ.
+e1162f7	The resultant at-rest earth pressure E<sub>0,k</sub> = <b>15.1 kN</b> &nbsp;→&nbsp; R<sub>pd</sub> = E<sub>0,k</sub>/γ<sub>R;h</sub> = 15.1/1.1 = <b>13.7 kN</b>
+2f697bd	4. Adequacy
+1dbbd78	R<sub>d</sub> + R<sub>pd</sub> = 155 + 13.7 = <b>168.7 kN</b> &gt; H<sub>d</sub> = 163.6 kN
+4b4394a	<b>Result:</b> R<sub>d</sub> + R<sub>pd</sub> = 168.7 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Note: if the “passive”/at-rest soil may disappear or be affected by frost, its resistance must not be taken into account.</span>
+d670ded	WE10 — sliding check (drained)
+e6555a7	=
+4dc9e11	V′<sub>k</sub> vertical load (kN)
+d3dd1f5	Q<sub>x,k</sub> horizontal column load (kN)
+f5f8862	δ base friction angle (°)
+b585232	E<sub>a,k</sub> active earth pressure (kN)
+62945e4	γ<sub>R;h</sub> resistance factor
+336f707	E<sub>0,k</sub> at-rest earth pressure (kN)
+d67e174	Cast-in-situ reinforced-concrete foundation → δ = φ. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>pd</sub>. The at-rest earth pressure (R<sub>pd</sub>) may be relied upon only if the soil is certain not to heave and cannot be removed.
+fc94e42	Undrained case
+5c920af	The same pad footing and loading, but the soil beneath the base is now <b>cohesive clay</b>: φ<sub>u</sub> = 0°, c<sub>u</sub> = 65 kPa (the fill has c = 5 kPa). In the undrained case the sliding resistance comes not from base friction but from the <b>adhesion mobilised over the whole base area</b> (A<sub>c</sub>·c<sub>u</sub>).
+ba6bb98	R<tspan baseline-shift="sub" font-size="7">d</tspan> = A<tspan baseline-shift="sub" font-size="7">c</tspan>·c<tspan baseline-shift="sub" font-size="7">u</tspan> (base adhesion)
+d1f0edb	clay (cohesive)
+649b59f	=
+3a2969e	1. The governing horizontal load is unchanged
+061fbab	The horizontal load does not depend on the drainage condition of the soil beneath the base: H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·10.08 + 1.5·100 = <b>163.6 kN</b>
+a76fdd5	2. Sliding resistance — base adhesion
+4bc9961	R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub> / γ<sub>R;h</sub>, &nbsp; where A<sub>c</sub> = B·L = 2.0·1.5 = 3.0 m², &nbsp; c<sub>u,k</sub> = 65 kPa, &nbsp; γ<sub>R;h</sub> = 1.1.
+67072ba	R<sub>d</sub> = (2.0·1.5·65)/1.1 = <b>177 kN</b> &nbsp;<span style="color:var(--ink-mute)">(the whole base area is mobilised; no earth resistance is needed)</span>
+c2ee233	<b>Result:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; The undrained base adhesion is sufficient on its own (in the drained case the earth resistance was also needed).
+806e02b	Mini calculator — undrained
+4d4dbdb	WE10.5 — sliding check (undrained)
+f4ac533	c<sub>u,k</sub> base adhesion (kPa)
+5abdeb3	Undrained sliding resistance over the whole base area: R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub>/γ<sub>R;h</sub>. Condition: H<sub>d</sub> ≤ R<sub>d</sub>.
+25a1b9d	Worked Example 11 — Sliding with passive earth resistance (EQU, drained)
+4c61c88	Check the adequacy of the <b>pad footing</b> (B = 0.95 m, L = 1.45 m) shown in the figure against horizontal sliding (EQU, drained). h = 0.95 m; t = 2.05 m; t<sub>fill</sub> = 3.0 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 490 kN</b> (permanent) and <b>Q<sub>z,k</sub> = 610 kN</b> (variable) vertical, plus <b>Q<sub>x,k</sub> = 250 kN</b> horizontal; e<sub>b</sub> = 0.04 m. The vertical loads include the weight of the foundation and of the soil lying above it. The groundwater is 0.95 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 32°, c = 0 kPa; <b>silt:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 16°, c = 40 kPa. Between the foundation and the soil, <b>δ = ⅔·φ</b> is to be used.
+68acc1a	WE11
+fd4ad5f	=
+e449f92	=
+e581e3e	=
+4c9ea20	E<tspan baseline-shift="sub" font-size="7">p</tspan> → R<tspan baseline-shift="sub" font-size="7">pd</tspan> (passive)
+09e5a7e	R<tspan baseline-shift="sub" font-size="7">d</tspan> (friction)
+7dda024	h<tspan baseline-shift="sub" font-size="7">GWL</tspan>=0.95m
+74252f8	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=3.0m
+5dc9a9a	γ=19.5 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20.5 · φ=32° · c=0
+d17e53d	γ=19.5 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20.5 · φ=16° · c=40
+560b664	Pad footing (L = 1.45 m)
+0644a1a	1. Governing horizontal load — active earth pressure + column load
+95e863d	Horizontal column load: Q<sub>x,k</sub> = 250 kN. &nbsp; Coefficient of the active earth pressure acting on the foundation (sand fill): K<sub>a</sub> = tan²(45°−φ/2) = tan²(45°−16°) = <b>0.307</b>
+49c582d	The vertical geostatic stress over the height of the foundation (groundwater at the top of the foundation): σ′<sub>v,top</sub> = 19.5·2.05 = <b>39.98 kPa</b>; &nbsp; σ′<sub>v,bot</sub> = 39.98 + (20.5−10)·0.95 = <b>49.95 kPa</b>
+d2b6ed1	Horizontal active stress: σ′<sub>h</sub> = K<sub>a</sub>·σ′<sub>v</sub> → <b>12.27</b> and <b>15.34 kPa</b>. &nbsp; Resultant: E<sub>a,k</sub> = (12.27+15.34)/2·h·L = 13.80·0.95·1.45 = <b>19 kN</b>
+b56ad88	H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·19 + 1.5·250 = <b>400.65 kN</b>
+677f3b8	2. Base friction resistance
+5307dd6	Only the <b>permanent</b> vertical load contributes: V′<sub>k</sub> = G<sub>z,k</sub> = 490 kN (on the safe side, the variable Q<sub>z,k</sub> and the cohesion at the base are neglected).
+111f074	Precast foundation → δ<sub>k</sub> = ⅔·φ = ⅔·16° = 10.67° → tan δ<sub>k</sub> = <b>0.189</b>; &nbsp; γ<sub>R;h</sub> = 1.1
+7b57f5c	R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub> = (490·0.189)/1.1 = <b>84.2 kN</b>
+cae8bf7	3. Passive earth resistance on the back face of the foundation
+6f2d1d6	K<sub>p</sub> = tan²(45°+φ/2) = tan²(45°+16°) = <b>3.255</b>. &nbsp; The passive stress: σ′<sub>h,p</sub> = K<sub>p</sub>·σ′<sub>v</sub> → <b>130.12</b> and <b>162.59 kPa</b>.
+21eb4ad	E<sub>p,k</sub> = (130.12+162.59)/2·h·L = 146.35·0.95·1.45 = <b>201.6 kN</b> &nbsp;→&nbsp; R<sub>pd</sub> = E<sub>p,k</sub>/γ<sub>R;h</sub> = 201.6/1.1 = <b>183.27 kN</b>
+a9e1d1c	4. Sliding check
+19f3b54	R<sub>d</sub> + R<sub>pd</sub> = 84.2 + 183.27 = <b>267.47 kN</b> &lt; H<sub>d</sub> = 400.65 kN
+bfaed76	<b>Result:</b> R<sub>d</sub> + R<sub>pd</sub> = 267.47 kN &lt; H<sub>d</sub> = 400.65 kN → <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.
+2ed699a	WE11 — sliding + passive earth resistance
+26afd54	G<sub>z,k</sub> permanent vertical (kN)
+51753ff	φ below base (°)
+30a5959	E<sub>p,k</sub> passive earth resistance (kN)
+ad7dc8e	Precast foundation → δ = ⅔·φ. The base friction uses only the permanent vertical load. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>pd</sub>.
+b48061c	Calculator
+235f0c3	One calculator for the complete check of a shallow foundation: any number of soil layers, strip or pad footing, concentric and eccentric loads (for a pad footing even in two directions), horizontal forces in both directions, an inclined foundation base and groundwater. The program computes the <b>drained</b> and the <b>undrained</b> bearing resistance and the <b>sliding</b> check at the same time, derived step by step — the model can be rotated in 3D, and the data of the worked examples can be loaded with one click.
+a3d303f	Calculation conventions
+29f3691	Loads and self-weight
+50db1fd	The loads are <b>characteristic</b> values at the top of the foundation: G<sub>k</sub> permanent and Q<sub>k</sub> variable vertical load, H<sub>B,k</sub> horizontal force parallel to side B and H<sub>L,k</sub> parallel to side L (the latter for a pad footing only). The nature of H can be chosen: permanent (γ<sub>G</sub>) or variable (γ<sub>Q</sub>) — the same for both components. For a strip footing all values refer to a 1 m long section, in kN/m.
+eaca51b	When self-weight is switched on, the foundation (G<sub>b,k</sub> = B·L·h·γ<sub>b</sub>, γ<sub>b</sub> = 25 kN/m³) and the fill above it (G<sub>f,k</sub> = (B·L − b·l)·Σγ<sub>i</sub>·t<sub>i</sub> over the thickness D − h, with the moist unit weight, neglecting buoyancy) are added to G<sub>k</sub> as permanent loads — as in the practical material.
+26a6027	Design values: V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub>; the horizontal load with its resultant: H<sub>d</sub> = γ<sub>H</sub>·√(H<sub>B,k</sub>² + H<sub>L,k</sub>²). Default values: γ<sub>G</sub> = 1.35, γ<sub>Q</sub> = 1.5, γ<sub>R</sub> = 1.4 (bearing failure), γ<sub>R;h</sub> = 1.1 (sliding) — all of them can be edited.
+ef7053a	Input ranges and interdependent limits
+0dc20ae	Permitted ranges of the dimensions: B = 0.5–5 m, L = 0.5–5 m, D = 0.5–4 m, h = 0.5–4 m, b = 0.2–1.0 m. The sliders move within these ranges, and a typed value is clipped to the edge of the range.
+d68db03	The dimensions limit one another, so that no meaningless foundation can be entered: the footing height cannot exceed the depth of the foundation base (h ≤ D — if D is reduced, h decreases with it); the wall or column cannot overhang the foundation (b ≤ B, and for a pad footing b ≤ L as well); the eccentricity of Q<sub>k</sub> cannot exceed half the foundation width (e<sub>Q</sub> ≤ B/2, e<sub>Q,L</sub> ≤ L/2), i.e. the load cannot fall outside the foundation. The limit of a dependent dimension is shown below its field and adjusts immediately when the controlling dimension changes.
+6ae7268	The scale of the 3D model and of the 2D section adapts to the dimensions for every setting: the width and depth of the soil block grow with B, L, D, the layer thicknesses and the groundwater; for a large foundation the spacing of arrows and labels increases proportionally, and in the 2D section the foundation occupies at most the middle band of the drawing, so the layer and dimension labels always fit.
+297e26f	Eccentricity — in two directions
+1f74a4e	The horizontal forces act at the top of the foundation (their lever arm about the foundation base is h), and Q<sub>k</sub> acts with the eccentricities e<sub>Q</sub> (B direction) and e<sub>Q,L</sub> (L direction). From the moment equation, for each direction: e<sub>B</sub> = |H<sub>B,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q</sub>| / V<sub>k</sub> and e<sub>L</sub> = |H<sub>L,k</sub>·h ∓ Q<sub>k</sub>·e<sub>Q,L</sub>| / V<sub>k</sub>, where V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub>; the ∓ sign is set by the switch (moments in opposite or in the same direction). In the figures (3D and 2D) the H arrow is shown on the top face of the foundation and Q on the side corresponding to its eccentricity; on the foundation base the point of application of the resultant and the effective area B′ (for a pad footing B′ × L′) are marked in teal, and the resultant always shifts in the direction of H.
+de2d10d	Effective area: B′ = B − 2·e<sub>B</sub>, L′ = L − 2·e<sub>L</sub>, A′ = B′·L′. For a strip footing L′ = 1 m and e<sub>L</sub> = 0. If e<sub>B</sub> &gt; B/3 or e<sub>L</sub> &gt; L/3, the effective area model is no longer valid — the program gives a warning, and the size of the foundation or the arrangement of the loads has to be changed.
+29600ef	Bearing resistance (GEO)
+cf5a604	The bearing resistance is calculated with the shear strength of the <b>layer below the foundation base</b> (φ, c, or c<sub>u</sub>), without averaging. The effective overburden pressure q′ (the total q in the undrained case) follows from the whole layer sequence and the groundwater: γ above the water, γ<sub>sat</sub> − γ<sub>w</sub> below it (γ<sub>sat</sub> for total stress). γ′ depends on the ratio t<sub>wd</sub>/B′: ≤ 0.5 → γ<sub>sat</sub> − γ<sub>w</sub>; ≥ 1.5 → γ; linear transition in between.
+21fcfb0	Bearing resistance factors: N<sub>q</sub> = e<sup>π·tanφ</sup>·tan²(45° + φ/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cotφ, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tanφ. Shape factors for a pad footing with the ratio B′/L′ (s<sub>γ</sub> = 1 − 0.3·B′/L′, s<sub>q</sub> = 1 + (B′/L′)·sinφ, s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)), where B is the direction of H<sub>B</sub> — the convention of the worked examples; for a strip footing s = 1.
+eaa0613	Load inclination with the <b>resultant of H</b>, using characteristic values: f = H/(V<sub>k</sub> + A′·c·cotφ). The exponent depends on the direction of H (EC7 Annex D): m<sub>B</sub> = (2 + B′/L′)/(1 + B′/L′), m<sub>L</sub> = (2 + L′/B′)/(1 + L′/B′), m = m<sub>L</sub>·cos²θ + m<sub>B</sub>·sin²θ, where cosθ = H<sub>L</sub>/H and sinθ = H<sub>B</sub>/H (m = 2 for a strip footing). i<sub>γ</sub> = (1 − f)<sup>m+1</sup>, i<sub>q</sub> = (1 − f)<sup>m</sup>, i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1).
+3b010e4	Inclination of the foundation base (α): b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tanφ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tanφ), with α in radians.
+f58cb64	Drained: R<sub>k</sub>/A′ = 0.5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>. Undrained (if the layer below the base has a c<sub>u</sub>): σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q, where s<sub>c</sub> = 1 + 0.2·B′/L′, b<sub>c</sub> = 1 − 2α/(π + 2), i<sub>c</sub> = 0.5·[1 + √(1 − H/(A′·c<sub>u</sub>))]; R<sub>d</sub> = σ<sub>t</sub>·A′/γ<sub>R</sub>. Adequate if V<sub>d</sub> ≤ R<sub>d</sub>.
+f4fe576	Sliding (EQU)
+2e0337e	The active earth pressure acts on the front face of the foundation, of height h and width L (1 m for a strip footing); it is obtained with effective stresses, layer by layer, with the coefficient K<sub>a</sub> = tan²(45° − φ/2) (the water pressure is balanced on the two sides). When switched on, it is added to H<sub>d</sub> as a permanent load: H<sub>d</sub> = γ<sub>H</sub>·H + γ<sub>G</sub>·E<sub>a,k</sub>, where H is the resultant of the horizontal forces — on the safe side, the earth pressure is taken into account at full value, regardless of direction.
+159f59b	Base friction is provided only by the permanent vertical load (V′<sub>k</sub> = G<sub>k</sub> including self-weight), and cohesion is neglected: R<sub>d</sub> = V′<sub>k</sub>·tanδ / γ<sub>R;h</sub>, δ = φ (cast in situ) or ⅔·φ (precast), with the φ of the layer below the base.
+8ddaf69	Earth resistance on the resisting side can be set to none, at rest (K<sub>0</sub> = 1 − sinφ) or passive (K<sub>p</sub> = tan²(45° + φ/2)), on the same face; R<sub>p;d</sub> = η·E<sub>k</sub>/γ<sub>R;h</sub>, where η is the mobilised fraction (the full passive resistance is mobilised only at large displacements). Adequate if H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.
+a77665c	Undrained alternative: R<sub>d</sub> = A′·c<sub>u</sub>/γ<sub>R;h</sub>, and the limit R<sub>d</sub> ≤ 0.4·V<sub>d</sub> must also be satisfied — the program takes the smaller value.
+11ea2a2	The 3D model and the 2D section
+83530bb	The soil block is transparent, with the foundation and the wall/column solid inside it. For a strip footing the wall and the foundation continue along the length, and the calculation refers to the highlighted 1 m long section. The arrows show the characteristic loads (V<sub>k</sub> = G<sub>k</sub> + Q<sub>k</sub> from the superstructure and the self-weight, Q with its eccentricity, H<sub>B,k</sub> and H<sub>L,k</sub>), and the labels show the parameters of the layers and the design groundwater.
+8890aa7	The <b>2D section</b> button shows the same state in a vertical section: layers, groundwater, foundation, effective width (B′), loads; the 3D model can be rotated, the 2D section can be read at a glance.
+fc3af78	Below the figure the <b>checks</b> are listed one under the other: drained bearing resistance, undrained bearing resistance, sliding; each row compares resistance and load and shows the verdict and a utilisation bar. Clicking a row opens its derivation; the design load, the eccentricity and the effective area appear in steps 1–3 of the derivation.
+71534a2	The drained–undrained film (3D silo)
+17835bf	Illustrative model: the load of the silo acts on a B × B slab at a depth of D = 1 m, with the groundwater at ground level. The load q(t) increases linearly to q<sub>max</sub> during the filling time (in two-stage mode in two steps, with a rest period between them whose length is twice the consolidation time of the soil, at most 2 years).
+e0cf0b7	Settlement in the film: s = (0.12·q + 0.88·Δσ′)·1.2·B/(2·E<sub>oed</sub>) — a small immediate (distortional) part and a consolidation part proportional to the effective stress; E<sub>oed</sub> = 4 MPa for clay, 8 MPa for silt and 30 MPa for sand. In the 3D scene the settlement is shown magnified 3 times, and the original foundation base is marked with a dashed line; the saturation of the blue zone beneath the base is proportional to the excess pore water pressure, and the water column of the piezometer shows Δu, scaled to q<sub>max</sub>.
+48084f7	The 3D models of “The terms of the formula” chapter
+c45379c	Failure mechanism: a Prandtl mass for a strip footing — an active wedge at 45° + φ/2, a logarithmic spiral r = r<sub>0</sub>·e<sup>θ·tan φ</sup> around the edge of the foundation with a rotation of π/2, and a passive Rankine wedge at 45° − φ/2; the passive slip surface continues at the same angle through the overburden <b>up to ground level</b> (the q′ term of the formula replaces the overburden with a distributed load acting at the level of the foundation base, while the drawing continues the slip surface up to the ground surface, so as the overburden increases, the run-out of the mechanism and the heaving block grow); the depth of the mass depends on φ and B, and its run-out on D as well. The movement is an illustrative, exaggerated animation, but it follows the kinematics of the mechanism: the active wedge settles together with the foundation; the radial zone stays on the slip surface, and inside it the soil “flows” by rotating about the edge of the foundation (E) (downwards beside the wedge, upwards and outwards towards the passive wedge); the passive wedge and the overburden above it slide out together, upwards and outwards in the direction of the slip surface (45° − φ/2), with a displacement proportional to the velocity that increases along the spiral (by a factor of e<sup>π/2·tan φ</sup>); above the passive zone the ground heaves up to where the slip surface emerges (the heave is full at the emergence point, small at the wall of the foundation and convex in between; where the slip surface emerges, a step against the stationary ground shows the outward sliding); the slip surface stays in place. The arrows show the direction of movement, and their length adapts to the size of the mechanism; in the depth explorer the thin brown arrows drawn on the ground surface indicate the weight of the overburden (q′), not displacement.
+3bda283	The three terms and every factor are calculated with the calculator’s formulas: 0.5·γ·B·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub>, q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub>, c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; D = 0.5 m is fixed in the shape explorer, D = 0.8 m in the inclination explorer and B = 2 m in the depth explorer. The mechanism for an inclined load is one-sided in the direction of H, drawn with an angle of φ − 0.9·δ and a shifted active wedge (illustration), and the i factors are exact; the ratio H/V can be at most 0.9·tan φ (the slider range narrows with φ), so the slip surface of bearing failure is always shown. Every 3D model (including the silo film) can be switched to a <b>2D section</b>: this is a vertical section of the same scene through the axis of the foundation (a front view without rotation), with the same displacements and labels.
+b1d9fa2	Inclination of the foundation base (explorer 6): B = 2 m and D = 1 m are fixed, α is at most 15°; the mechanism is drawn towards the higher edge, because there the ground “falls away” by α relative to the foundation base: the spiral of the radial zone rotates only through π/2 − α, the passive wedge runs up to the horizontal plane at the level of the higher edge, and the slip surface up to the ground surface; the foundation settles perpendicular to its base, and the active wedge moves with it. b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ), with α in radians; the bar chart shows the terms multiplied by b, relative to the value for a horizontal base. V is drawn vertical; its component parallel to the foundation base (V·sin α) belongs to the i factors, and the model shows only the effect of b.
+ea7269a	The chart of the N factors uses a decimal (linear) scale from 0 to 300, for φ = 0–45° (values above 300, N<sub>γ</sub> near 45°, fall outside the chart).
+1c25302	The 3D scenes (explorers, silo film, calculator) rotate about the centre of the soil block; the scale adapts to the horizontal diagonal of the block and to its largest vertical extent, so the whole model stays on the canvas at any rotation angle (the default zoom of the calculator is 1.0, and it can be zoomed by scrolling). The labels stay within the edge of the canvas.
+a0932d2	The proportion of the end faces of a pad footing approximates the base area (2·A<sub>section</sub>/(B·L)); the shape factors are those of EC7 Annex D, and for φ = 0, s<sub>c</sub> = 1 + 0.2·B/L.
+4a5f243	Pore water pressure: every increment of load first goes into the pore water (saturated soil, Δu = Δσ) and seeps away with a time constant T<sub>c</sub> characteristic of the soil (dΔu/dt = dq/dt − Δu/T<sub>c</sub>); T<sub>c</sub> = 2 years for clay, 1 month for silt and half a day for sand. The excess effective stress is Δσ′ = q − Δu. This is a first-order approximation, simpler than real consolidation.
+81f52a7	Undrained strength: c<sub>u</sub> = c<sub>u,0</sub> + α·Δσ′ (strength increasing with consolidation; clay c<sub>u,0</sub> = 30 kPa, α = 0.25; silt 45 kPa, 0.30). Undrained bearing resistance for a strip footing: (2 + π)·c<sub>u</sub> + γ<sub>sat</sub>·D; drained: c′·N<sub>c</sub> + γ′·D·N<sub>q</sub> + 0.5·γ′·B·N<sub>γ</sub> (without shape and inclination factors). The smaller of the two governs; for sand only the drained one is meaningful.
+a909966	Bearing failure occurs when the load reaches the current governing bearing resistance (without partial factors, showing the actual failure); the film then stops, the silo tilts by 24°, the soil heaves on the −X side and the slip surface appears. The drawing rules of the 3D scene are the same as those of the calculator’s 3D model (transparent block, painter’s algorithm).
+73b4b4d	BME Faculty of Civil Engineering · Department of Engineering Geology and Geotechnics · Foundation Engineering BSc
+82a712f	Teaching aid — the worked examples are based on the practical material; the results of the calculator are for checking, and for design they do not replace a detailed analysis.

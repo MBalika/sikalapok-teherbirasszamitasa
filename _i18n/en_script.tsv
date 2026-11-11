@@ -1,0 +1,335 @@
+# index.html – a <script> blokkok karakterláncai és sablonjai (kalkulátor, 3D-jelenetek, siló-film, formázás-őr)
+# a ${…} kifejezések változatlanul maradnak; egyszeres idézőjeles karakterláncban az angolban csak ’ aposztróf lehet
+692955d	Introduction
+1a21d13	Calculation procedure
+0a82642	3. Effective area & groundwater
+36c9bfa	5. Sliding check
+e6802d9	Drained or undrained?
+bdcb4b8	1. Why two ways?
+8195330	3. How we calculate
+525eaa4	The terms of the formula
+c0daebc	Overview
+5f0d507	1. Mechanism and the three terms
+76ce157	2. Shape factors
+5a79c06	3. Load inclination
+47dece8	4. Depth term
+717d18e	5. N factors
+a0cfbe5	6. Base inclination
+1832c1d	gravel
+ae0ccfe	clayey silt
+d1591f7	=
+75ab37c	fill
+009828f	Default — pad footing, eccentricity in two directions
+443d945	WE1 — drained strip footing (B = 1.3 m)
+418a94c	WE2 — undrained strip footing
+dc7476c	WE4 — deeper groundwater (t_wd = 1.4 m)
+eee7f90	WE5 — reversed horizontal force
+a568c80	WE6 — increased eccentricity (e_q = 0.5 m)
+e75068a	WE7 — inclined foundation base (α = 5°)
+b735444	WE8 — pad footing, B direction
+4e8d66d	WE10 — sliding, with at-rest earth resistance
+f17f2ff	WE11 — sliding, with passive earth resistance
+4d24b3d	t<sub>wd</sub> ≥ 1.5·B′ → γ′ = γ
+42b751c	t<sub>wd</sub> ≤ 0.5·B′ → γ′ = γ<sub>sat</sub> − γ<sub>w</sub>
+1a25db8	0.5·B′ &lt; t<sub>wd</sub> &lt; 1.5·B′ → linear transition
+09ae0b2	⏎    <div class="kwrap">⏎      <aside class="kside">⏎        <div class="kbar"><select id="k-preset"><option value="">Load a worked example…</option>
+ad3dba0	</select><button type="button" class="kbtn" id="k-reset" title="Default values">↺</button></div>⏎        <details open class="kg"><summary>Foundation</summary>⏎          
+5100f90	Type
+3e7c80b	Pad footing (B × L)
+fc38938	width (in the direction of H), 0.5–5 m
+91c7ed6	length, 0.5–5 m
+7bb1c36	depth of the foundation base, 0.5–4 m
+275ec3a	footing height, 0.5–4 m <em class="klim" data-l="h"></em>
+8db51be	wall / column width, 0.2–1.0 m <em class="klim" data-l="b"></em>
+024a1fa	inclination of the foundation base
+4a5f913	⏎        </details>⏎        <details open class="kg"><summary>Loads (characteristic, at the top of the foundation)</summary>⏎          
+65da23f	permanent vertical
+54c6584	variable vertical
+a1ece33	eccentricity of ${sub('Q','k')} <em class="klim" data-l="eQ"></em>
+c918779	horizontal force (B direction)
+dcff9dc	nature of H
+09e4e70	permanent (γ<sub>G</sub>)
+a71fdfb	variable (γ<sub>Q</sub>)
+941ec8f	the moments ${sub('H','B')}·h and ${sub('Q','k')}·${sub('e','Q')} act in <b>opposite</b> directions
+ce218e9	⏎          <div class="ksub" id="k-biax"><b>Eccentricity in two directions</b> (pad footing only)⏎          
+c857805	eccentricity of ${sub('Q','k')} in the L direction <em class="klim" data-l="eQL"></em>
+f70f12e	horizontal force (L direction)
+13c1ae0	the moments ${sub('H','L')}·h and ${sub('Q','k')}·${sub('e','Q,L')} act in <b>opposite</b> directions
+9d621fc	automatically add the self-weight of the foundation (γ<sub>b</sub> = 25 kN/m³) and of the fill
+c0de7a1	⏎        </details>⏎        <details open class="kg"><summary>Groundwater and layers</summary>⏎          
+55eb9fc	GWL
+03170da	design groundwater level below ground level
+216c6a3	the groundwater is deep (no effect)
+9d82a9c	⏎          <div class="klay" id="k-layers"></div>⏎          <div class="kbar"><button type="button" class="kbtn" id="k-addlay">+ layer</button><select id="k-soil"><option value="">Soil type preset…</option>
+4bc624d	</select></div>⏎          <p class="knote">The last layer extends downwards indefinitely. The bearing resistance is calculated with the parameters of the layer <b>below the foundation base</b>; q′ and the earth pressure follow from the whole layer sequence.</p>⏎        </details>⏎        <details class="kg"><summary>Sliding and partial factors</summary>⏎          
+09033f6	base friction δ
+7440f45	cast in situ: δ = φ
+15156a5	precast: δ = ⅔·φ
+879f570	earth resistance on the resisting side
+4bbbee5	not taken into account
+0ba3a0b	at rest (K₀ = 1 − sinφ)
+a41e635	passive (K<sub>p</sub>)
+4beff63	mobilised fraction
+dd1ac5d	of the earth resistance
+d211026	the active earth pressure (${sub('E','a,k')}) as a permanent load in ${sub('H','d')}
+88dc92e	permanent load
+ede7beb	variable load
+835d88b	bearing failure (GEO)
+be4fec7	sliding
+03c075a	⏎        </details>⏎      </aside>⏎      <div class="kmain">⏎        <div class="kview">⏎          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D model</button><button type="button" class="kt" data-v="2d">2D section</button>⏎            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Reset view">⟲ view</button><button type="button" class="kbtn" id="k-spin" title="Automatic rotation">▶ rotate</button></div>⏎          <div class="kcanvas" id="k-cwrap"><canvas id="k-c3d"></canvas><div class="khint">drag with the mouse / your finger to rotate · scroll = zoom</div></div>⏎          <div class="k2d" id="k-svg" style="display:none"></div>⏎          <div class="kcap" id="k-cap"></div>⏎        </div>⏎        <div class="kchecks" id="k-tiles"></div>⏎        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (EQU)</button>⏎          <span class="ksp"></span><button type="button" class="kbtn" id="k-copy">⧉ copy calculation</button><button type="button" class="kbtn" id="k-print">⎙ print</button></div>⏎          <div class="ksteps" id="k-steps"></div></div>⏎      </div>⏎    </div>
+c2fc506	 · new layer
+0f700a6	✓ copied
+e0e9d99	⧉ copy calculation
+b72cb40	<div class="klh"><span></span><span>name</span><span>t [m]</span><span>γ</span><span>γ<sub>sat</sub></span><span>φ [°]</span><span>c [kPa]</span><span>c<sub>u</sub></span><span></span></div>
+cc680eb	<div class="klr" data-i="${i}"><i style="background:${LAYCOL[i%LAYCOL.length]}"></i>⏎        <input type="text" data-k="name" value="${L.name.replace(/"/g,'&quot;')}" aria-label="layer name">⏎        <span class="kli"><small>t [m]</small><input type="text" inputmode="decimal" data-k="t" value="${i===n-1?'∞':F(L.t,2)}" ${i===n-1?'disabled':''} aria-label="thickness"></span>⏎        <div class="klp"><span class="kli"><small>γ</small><input type="text" inputmode="decimal" data-k="g" value="${F(L.g,1)}" aria-label="γ"></span><span class="kli"><small>γ<sub>sat</sub></small><input type="text" inputmode="decimal" data-k="gs" value="${F(L.gs,1)}" aria-label="γsat"></span>⏎        <span class="kli"><small>φ [°]</small><input type="text" inputmode="decimal" data-k="phi" value="${F(L.phi,0)}" aria-label="φ"></span><span class="kli"><small>c [kPa]</small><input type="text" inputmode="decimal" data-k="c" value="${F(L.c,0)}" aria-label="c"></span><span class="kli"><small>c<sub>u</sub></small><input type="text" inputmode="decimal" data-k="cu" value="${F(L.cu,0)}" aria-label="cu"></span></div>⏎        <button type="button" class="kx" title="delete layer" ${n<=1?'disabled':''}>×</button></div>
+a582933	no c<sub>u</sub> given
+f1c7df2	ADEQUATE ✓
+48006fc	NOT ADEQUATE ✗
+fad01df	utilisation ${F(util,0)}%
+d6dbb15	" title="open the derivation">⏎        <div class="knm"><span class="kg2">
+6975e9e	the layer below the foundation base has no c<sub>u</sub>
+73810c7	</div>⏎        <div class="kut"><span>utilisation <b>
+b102f82	bearing resistance
+74c5ea5	Drained case
+941b87b	Self-weight: 
+90b91d6	0 (switched off)
+798fa0e	Design load: ${sub('V','d')} = ${F(S.gG,2)}·${F(R.Gk,1)} + ${F(S.gQ,2)}·${F(S.Qk,0)} = <b>${F(R.Vd,1)}${u}</b> &nbsp;(${sub('V','k')} = ${F(R.Vk,1)}${u})
+50f39a3	Eccentricity in the B direction: 
+c6c3600	<br>Eccentricity in the L direction: ${sub('e','L')} = |${sub('H','L,k')}·h ${S.HoppL?'−':'+'} ${sub('Q','k')}·${sub('e','Q,L')}| / ${sub('V','k')} = |${F(S.HL,0)}·${F(Math.min(S.h,S.D),2)} ${S.HoppL?'−':'+'} ${F(S.Qk,0)}·${F(S.eQL,2)}| / ${F(R.Vk,1)} = <b>${F(R.eL,3)} m</b> → L′ = L − 2·${sub('e','L')} = <b>${F(R.Lp,3)} m</b>
+80a2884	 · L′ = L = ${F(R.Lp,2)} m (no eccentricity in the L direction)
+f0dcd8c	<br><em>Since B′ &gt; L′ here, the smaller effective side takes the role of B′ in the bearing resistance formulas (EC7 convention): from here on B′ = ${F(R.Bf,3)} m and L′ = ${F(R.Lf,3)} m.</em>
+32aefaf	 <span class="kwarn">⚠ the eccentricity exceeds the B/3 (or L/3) limit — the effective area model is no longer valid here</span>
+4d560d9	Effective overburden pressure at the foundation base: q′ = Σγ′<sub>i</sub>·t<sub>i</sub> = ${R.qStr} = <b>${F(R.q,2)} kPa</b>
+eae7df7	γ′ below the foundation base (layer ${R.baseIdx+1}: ${R.base.L.name}): ${sub('t','wd')} = ${isFinite(R.twd)?F(R.twd,2)+' m':'∞'}; ${R.gpCase} → γ′ = <b>${F(R.gp,2)} kN/m³</b>
+1400266	Bearing resistance factors (φ = ${F(R.phi,1)}°): ${sub('N','q')} = <b>${F(R.N.Nq,2)}</b> · ${sub('N','c')} = <b>${F(R.N.Nc,2)}</b> · ${sub('N','γ')} = <b>${F(R.N.Ng,2)}</b>
+9084888	Shape factors
+10414ac	 (strip footing → 1)
+4f94075	${sub('m','B')} = ${F(R.mB,3)}, ${sub('m','L')} = ${F(R.mL,3)}; according to the direction of the resultant H, m = ${sub('m','L')}·cos²θ + ${sub('m','B')}·sin²θ = ${F(R.mL,3)}·${F(R.cos2,3)} + ${F(R.mB,3)}·${F(R.sin2,3)} = <b>${F(R.m,3)}</b>
+91b4c15	Load inclination
+e9d8bb0	 (resultant H: √(${F(R.HB,0)}² + ${F(R.HL,0)}²) = ${F(R.Hres,1)}${u})
+2de362d	 + A′·c·cotφ) = 
+dfe82e0	·cot
+dca697c	Base inclination (α = ${F(S.alpha,1)}°): ${sub('b','q')} = ${sub('b','γ')} = ${F(R.bq,3)} · ${sub('b','c')} = ${F(R.bc,3)}
+955c093	${sub('R','k')} = ${F(R.RkA,1)}·${F(R.Ap,3)} = ${F(R.Rk,1)}${u} → ${sub('R','d')} = ${sub('R','k')}/γ<sub>R</sub> = ${F(R.Rk,1)}/${F(S.gR,2)} = <b>${F(R.Rd,1)}${u}</b>; utilisation ${sub('V','d')}/${sub('R','d')} = <b>${F(R.utilDr,0)}%</b>
+14c0dc8	<p class="kwarn">No c<sub>u</sub> is given for the layer below the foundation base (${R.base.L.name}) — enter it in the layer table for the undrained check.</p>
+ff3adfd	Total overburden pressure at the foundation base (total stress, water buoyancy not taken into account): q = Σγ<sub>i</sub>·t<sub>i</sub> = ${R.qTotStr} = <b>${F(R.qTot,2)} kPa</b>
+5c65c13	Factors: 
+061c358	1 (strip footing)
+b3cfa53	 (resultant H = ${F(R.Hres,1)}${u})
+4a7aac6	${sub('R','k')} = σ<sub>t</sub>·A′ = ${F(R.RkU,1)}${u} → ${sub('R','d')} = ${F(R.RkU,1)}/${F(S.gR,2)} = <b>${F(R.RdU,1)}${u}</b>; utilisation <b>${F(R.utilUd,0)}%</b>
+5aef19c	Active earth pressure on the 
+251088a	 m high front face of the foundation (layer by layer K<sub>a</sub> = tan²(45° − φ/2), with effective stresses
+c65b45e	, over a width of L = ${F(S.L,2)} m
+44f7d8a	Horizontal design load
+21c8398	 (resultant of H: √(${F(R.HB,0)}² + ${F(R.HL,0)}²) = ${F(R.Hres,1)}${u}; on the safe side, the active earth pressure is added at full value)
+d51d86a	Base friction (${S.delta==='mono'?'monolit: δ = φ':'előregyártott: δ = ⅔·φ'} = ${F(R.deltaDeg,2)}°, tan δ = ${F(R.tgd,3)}; only the permanent vertical load contributes, cohesion is neglected): ${sub('R','d')} = ${sub('V','′k')}·tan δ / γ<sub>R;h</sub> = ${F(R.Vperm,1)}·${F(R.tgd,3)}/${F(S.gRh,2)} = <b>${F(R.RdS,1)}${u}</b>
+23dfd61	Earth resistance is not taken into account: ${sub('R','p;d')} = 0
+cacbbfa	Earth resistance (${S.pass==='K0'?'nyugalmi, K₀ = 1 − sinφ':'passzív, K<sub>p</sub> = tg²(45° + φ/2)'}): ${sub('E',S.pass==='K0'?'0,k':'p,k')} = <b>${F(R.Ep.F,2)}${u}</b> → ${sub('R','p;d')} = ${F(S.mob,2)}·${F(R.Ep.F,2)}/${F(S.gRh,2)} = <b>${F(R.Rpd,1)}${u}</b>${S.pass==='Kp'&&S.mob>=0.99?' <span class="kwarn">⚠ a teljes passzív ellenállás csak nagy elmozdulásra mobilizálódik — agyagban gyakran csak 50–67 %-a vehető figyelembe</span>':''}
+35d070b	at rest, K₀ = 1 − sinφ
+a0a1109	passive, K<sub>p</sub> = tan²(45° + φ/2)
+603cbe4	 <span class="kwarn">⚠ the full passive resistance is mobilised only at large displacements — in clay often only 50–67% of it may be relied upon</span>
+225eb86	Drained check: ${sub('R','d')} + ${sub('R','p;d')} = ${F(R.RdS,1)} + ${F(R.Rpd,1)} = <b>${F(R.RsumS,1)}${u}</b>; utilisation ${sub('H','d')}/(${sub('R','d')}+${sub('R','p;d')}) = <b>${F(R.utilSl,0)}%</b>
+51f32c7	Undrained alternative (base adhesion): ${sub('R','d')} = A′·c<sub>u</sub>/γ<sub>R;h</sub> = ${F(R.Ap,3)}·${F(R.cu,0)}/${F(S.gRh,2)} = <b>${F(R.RdSU,1)}${u}</b>; limit ${sub('R','d')} ≤ 0.4·${sub('V','d')} = ${F(R.adhLimit,1)}${u} ${R.adhLimOK?'✓':'✗ (a korlát mértékadó!)'}; ${sub('R','d')} + ${sub('R','p;d')} = <b>${F(Math.min(R.RdSU,R.adhLimit)+R.Rpd,1)}${u}</b> → utilisation <b>${F(R.HdS/(Math.min(R.RdSU,R.adhLimit)+R.Rpd)*100,0)}%</b>
+7ddf783	✗ (the limit governs!)
+9b78c2f	<span class="kcapm">Rotate: drag with your finger · zoom: two fingers. </span>
+096c414	<b>Strip footing (L ≫ B):</b> the wall and the foundation continue along the length — the calculation refers to a <b>1 m long section</b> (highlighted as solid on the model), so the loads and resistances are given in <b>kN/m</b>.
+95ce573	<b>Pad footing (B × L):</b> the whole foundation and the column are shown; the loads and resistances refer to the whole foundation, in <b>kN</b>.
+d024af6	resultant at the foundation base: e_{B} = 
+a25cea9	resultant at the foundation base (shifted in the direction of H): e_{B} = 
+de810af	1 m section examined
+45fa4cf	▼ GWL ${F(S.gw,1)} m
+852b64e	<line x1="${x0}" y1="${yS}" x2="${x1}" y2="${yS}" stroke="#8A7B5E" stroke-width="1.6"/><text x="${x0+4}" y="${yS-6}" font-size="10" fill="#6B6052">ground surface</text>
+ad9b30d	<line x1="${x0}" y1="${yw}" x2="${x1}" y2="${yw}" stroke="#1E78C8" stroke-width="1.6" stroke-dasharray="8,4"/><path d="M${x1-22},${yw-11} l8,11 l8,-11 z" fill="#1E78C8"/><text x="${x1-26}" y="${yw-4}" font-size="10" fill="#1E78C8" text-anchor="end">GWL ${F(S.gw,1)} m</text>
+8556168	<line x1="${x0}" y1="${yB}" x2="${x1}" y2="${yB}" stroke="#3D2A1A" stroke-width="0.9" stroke-dasharray="5,3"/><text x="${x1-4}" y="${yB+13}" font-size="9.5" fill="#3D2A1A" text-anchor="end">foundation base −${F(D,2)} m</text>
+1569606	<text x="${cx}" y="${yB+Math.abs(dy)+42}" font-size="10.5" font-weight="700" fill="#2E7D8A" text-anchor="middle">resultant at the foundation base: e<tspan baseline-shift="sub" font-size="7">B</tspan> = ${F(R.eB,2)} m (shifted in the direction of H) → B′ band</text>
+8a5bc85	<h4>Result</h4>
+6233711	Self-weight G<sub>f,k</sub> + G<sub>b,k</sub>
+6731917	G<sub>k</sub> permanent load
+fff0686	R<sub>k</sub>/A′ = width + surcharge + cohesion
+bb2d525	V<sub>d</sub> design load
+bea189d	e<sub>B</sub> eccentricity → B′
+d844c48	f load-inclination parameter
+5de64d0	<h4>Result (deeper groundwater)</h4>
+3542ba6	<h4>Result (reversed G<sub>x</sub>)</h4>
+3350a53	<h4>Result (larger e<sub>q</sub>)</h4>
+ad04d36	<h4>Result (inclined base)</h4>
+ee58167	<h4>Result (side B governs)</h4>
+7ae9ef8	s<sub>γ</sub> / s<sub>q</sub> / s<sub>c</sub> shape factors
+89df55e	i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub> inclination factors
+9b0c725	Required R<sub>k</sub> = V<sub>d</sub> · 1.4
+6b18dee	Quadratic equation
+b02ecf6	Effective width B′
+45e6043	<div class="verdict ok"><span class="big">B ≈ ${fmt(B,2)} m</span>required foundation width &nbsp;(B = B′ + 2·e<sub>B</sub>)</div>
+fa01e03	<h4>Result (sliding, drained)</h4>
+e7ef27e	R<sub>pd</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)
+5c04929	<h4>Result (sliding, undrained)</h4>
+dc657e3	<h4>Result (sliding + passive earth resistance)</h4>
+477afa5	δ = ⅔·φ → tan δ
+6426470	permeability k ≈ 10⁻⁹ m/s, consolidation takes years — undrained during construction, drained in the long term.
+cf2d105	k ≈ 10⁻⁷ m/s, consolidation takes weeks to months — it depends on the rate of filling; both cases are calculated.
+af0a850	k ≈ 10⁻⁴ m/s, the water escapes within hours — practically always drained; no excess pore water pressure develops.
+814d3fa	 d
+496f7b7	=
+ee62b01	 yr
+2c60918	sand (drains well)
+b486183	 — saturated
+9250fb9	sandy gravel — drainage layer
+397b94c	▼ groundwater near the surface
+8efd7fa	settlement s = 
+49012ca	× magnified)
+45c2b8b	excess pore water pressure below the base
+1f0342e	→ the water escapes immediately (Δu ≈ 0)
+d5008d3	→ the water slowly seeps out towards the drainage layer
+aab6285	BEARING FAILURE
+c3bfc55	the drained bearing resistance is exhausted
+6e0530a	the undrained bearing resistance is exhausted — the silo tilts, the soil heaves
+030a406	piezometer
+5792578	the silo has tilted — it stops here
+1ed4fcc	filling in progress
+947897b	the silo is full, the water is seeping out
+aa2ba9f	rest period
+a721b8e	soil skeleton 
+e0c5b1d	water 
+b05e3a0	 kPa beneath the base. Over time
+c78b051	the blue turns brown: water seeps out, the
+7734dbd	skeleton takes over: the soil gets stronger.
+4f249e7	shear strength c_u = 
+aed5fb9	drained: the strength increases with σ′
+cd64102	initial 
+a4be378	 kPa → increases with consolidation
+0fb5e3e	load and bearing resistance
+29b0889	load q
+95c108b	bearing res. (drained)
+a709139	bearing resistance (undrained)
+a74af18	the load has reached the bearing resistance → failure
+996d58b	safety: 
+9954764	× (drained: 
+bd7bc73	settlement: 
+96345b6	increases with consolidation (in proportion to Δσ′)
+db0183f	drag with the mouse to rotate
+90dfb8f	 mo
+008c072	bearing failure: 
+524e5e6	load q(t)
+35f6446	undrained bearing resistance (2+π)·c_u(t) + γ·D
+8e085e0	drained bearing resistance (long term)
+2dfb712	settlement (right-hand scale)
+17f2895	undrained bearing resistance
+617e68f	drained bearing resistance
+4df0dd6	settlement
+e08b693	safety (bearing resistance / load)
+23bf144	BEARING FAILURE after 
+d8b70e1	
+eee1125	still standing — failure comes after 
+a26ac53	
+c9fa934	safe throughout
+45ff5eb	 Initial c<sub>u,0</sub> = 
+eda0488	; drained parameters c′ = 
+c37eef1	 Drained parameters: c′ = 0, φ′ = 
+432414a	2D section (vertical section through the axis of the foundation)
+924a10b	width
+898a02d	depth
+7a0b1d5	cohesion
+f6d9ae7	The three terms [kPa]
+4a43994	heave
+9c59a39	active wedge
+b8e8580	radial shear zone
+6c004c8	passive wedge
+d43b75a	overburden: q′ = γ·D = 
+6e15ca4	slip surface
+ac6cb59	Strip footing, φ = 
+8b6a42c	Width term = the weight of the soil
+8852ba0	mass above the slip surface resists:
+e075360	the wider B, the larger the mass
+3d5d33f	(0.5·γ·B·N_γ).
+1581096	Depth term = the passive wedge has to
+e238fcc	lift the overburden above the base:
+efa6bb7	q′ = γ·D, the resistance is q′·N_q.
+4b7fd42	At D = 0 the term disappears.
+de3c4fb	Cohesion term = cohesion acting along
+a1b5e5e	the whole length of the slip surface:
+0755018	c·N_c, N_c = (N_q − 1)·cot φ.
+7613408	at φ = 0, N_c = 5.14.
+ef9d6dc	Click a term with the
+f489b7b	buttons on the left: the figure shows
+1a356d7	where the resistance comes from.
+e0c8c0e	depth of the mechanism: 
+cf5080e	run-out at the surface: 
+77d78fc	<span class="dfchip">0.5·γ·B·N_γ = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N_q = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N_c = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R_k/A′ = <b>${F(T.sum,0)} kPa</b></span>
+2601de7	section at mid-length; L = 
+9c8a370	 m perpendicular to the plane of the section
+7b2bd23	coloured end faces on the short sides: a slip surface and shear resistance develop here too
+9a5bc30	Pad footing B × L, B/L = 
+f6d57a1	ratio of the end faces to the base area: 
+750296e	1 − 0.3·B/L
+ae1a570	the vertical line is 1.0 (strip footing)
+9fa0d46	The three terms with shape factors [kPa]
+46a0c4e	as a strip footing: 
+84360a9	 kPa → now 
+e38961d	∞ (strip footing)
+7909b05	solid: one-sided, flatter slip surface in the direction of H
+eb9f092	dashed: mechanism for a vertical load
+dcd84c1	f = H/(V + B·c·cot φ) = 
+23ee266	Load-inclination factors
+96f6f32	The three terms with i [kPa]
+7f3db63	vertical: 
+9c24019	 kPa → inclined 
+e11711b	▼ groundwater at ground level (blue dashed line) → γ′ = γ − 10 kN/m³
+0ae8d78	overburden thickness D = 
+90362e4	the passive wedge has to lift this weight
+9ab7591	D = 0: no overburden, the depth term is zero
+0283a5c	The depth term grows linearly with D:
+fd21dcc	each metre of overburden adds γ′·N_q kPa
+7663803	of resistance. EC7 does not count the
+0f168e7	shear strength of the overburden
+8d2309c	(no d factor) — on the safe side.
+f59c51b	 kPa / m of overburden
+0f41782	<text x="${(px.x0+px.x1)/2}" y="${px.y1+30}" text-anchor="middle" font-size="11" fill="#6B6052">angle of shearing resistance φ</text><text x="14" y="${(px.y0+px.y1)/2}" text-anchor="middle" font-size="11" fill="#6B6052" transform="rotate(-90 14 ${(px.y0+px.y1)/2})">N factor (decimal scale)</text>
+f7db13d	higher edge: shorter spiral, smaller passive wedge
+ae2e38b	dashed: mechanism for a horizontal base
+4220897	lower edge
+9a403d5	α·tan φ = 
+3d8010c	(1 − α·tan φ)²
+98f08ae	b_q − (1 − b_q)/(N_c·tan φ)
+378ce45	Base-inclination factors
+8695210	The three terms with b [kPa]
+5855549	horizontal base: 
+5df9d8a	→ inclined base: 
+4f49a3c	Towards the higher edge the spiral rotates
+5438121	only through π/2 − α: shorter slip surface,
+61e2dd1	smaller passive wedge, less resistance.
+2707d14	With a vertical V, H = V·sin α also acts
+81b70bc	(i factors, see WE7).
+961dee7	Back to top
+9f0291c	bearing resistance factor
+070e318	shape factor
+ddac292	depth factor
+8452fdd	load-inclination factor
+63eda57	base-inclination factor
+36ce1c7	resistance factor
+c186d69	drained case
+714d9b0	undrained case
+5d23233	effective stress
+455aa4e	total stress
+14c4de7	favourable variable
+04a3c4a	critical state angle of shearing resistance
+baaff0e	undrained shear strength
+0422a19	angle of shearing resistance
+6bb5a7f	effective width
+89993b5	passive earth resistance
+3c95f6c	design value
+104f197	characteristic value
+42bda25	partial factor
+cebb3a4	overall stability
+c236828	general shear failure
+e0e8018	local shear failure
+b38cd9d	bearing stratum
+d0a27e5	foundation level
+9b37315	density index
+423a9da	winter groundwater level
+7b32e20	collapsible soil
+4f1ac03	organic soil
+df41d27	plastic zone
+88256f8	ground-bearing raft
+9a690d6	deepened shallow foundation
+c8fe5d3	mixed foundation
+20d0cd4	=

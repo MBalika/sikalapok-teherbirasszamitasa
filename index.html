@@ -4,6 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Síkalapok teherbírásszámítása — gyakorlati segédlet</title>
+<link rel="alternate" hreflang="hu" href="https://sikalapok-teherbirasszamitasa.vercel.app/">
+<link rel="alternate" hreflang="en" href="https://sikalapok-teherbirasszamitasa.vercel.app/en">
+<link rel="alternate" hreflang="x-default" href="https://sikalapok-teherbirasszamitasa.vercel.app/">
+<script>/*nyelv*/try{if(localStorage.getItem('alap-lang')==='en'&&!/[?&]hu\b/.test(location.search))location.replace('en'+location.hash)}catch(e){}</script>
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>
 Hyphenopoly.config({
@@ -178,7 +182,8 @@ h2::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;bor
   .brandbar .wrap{padding:10px 16px}
   .brand-text .uni{display:none}
   .brand-text .course{font-size:.95rem}
-  .brandbar .rhs{display:none}
+  .brandbar .rhs .pill:not(.langsw){display:none}
+  .brandbar .wrap{flex-wrap:nowrap}
   .chaptertabs .wrap{padding:0 12px;mask-image:linear-gradient(90deg,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
   .chaptertabs button{padding:12px 10px;font-size:.86rem}
   .chaptertabs .ch-num{margin-right:5px;width:20px;height:20px;line-height:20px}
@@ -341,6 +346,14 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 .dftab{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0}
 .dftab th,.dftab td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
 .dftab th{background:#F4EFE7;font-weight:600}
+/* nyelvváltó (HU | EN) */
+.pill.langsw{display:inline-flex;align-items:center;gap:2px;padding:3px;text-decoration:none;color:#EFE7DA;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.06em;cursor:pointer;opacity:1}
+.pill.langsw b,.pill.langsw span{display:inline-grid;place-items:center;min-width:30px;padding:3px 8px;border-radius:99px}
+.pill.langsw b{background:var(--gold);color:#241C12}
+.pill.langsw span{color:rgba(239,231,218,.75)}
+.pill.langsw:hover span{color:#fff;background:rgba(255,255,255,.12)}
+.pill.langsw:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(max-width:700px){.pill.langsw{padding:0;width:36px;height:32px;justify-content:center;flex:none}.pill.langsw b{display:none}.pill.langsw span{padding:0;min-width:0;color:#fff}}
 </style>
 </head>
 <body>
@@ -355,6 +368,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       </div>
     </div>
     <div class="rhs">
+      <a class="pill langsw" id="langSw" href="en" hreflang="en" lang="en" aria-label="English version"><b>HU</b><span>EN</span></a>
       <span class="pill rebar" onclick="setChapter('kalkulator')">kalkulátor</span>
     </div>
   </div>
@@ -738,7 +752,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <div class="dfside">
           <div class="dfsl"><label>Talaj az alap alatt</label></div>
           <div class="dfsc" id="df-soil"><button type="button" class="on" data-s="agyag">puha, telített agyag</button><button type="button" data-s="iszap">iszap</button><button type="button" data-s="homok">homok</button></div>
-          <div class="dfsl"><label>Végső talpfeszültség q<sub>max</sub> <span class="v" id="df-qv"></span></label><input type="range" id="df-q" min="50" max="400" step="10"></div>
+          <div class="dfsl"><label><span>Végső talpfeszültség q<sub>max</sub></span> <span class="v" id="df-qv"></span></label><input type="range" id="df-q" min="50" max="400" step="10"></div>
           <div class="dfsl"><label>A feltöltés ideje <span class="v" id="df-tfv"></span></label><input type="range" id="df-tf" min="0" max="7" step="1"></div>
           <div class="dfsl"><label>Alapszélesség B <span class="v" id="df-Bv"></span></label><input type="range" id="df-B" min="4" max="30" step="1"></div>
           <div class="dfsl"><label>Feltöltés módja</label></div>
@@ -1049,7 +1063,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>φ (°)</label><input type="number" id="mp1-phi" value="24" step="1"></div>
           <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp1-c" value="12" step="1"></div>
         </div>
-        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 0,6 · t = 0,5 m · γ<sub>feltöltés</sub> = 17 · γ<sub>b</sub> = 25 kN/m³</p>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3; h = 0,6; t = 0,5 m; γ<sub>feltöltés</sub> = 17; γ<sub>b</sub> = 25 kN/m³</p>
         <div class="calc-results" id="mp1-res"></div>
       </div>
     </div>
@@ -1094,7 +1108,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c<sub>u</sub> drénezetlen ny.szil. (kPa)</label><input type="number" id="mp2-cu" value="150" step="10"></div>
           <div class="cr"><label>Q<sub>v,k</sub> (kN/m)</label><input type="number" id="mp2-Qv" value="70" step="10"></div>
         </div>
-        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 0,6 · t = 0,5 m · γ<sub>feltöltés</sub> = 17 · γ<sub>b</sub> = 25 kN/m³ &nbsp;·&nbsp; teljes feszültség (φ = 0)</p>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3; h = 0,6; t = 0,5 m; γ<sub>feltöltés</sub> = 17; γ<sub>b</sub> = 25 kN/m³; teljes feszültség (φ = 0)</p>
         <div class="calc-results" id="mp2-res"></div>
       </div>
     </div>
@@ -1221,7 +1235,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp3-c" value="30" step="1"></div>
           <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp3-Gx" value="30" step="5"></div>
         </div>
-        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3 · h = 1,0 · t = 0,4 m · γ<sub>feltöltés</sub> = 18 · γ<sub>b</sub> = 25 kN/m³ &nbsp;·&nbsp; sávalap, m<sub>B</sub> = 2</p>
+        <p class="calc-note">Állandók (önsúlyhoz): b = 0,3; h = 1,0; t = 0,4 m; γ<sub>feltöltés</sub> = 18; γ<sub>b</sub> = 25 kN/m³; sávalap, m<sub>B</sub> = 2</p>
         <div class="calc-results" id="mp3-res"></div>
       </div>
     </div>
@@ -1344,7 +1358,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp4-c" value="30" step="1"></div>
           <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp4-Gx" value="30" step="5"></div>
         </div>
-        <p class="calc-note">Állandók: b = 0,3 · h = 1,0 · t = 0,4 m · γ<sub>feltöltés</sub> = 18 · γ<sub>b</sub> = 25 kN/m³ · sávalap. &nbsp; A mélyebb talajvíz hatása: q′ = 25,2 kPa, γ′ = 15,3 kN/m³ (az MP3-ban 20,1 ill. 10 volt). Állítsd vissza ezekre, hogy lásd az MP3 értékét.</p>
+        <p class="calc-note">Állandók: b = 0,3; h = 1,0; t = 0,4 m; γ<sub>feltöltés</sub> = 18; γ<sub>b</sub> = 25 kN/m³; sávalap. &nbsp; A mélyebb talajvíz hatása: q′ = 25,2 kPa, γ′ = 15,3 kN/m³ (az MP3-ban 20,1 ill. 10 volt). Állítsd vissza ezekre, hogy lásd az MP3 értékét.</p>
         <div class="calc-results" id="mp4-res"></div>
       </div>
     </div>
@@ -1449,7 +1463,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp5-c" value="30" step="1"></div>
           <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp5-Gx" value="30" step="5"></div>
         </div>
-        <p class="calc-note">A <b>fordított</b> G<sub>x</sub> miatt a külpontosság a két nyomaték <b>összegéből</b> adódik: e<sub>B</sub> = |H<sub>k</sub>·h + Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub>. Állandók: b=0,3 · h=1,0 · t=0,4 m · γ<sub>feltöltés</sub>=18 · γ<sub>b</sub>=25 kN/m³ · sávalap.</p>
+        <p class="calc-note">A <b>fordított</b> G<sub>x</sub> miatt a külpontosság a két nyomaték <b>összegéből</b> adódik: e<sub>B</sub> = |H<sub>k</sub>·h + Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub>. Állandók: b=0,3; h=1,0; t=0,4 m; γ<sub>feltöltés</sub>=18; γ<sub>b</sub>=25 kN/m³; sávalap.</p>
         <div class="calc-results" id="mp5-res"></div>
       </div>
     </div>
@@ -1551,7 +1565,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c kohézió (kPa)</label><input type="number" id="mp6-c" value="30" step="1"></div>
           <div class="cr"><label>G<sub>x,k</sub> vízszintes erő (kN/m)</label><input type="number" id="mp6-Gx" value="30" step="5"></div>
         </div>
-        <p class="calc-note">Húzd az e<sub>q</sub> mezőt 0,3-ra, hogy lásd az MP3 esetét (R<sub>d</sub> = 736). Állandók: b=0,3 · h=1,0 · t=0,4 m · γ<sub>feltöltés</sub>=18 · γ<sub>b</sub>=25 kN/m³ · sávalap.</p>
+        <p class="calc-note">Húzd az e<sub>q</sub> mezőt 0,3-ra, hogy lásd az MP3 esetét (R<sub>d</sub> = 736). Állandók: b=0,3; h=1,0; t=0,4 m; γ<sub>feltöltés</sub>=18; γ<sub>b</sub>=25 kN/m³; sávalap.</p>
         <div class="calc-results" id="mp6-res"></div>
       </div>
     </div>
@@ -2374,7 +2388,9 @@ function setChapter(chId){
 })();
 
 /* ===================== SEGÉDFÜGGVÉNYEK ===================== */
-const fmt = (v,dec=2) => { if(!isFinite(v)) return '—'; if(Math.abs(v)<1e-9) v=0; return v.toFixed(dec).replace('.',','); };
+// angol változat (en.html, <html lang="en-GB">): tizedespont, angol időtartamok
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+const fmt = (v,dec=2) => { if(!isFinite(v)) return '—'; if(Math.abs(v)<1e-9) v=0; return v.toFixed(dec).replace('.',EN?'.':','); };
 const deg2rad = d => d*Math.PI/180;
 function nFactors(phi){
   const r=deg2rad(phi);
@@ -3177,7 +3193,7 @@ const DFILM=(function(){
     homok:{name:'homok',Tc:0.02,cu0:null,alpha:0,c:0,phi:33,gsat:20,E:30,col:'#E6D28E',note:'k ≈ 10⁻⁴ m/s, a víz órák alatt elszökik — gyakorlatilag mindig drénezett, pórusvíznyomás-többlet nem alakul ki.'}
   };
   const TF=[1,3,10,30,100,365,730,1825];
-  const tfName=d=>!isFinite(d)?'—':d<30?d+' nap':d<365?Math.round(d/30)+' hónap':(d/365).toLocaleString('hu-HU',{maximumFractionDigits:1})+' év';
+  const tfName=d=>{ if(!isFinite(d)) return '—'; if(EN){ const w=(n,u)=>n+' '+u+(n===1?'':'s'); return d<30?w(d,'day'):d<365?w(Math.round(d/30),'month'):w(+(d/365).toFixed(1),'year'); } return d<30?d+' nap':d<365?Math.round(d/30)+' hónap':(d/365).toLocaleString('hu-HU',{maximumFractionDigits:1})+' év'; };
   const S={soil:'agyag',qmax:250,tfi:3,B:12,mode:'lin',speed:1,D:1,gw:10,ex:3};
   const SCEN={
     transcona:{soil:'agyag',qmax:250,tfi:3,B:12,mode:'lin'},
@@ -3869,6 +3885,22 @@ const initCh=(location.hash||'#bevezetes').slice(1);
 setChapter(CHAPTERS.find(c=>c.id===initCh)?initCh:'bevezetes');
 KALK.build(document.getElementById('kalk-host'));
 function openPreset(k){ setChapter('kalkulator'); if(window.KALK&&KALK.redraw) KALK.redraw(); const p=document.getElementById('k-preset'); p.value=k; p.dispatchEvent(new Event('change')); }
+/* nyelvváltó (HU | EN): a választás megmarad, a másik nyelvű oldal ugyanabban a fejezetben, ugyanott nyílik meg */
+(function langSwitch(){
+  const sw=document.getElementById('langSw'), KEY='alap-pos';
+  const hh=()=>{ let h=0; ['.chaptertabs','#subNav'].forEach(q=>{ const n=document.querySelector(q); if(n&&n.offsetParent!==null) h+=n.offsetHeight; }); return h; };
+  if(sw) sw.addEventListener('click',()=>{
+    try{ localStorage.setItem('alap-lang', EN?'hu':'en'); }catch(e){}
+    const H0=hh(); let best=null; const pg=document.querySelector('.chapter-page.active');
+    if(pg) pg.querySelectorAll('[id]').forEach(n=>{ if(n.closest('svg')) return; const r=n.getBoundingClientRect(); if(r.height&&r.top<=H0+1&&r.bottom>H0) best=n; });
+    try{ sessionStorage.setItem(KEY, JSON.stringify({id:best?best.id:'', off:best?H0-best.getBoundingClientRect().top:0, y:scrollY, t:Date.now()})); }catch(e){}
+    sw.setAttribute('href',(EN?'./':'en')+location.hash);
+  });
+  let p=null; try{ p=JSON.parse(sessionStorage.getItem(KEY)||'null'); sessionStorage.removeItem(KEY); }catch(e){}
+  if(p&&Date.now()-p.t<20000){ if('scrollRestoration' in history) history.scrollRestoration='manual';
+    const go=()=>{ const n=p.id&&document.getElementById(p.id); const y=n?n.getBoundingClientRect().top+scrollY-hh()+p.off:p.y; scrollTo({top:Math.max(0,y),behavior:'instant'}); };
+    requestAnimationFrame(go); addEventListener('load',()=>{ go(); setTimeout(go,600); },{once:true}); }
+})();
 /* vissza a tetejére */
 (function(){ const b=document.createElement('button'); b.className='toplink'; b.type='button'; b.title='Vissza a tetejére'; b.textContent='↑'; b.onclick=()=>window.scrollTo({top:0,behavior:'smooth'}); document.body.appendChild(b); window.addEventListener('scroll',()=>b.classList.toggle('show',window.scrollY>600),{passive:true}); })();
 /* aktív alfejezet-jelölés görgetéskor */
@@ -3982,6 +4014,8 @@ p,li,td,th,.lead,.kst,.ks2,.knote,.kcap,.calc-note{overflow-wrap:break-word}
 (function(){
 "use strict";
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+// angol változat: angol tördelési szabályok és en-gb elválasztás
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
 const GUARD = (() => {
   const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011', SHY = '\u00AD';
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
@@ -3992,6 +4026,7 @@ const GUARD = (() => {
   const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
   const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
   const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Hh]úsz|[Ss]záz|[Ee]zer|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Öö]tödik|[Hh]atodik|[Hh]etedik|[Nn]yolcadik|[Kk]ilencedik|[Tt]izedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik|[Kk]ettő|[Hh]armincnyolc|[Nn]egyven|[Hh]etven))(?=\s\S)\s/g;
+  const NUMW_EN = /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Ff]ifth|[Ss]ixth|[Ss]eventh|[Bb]oth|[Ee]ach|[Ee]leven))(?=\s\S)\s/g;
   function textPass(s) {
     if (!/[ \-–·]/.test(s)) return s;
     // ezres tagolás
@@ -4015,19 +4050,19 @@ const GUARD = (() => {
     // függvénynév + argumentum
     s = s.replace(/\b(tg|ctg|sin|cos|tan|ln|log|exp) /g, '$1' + NB);
     // rövidítések
-    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|ld\.|vö\.|cca\.|átl\.|ill|ún|kb) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(EN ? /(^|[\s(\u00A0])(e\.g\.|i\.e\.|approx\.|cf\.|max\.|min\.|No\.|Fig\.|c\.) (?=\S)/g : /(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|ld\.|vö\.|cca\.|átl\.|ill|ún|kb) (?=\S)/g, '$1$2' + NB);
     // szám + mértékegység / szó; magában álló szám
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
     // névelők, rövid kötőszavak
-    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|A|An|the|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
     // betűvel írt számnév + amit számlál
-    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(EN ? NUMW_EN : NUMW, '$1$2' + NB);
     // utótagos kötőjel (30°-nál, RFA-n, 1173-ban)
     s = s.replace(/([\d°′″%)\]\p{Lu}\u2080-\u2089])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     return s;
   }
-  const SHORTEND = new RegExp('(^|[\\s( ⁠„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|A|An|the|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[.,]\\d+)?%?) $') : new RegExp('(^|[\\s( ⁠„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
   // csomóponthatáron átnyúló kötés (pl. „Az <b>…”, „b<sub>q</sub> − (…”)
   function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
     if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
@@ -4057,7 +4092,8 @@ const GUARD = (() => {
     while ((m = pr.exec(full))) { if (m[0].length <= parMax) mark(m.index, m.index + m[0].length); }
     // szakkifejezések
     termRx.lastIndex = 0;
-    while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    // csak akkor köt, ha a kifejezés elfér a sor töredékében (keskeny hasábban, nagy betűs címben ne lógjon ki)
+    while ((m = termRx.exec(full))) if (!EN || m[0].length <= 0.3 * cpl) mark(m.index, m.index + m[0].length);
     // címke: érték
     const lv = /(\p{L}[\p{L}\p{N}′_]{1,22}): ([\d−+±≤≥=<>~≈α-ωΑ-Ω]\S{0,9}(?:[ \u00A0][^\s;·]{1,7})?)(?=$|[;,.·)\s])/gu;
     while ((m = lv.exec(full))) { if (m[0].length <= 34) mark(m.index, m.index + m[0].length); }
@@ -4163,8 +4199,9 @@ const GUARD = (() => {
     observe();
     // Hyphenopoly
     const H = window.Hyphenopoly;
-    if (H && H.hyphenators && H.hyphenators.hu) {
-      H.hyphenators.hu.then(fn => { hyph = s => fn(s); const all = $$(HYPH); all.forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; if (window.RAG) window.RAG.later(80); }).catch(() => {});
+    const HK = EN ? 'en-gb' : 'hu';
+    if (H && H.hyphenators && H.hyphenators[HK]) {
+      H.hyphenators[HK].then(fn => { hyph = s => fn(s); const all = $$(HYPH); all.forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; if (window.RAG) window.RAG.later(80); }).catch(() => {});
     }
   }
   // vászonra szánt szöveg őrzése
