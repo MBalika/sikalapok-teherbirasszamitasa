@@ -69,8 +69,6 @@ dbf0e5f	actual cross-section
 71f42e8	B&#160;&#160;&#160;width
 4361af3	L&#160;&#160;&#160;length
 a13532d	eccentricity
-878609b	e<tspan baseline-shift="sub" font-size="8">B</tspan>&#160;&#160;&#160;in the B direction
-04a39c9	e<tspan baseline-shift="sub" font-size="8">L</tspan>&#160;&#160;&#160;in the L direction
 5bd3640	effective area
 c0e0b30	B′&#160;&#160;&#160;width
 24ecece	L′&#160;&#160;&#160;length
@@ -78,8 +76,6 @@ c0e0b30	B′&#160;&#160;&#160;width
 e3594b8	<b>Watch the signs!</b> The moments of the horizontal force and of the eccentric vertical load can act in <i>opposite</i> directions — in that case the eccentricity decreases.
 119402b	3.2 Effect of groundwater — the effective γ′
 445c554	The value of γ′ in the width term is influenced by the depth of the groundwater below the foundation base (t<sub>wd</sub>). The failure zone extends to a depth of B′; γ′ varies linearly with the ratio t<sub>wd</sub>/B′:
-733d382	=
-5ce152e	=
 f0be16b	t<sub>wd</sub> ≤ 0.5·B′ &nbsp;→&nbsp; γ′ = γ<sub>sat</sub> − γ<sub>w</sub> &nbsp;&nbsp;(water within the failure zone)<br>⏎      0.5·B′ &lt; t<sub>wd</sub> &lt; 1.5·B′ &nbsp;→&nbsp; γ′ = (γ<sub>sat</sub> − γ<sub>w</sub>) + (γ<sub>m</sub> − (γ<sub>sat</sub> − γ<sub>w</sub>))·(t<sub>wd</sub>/B′ − 0.5) &nbsp;&nbsp;(linear transition)<br>⏎      1.5·B′ ≤ t<sub>wd</sub> &nbsp;→&nbsp; γ′ = γ<sub>m</sub> &nbsp;&nbsp;(water deep, no effect)
 4fdc1a8	A negative t<sub>wd</sub> means the groundwater is <i>above</i> the foundation base — then γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.
 47a995c	4. Verification of adequacy
@@ -250,15 +246,8 @@ fb6ae9c	<b>11</b> worked examples derived in detail from the practical material 
 cbe3d6c	WE1
 1958827	Figure
 7834224	ground surface
-8eac697	=
-94fb0d3	base −1.10 m (rel.)
-1dbb14c	=
-d257cf1	=
-9fefb71	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=0.8m
 bf49af9	sandy gravel fill
-d7a883b	=
 ce3f633	silty sand
-5f41c15	=
 267d7d4	Solution
 dba9189	1. Action side — the design load
 e41955c	Weight of fill: G<sub>f,k</sub> = (B−b)·t·γ = (1.1−0.3)·0.5·17 = <b>6.8 kN/m</b>
@@ -307,16 +296,7 @@ b94bbe0	undrained
 c56d5ba	Check the <b>strip footing</b> in the drained case. Loads: <b>G<sub>z,k</sub> = 250 kN/m</b> (concentric), <b>Q<sub>z,k</sub> = 170 kN/m</b> applied eccentrically (e<sub>q</sub> = 0.3 m), and a horizontal force of <b>G<sub>x,k</sub> = 30 kN/m</b>. Geometry: b = 0.3 m, B = 1.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. The groundwater is 0.6 m above the foundation base.<br><b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa. <b>silty sand:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa.
 79786dc	WE3
 3f75bcb	groundwater
-1f4206a	=
-e5eddb5	=
-5570dd0	=
-62b6d54	=
-88ca8a2	h<tspan baseline-shift="sub" font-size="7">GWL</tspan>=0.6m
-2be8fe1	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.1m
 fa7c0a9	sand fill
-f5617e0	=
-bdd0c1a	=
-116b492	Strip footing
 52083f0	G<sub>f,k</sub> = (1.3−0.3)·0.4·18 = 7.2; &nbsp; G<sub>b,k</sub> = 1.3·1.0·25 = 32.5 → G<sub>k</sub> = 250 + 7.2 + 32.5 = <b>289.7 kN/m</b>
 9553d9c	V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b>
 389b855	2. Eccentricity of the resultant force
@@ -337,7 +317,6 @@ b9b563a	Q<sub>z,k</sub> eccentric (kN/m)
 12d3c26	Worked Example 4 — Effect of the design groundwater depth
 93c8578	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. Loads: G<sub>z,k</sub> = 250 kN/m (concentric), Q<sub>z,k</sub> = 170 kN/m (e<sub>q</sub> = 0.3 m), G<sub>x,k</sub> = 30 kN/m. Soils: sand fill γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa; silty sand γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa. <b>The only difference:</b> the design groundwater is now <b>2 m deeper</b> — 1.4 m below the foundation base (t<sub>wd</sub> = 1.4 m). <b>Question: how does R<sub>d</sub> change?</b>
 e227d52	WE4
-5b18304	t<tspan baseline-shift="sub" font-size="7">wd</tspan>=1.4m
 1edc716	1. Action side — unchanged (same as WE3)
 b6c067d	V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(the load does not depend on the groundwater)</span>
 ee64d64	2. Eccentricity — unchanged
@@ -351,7 +330,6 @@ ea565bc	3. q′ and γ′ with the deeper groundwater — <u>this changes!</u>
 7b74fd7	Worked Example 5 — Effect of the direction of the horizontal force
 0ea63b8	The same <b>strip footing</b> as in WE3 — all data unchanged: B = 1.3 m, b = 0.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³; G<sub>z,k</sub> = 250 kN/m (concentric), Q<sub>z,k</sub> = 170 kN/m (e<sub>q</sub> = 0.3 m), G<sub>x,k</sub> = 30 kN/m; groundwater 0.6 m above the foundation base; sand fill (γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa) and silty sand (γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa). <b>The only difference:</b> the direction of the horizontal force G<sub>x,k</sub> is <b>reversed</b>. <b>Question: how does R<sub>d</sub> change?</b>
 28d76c3	WE5
-a1fc9eb	G<tspan baseline-shift="sub" font-size="8">x,k</tspan>=30 kN/m (reversed)
 03a9615	1. Action side — unchanged
 fa09354	G<sub>k</sub> = 250 + 7.2 + 32.5 = <b>289.7 kN/m</b>; &nbsp; V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(the magnitude of the load is unchanged)</span>
 1fa607a	2. Eccentricity — <u>this changes!</u>
@@ -388,11 +366,7 @@ dfb1797	α = 5° = 0.0873 rad. &nbsp; b<sub>q</sub> = b<sub>γ</sub> = (1 − α
 bf52889	Worked Example 8 — Pad footing, checked in both directions
 807bff7	WE8
 c5fbda6	Figure — cross-section
-2f2fee4	=
-31cfdf4	=
-2386217	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.5m
 230e044	sandy gravel
-e8123d2	=
 2aefefa	Pad footing (L = 1.5 m)
 83656a2	Figure — plan view
 2f43ef5	plan view
@@ -416,14 +390,8 @@ a5c9cd3	G<sub>k</sub> permanent load (kN)
 605adb0	Worked Example 9 — Determining the required foundation width
 43e9467	Determine the required width B of the <b>strip footing</b>. The load given is a <b>design value</b> that already includes the self-weight of the foundation and the overlying soil: <b>V<sub>d</sub> = 255 kN/m</b>, e<sub>B</sub> = 0.02 m. b = 0.3 m, t<sub>fill</sub> = 1.65 m, γ<sub>b</sub> = 25 kN/m³. The <b>groundwater is at the foundation level</b>. Layer 1 (fill): γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 15°, c = 5 kPa; <b>Layer 2 (bearing stratum, below the base):</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 30°, c = 0 kPa. We design for the governing (just-adequate) condition: <b>V<sub>d</sub> = R<sub>d</sub></b>.
 2a9038c	WE9
-efe33c1	=
-f36f526	=
-1653658	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=1.65m
 3c656bd	Layer 1 (fill)
-2e5019b	=
 9d7a221	Layer 2 (bearing stratum)
-f261513	=
-148c939	strip footing (L ≫ B)
 ef80d3d	1. The design condition
 eaa9604	In the governing condition V<sub>d</sub> = R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>, so the required characteristic resistance is: R<sub>k</sub> = V<sub>d</sub>·γ<sub>R</sub> = 255·1.4 = <b>357 kN/m</b>
 1346843	2. q′ and γ′ (groundwater at the base)
@@ -441,11 +409,6 @@ dd4b9bb	5. Solving the quadratic equation
 74e69a1	e<sub>B</sub> eccentricity (m)
 3ec5dc2	We design for the governing (just-adequate) condition: V<sub>d</sub> = R<sub>d</sub>. The solution follows from a quadratic equation (B = B′ + 2·e<sub>B</sub>).
 e687d4e	WE10
-6d67b37	=
-da8f515	=
-a976930	R<tspan baseline-shift="sub" font-size="7">d</tspan> (base friction)
-5edd64c	=
-18cfa7f	=
 76da62b	the horizontal load is parallel to side B
 f23d625	1. Governing horizontal load at the foundation base
 e0f74eb	Horizontal column load: Q<sub>x,k</sub> = 100 kN. &nbsp; Earth-pressure coefficients of the <b>active earth pressure</b> acting on the foundation:
@@ -466,9 +429,7 @@ b585232	E<sub>a,k</sub> active earth pressure (kN)
 336f707	E<sub>0,k</sub> at-rest earth pressure (kN)
 fc94e42	Undrained case
 5c920af	The same pad footing and loading, but the soil beneath the base is now <b>cohesive clay</b>: φ<sub>u</sub> = 0°, c<sub>u</sub> = 65 kPa (the fill has c = 5 kPa). In the undrained case the sliding resistance comes not from base friction but from the <b>adhesion mobilised over the whole base area</b> (A<sub>c</sub>·c<sub>u</sub>).
-ba6bb98	R<tspan baseline-shift="sub" font-size="7">d</tspan> = A<tspan baseline-shift="sub" font-size="7">c</tspan>·c<tspan baseline-shift="sub" font-size="7">u</tspan> (base adhesion)
 d1f0edb	clay (cohesive)
-649b59f	=
 3a2969e	1. The governing horizontal load is unchanged
 061fbab	The horizontal load does not depend on the drainage condition of the soil beneath the base: H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·10.08 + 1.5·100 = <b>163.6 kN</b>
 a76fdd5	2. Sliding resistance — base adhesion
@@ -476,16 +437,6 @@ a76fdd5	2. Sliding resistance — base adhesion
 c2ee233	<b>Result:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; The undrained base adhesion is sufficient on its own (in the drained case the earth resistance was also needed).
 806e02b	Mini calculator — undrained
 68acc1a	WE11
-fd4ad5f	=
-e449f92	=
-e581e3e	=
-4c9ea20	E<tspan baseline-shift="sub" font-size="7">p</tspan> → R<tspan baseline-shift="sub" font-size="7">pd</tspan> (passive)
-09e5a7e	R<tspan baseline-shift="sub" font-size="7">d</tspan> (friction)
-7dda024	h<tspan baseline-shift="sub" font-size="7">GWL</tspan>=0.95m
-74252f8	t<tspan baseline-shift="sub" font-size="7">fill</tspan>=3.0m
-5dc9a9a	γ=19.5 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20.5 · φ=32° · c=0
-d17e53d	γ=19.5 · γ<tspan baseline-shift="sub" font-size="7">sat</tspan>=20.5 · φ=16° · c=40
-560b664	Pad footing (L = 1.45 m)
 0644a1a	1. Governing horizontal load — active earth pressure + column load
 95e863d	Horizontal column load: Q<sub>x,k</sub> = 250 kN. &nbsp; Coefficient of the active earth pressure acting on the foundation (sand fill): K<sub>a</sub> = tan²(45°−φ/2) = tan²(45°−16°) = <b>0.307</b>
 49c582d	The vertical geostatic stress over the height of the foundation (groundwater at the top of the foundation): σ′<sub>v,top</sub> = 19.5·2.05 = <b>39.98 kPa</b>; &nbsp; σ′<sub>v,bot</sub> = 39.98 + (20.5−10)·0.95 = <b>49.95 kPa</b>
@@ -623,3 +574,50 @@ f44d2cb	Undrained sliding resistance over the whole base area: R<sub>d</sub> = A
 8c5298c	R<sub>d</sub> + R<sub>p;d</sub> = 83.9 + 183.3 = <b>267.2 kN</b> &lt; H<sub>d</sub> = 400.65 kN
 712a699	<b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267.2 kN &lt; H<sub>d</sub> = 400.65 kN → <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.
 341318a	Precast foundation → δ = ⅔·φ. The base friction uses only the permanent vertical load. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.
+ca43d84	e<tspan dy="2.6" font-size="10">B</tspan><tspan dy="-2.6">&#160;&#160;&#160;in the B direction</tspan>
+8c96327	e<tspan dy="2.6" font-size="10">L</tspan><tspan dy="-2.6">&#160;&#160;&#160;in the L direction</tspan>
+51c9421	t<tspan dy="2.6" font-size="10">wd</tspan><tspan dy="-2.6">/B′</tspan>
+7d306be	γ<tspan dy="2.6" font-size="9">sat</tspan><tspan dy="-2.6">−γ</tspan><tspan dy="2.6" font-size="9">w</tspan>
+c54c3b3	γ<tspan dy="3" font-size="78%">b</tspan><tspan dy="-3">​</tspan> = 25 kN/m³
+71bd82d	G<tspan dy="3" font-size="78%">v,k</tspan><tspan dy="-3">​</tspan> = 220 kN/m
+1e0a28b	Q<tspan dy="3" font-size="78%">v,k</tspan><tspan dy="-3">​</tspan> = 70 kN/m
+94502d1	γ = 17 kN/m³
+aa91b25	φ = 30° · c = 10 kPa
+fb5a657	γ = 18 kN/m³
+a0d8ef0	φ = 24° · c = 12 kPa
+9cf4674	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 0.8 m
+b6eac16	G<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 250 kN/m
+19bf904	Q<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 170 kN/m
+242de90	G<tspan dy="3" font-size="78%">x,k</tspan><tspan dy="-3">​</tspan> = 30 kN/m
+24a78fb	h<tspan dy="3" font-size="78%">GWL</tspan><tspan dy="-3">​</tspan> = 0.6 m
+0e3fc9f	γ = 18 · γ<tspan dy="3" font-size="78%">sat</tspan><tspan dy="-3">​</tspan> = 19 kN/m³
+760b6ed	φ = 30° · c = 5 kPa
+6d0612c	γ = 18 · γ<tspan dy="3" font-size="78%">sat</tspan><tspan dy="-3">​</tspan> = 20 kN/m³
+c0e92cb	φ = 26° · c = 30 kPa
+73b7c45	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 1.1 m
+94c2028	t<tspan dy="3" font-size="78%">wd</tspan><tspan dy="-3">​</tspan> = 1.4 m
+5ceefa2	G<tspan dy="3" font-size="78%">x,k</tspan><tspan dy="-3">​</tspan> = 30 kN/m (reversed)
+db9444d	G<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 1000 kN
+7d9f354	Q<tspan dy="3" font-size="78%">x,k</tspan><tspan dy="-3">​</tspan> = 100 kN
+e31deeb	γ = 19 · γ<tspan dy="3" font-size="78%">sat</tspan><tspan dy="-3">​</tspan> = 20 kN/m³
+606df77	φ = 32° · c = 0 kPa
+d2e0a6e	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 1.5 m
+820dfb9	groundwater (at foundation level)
+b409b53	V<tspan dy="3" font-size="78%">d</tspan><tspan dy="-3">​</tspan> = 255 kN/m
+2e8890f	φ = 15° · c = 5 kPa
+978e017	φ = 30° · c = 0 kPa
+b5b17d8	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 1.65 m
+b2d67e8	G<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 320 kN
+83aa9f8	R<tspan dy="3" font-size="78%">d</tspan><tspan dy="-3">​</tspan> (base friction)
+8218059	φ = 28° · c = 0 kPa
+a857d30	R<tspan dy="3" font-size="78%">d</tspan><tspan dy="-3">​</tspan> (base adhesion)
+4312541	φ<tspan dy="3" font-size="78%">u</tspan><tspan dy="-3">​</tspan> = 0° · c<tspan dy="3" font-size="78%">u</tspan><tspan dy="-3">​</tspan> = 65 kPa
+95ef194	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 1.6 m
+09dfebf	G<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 490 kN
+3ad84f8	Q<tspan dy="3" font-size="78%">z,k</tspan><tspan dy="-3">​</tspan> = 610 kN
+e69e3da	Q<tspan dy="3" font-size="78%">x,k</tspan><tspan dy="-3">​</tspan> = 250 kN
+ef8f21b	E<tspan dy="3" font-size="78%">p</tspan><tspan dy="-3">​</tspan> → R<tspan dy="3" font-size="78%">p;d</tspan><tspan dy="-3">​</tspan> (passive)
+4907276	γ = 19.5 · γ<tspan dy="3" font-size="78%">sat</tspan><tspan dy="-3">​</tspan> = 20.5 kN/m³
+989e869	φ = 16° · c = 40 kPa
+6e637f7	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 3.0 m
+b9519d2	Pad footing (L = 1.45 m) · γ<tspan dy="3" font-size="78%">b</tspan><tspan dy="-3">​</tspan> = 25 kN/m³

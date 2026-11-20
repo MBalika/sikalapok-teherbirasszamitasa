@@ -140,7 +140,6 @@ de810af	1 m section examined
 852b64e	<line x1="${x0}" y1="${yS}" x2="${x1}" y2="${yS}" stroke="#8A7B5E" stroke-width="1.6"/><text x="${x0+4}" y="${yS-6}" font-size="10" fill="#6B6052">ground surface</text>
 ad9b30d	<line x1="${x0}" y1="${yw}" x2="${x1}" y2="${yw}" stroke="#1E78C8" stroke-width="1.6" stroke-dasharray="8,4"/><path d="M${x1-22},${yw-11} l8,11 l8,-11 z" fill="#1E78C8"/><text x="${x1-26}" y="${yw-4}" font-size="10" fill="#1E78C8" text-anchor="end">GWL ${F(S.gw,1)} m</text>
 8556168	<line x1="${x0}" y1="${yB}" x2="${x1}" y2="${yB}" stroke="#3D2A1A" stroke-width="0.9" stroke-dasharray="5,3"/><text x="${x1-4}" y="${yB+13}" font-size="9.5" fill="#3D2A1A" text-anchor="end">foundation base −${F(D,2)} m</text>
-1569606	<text x="${cx}" y="${yB+Math.abs(dy)+42}" font-size="10.5" font-weight="700" fill="#2E7D8A" text-anchor="middle">resultant at the foundation base: e<tspan baseline-shift="sub" font-size="7">B</tspan> = ${F(R.eB,2)} m (shifted in the direction of H) → B′ band</text>
 8a5bc85	<h4>Result</h4>
 6233711	Self-weight G<sub>f,k</sub> + G<sub>b,k</sub>
 6731917	G<sub>k</sub> permanent load
@@ -252,7 +251,6 @@ f489b7b	buttons on the left: the figure shows
 1a356d7	where the resistance comes from.
 e0c8c0e	depth of the mechanism: 
 cf5080e	run-out at the surface: 
-77d78fc	<span class="dfchip">0.5·γ·B·N_γ = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N_q = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N_c = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R_k/A′ = <b>${F(T.sum,0)} kPa</b></span>
 2601de7	section at mid-length; L = 
 9c8a370	 m perpendicular to the plane of the section
 7b2bd23	coloured end faces on the short sides: a slip surface and shear resistance develop here too
@@ -270,10 +268,6 @@ dcd84c1	f = H/(V + B·c·cot φ) =
 23ee266	Load-inclination factors
 96f6f32	The three terms with i [kPa]
 7f3db63	vertical: 
-9c24019	 kPa → inclined 
-e11711b	▼ groundwater at ground level (blue dashed line) → γ′ = γ − 10 kN/m³
-0ae8d78	overburden thickness D = 
-90362e4	the passive wedge has to lift this weight
 9ab7591	D = 0: no overburden, the depth term is zero
 0283a5c	The depth term grows linearly with D:
 fd21dcc	each metre of overburden adds γ′·N_q kPa
@@ -281,9 +275,6 @@ fd21dcc	each metre of overburden adds γ′·N_q kPa
 0f168e7	shear strength of the overburden
 8d2309c	(no d factor) — on the safe side.
 f59c51b	 kPa / m of overburden
-0f41782	<text x="${(px.x0+px.x1)/2}" y="${px.y1+30}" text-anchor="middle" font-size="11" fill="#6B6052">angle of shearing resistance φ</text><text x="14" y="${(px.y0+px.y1)/2}" text-anchor="middle" font-size="11" fill="#6B6052" transform="rotate(-90 14 ${(px.y0+px.y1)/2})">N factor (decimal scale)</text>
-f7db13d	higher edge: shorter spiral, smaller passive wedge
-ae2e38b	dashed: mechanism for a horizontal base
 4220897	lower edge
 9a403d5	α·tan φ = 
 3d8010c	(1 − α·tan φ)²
@@ -333,3 +324,10 @@ c8fe5d3	mixed foundation
 20d0cd4	=
 e144242	⏎        </details>⏎      </aside>⏎      <div class="kmain">⏎        <div class="kview">⏎          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D model</button><button type="button" class="kt" data-v="2d">2D section</button>⏎            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Reset view">⟲ view</button><button type="button" class="kbtn" id="k-spin" title="Automatic rotation">▶ rotate</button></div>⏎          <div class="kcanvas" id="k-cwrap"><canvas id="k-c3d"></canvas><div class="khint">drag with the mouse / your finger to rotate · scroll = zoom</div></div>⏎          <div class="k2d" id="k-svg" style="display:none"></div>⏎          <div class="kcap" id="k-cap"></div>⏎        </div>⏎        <div class="kchecks" id="k-tiles"></div>⏎        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (GEO)</button>⏎          <span class="ksp"></span><button type="button" class="kbtn" id="k-copy">⧉ copy calculation</button><button type="button" class="kbtn" id="k-print">⎙ print</button></div>⏎          <div class="ksteps" id="k-steps"></div></div>⏎      </div>⏎    </div>
 c3168e9	R<sub>p;d</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)
+04f3293	<text x="${cx}" y="${yB+Math.abs(dy)+42}" font-size="10.5" font-weight="700" fill="#2E7D8A" text-anchor="middle">resultant at the foundation base: e<tspan dy="2.5" font-size="7.5">B</tspan><tspan dy="-2.5"> = ${F(R.eB,2)} m (shifted in the direction of H) → B′ band</tspan></text>
+d02dbf8	→ inclined: 
+ef66898	▼ groundwater at ground level (blue dashed line) → γ′\u00A0=\u00A0γ\u00A0−\u00A010\u00A0kN/m³
+05a9712	the weight of the overburden (q′) loads the passive wedge: the failure has to lift this too
+fbac9a4	<text x="${(px.x0+px.x1)/2}" y="${px.y1+32}" text-anchor="middle" font-size="11" fill="#6B6052">angle of shearing resistance φ</text><text x="14" y="${(px.y0+px.y1)/2}" text-anchor="middle" font-size="11" fill="#6B6052" transform="rotate(-90 14 ${(px.y0+px.y1)/2})">N factor (decimal scale)</text>
+6a8ba72	solid: towards the higher edge a shorter spiral, a smaller passive wedge
+75b1912	dashed: mechanism for a horizontal base
