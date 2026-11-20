@@ -17,5 +17,6 @@ def polish(t):
 for k in (1, 0):
     m = ms[k]; t = polish(m.group(2))
     if k == 1: t = t.replace('viewBox="0 0 560 300"', 'viewBox="-28 0 588 300"')
+    if k == 0 and 'min-width' not in t: t = t.replace('<svg data-polished="1" ', '<svg data-polished="1" style="min-width:620px" ', 1)
     s = s[:m.start(2)] + t + s[m.end(2):]
 p.write_text(s, encoding='utf-8'); print('kész')

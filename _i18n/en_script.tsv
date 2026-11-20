@@ -202,7 +202,7 @@ a74af18	the load has reached the bearing resistance → failure
 996d58b	safety: 
 9954764	× (drained: 
 bd7bc73	settlement: 
-96345b6	increases with consolidation (in proportion to Δσ′)
+96345b6	grows with consolidation (as Δσ′ grows)
 db0183f	drag with the mouse to rotate
 90dfb8f	 mo
 008c072	bearing failure: 

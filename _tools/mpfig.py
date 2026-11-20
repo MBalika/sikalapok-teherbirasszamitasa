@@ -51,7 +51,7 @@ class Fig:
                 f'<pattern id="{p}dash" width="20" height="12" patternUnits="userSpaceOnUse"><path d="M2 4h7M12 10h6" stroke="#8A6C3F" stroke-width=".8" opacity=".45"/></pattern>'
                 f'<pattern id="{p}hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v10" stroke="#6E5C48" stroke-width=".8" opacity=".4"/></pattern>'
                 f'<pattern id="{p}conc" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M3 5l2 1M14 4l1 2M8 14l2-1M17 16l1 1M4 19l1-1" stroke="#7B848B" stroke-width=".8" opacity=".55"/></pattern></defs>')
-        return (f'<svg viewBox="0 0 {s.W} {s.H}" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif">' + defs + ''.join(s.g)
+        return (f'<svg viewBox="0 0 {s.W} {s.H}" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif"' + (' style="min-width:620px"' if s.W > 600 else '') + '>' + defs + ''.join(s.g)
                 + '<g paint-order="stroke" stroke="#fff" stroke-opacity=".78" stroke-width="2.8" stroke-linejoin="round">' + ''.join(s.t) + '</g></svg>')
 def m(v):
     """hossz méterben: legalább egy tizedes (1,0 m; 0,95 m)"""
@@ -81,6 +81,7 @@ def section(pid, sc, B, h, b, t, layers, loads, hload=None, gw=None, wdim=None, 
     if gw is not None:  # talajvíz: az alaptest mögött futó szaggatott vonal, a felirat a vonal fölött
         yw = Y(gw); obst.append(yw); F.line(X0, yw, X1, yw, WATER, 1.6, '9 5')
         F.add(f'<polygon points="{X0+34},{yw-11} {X0+48},{yw-11} {X0+41},{yw-1}" fill="{WATER}"/>'); F.text(X0 + 54, yw + 15 if hload and abs(yw - yT) < 1 else yw - 6, gwlabel, size=12, weight=700, fill=WATER)
+        if hload and abs(yw - yT) < 1: obst.append(yw + 12)
     F.add(f'<polygon points="{xl:.1f},{yT:.1f} {xr:.1f},{yT:.1f} {xr:.1f},{yB-dy:.1f} {xl:.1f},{yB+dy:.1f}" fill="#C9CDD1" stroke="{INK}" stroke-width="1.6"/>'
           f'<polygon points="{xl:.1f},{yT:.1f} {xr:.1f},{yT:.1f} {xr:.1f},{yB-dy:.1f} {xl:.1f},{yB+dy:.1f}" fill="url(#{pid}conc)"/>')
     F.add(f'<rect x="{wl:.1f}" y="{wt:.1f}" width="{wr-wl:.1f}" height="{yT-wt:.1f}" fill="#B4BABF" stroke="{INK}" stroke-width="1.4"/>')
