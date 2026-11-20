@@ -1,3 +1,7 @@
 _i18n/node_modules/
 _i18n/.en/
 _i18n/missing.tsv
+_i18n/unused.txt
+_i18n/carry.json
+_i18n/carry_auto.tsv
+_i18n/carry_todo.txt

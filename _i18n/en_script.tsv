@@ -76,7 +76,6 @@ d211026	the active earth pressure (${sub('E','a,k')}) as a permanent load in ${s
 ede7beb	variable load
 835d88b	bearing failure (GEO)
 be4fec7	sliding
-03c075a	⏎        </details>⏎      </aside>⏎      <div class="kmain">⏎        <div class="kview">⏎          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D model</button><button type="button" class="kt" data-v="2d">2D section</button>⏎            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Reset view">⟲ view</button><button type="button" class="kbtn" id="k-spin" title="Automatic rotation">▶ rotate</button></div>⏎          <div class="kcanvas" id="k-cwrap"><canvas id="k-c3d"></canvas><div class="khint">drag with the mouse / your finger to rotate · scroll = zoom</div></div>⏎          <div class="k2d" id="k-svg" style="display:none"></div>⏎          <div class="kcap" id="k-cap"></div>⏎        </div>⏎        <div class="kchecks" id="k-tiles"></div>⏎        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (EQU)</button>⏎          <span class="ksp"></span><button type="button" class="kbtn" id="k-copy">⧉ copy calculation</button><button type="button" class="kbtn" id="k-print">⎙ print</button></div>⏎          <div class="ksteps" id="k-steps"></div></div>⏎      </div>⏎    </div>
 c2fc506	 · new layer
 0f700a6	✓ copied
 e0e9d99	⧉ copy calculation
@@ -161,7 +160,6 @@ ee58167	<h4>Result (side B governs)</h4>
 b02ecf6	Effective width B′
 45e6043	<div class="verdict ok"><span class="big">B ≈ ${fmt(B,2)} m</span>required foundation width &nbsp;(B = B′ + 2·e<sub>B</sub>)</div>
 fa01e03	<h4>Result (sliding, drained)</h4>
-e7ef27e	R<sub>pd</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)
 5c04929	<h4>Result (sliding, undrained)</h4>
 dc657e3	<h4>Result (sliding + passive earth resistance)</h4>
 477afa5	δ = ⅔·φ → tan δ
@@ -333,3 +331,5 @@ df41d27	plastic zone
 9a690d6	deepened shallow foundation
 c8fe5d3	mixed foundation
 20d0cd4	=
+e144242	⏎        </details>⏎      </aside>⏎      <div class="kmain">⏎        <div class="kview">⏎          <div class="kvt"><button type="button" class="kt on" data-v="3d">3D model</button><button type="button" class="kt" data-v="2d">2D section</button>⏎            <span class="ksp"></span><button type="button" class="kbtn" id="k-vreset" title="Reset view">⟲ view</button><button type="button" class="kbtn" id="k-spin" title="Automatic rotation">▶ rotate</button></div>⏎          <div class="kcanvas" id="k-cwrap"><canvas id="k-c3d"></canvas><div class="khint">drag with the mouse / your finger to rotate · scroll = zoom</div></div>⏎          <div class="k2d" id="k-svg" style="display:none"></div>⏎          <div class="kcap" id="k-cap"></div>⏎        </div>⏎        <div class="kchecks" id="k-tiles"></div>⏎        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (GEO)</button>⏎          <span class="ksp"></span><button type="button" class="kbtn" id="k-copy">⧉ copy calculation</button><button type="button" class="kbtn" id="k-print">⎙ print</button></div>⏎          <div class="ksteps" id="k-steps"></div></div>⏎      </div>⏎    </div>
+c3168e9	R<sub>p;d</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)

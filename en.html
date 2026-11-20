@@ -500,10 +500,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
   <section class="subsection" id="b-utmutato">
     <h2>How to use this material</h2>
     <div class="panel">
-      <p>The top bar lets you switch between the <b>main chapters</b>, and the sub-menu that appears beneath it lets you move between the sections of a given chapter. Beyond the introduction, three content chapters build on one another:</p>
+      <p>The top bar lets you switch between the <b>main chapters</b>, and the sub-menu that appears beneath it lets you move between the sections of a given chapter. Beyond the introduction, five chapters build on one another:</p>
       <ol style="padding-left:22px;line-height:1.9">
         <li><b>The calculation procedure</b> — the design workflow, then the complete formula for the <b>bearing resistance</b> of a shallow foundation against bearing failure for the <b>drained</b> and <b>undrained</b> cases, the treatment of the effective foundation area and the groundwater, the verification of adequacy, and finally the <b>sliding check</b> (drained and undrained).</li>
-        <li><b>Worked examples</b> — <b>11 examples</b> reconstructed from the practical material and derived step by step: drained and undrained strip and pad footings, concentric and eccentric, vertical and inclined loads, the effect and depth of groundwater, the effect of the direction of the horizontal force, the required foundation width, and the <b>sliding check</b> (drained and undrained) with passive earth resistance.</li>
+        <li><b>Drained or undrained?</b> — why two calculations are needed: the role of pore water pressure, the difference between rapid and slow loading on an interactive 3D <b>silo-filling</b> model, a comparison of the two calculation cases, and the lesson of the Transcona grain elevator.</li>
+      <li><b>The terms of the formula</b> — rotatable 3D models show what the three terms of the formula express, together with the shape, load-inclination and base-inclination factors, the weight of the overburden and the N factors.</li>
+      <li><b>Worked examples</b> — <b>11 examples</b> reconstructed from the practical material and derived step by step: drained and undrained strip and pad footings, concentric and eccentric, vertical and inclined loads, the effect and depth of groundwater, the effect of the direction of the horizontal force, the required foundation width, and the <b>sliding check</b> (drained and undrained) with passive earth resistance.</li>
         <li><b>Calculator</b> — a multi-layer, interactive calculator: any number of soil layers, strip or pad footing, eccentric and horizontal loads, groundwater; the program computes the drained and the undrained design resistance R<sub>d</sub> and the sliding check at the same time, derived step by step. The model can be rotated in 3D, and the data of the worked examples can be loaded with one click.</li>
       </ol>
     </div>
@@ -584,7 +586,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           s<sub>q</sub> = 1 + (B′/L′)·sinφ<br>
           s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a strip footing (L ≫ B): s<sub>γ</sub> = s<sub>q</sub> = s<sub>c</sub> ≈ 1.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a strip footing (L ≫ B): s<sub>γ</sub> = s<sub>q</sub> = s<sub>c</sub> = 1.</p>
       </div>
       <div class="panel" style="margin:8px 0">
         <h4 style="margin-top:0;text-align:center">Load-inclination factors (i)</h4>
@@ -592,9 +594,9 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           i<sub>γ</sub> = (1 − f)<sup>m+1</sup><br>
           i<sub>q</sub> = (1 − f)<sup>m</sup><br>
           i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)<br>
-          f = R<sub>h</sub> / (R<sub>v</sub> + B′·L′·c·cotφ)
+          f = H<sub>k</sub> / (V<sub>k</sub> + B′·L′·c·cotφ)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a vertical load only, R<sub>h</sub> = 0 → f = 0 → i = 1.<br>m: for a strip footing m<sub>B</sub> ≈ 2, for a pad footing 1.5.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a vertical load only, H<sub>k</sub> = 0 → f = 0 → i = 1.<br>m: for a strip footing m<sub>B</sub> = 2, for a square pad footing 1.5.</p>
       </div>
       <div class="panel" style="margin:8px 0">
         <h4 style="margin-top:0;text-align:center">Base-inclination factors (b)</h4>
@@ -602,7 +604,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tanφ)²<br>
           b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tanφ)
         </div>
-        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a horizontal foundation base, α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
+        <p style="font-size:0.84rem;margin:0;color:var(--ink-mute)">For a horizontal foundation base, α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> = 1.</p>
       </div>
     </div>
     <h3>The load-inclination exponent (m)</h3>
@@ -622,7 +624,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <h3>2.2 Undrained case</h3>
     <p>The <b>undrained</b> case is typical of rapid loading / fine-grained (cohesive) soils: the shear strength of the soil is described by the undrained shear strength <span class="inline-math">c<sub>u</sub></span>, with <span class="inline-math">φ = 0</span>. Water buoyancy <b>must not</b> be taken into account — we work with total stresses.</p>
     <div class="callout formula" style="text-align:center;font-size:0.98rem">
-      σ<sub>t</sub> = R<sub>v</sub> / (B′·L′) = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> &nbsp;+&nbsp; q
+      σ<sub>t</sub> = R<sub>k</sub> / (B′·L′) = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> &nbsp;+&nbsp; q
     </div>
     <div class="grid c2">
       <div class="panel" style="margin:8px 0">
@@ -630,7 +632,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <div class="callout formula" style="margin:6px 0;font-size:0.85rem">
           s<sub>c</sub> = 1 + 0.2·(B′/L′)<br>
           b<sub>c</sub> = 1 − 2α/(π + 2)<br>
-          i<sub>c</sub> = 0.5·[1 + √(1 − R<sub>h</sub>/(A′·c<sub>u</sub>))]
+          i<sub>c</sub> = 0.5·[1 + √(1 − H<sub>k</sub>/(A′·c<sub>u</sub>))]
         </div>
         <p style="font-size:0.84rem;color:var(--ink-mute);margin:0">α must be entered in the formula in radians.</p>
       </div>
@@ -765,7 +767,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
   </section>
 
   <section class="subsection" id="me-5">
-    <h2>5. Sliding check (EQU)</h2>
+    <h2>5. Sliding check (GEO)</h2>
     <p>If the force acting on the foundation base has a <b>horizontal component</b> (it is not perpendicular to the base), the safety against <b>sliding</b> must be checked. The condition for adequacy is:</p>
     <div class="callout formula" style="text-align:center;font-size:1.04rem">
       H<sub>d</sub> &le; R<sub>d</sub> + R<sub>p;d</sub>
@@ -880,7 +882,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
         <div class="callout formula" style="font-size:.84rem;margin:8px 0">R<sub>k</sub>/A′ = 0.5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c′·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub></div>
         <ul class="bullet" style="font-size:.92rem">
           <li><b>Parameters:</b> c′ and φ′ (effective shear strength parameters); below the groundwater the unit weight is γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</li>
-          <li><b>Bearing resistance factors:</b> N<sub>q</sub> = e<sup>π·tan φ′</sup>·tan²(45° + φ′/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cot φ′, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tan φ′ — all three terms grow with the load and with the width.</li>
+          <li><b>Bearing resistance factors:</b> N<sub>q</sub> = e<sup>π·tan φ′</sup>·tan²(45° + φ′/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cot φ′, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tan φ′ — all three factors depend on φ′ alone and rise steeply with φ′.</li>
           <li><b>q′:</b> the <b>effective</b> overburden pressure of the soil above the foundation base; groundwater close by also reduces the γ′ term (t<sub>wd</sub>/B′ rule).</li>
           <li><b>When:</b> sand and gravel always; silt and clay in the long term.</li>
         </ul>
@@ -915,7 +917,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <h2>4. A famous case: the Transcona grain elevator, 1913</h2>
     <div class="task-card">
       <div class="task-head"><h3 style="margin-top:18px">What happens in the film really happened</h3><span class="task-num">Winnipeg, Canada</span></div>
-      <p>Filling of the Transcona grain elevator began in the autumn of 1913, straight after it was completed, and it was almost full <b>within a month</b>. Beneath the raft lay thick, soft, saturated clay. The fast filling created undrained conditions: the pore water could not escape, and the strength of the soil did not increase with the load. When the average contact pressure reached about <b>300 kPa</b>, the soil was pushed out on one side and heaved on the other, and within a few hours the building tilted by some <b>27°</b> — the reinforced concrete silo itself remained almost undamaged.</p>
+      <p>Filling of the Transcona grain elevator began in the autumn of 1913, straight after it was completed, and it was almost full <b>within a month</b>. Beneath the raft lay thick, soft, saturated clay. The fast filling created undrained conditions: the pore water could not escape, and the strength of the soil did not increase with the load. When the average contact pressure reached about <b>300 kPa</b>, the soil was pushed out on one side and heaved on the other, and within a single day the building tilted by some <b>27°</b> — the reinforced concrete silo itself remained almost undamaged.</p>
       <p>Decades later, the undrained bearing resistance back-calculated from c<sub>u</sub> values measured on soil samples showed <b>good agreement</b> with the actual failure pressure — this became one of the classic confirmations of the undrained (φ<sub>u</sub> = 0) bearing resistance calculation. The silo was later straightened by underpinning and remained in use for decades.</p>
       <div class="callout note" style="margin:10px 0 4px"><b>Lesson:</b> on saturated clay the <b>rate</b> of filling matters just as much as the magnitude of the load. The same silo, the same soil — filled slowly, in stages, the water would have escaped, the soil would have gained strength, and the silo would still be standing upright. The “In two stages, with a rest period” scenario shows exactly this.</div>
     </div>
@@ -985,7 +987,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <section class="subsection" id="kt-3">
     <h2>3. Load inclination: why does the bearing resistance decrease?</h2>
-    <p>If the resultant force is not perpendicular to the foundation base, the horizontal component <b>pushes the soil in the direction of H</b>: the mechanism becomes <b>one-sided and flatter</b>, the slip surface moves a smaller, shallower soil mass, and part of the friction angle is already “used up” by shear along the foundation base. Less soil resists → lower bearing resistance. This is what the <b>i factors</b> express: they are all less than 1, and they decrease rapidly as the H/V ratio grows. If δ reached φ, the result would no longer be bearing failure but <b>sliding</b> — that is the task of the EQU check; this is why the slider allows H/V only up to 0.9·tan φ, so that you always see the bearing failure mechanism.</p>
+    <p>If the resultant force is not perpendicular to the foundation base, the horizontal component <b>pushes the soil in the direction of H</b>: the mechanism becomes <b>one-sided and flatter</b>, the slip surface moves a smaller, shallower soil mass, and part of the friction angle is already “used up” by shear along the foundation base. Less soil resists → lower bearing resistance. This is what the <b>i factors</b> express: they are all less than 1, and they decrease rapidly as the H/V ratio grows. If δ reached φ, the result would no longer be bearing failure but <b>sliding</b> — that is the task of the sliding check; this is why the slider allows H/V only up to 0.9·tan φ, so that you always see the bearing failure mechanism.</p>
     <div class="panel">
       <div class="dfbar"><button type="button" class="kbtn" id="kp-play3">⏸ Pause</button><span class="ksp"></span><span class="kvt2" id="kp-vw3"><button type="button" class="kbtn on" data-v="3d">3D model</button><button type="button" class="kbtn" data-v="2d">2D section</button></span><button type="button" class="kbtn" id="kp-vr3" title="Reset view">⟲ view</button><button type="button" class="kbtn on" id="kp-spin3">▶ rotate</button></div>
       <div class="dfwrap">
@@ -1004,7 +1006,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <section class="subsection" id="kt-4">
     <h2>4. The depth term: the weight of the overburden</h2>
-    <p>The soil above the foundation base, the <b>overburden</b>, helps in two ways: its weight presses as a uniform surcharge on the passive wedge, which the failure <b>has to lift</b>, and its shear strength also resists the movement. The EC7 formula takes only the first into account: q′ = γ′·D (the shear strength of the overburden is neglected on the safe side, which is why there is no separate depth factor “d”). Drag the D slider: the overburden gets thicker, the q′·N<sub>q</sub> term increases linearly, and the passive wedge has to push out an ever larger mass. With groundwater the overburden is “lighter” (γ′ = γ − γ<sub>w</sub>), and the term is smaller.</p>
+    <p>The soil above the foundation base, the <b>overburden</b>, helps in two ways: its weight presses as a uniform surcharge on the passive wedge, which the failure <b>has to lift</b>, and its shear strength also resists the movement. The EC7 formula takes only the first into account: q′ = γ′·D (the shear strength of the overburden is neglected on the safe side, which is why there is no separate depth factor “d”). Drag the D slider: the overburden gets thicker, the q′·N<sub>q</sub> term increases linearly, and the passive wedge has to push out an ever larger mass. With groundwater the overburden is “lighter” (γ′ = γ<sub>sat</sub> − γ<sub>w</sub>), and the term is smaller.</p>
     <div class="panel">
       <div class="dfbar"><button type="button" class="kbtn" id="kp-play4">⏸ Pause</button><button type="button" class="kbtn" id="kp-gw4">groundwater at ground level</button><span class="ksp"></span><span class="kvt2" id="kp-vw4"><button type="button" class="kbtn on" data-v="3d">3D model</button><button type="button" class="kbtn" data-v="2d">2D section</button></span><button type="button" class="kbtn" id="kp-vr4" title="Reset view">⟲ view</button><button type="button" class="kbtn on" id="kp-spin4">▶ rotate</button></div>
       <div class="dfwrap">
@@ -1021,7 +1023,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <section class="subsection" id="kt-5">
     <h2>5. The N factors</h2>
-    <p>All three bearing resistance factors depend solely on φ and grow <b>exponentially</b> with φ — because of the logarithmic spiral. The chart shows them on a decimal (linear) scale: below 25° the curves are flat, above it they “take off” — from 30° to 40°, N<sub>γ</sub> more than triples. This is why φ should be determined carefully, and why it must not be “rounded”.</p>
+    <p>All three bearing resistance factors depend solely on φ and grow <b>exponentially</b> with φ — because of the logarithmic spiral. The chart shows them on a decimal (linear) scale: below 25° the curves are flat, above it they “take off” — from 30° to 40°, N<sub>γ</sub> increases more than fivefold. This is why φ should be determined carefully, and why it must not be “rounded”.</p>
     <div class="panel">
       <div class="sim" style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:center">
         <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px"><svg id="kp-svg5" viewBox="0 0 560 360" role="img" aria-label="N factors as a function of φ" style="width:100%;height:auto;display:block"></svg></div>
@@ -1045,7 +1047,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="dfsl"><label>Inclination of the foundation base α <span class="v" id="kp-v6al"></span></label><input type="range" id="kp-6al" min="0" max="15" step="1"></div>
           <div class="dfsl"><label>Angle of shearing resistance φ <span class="v" id="kp-v6phi"></span></label><input type="range" id="kp-6phi" min="10" max="40" step="1"></div>
           <div class="dfsl"><label>Cohesion c <span class="v" id="kp-v6c"></span></label><input type="range" id="kp-6c" min="0" max="30" step="1"></div>
-          <p class="knote">b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ), with α in radians (EC7 Annex D). On the model B = 2 m, D = 1 m; the foundation settles perpendicular to its base, and the mechanism is one-sided, towards the higher edge. For a small inclination (5°) the reduction is a few per cent; at 15° it is already 20–30%.</p>
+          <p class="knote">b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ), with α in radians (EC7 Annex D). On the model B = 2 m, D = 1 m; the foundation settles perpendicular to its base, and the mechanism is one-sided, towards the higher edge. For a small inclination (5°) the reduction is about 10%; at 15° it is already close to 30% (φ = 30°).</p>
         </div>
       </div>
     </div>
@@ -1066,7 +1068,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="task-head">
         <div>
           <h3>Task</h3>
-          <p style="margin:6px 0 0">Check the adequacy against bearing failure, in the drained case, of the <b>strip footing</b> (L&nbsp;≫&nbsp;B) shown in the figure. Loads: <b>G<sub>v,k</sub> = 220 kN/m</b>, <b>Q<sub>v,k</sub> = 70 kN/m</b> (concentric, vertical). Geometry: b = 0.3 m, B = 1.1 m, h = 0.6 m, with the foundation base 1.1 m below ground level. γ<sub>b</sub> = 25 kN/m³. The groundwater is deep. <b>sandy gravel fill:</b> γ = 17 kN/m³, φ = 30°, c = 10 kPa. <b>silty sand:</b> γ = 18 kN/m³, φ = 24°, c = 12 kPa.</p>
+          <p style="margin:6px 0 0">Check the adequacy against bearing failure, in the drained case, of the <b>strip footing</b> (L&nbsp;≫&nbsp;B) shown in the figure. Loads: <b>G<sub>v,k</sub> = 220 kN/m</b>, <b>Q<sub>v,k</sub> = 70 kN/m</b> (concentric, vertical). Geometry: b = 0.3 m, B = 1.1 m, h = 0.6 m, with the foundation base 1.1 m below ground level. γ<sub>b</sub> = 25 kN/m³. The groundwater is deep. <b>Sandy gravel fill:</b> γ = 17 kN/m³, φ = 30°, c = 10 kPa. <b>Silty sand:</b> γ = 18 kN/m³, φ = 24°, c = 12 kPa.</p>
         </div>
         <span class="task-num">WE1</span>
       </div>
@@ -1130,7 +1132,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>Weight of fill: G<sub>f,k</sub> = (B−b)·t·γ = (1.1−0.3)·0.5·17 = <b>6.8 kN/m</b></p>
       <p>Weight of the foundation: G<sub>b,k</sub> = B·h·γ<sub>b</sub> = 1.1·0.6·25 = <b>16.5 kN/m</b></p>
       <p>Permanent loads: G<sub>k</sub> = 220 + 6.8 + 16.5 = <b>243.3 kN/m</b></p>
-      <p>V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub> = 1.35·243.3 + 1.5·70 = <b>434 kN/m</b></p>
+      <p>V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub> = 1.35·243.3 + 1.5·70 = <b>433 kN/m</b></p>
     </div>
     <div class="step"><h4>2. Geometry and overburden pressure</h4>
       <p>Concentric load → B = B′, A′ = B′·L′ = 1.1 m²/m.</p>
@@ -1139,14 +1141,14 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     </div>
     <div class="step"><h4>3. Bearing resistance factors (φ = 24°)</h4>
       <p>N<sub>q</sub> = e<sup>π·tan24°</sup>·tan²(45°+12°) = <b>9.60</b>; &nbsp; N<sub>c</sub> = (N<sub>q</sub>−1)·cot24° = <b>19.32</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan24° = <b>7.66</b></p>
-      <p>Strip footing, concentric load, horizontal base → s = i = b ≈ 1.</p>
+      <p>Strip footing, concentric load, horizontal base → s = i = b = 1.</p>
     </div>
     <div class="step"><h4>4. Characteristic and design resistance</h4>
       <p>R<sub>k</sub>/A′ = 0.5·γ′·B′·N<sub>γ</sub> + q′·N<sub>q</sub> + c·N<sub>c</sub> = 0.5·18·1.1·7.66 + 19·9.60 + 12·19.32</p>
       <p>= 76 + 182 + 232 = <b>490 kPa</b></p>
       <p>R<sub>k</sub> = 490·1.1 = 539 kN/m → R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub> = 539/1.4 = <b>385 kN/m</b></p>
     </div>
-    <div class="callout fail"><b>Result (B = 1.1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 434 kN/m → <b>NOT ADEQUATE.</b></div>
+    <div class="callout fail"><b>Result (B = 1.1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 433 kN/m → <b>NOT ADEQUATE.</b></div>
     <div class="step"><h4>5. Remedy: widen the foundation — B = 1.3 m</h4>
       <p>New weights: G<sub>f,k</sub> = (1.3−0.3)·0.5·17 = 8.5; &nbsp; G<sub>b,k</sub> = 1.3·0.6·25 = 19.5 → G<sub>k</sub> = 248 → V<sub>d</sub> = 1.35·248 + 1.5·70 = <b>440 kN/m</b></p>
       <p>R<sub>k</sub>/A′ = 0.5·18·1.3·7.66 + 19·9.60 + 12·19.32 = 90 + 182 + 232 = 504 kPa</p>
@@ -1188,7 +1190,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     </div>
     <h3>Solution</h3>
     <div class="step"><h4>1. Action side</h4>
-      <p>Same as WE1: G<sub>k</sub> = 243.3 kN/m → V<sub>d</sub> = 1.35·243.3 + 1.5·70 = <b>434 kN/m</b></p>
+      <p>Same as WE1: G<sub>k</sub> = 243.3 kN/m → V<sub>d</sub> = 1.35·243.3 + 1.5·70 = <b>433 kN/m</b></p>
     </div>
     <div class="step"><h4>2. Overburden pressure (total stress!)</h4>
       <p>Undrained case → we work with <i>total</i> stresses; water buoyancy is not taken into account.</p>
@@ -1196,10 +1198,10 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     </div>
     <div class="step"><h4>3. Undrained resistance</h4>
       <p>Strip footing → s<sub>c</sub> = 1; horizontal base → b<sub>c</sub> = 1; vertical load → i<sub>c</sub> = 1.</p>
-      <p>σ<sub>t</sub> = R<sub>v</sub>/A′ = (2+π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q = (2+π)·150·1·1·1 + 19 = 771 + 19 = <b>790 kPa</b></p>
-      <p>R<sub>k</sub> = 790·1.1 = 869 kN/m → R<sub>d</sub> = 869/1.4 = <b>620 kN/m</b></p>
+      <p>σ<sub>t</sub> = R<sub>k</sub>/A′ = (2+π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q = (2+π)·150·1·1·1 + 19 = 771 + 19 = <b>790 kPa</b></p>
+      <p>R<sub>k</sub> = 790·1.1 = 869 kN/m → R<sub>d</sub> = 869/1.4 = <b>621 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 620 kN/m &gt; V<sub>d</sub> = 434 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; In the undrained state the stiff cohesive soil can carry the load even with a width of 1.1 m.</div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 621 kN/m &gt; V<sub>d</sub> = 433 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; In the undrained state the stiff cohesive soil can carry the load even with a width of 1.1 m.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp2')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1305,24 +1307,24 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="step"><h4>2. Eccentricity of the resultant force</h4>
       <p>Characteristic vertical load: V<sub>k</sub> = G<sub>z,k</sub>+G<sub>f,k</sub>+G<sub>b,k</sub>+Q<sub>z,k</sub> = 250+7.2+32.5+170 = <b>459.7 kN/m</b></p>
       <p>Horizontal load: H<sub>k</sub> = G<sub>x,k</sub> = <b>30 kN/m</b></p>
-      <p>Moment equation about the axis of the foundation base: e<sub>B,k</sub> = |(H<sub>k</sub>·h) − (Q<sub>z,k</sub>·e<sub>q</sub>)| / V<sub>k</sub> = |(30·1.0) − (170·0.3)| / 459.7 = 21/459.7 = <b>0.046 m</b></p>
-      <p>Effective width: B′ = B − 2·e<sub>B,k</sub> = 1.3 − 2·0.046 = <b>1.208 m</b>; &nbsp; A′ = 1.208 m²/m</p>
+      <p>Moment equation about the axis of the foundation base: e<sub>B,k</sub> = |(H<sub>k</sub>·h) − (Q<sub>z,k</sub>·e<sub>q</sub>)| / V<sub>k</sub> = |(30·1.0) − (170·0.3)| / 459.7 = 21/459.7 = <b>0.0457 m</b></p>
+      <p>Effective width: B′ = B − 2·e<sub>B,k</sub> = 1.3 − 2·0.0457 = <b>1.209 m</b>; &nbsp; A′ = 1.209 m²/m</p>
     </div>
     <div class="step"><h4>3. Overburden pressure and γ′ (water above the base)</h4>
       <p>q′ = Σγ′<sub>i</sub>·t<sub>i</sub> = 18·0.8 + (19−10)·0.3 + (20−10)·0.3 = <b>20.1 kPa</b></p>
       <p>Water above the base → t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b></p>
     </div>
     <div class="step"><h4>4. Factors (φ = 26°)</h4>
-      <p>N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; Strip footing → s ≈ 1; horizontal base → b ≈ 1.</p>
-      <p>f = H<sub>k</sub>/(V<sub>k</sub> + B′·L′·c·cotφ) = 30/(459.7 + 1.208·30·cot26°) = 30/534 = <b>0.0562</b></p>
+      <p>N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; Strip footing → s = 1; horizontal base → b = 1.</p>
+      <p>f = H<sub>k</sub>/(V<sub>k</sub> + B′·L′·c·cotφ) = 30/(459.7 + 1.209·30·cot26°) = 30/534 = <b>0.0562</b></p>
       <p>m<sub>B</sub> = 2 (strip footing) → i<sub>γ</sub> = (1−f)<sup>3</sup> = <b>0.841</b>; &nbsp; i<sub>q</sub> = (1−f)<sup>2</sup> = <b>0.891</b>; &nbsp; i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub>−1)/(N<sub>q</sub>−1) = <b>0.881</b></p>
     </div>
     <div class="step"><h4>5. Resistance</h4>
       <p>R<sub>k</sub>/A′ = 0.5·γ′·B′·N<sub>γ</sub>·i<sub>γ</sub> + q′·N<sub>q</sub>·i<sub>q</sub> + c·N<sub>c</sub>·i<sub>c</sub></p>
-      <p>= 0.5·10·1.208·10.59·0.841 + 20.1·11.85·0.891 + 30·22.25·0.881 ≈ 54 + 212 + 588 = <b>854 kPa</b></p>
-      <p>R<sub>k</sub> = 854·1.208 = 1031 kN/m → R<sub>d</sub> = 1031/1.4 = <b>736 kN/m</b></p>
+      <p>= 0.5·10·1.209·10.59·0.841 + 20.1·11.85·0.891 + 30·22.25·0.881 ≈ 54 + 212 + 588 = <b>854 kPa</b></p>
+      <p>R<sub>k</sub> = 854·1.209 = 1032 kN/m → R<sub>d</sub> = 1032/1.4 = <b>737 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 736 kN/m &gt; V<sub>d</sub> = 646.1 kN/m → <b>ADEQUATE.</b> ✓</div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 737 kN/m &gt; V<sub>d</sub> = 646.1 kN/m → <b>ADEQUATE.</b> ✓</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp3')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1430,22 +1432,22 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>V<sub>d</sub> = 1.35·289.7 + 1.5·170 = <b>646.1 kN/m</b> &nbsp;<span style="color:var(--ink-mute)">(the load does not depend on the groundwater)</span></p>
     </div>
     <div class="step"><h4>2. Eccentricity — unchanged</h4>
-      <p>e<sub>B,k</sub> = |H<sub>k</sub>·h − Q<sub>z,k</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.3|/459.7 = <b>0.046 m</b> → B′ = 1.3 − 2·0.046 = <b>1.208 m</b>; &nbsp; A′ = 1.208 m²/m</p>
+      <p>e<sub>B,k</sub> = |H<sub>k</sub>·h − Q<sub>z,k</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.3|/459.7 = <b>0.0457 m</b> → B′ = 1.3 − 2·0.0457 = <b>1.209 m</b>; &nbsp; A′ = 1.209 m²/m</p>
     </div>
     <div class="step"><h4>3. q′ and γ′ with the deeper groundwater — <u>this changes!</u></h4>
       <p>The groundwater is 1.4 m below the foundation base (t<sub>wd</sub> = 1.4 m), so there is <b>no water above the base</b> → q′ with the moist unit weights:</p>
       <p>q′ = 18·1.1 + 18·0.3 = <b>25.2 kPa</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 20.1 kPa)</span></p>
       <p>γ′ for the silty sand layer beneath the foundation: since 0.5·B′ &lt; t<sub>wd</sub> &lt; 1.5·B′ → <b>linear transition</b>:</p>
-      <p>γ′ = (20−10) + (18−(20−10))·(1.4/1.208 − 0.5) = 10 + 8·0.659 = <b>15.3 kN/m³</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 10 kN/m³)</span></p>
+      <p>γ′ = (20−10) + (18−(20−10))·(1.4/1.209 − 0.5) = 10 + 8·0.658 = <b>15.3 kN/m³</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 10 kN/m³)</span></p>
     </div>
     <div class="step"><h4>4. Factors (φ = 26°) — unchanged</h4>
-      <p>N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; f = 0.056 → i<sub>γ</sub> = 0.841; i<sub>q</sub> = 0.891; i<sub>c</sub> = 0.881. &nbsp; Strip footing → s ≈ 1.</p>
+      <p>N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; f = 0.056 → i<sub>γ</sub> = 0.841; i<sub>q</sub> = 0.891; i<sub>c</sub> = 0.881. &nbsp; Strip footing → s = 1.</p>
     </div>
     <div class="step"><h4>5. Resistance</h4>
-      <p>R<sub>k</sub>/A′ = 0.5·15.3·1.208·10.59·0.841 + 25.2·11.85·0.891 + 30·22.25·0.881 ≈ 82 + 266 + 588 = <b>936 kPa</b></p>
-      <p>R<sub>k</sub> = 936·1.208 = 1131 kN/m → R<sub>d</sub> = 1131/1.4 = <b>808 kN/m</b></p>
+      <p>R<sub>k</sub>/A′ = 0.5·15.3·1.209·10.59·0.841 + 25.2·11.85·0.891 + 30·22.25·0.881 ≈ 82 + 266 + 588 = <b>936 kPa</b></p>
+      <p>R<sub>k</sub> = 936·1.209 = 1131.6 kN/m → R<sub>d</sub> = 1131.6/1.4 = <b>808 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the deeper groundwater, R<sub>d</sub> <b>increased</b> (WE3: 736 → WE4: 808 kN/m): less buoyancy → larger γ′ and q′ → higher bearing resistance.</div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the deeper groundwater, R<sub>d</sub> <b>increased</b> (WE3: 737 → WE4: 808 kN/m): less buoyancy → larger γ′ and q′ → higher bearing resistance.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp4')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1541,16 +1543,16 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>e<sub>B</sub> (WE3) = |H<sub>k</sub>·h − Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.3|/459.7 = 21/459.7 = <b>0.046 m</b></p>
       <p>If the direction of G<sub>x</sub> is reversed, the two moments act in the <b>same direction</b>, so they <b>add up</b>:</p>
       <p>e<sub>B</sub> (reversed) = |H<sub>k</sub>·h + Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 + 170·0.3|/459.7 = 81/459.7 = <b>0.176 m</b></p>
-      <p>B′ = 1.3 − 2·0.176 = <b>0.948 m</b>; &nbsp; A′ = 0.948 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.208 m)</span></p>
+      <p>B′ = 1.3 − 2·0.176 = <b>0.948 m</b>; &nbsp; A′ = 0.948 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.209 m)</span></p>
     </div>
     <div class="step"><h4>3. q′, γ′ and the factors — unchanged</h4>
       <p>q′ = 20.1 kPa; γ′ = 10 kN/m³ (groundwater above the base); φ = 26° → N<sub>q</sub>=11.85, N<sub>c</sub>=22.25, N<sub>γ</sub>=10.59. The load magnitude is the same → i<sub>γ</sub>≈0.84, i<sub>q</sub>≈0.89, i<sub>c</sub>≈0.88.</p>
     </div>
     <div class="step"><h4>4. Resistance with the smaller B′</h4>
-      <p>R<sub>k</sub>/A′ = 0.5·10·0.948·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 42 + 211 + 585 = <b>839 kPa</b></p>
+      <p>R<sub>k</sub>/A′ = 0.5·10·0.948·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 42 + 211 + 586 = <b>839 kPa</b></p>
       <p>R<sub>k</sub> = 839·0.948 = 795 kN/m → R<sub>d</sub> = 795/1.4 = <b>568 kN/m</b></p>
     </div>
-    <div class="callout warn"><b>Result:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>NOT ADEQUATE!</b> &nbsp; Reversing G<sub>x</sub> <b>significantly reduces</b> R<sub>d</sub> (WE3: 736 → 568 kN/m): the two moments add up, the eccentricity grows (0.046 → 0.176 m), so the effective width B′ (and with it the bearing resistance) decreases.</div>
+    <div class="callout warn"><b>Result:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>NOT ADEQUATE!</b> &nbsp; Reversing G<sub>x</sub> <b>significantly reduces</b> R<sub>d</sub> (WE3: 737 → 568 kN/m): the two moments add up, the eccentricity grows (0.046 → 0.176 m), so the effective width B′ (and with it the bearing resistance) decreases.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp5')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1643,16 +1645,16 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="step"><h4>2. Eccentricity — <u>this grows!</u></h4>
       <p>Because of the larger e<sub>q</sub>, the moment of Q (170·0.5 = 85) is now <b>larger</b> than the moment of G<sub>x</sub> (30·1.0 = 30):</p>
       <p>e<sub>B</sub> = |H<sub>k</sub>·h − Q<sub>z</sub>·e<sub>q</sub>|/V<sub>k</sub> = |30·1.0 − 170·0.5|/459.7 = 55/459.7 = <b>0.120 m</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 0.046 m)</span></p>
-      <p>B′ = 1.3 − 2·0.120 = <b>1.06 m</b>; &nbsp; A′ = 1.06 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.208 m)</span></p>
+      <p>B′ = 1.3 − 2·0.120 = <b>1.06 m</b>; &nbsp; A′ = 1.06 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.209 m)</span></p>
     </div>
     <div class="step"><h4>3. q′, γ′ and the factors — unchanged</h4>
       <p>q′ = 20.1 kPa; γ′ = 10 kN/m³; φ = 26° → N<sub>q</sub>=11.85, N<sub>c</sub>=22.25, N<sub>γ</sub>=10.59; i<sub>γ</sub>≈0.84, i<sub>q</sub>≈0.89, i<sub>c</sub>≈0.88.</p>
     </div>
     <div class="step"><h4>4. Resistance with the smaller B′</h4>
-      <p>R<sub>k</sub>/A′ = 0.5·10·1.06·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 47 + 212 + 587 = <b>845 kPa</b></p>
-      <p>R<sub>k</sub> = 845·1.06 = 896 kN/m → R<sub>d</sub> = 896/1.4 = <b>640 kN/m</b></p>
+      <p>R<sub>k</sub>/A′ = 0.5·10·1.06·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 47 + 212 + 587 = <b>846 kPa</b></p>
+      <p>R<sub>k</sub> = 846·1.06 = 897 kN/m → R<sub>d</sub> = 897/1.4 = <b>641 kN/m</b></p>
     </div>
-    <div class="callout warn"><b>Result:</b> R<sub>d</sub> = 640 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>only just NOT ADEQUATE!</b> &nbsp; Because of the larger eccentricity, R<sub>d</sub> <b>decreased</b> (WE3: 736 → WE6: 640 kN/m): larger e<sub>q</sub> → larger e<sub>B</sub> → smaller effective width (B′) → lower bearing resistance.</div>
+    <div class="callout warn"><b>Result:</b> R<sub>d</sub> = 641 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>only just NOT ADEQUATE!</b> &nbsp; Because of the larger eccentricity, R<sub>d</sub> <b>decreased</b> (WE3: 737 → WE6: 641 kN/m): larger e<sub>q</sub> → larger e<sub>B</sub> → smaller effective width (B′) → lower bearing resistance.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp6')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1670,7 +1672,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>c cohesion (kPa)</label><input type="number" id="mp6-c" value="30" step="1"></div>
           <div class="cr"><label>G<sub>x,k</sub> horizontal force (kN/m)</label><input type="number" id="mp6-Gx" value="30" step="5"></div>
         </div>
-        <p class="calc-note">Set the e<sub>q</sub> field to 0.3 to see the WE3 case (R<sub>d</sub> = 736). Constants: b=0.3; h=1.0; t=0.4 m; γ<sub>fill</sub>=18; γ<sub>b</sub>=25 kN/m³; strip footing.</p>
+        <p class="calc-note">Set the e<sub>q</sub> field to 0.3 to see the WE3 case (R<sub>d</sub> = 737). Constants: b=0.3; h=1.0; t=0.4 m; γ<sub>fill</sub>=18; γ<sub>b</sub>=25 kN/m³; strip footing.</p>
         <div class="calc-results" id="mp6-res"></div>
       </div>
     </div>
@@ -1745,7 +1747,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
     <h3>Solution</h3>
     <div class="step"><h4>1–2. Loads and eccentricity — unchanged</h4>
-      <p>V<sub>d</sub> = <b>646.1 kN/m</b>; &nbsp; e<sub>B</sub> = 0.046 m → B′ = <b>1.208 m</b> (as in WE3).</p>
+      <p>V<sub>d</sub> = <b>646.1 kN/m</b>; &nbsp; e<sub>B</sub> = 0.0457 m → B′ = <b>1.209 m</b> (as in WE3).</p>
     </div>
     <div class="step"><h4>3. q′, γ′ and the i factors — unchanged</h4>
       <p>q′ = 20.1 kPa; γ′ = 10 kN/m³; φ = 26° → N<sub>q</sub>=11.85, N<sub>c</sub>=22.25, N<sub>γ</sub>=10.59; i<sub>γ</sub>≈0.84, i<sub>q</sub>≈0.89, i<sub>c</sub>≈0.88.</p>
@@ -1755,10 +1757,10 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ) = 0.917 − 0.083/10.86 = <b>0.909</b></p>
     </div>
     <div class="step"><h4>5. Resistance with the b factors</h4>
-      <p>R<sub>k</sub>/A′ = 54·0.917 + 212·0.917 + 588·0.909 ≈ 49 + 195 + 535 = <b>779 kPa</b></p>
-      <p>R<sub>k</sub> = 779·1.208 = 941 kN/m → R<sub>d</sub> = 941/1.4 = <b>672 kN/m</b></p>
+      <p>R<sub>k</sub>/A′ = 53.8·0.917 + 212.3·0.917 + 588.0·0.909 ≈ 49.3 + 194.6 + 534.5 = <b>778 kPa</b></p>
+      <p>R<sub>k</sub> = 778.4·1.209 = 941 kN/m → R<sub>d</sub> = 941/1.4 = <b>672 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the inclined base, R<sub>d</sub> <b>decreases</b> (WE3: 736 → WE7: 672 kN/m): the b &lt; 1 base-inclination factors reduce all three terms — but the margin is still sufficient, so the foundation is adequate.</div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the inclined base, R<sub>d</sub> <b>decreases</b> (WE3: 737 → WE7: 672 kN/m): the b &lt; 1 base-inclination factors reduce all three terms — but the margin is still sufficient, so the foundation is adequate.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp7')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1777,7 +1779,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>G<sub>x,k</sub> horizontal force (kN/m)</label><input type="number" id="mp7-Gx" value="30" step="5"></div>
           <div class="cr"><label>α base inclination (°)</label><input type="number" id="mp7-alpha" value="5" step="1"></div>
         </div>
-        <p class="calc-note">Set α to 0 to see the WE3 case (R<sub>d</sub> = 736). The base-inclination factors: b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ).</p>
+        <p class="calc-note">Set α to 0 to see the WE3 case (R<sub>d</sub> = 737). The base-inclination factors: b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ).</p>
         <div class="calc-results" id="mp7-res"></div>
       </div>
     </div>
@@ -1869,23 +1871,23 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     </div>
     <div class="step"><h4>2. Eccentricity of the resultant force</h4>
       <p>V<sub>k</sub> = G<sub>k</sub> = 1110.5 kN; &nbsp; H<sub>k</sub> = Q<sub>x,k</sub> = 100 kN</p>
-      <p>e<sub>B</sub> = (H<sub>k</sub>·h)/V<sub>k</sub> = (100·1.2)/1110.5 = <b>0.11 m</b>; &nbsp; e<sub>L</sub> = 0</p>
-      <p>B′ = 2.0 − 2·0.11 = <b>1.78 m</b>; &nbsp; L′ = 1.5 m; &nbsp; A′ = 1.78·1.5 = <b>2.67 m²</b></p>
+      <p>e<sub>B</sub> = (H<sub>k</sub>·h)/V<sub>k</sub> = (100·1.2)/1110.5 = <b>0.108 m</b>; &nbsp; e<sub>L</sub> = 0</p>
+      <p>B′ = 2.0 − 2·0.108 = <b>1.784 m</b>; &nbsp; L′ = 1.5 m; &nbsp; A′ = 1.784·1.5 = <b>2.676 m²</b></p>
     </div>
     <div class="step"><h4>3. q′ and γ′ (with groundwater)</h4>
       <p>q′ = 18·1.0 + (19−10)·0.5 + (20−10)·0.1 = 18 + 4.5 + 1.0 = <b>23.5 kPa</b></p>
       <p>Water above the base → t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b></p>
     </div>
     <div class="step"><h4>4. Bearing resistance factors (sandy gravel: φ = 32°, c = 0)</h4>
-      <p>N<sub>q</sub> = 23.17; N<sub>c</sub> = 35.48; N<sub>γ</sub> = 27.71. &nbsp; Horizontal base → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> ≈ 1.</p>
+      <p>N<sub>q</sub> = 23.18; N<sub>c</sub> = 35.49; N<sub>γ</sub> = 27.72. &nbsp; Horizontal base → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> = 1.</p>
     </div>
     <div class="step"><h4>5. Checking both directions</h4>
-      <p><b>Side B</b> (weakened by Q<sub>x</sub> — governing): s<sub>γ</sub>=0.64, s<sub>q</sub>=1.63, s<sub>c</sub>=1.66; &nbsp; f = H<sub>k</sub>/V<sub>k</sub> = 0.09 → i<sub>γ</sub>=0.793, i<sub>q</sub>=0.871, i<sub>c</sub>=0.865.</p>
-      <p>R<sub>k</sub>/A′ = 0.5·10·1.78·27.71·0.64·0.793 + 23.5·23.17·1.63·0.871 + 0 = 125 + 773 + 0 = <b>898 kPa</b></p>
-      <p>R<sub>k,B</sub> = 898·2.67 = 2398 kN → R<sub>d,B</sub> = 2398/1.4 = <b>1713 kN</b></p>
-      <p><b>Side L:</b> s<sub>γ</sub>=0.75, s<sub>q</sub>=1.46, s<sub>c</sub>=1.48; the horizontal load is parallel to B, so in the L direction i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. Hence <b>side B</b> governs.</p>
+      <p><b>Side B</b> (weakened by Q<sub>x</sub> — governing): s<sub>γ</sub>=0.64, s<sub>q</sub>=1.63, s<sub>c</sub>=1.66; &nbsp; f = H<sub>k</sub>/V<sub>k</sub> = 0.09; m<sub>B</sub> = (2 + B′/L′)/(1 + B′/L′) = 1.46 → i<sub>γ</sub>=0.793, i<sub>q</sub>=0.872, i<sub>c</sub>=0.866.</p>
+      <p>R<sub>k</sub>/A′ = 0.5·10·1.784·27.72·0.643·0.793 + 23.5·23.18·1.630·0.872 + 0 = 126 + 774 + 0 = <b>900 kPa</b></p>
+      <p>R<sub>k,B</sub> = 900·2.676 = 2408 kN → R<sub>d,B</sub> = 2408/1.4 = <b>1720 kN</b></p>
+      <p><b>Side L:</b> s<sub>γ</sub>=0.75, s<sub>q</sub>=1.45, s<sub>c</sub>=1.47; the horizontal load is parallel to B, so in the L direction i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. Hence <b>side B</b> governs.</p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1713 kN &gt; V<sub>d</sub> = 1499 kN → <b>ADEQUATE.</b> ✓ &nbsp; Side B governs, because the horizontal Q<sub>x</sub> is parallel to this direction (i &lt; 1).</div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1720 kN &gt; V<sub>d</sub> = 1499 kN → <b>ADEQUATE.</b> ✓ &nbsp; Side B governs, because the horizontal Q<sub>x</sub> is parallel to this direction (i &lt; 1).</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp8')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
@@ -1970,7 +1972,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>The bearing Layer 2: φ = 30°, c = 0; t<sub>wd</sub>/B′ &lt; 0.5 → γ′ = γ<sub>sat</sub> − γ<sub>w</sub> = 20 − 10 = <b>10 kN/m³</b></p>
     </div>
     <div class="step"><h4>3. Bearing resistance factors (φ = 30°)</h4>
-      <p>N<sub>q</sub> = e<sup>π·tan φ</sup>·tan²(45°+φ/2) = <b>18.40</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan φ = <b>20.09</b>. &nbsp; Strip footing → s ≈ 1; concentric (no inclined load) → i ≈ 1; c = 0 → the cohesion term vanishes.</p>
+      <p>N<sub>q</sub> = e<sup>π·tan φ</sup>·tan²(45°+φ/2) = <b>18.40</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan φ = <b>20.09</b>. &nbsp; Strip footing → s = 1; vertical load (no horizontal force) → i = 1; c = 0 → the cohesion term vanishes.</p>
     </div>
     <div class="step"><h4>4. The bearing resistance formula — now B′ is the unknown</h4>
       <p>R<sub>k</sub>/B′ = 0.5·B′·γ′·N<sub>γ</sub> + q′·N<sub>q</sub> &nbsp;→&nbsp; 0 = 0.5·γ′·N<sub>γ</sub>·(B′)² + q′·N<sub>q</sub>·B′ − R<sub>k</sub></p>
@@ -2002,12 +2004,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <!-- ===== MP10 (elcsúszás, drénezett) ===== -->
   <section class="subsection" id="s-mp10">
-    <h2>Worked Example 10 — Sliding check (EQU, drained)</h2>
+    <h2>Worked Example 10 — Sliding check (GEO, drained)</h2>
     <div class="task-card">
       <div class="task-head">
         <div>
           <h3>Task</h3>
-          <p style="margin:6px 0 0">Check the adequacy of the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) shown in the figure against <b>horizontal sliding</b> (EQU limit state, drained case). Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads (characteristic): <b>G<sub>z,k</sub> = 320 kN</b> vertical (including the self-weight of the foundation and the soil) and <b>Q<sub>x,k</sub> = 100 kN</b> horizontal column load. The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 0 kPa; <b>silty sand:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 28°, c = 0 kPa. The condition for adequacy: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.</p>
+          <p style="margin:6px 0 0">Check the adequacy of the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) shown in the figure against <b>horizontal sliding</b> (GEO limit state, drained case). Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads (characteristic): <b>G<sub>z,k</sub> = 320 kN</b> vertical (including the self-weight of the foundation and the soil) and <b>Q<sub>x,k</sub> = 100 kN</b> horizontal column load. The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 0 kPa; <b>silty sand:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 28°, c = 0 kPa. The condition for adequacy: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.</p>
         </div>
         <span class="task-num">WE10</span>
       </div>
@@ -2094,21 +2096,21 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="step"><h4>2. Sliding resistance — base friction</h4>
       <p>R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub>, &nbsp; where V′<sub>k</sub> = G<sub>z,k</sub> = 320 kN (includes the self-weight of the foundation and the soil).</p>
       <p>Cast-in-situ reinforced-concrete foundation → δ<sub>k</sub> = φ = 28° → tan δ<sub>k</sub> = <b>0.532</b>; &nbsp; γ<sub>R;h</sub> = 1.1</p>
-      <p>R<sub>d</sub> = (320·0.532)/1.1 = <b>155 kN</b> &nbsp; <span style="color:var(--ink-mute)">→ R<sub>d</sub> = 155 &lt; H<sub>d</sub> = 163.6, so on its own it is <b>not enough</b>.</span></p>
+      <p>R<sub>d</sub> = (320·0.532)/1.1 = <b>154.7 kN</b> &nbsp; <span style="color:var(--ink-mute)">→ R<sub>d</sub> = 154.7 &lt; H<sub>d</sub> = 163.6, so on its own it is <b>not enough</b>.</span></p>
     </div>
     <div class="step"><h4>3. Adding earth resistance (at-rest earth pressure)</h4>
-      <p>R<sub>pd</sub> from at-rest or passive earth pressure? On the safe side we use the <b>at-rest</b> earth pressure: K<sub>0</sub> = 1 − sin φ.</p>
-      <p>The resultant at-rest earth pressure E<sub>0,k</sub> = <b>15.1 kN</b> &nbsp;→&nbsp; R<sub>pd</sub> = E<sub>0,k</sub>/γ<sub>R;h</sub> = 15.1/1.1 = <b>13.7 kN</b></p>
+      <p>R<sub>p;d</sub> from at-rest or passive earth pressure? On the safe side we use the <b>at-rest</b> earth pressure: K<sub>0</sub> = 1 − sin φ.</p>
+      <p>The resultant at-rest earth pressure E<sub>0,k</sub> = <b>15.1 kN</b> &nbsp;→&nbsp; R<sub>p;d</sub> = E<sub>0,k</sub>/γ<sub>R;h</sub> = 15.1/1.1 = <b>13.7 kN</b></p>
     </div>
     <div class="step"><h4>4. Adequacy</h4>
-      <p>R<sub>d</sub> + R<sub>pd</sub> = 155 + 13.7 = <b>168.7 kN</b> &gt; H<sub>d</sub> = 163.6 kN</p>
+      <p>R<sub>d</sub> + R<sub>p;d</sub> = 154.7 + 13.7 = <b>168.4 kN</b> &gt; H<sub>d</sub> = 163.6 kN</p>
     </div>
-    <div class="callout success"><b>Result:</b> R<sub>d</sub> + R<sub>pd</sub> = 168.7 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Note: if the “passive”/at-rest soil may disappear or be affected by frost, its resistance must not be taken into account.</span></div>
+    <div class="callout success"><b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 168.4 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Note: if the “passive”/at-rest soil may disappear or be affected by frost, its resistance must not be taken into account.</span></div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp10')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
     <div class="calc" id="calc-mp10">
-      <div class="calc-head"><h3>WE10 — sliding check (drained)</h3><span class="calc-tag" style="background:var(--moss)">EQU</span></div>
+      <div class="calc-head"><h3>WE10 — sliding check (drained)</h3><span class="calc-tag" style="background:var(--moss)">GEO · sliding</span></div>
       <div class="calc-body">
         <div class="cgrid">
           <div class="cr"><label>V′<sub>k</sub> vertical load (kN)</label><input type="number" id="mp10-Vk" value="320" step="10"></div>
@@ -2118,7 +2120,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>γ<sub>R;h</sub> resistance factor</label><input type="number" id="mp10-gR" value="1.1" step="0.05"></div>
           <div class="cr"><label>E<sub>0,k</sub> at-rest earth pressure (kN)</label><input type="number" id="mp10-E0" value="15.1" step="0.5"></div>
         </div>
-        <p class="calc-note">Cast-in-situ reinforced-concrete foundation → δ = φ. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>pd</sub>. The at-rest earth pressure (R<sub>pd</sub>) may be relied upon only if the soil is certain not to heave and cannot be removed.</p>
+        <p class="calc-note">Cast-in-situ reinforced-concrete foundation → δ = φ. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>. The at-rest earth pressure (R<sub>p;d</sub>) may be relied upon only if the soil is certain not to freeze and cannot be removed.</p>
         <div class="calc-results" id="mp10-res"></div>
       </div>
     </div>
@@ -2176,24 +2178,24 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>The horizontal load does not depend on the drainage condition of the soil beneath the base: H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·10.08 + 1.5·100 = <b>163.6 kN</b></p>
     </div>
     <div class="step"><h4>2. Sliding resistance — base adhesion</h4>
-      <p>R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub> / γ<sub>R;h</sub>, &nbsp; where A<sub>c</sub> = B·L = 2.0·1.5 = 3.0 m², &nbsp; c<sub>u,k</sub> = 65 kPa, &nbsp; γ<sub>R;h</sub> = 1.1.</p>
+      <p>R<sub>d</sub> = A<sub>c</sub>·c<sub>u;k</sub> / γ<sub>R;h</sub>, &nbsp; where A<sub>c</sub> = B·L = 2.0·1.5 = 3.0 m², &nbsp; c<sub>u;k</sub> = 65 kPa, &nbsp; γ<sub>R;h</sub> = 1.1.</p>
       <p>R<sub>d</sub> = (2.0·1.5·65)/1.1 = <b>177 kN</b> &nbsp;<span style="color:var(--ink-mute)">(the whole base area is mobilised; no earth resistance is needed)</span></p>
     </div>
     <div class="callout success"><b>Result:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; The undrained base adhesion is sufficient on its own (in the drained case the earth resistance was also needed).</div>
 
     <h3>Mini calculator — undrained</h3>
     <div class="calc" id="calc-mp10u">
-      <div class="calc-head"><h3>WE10.5 — sliding check (undrained)</h3><span class="calc-tag" style="background:var(--moss)">EQU</span></div>
+      <div class="calc-head"><h3>WE10 — sliding check (undrained)</h3><span class="calc-tag" style="background:var(--moss)">GEO · sliding</span></div>
       <div class="calc-body">
         <div class="cgrid">
           <div class="cr"><label>B width (m)</label><input type="number" id="mp10u-B" value="2.0" step="0.1"></div>
           <div class="cr"><label>Q<sub>x,k</sub> horizontal column load (kN)</label><input type="number" id="mp10u-Qx" value="100" step="5"></div>
           <div class="cr"><label>L length (m)</label><input type="number" id="mp10u-L" value="1.5" step="0.1"></div>
           <div class="cr"><label>E<sub>a,k</sub> active earth pressure (kN)</label><input type="number" id="mp10u-Ea" value="10.08" step="0.5"></div>
-          <div class="cr"><label>c<sub>u,k</sub> base adhesion (kPa)</label><input type="number" id="mp10u-cu" value="65" step="5"></div>
+          <div class="cr"><label>c<sub>u;k</sub> base adhesion (kPa)</label><input type="number" id="mp10u-cu" value="65" step="5"></div>
           <div class="cr"><label>γ<sub>R;h</sub> resistance factor</label><input type="number" id="mp10u-gR" value="1.1" step="0.05"></div>
         </div>
-        <p class="calc-note">Undrained sliding resistance over the whole base area: R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub>/γ<sub>R;h</sub>. Condition: H<sub>d</sub> ≤ R<sub>d</sub>.</p>
+        <p class="calc-note">Undrained sliding resistance over the whole base area: R<sub>d</sub> = A<sub>c</sub>·c<sub>u;k</sub>/γ<sub>R;h</sub>. Condition: H<sub>d</sub> ≤ R<sub>d</sub>.</p>
         <div class="calc-results" id="mp10u-res"></div>
       </div>
     </div>
@@ -2201,12 +2203,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 
   <!-- ===== MP11 (elcsúszás + passzív földellenállás) ===== -->
   <section class="subsection" id="s-mp11">
-    <h2>Worked Example 11 — Sliding with passive earth resistance (EQU, drained)</h2>
+    <h2>Worked Example 11 — Sliding with passive earth resistance (GEO, drained)</h2>
     <div class="task-card">
       <div class="task-head">
         <div>
           <h3>Task</h3>
-          <p style="margin:6px 0 0">Check the adequacy of the <b>pad footing</b> (B = 0.95 m, L = 1.45 m) shown in the figure against horizontal sliding (EQU, drained). h = 0.95 m; t = 2.05 m; t<sub>fill</sub> = 3.0 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 490 kN</b> (permanent) and <b>Q<sub>z,k</sub> = 610 kN</b> (variable) vertical, plus <b>Q<sub>x,k</sub> = 250 kN</b> horizontal; e<sub>b</sub> = 0.04 m. The vertical loads include the weight of the foundation and of the soil lying above it. The groundwater is 0.95 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 32°, c = 0 kPa; <b>silt:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 16°, c = 40 kPa. Between the foundation and the soil, <b>δ = ⅔·φ</b> is to be used.</p>
+          <p style="margin:6px 0 0">Check the adequacy of the <b>pad footing</b> (B = 0.95 m, L = 1.45 m) shown in the figure against horizontal sliding (GEO, drained). h = 0.95 m; t = 2.05 m; t<sub>fill</sub> = 3.0 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 490 kN</b> (permanent) and <b>Q<sub>z,k</sub> = 610 kN</b> (variable) vertical, plus <b>Q<sub>x,k</sub> = 250 kN</b> horizontal; e<sub>b</sub> = 0.04 m. The vertical loads include the weight of the foundation and of the soil lying above it. The groundwater is 0.95 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 32°, c = 0 kPa; <b>silt:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 16°, c = 40 kPa. Between the foundation and the soil, <b>δ = ⅔·φ</b> is to be used.</p>
         </div>
         <span class="task-num">WE11</span>
       </div>
@@ -2303,22 +2305,22 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     </div>
     <div class="step"><h4>2. Base friction resistance</h4>
       <p>Only the <b>permanent</b> vertical load contributes: V′<sub>k</sub> = G<sub>z,k</sub> = 490 kN (on the safe side, the variable Q<sub>z,k</sub> and the cohesion at the base are neglected).</p>
-      <p>Precast foundation → δ<sub>k</sub> = ⅔·φ = ⅔·16° = 10.67° → tan δ<sub>k</sub> = <b>0.189</b>; &nbsp; γ<sub>R;h</sub> = 1.1</p>
-      <p>R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub> = (490·0.189)/1.1 = <b>84.2 kN</b></p>
+      <p>Precast foundation → δ<sub>k</sub> = ⅔·φ = ⅔·16° = 10.67° → tan δ<sub>k</sub> = <b>0.1883</b>; &nbsp; γ<sub>R;h</sub> = 1.1</p>
+      <p>R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub> = (490·0.1883)/1.1 = <b>83.9 kN</b></p>
     </div>
-    <div class="step"><h4>3. Passive earth resistance on the back face of the foundation</h4>
+    <div class="step"><h4>3. Passive earth resistance on the front face of the foundation</h4>
       <p>K<sub>p</sub> = tan²(45°+φ/2) = tan²(45°+16°) = <b>3.255</b>. &nbsp; The passive stress: σ′<sub>h,p</sub> = K<sub>p</sub>·σ′<sub>v</sub> → <b>130.12</b> and <b>162.59 kPa</b>.</p>
-      <p>E<sub>p,k</sub> = (130.12+162.59)/2·h·L = 146.35·0.95·1.45 = <b>201.6 kN</b> &nbsp;→&nbsp; R<sub>pd</sub> = E<sub>p,k</sub>/γ<sub>R;h</sub> = 201.6/1.1 = <b>183.27 kN</b></p>
+      <p>E<sub>p,k</sub> = (130.12+162.59)/2·h·L = 146.35·0.95·1.45 = <b>201.6 kN</b> &nbsp;→&nbsp; R<sub>p;d</sub> = E<sub>p,k</sub>/γ<sub>R;h</sub> = 201.6/1.1 = <b>183.3 kN</b></p>
     </div>
     <div class="step"><h4>4. Sliding check</h4>
-      <p>R<sub>d</sub> + R<sub>pd</sub> = 84.2 + 183.27 = <b>267.47 kN</b> &lt; H<sub>d</sub> = 400.65 kN</p>
+      <p>R<sub>d</sub> + R<sub>p;d</sub> = 83.9 + 183.3 = <b>267.2 kN</b> &lt; H<sub>d</sub> = 400.65 kN</p>
     </div>
-    <div class="callout fail"><b>Result:</b> R<sub>d</sub> + R<sub>pd</sub> = 267.47 kN &lt; H<sub>d</sub> = 400.65 kN → <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.</div>
+    <div class="callout fail"><b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267.2 kN &lt; H<sub>d</sub> = 400.65 kN → <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.</div>
 
     <h3>Mini calculator</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp11')">⚙ Load the data into the multi-layer calculator (3D)</button></p>
     <div class="calc" id="calc-mp11">
-      <div class="calc-head"><h3>WE11 — sliding + passive earth resistance</h3><span class="calc-tag" style="background:var(--moss)">EQU</span></div>
+      <div class="calc-head"><h3>WE11 — sliding + passive earth resistance</h3><span class="calc-tag" style="background:var(--moss)">GEO · sliding</span></div>
       <div class="calc-body">
         <div class="cgrid">
           <div class="cr"><label>G<sub>z,k</sub> permanent vertical (kN)</label><input type="number" id="mp11-Gz" value="490" step="10"></div>
@@ -2328,7 +2330,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
           <div class="cr"><label>E<sub>p,k</sub> passive earth resistance (kN)</label><input type="number" id="mp11-Ep" value="201.6" step="5"></div>
           <div class="cr"><label>γ<sub>R;h</sub> resistance factor</label><input type="number" id="mp11-gR" value="1.1" step="0.05"></div>
         </div>
-        <p class="calc-note">Precast foundation → δ = ⅔·φ. The base friction uses only the permanent vertical load. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>pd</sub>.</p>
+        <p class="calc-note">Precast foundation → δ = ⅔·φ. The base friction uses only the permanent vertical load. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.</p>
         <div class="calc-results" id="mp11-res"></div>
       </div>
     </div>
@@ -2368,12 +2370,12 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <h3>Bearing resistance (GEO)</h3>
       <ul class="bullet">
         <li>The bearing resistance is calculated with the shear strength of the <b>layer below the foundation base</b> (φ, c, or c<sub>u</sub>), without averaging. The effective overburden pressure q′ (the total q in the undrained case) follows from the whole layer sequence and the groundwater: γ above the water, γ<sub>sat</sub> − γ<sub>w</sub> below it (γ<sub>sat</sub> for total stress). γ′ depends on the ratio t<sub>wd</sub>/B′: ≤ 0.5 → γ<sub>sat</sub> − γ<sub>w</sub>; ≥ 1.5 → γ; linear transition in between.</li>
-        <li>Bearing resistance factors: N<sub>q</sub> = e<sup>π·tanφ</sup>·tan²(45° + φ/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cotφ, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tanφ. Shape factors for a pad footing with the ratio B′/L′ (s<sub>γ</sub> = 1 − 0.3·B′/L′, s<sub>q</sub> = 1 + (B′/L′)·sinφ, s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)), where B is the direction of H<sub>B</sub> — the convention of the worked examples; for a strip footing s = 1.</li>
+        <li>Bearing resistance factors: N<sub>q</sub> = e<sup>π·tanφ</sup>·tan²(45° + φ/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cotφ, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tanφ. Shape factors for a pad footing with the ratio B′/L′ (s<sub>γ</sub> = 1 − 0.3·B′/L′, s<sub>q</sub> = 1 + (B′/L′)·sinφ, s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)), where B′ is always the smaller and L′ the larger effective side (EC7); for a strip footing s = 1.</li>
         <li>Load inclination with the <b>resultant of H</b>, using characteristic values: f = H/(V<sub>k</sub> + A′·c·cotφ). The exponent depends on the direction of H (EC7 Annex D): m<sub>B</sub> = (2 + B′/L′)/(1 + B′/L′), m<sub>L</sub> = (2 + L′/B′)/(1 + L′/B′), m = m<sub>L</sub>·cos²θ + m<sub>B</sub>·sin²θ, where cosθ = H<sub>L</sub>/H and sinθ = H<sub>B</sub>/H (m = 2 for a strip footing). i<sub>γ</sub> = (1 − f)<sup>m+1</sup>, i<sub>q</sub> = (1 − f)<sup>m</sup>, i<sub>c</sub> = (i<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1).</li>
         <li>Inclination of the foundation base (α): b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tanφ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tanφ), with α in radians.</li>
         <li>Drained: R<sub>k</sub>/A′ = 0.5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub>; R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub>. Undrained (if the layer below the base has a c<sub>u</sub>): σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q, where s<sub>c</sub> = 1 + 0.2·B′/L′, b<sub>c</sub> = 1 − 2α/(π + 2), i<sub>c</sub> = 0.5·[1 + √(1 − H/(A′·c<sub>u</sub>))]; R<sub>d</sub> = σ<sub>t</sub>·A′/γ<sub>R</sub>. Adequate if V<sub>d</sub> ≤ R<sub>d</sub>.</li>
       </ul>
-      <h3>Sliding (EQU)</h3>
+      <h3>Sliding (GEO)</h3>
       <ul class="bullet">
         <li>The active earth pressure acts on the front face of the foundation, of height h and width L (1 m for a strip footing); it is obtained with effective stresses, layer by layer, with the coefficient K<sub>a</sub> = tan²(45° − φ/2) (the water pressure is balanced on the two sides). When switched on, it is added to H<sub>d</sub> as a permanent load: H<sub>d</sub> = γ<sub>H</sub>·H + γ<sub>G</sub>·E<sub>a,k</sub>, where H is the resultant of the horizontal forces — on the safe side, the earth pressure is taken into account at full value, regardless of direction.</li>
         <li>Base friction is provided only by the permanent vertical load (V′<sub>k</sub> = G<sub>k</sub> including self-weight), and cohesion is neglected: R<sub>d</sub> = V′<sub>k</sub>·tanδ / γ<sub>R;h</sub>, δ = φ (cast in situ) or ⅔·φ (precast), with the φ of the layer below the base.</li>
@@ -2691,7 +2693,7 @@ const KALK = (function(){
           <div class="kcap" id="k-cap"></div>
         </div>
         <div class="kchecks" id="k-tiles"></div>
-        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (EQU)</button>
+        <div class="kdet"><div class="kvt"><button type="button" class="kt on" data-d="dr">Bearing resistance — drained</button><button type="button" class="kt" data-d="ud">Bearing resistance — undrained</button><button type="button" class="kt" data-d="sl">Sliding (GEO)</button>
           <span class="ksp"></span><button type="button" class="kbtn" id="k-copy">⧉ copy calculation</button><button type="button" class="kbtn" id="k-print">⎙ print</button></div>
           <div class="ksteps" id="k-steps"></div></div>
       </div>
@@ -2801,7 +2803,7 @@ const KALK = (function(){
     $('tiles').innerHTML=
       row('dr','bearing resistance','Drained case',`${sub('R','d')} = ${F(R.Rd,0)}${u}`,R.okDr?'≥':'&lt;',`${sub('V','d')} = ${F(R.Vd,0)}${u}`,R.okDr,R.utilDr)+
       row('ud','bearing resistance','Undrained case',`${sub('R','d')} = ${F(R.RdU,0)}${u}`,R.okUd?'≥':'&lt;',`${sub('V','d')} = ${F(R.Vd,0)}${u}`,R.okUd,R.utilUd,R.hasCu)+
-      row('sl','sliding','EQU',`${sub('R','d')} + ${sub('R','p;d')} = ${F(R.RsumS,0)}${u}`,R.okSl?'≥':'&lt;',`${sub('H','d')} = ${F(R.HdS,0)}${u}`,R.okSl,R.utilSl);
+      row('sl','sliding','GEO',`${sub('R','d')} + ${sub('R','p;d')} = ${F(R.RsumS,0)}${u}`,R.okSl?'≥':'&lt;',`${sub('H','d')} = ${F(R.HdS,0)}${u}`,R.okSl,R.utilSl);
     $('tiles').querySelectorAll('.kchk').forEach(d=>d.addEventListener('click',()=>{ S.detail=d.dataset.d; document.querySelectorAll('.kt[data-d]').forEach(x=>x.classList.toggle('on',x.dataset.d===S.detail)); const R2=compute(); renderTiles(R2); renderSteps(R2); }));
   }
   function step(n,t){ return `<div class="kst"><b>${n}.</b> ${t}</div>`; }
@@ -3108,7 +3110,7 @@ function calcMP1(){
     rr('G<sub>k</sub> permanent load', fmt(Gk,1)+' kN/m',true)+
     rr('V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
     rr('N<sub>q</sub> / N<sub>c</sub> / N<sub>γ</sub> (φ='+fmt(phi,0)+'°)', fmt(N.Nq,2)+' / '+fmt(N.Nc,2)+' / '+fmt(N.Ng,2),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>k</sub> = R<sub>k</sub>/A′ · B', fmt(Rk,0)+' kN/m',true)+
     rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
@@ -3140,7 +3142,7 @@ function calcMP3(){
     rr('e<sub>B</sub> eccentricity → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
@@ -3159,7 +3161,7 @@ function calcMP4(){
     rr('e<sub>B</sub> eccentricity → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
@@ -3178,7 +3180,7 @@ function calcMP5(){
     rr('e<sub>B</sub> = |H·h + Q·e<sub>q</sub>|/V<sub>k</sub> → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
@@ -3197,7 +3199,7 @@ function calcMP6(){
     rr('e<sub>B</sub> = |H·h − Q·e<sub>q</sub>|/V<sub>k</sub> → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
@@ -3216,7 +3218,7 @@ function calcMP7(){
     rr('e<sub>B</sub> → B′', fmt(eB,3)+' m → B′ = '+fmt(Bp,3)+' m',true)+
     rr('b<sub>γ</sub> / b<sub>q</sub> / b<sub>c</sub> (α='+fmt(alpha,0)+'°)', fmt(bg,3)+' / '+fmt(bq,3)+' / '+fmt(bc,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
-    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,0)+' + '+fmt(td,0)+' + '+fmt(tc,0)+' = '+fmt(RkA,0)+' kPa',true)+
+    rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
@@ -3258,9 +3260,9 @@ function calcMP10(){
   document.getElementById('mp10-res').innerHTML='<h4>Result (sliding, drained)</h4>'+
     rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
     rr('R<sub>d</sub> = V′<sub>k</sub>·tg δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
-    rr('R<sub>pd</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)', fmt(Rpd,1)+' kN',true)+
-    rr('R<sub>d</sub> + R<sub>pd</sub>', fmt(tot,1)+' kN',true)+
-    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>pd</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
+    rr('R<sub>p;d</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)', fmt(Rpd,1)+' kN',true)+
+    rr('R<sub>d</sub> + R<sub>p;d</sub>', fmt(tot,1)+' kN',true)+
+    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>p;d</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
 }
 function calcMP10u(){
   const B=num('mp10u-B'),L=num('mp10u-L'),cu=num('mp10u-cu'),gR=num('mp10u-gR'),Qx=num('mp10u-Qx'),Ea=num('mp10u-Ea');
@@ -3268,7 +3270,7 @@ function calcMP10u(){
   document.getElementById('mp10u-res').innerHTML='<h4>Result (sliding, undrained)</h4>'+
     rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
     rr('A<sub>c</sub> = B·L', fmt(Ac,2)+' m²',true)+
-    rr('R<sub>d</sub> = A<sub>c</sub>·c<sub>u,k</sub> / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
+    rr('R<sub>d</sub> = A<sub>c</sub>·c<sub>u;k</sub> / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
     `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub> = ${fmt(Rd,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
 }
 function calcMP11(){
@@ -3279,9 +3281,9 @@ function calcMP11(){
     rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
     rr('δ = ⅔·φ → tan δ', fmt(delta,2)+'° → '+fmt(tgd,3),true)+
     rr('R<sub>d</sub> = G<sub>z,k</sub>·tg δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
-    rr('R<sub>pd</sub> = E<sub>p,k</sub> / γ<sub>R;h</sub>', fmt(Rpd,1)+' kN',true)+
-    rr('R<sub>d</sub> + R<sub>pd</sub>', fmt(tot,1)+' kN',true)+
-    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>pd</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
+    rr('R<sub>p;d</sub> = E<sub>p,k</sub> / γ<sub>R;h</sub>', fmt(Rpd,1)+' kN',true)+
+    rr('R<sub>d</sub> + R<sub>p;d</sub>', fmt(tot,1)+' kN',true)+
+    `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>p;d</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
 }
 [['mp1',calcMP1],['mp2',calcMP2],['mp3',calcMP3],['mp4',calcMP4],['mp5',calcMP5],['mp6',calcMP6],['mp7',calcMP7],['mp8',calcMP8],['mp9',calcMP9],['mp10',calcMP10],['mp10u',calcMP10u],['mp11',calcMP11]].forEach(([p,fn])=>{
   bindCalc(p,fn); fn();
