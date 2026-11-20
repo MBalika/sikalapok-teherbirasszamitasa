@@ -266,7 +266,6 @@ e64017e	4. Characteristic and design resistance
 8d37d0c	New weights: G<sub>f,k</sub> = (1.3−0.3)·0.5·17 = 8.5; &nbsp; G<sub>b,k</sub> = 1.3·0.6·25 = 19.5 → G<sub>k</sub> = 248 → V<sub>d</sub> = 1.35·248 + 1.5·70 = <b>440 kN/m</b>
 517bdff	R<sub>k</sub>/A′ = 0.5·18·1.3·7.66 + 19·9.60 + 12·19.32 = 90 + 182 + 232 = 504 kPa
 953ee59	R<sub>k</sub> = 504·1.3 = 655 → R<sub>d</sub> = 655/1.4 = <b>468 kN/m</b>
-6d3da54	<b>Result (B = 1.3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m → <b>ADEQUATE.</b> ✓
 7d41766	Mini calculator
 1b2e5a8	⚙ Load the data into the multi-layer calculator (3D)
 dbc02dd	WE1 — checking a drained strip footing
@@ -293,7 +292,6 @@ b94bbe0	undrained
 041b138	c<sub>u</sub> undrained shear str. (kPa)
 6a88e49	Constants (for self-weight): b = 0.3; h = 0.6; t = 0.5 m; γ<sub>fill</sub> = 17; γ<sub>b</sub> = 25 kN/m³; total stress (φ = 0)
 9cb3efe	Worked Example 3 — Eccentric and inclined load, with groundwater
-c56d5ba	Check the <b>strip footing</b> in the drained case. Loads: <b>G<sub>z,k</sub> = 250 kN/m</b> (concentric), <b>Q<sub>z,k</sub> = 170 kN/m</b> applied eccentrically (e<sub>q</sub> = 0.3 m), and a horizontal force of <b>G<sub>x,k</sub> = 30 kN/m</b>. Geometry: b = 0.3 m, B = 1.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. The groundwater is 0.6 m above the foundation base.<br><b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa. <b>silty sand:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa.
 79786dc	WE3
 3f75bcb	groundwater
 fa7c0a9	sand fill
@@ -434,7 +432,6 @@ d1f0edb	clay (cohesive)
 061fbab	The horizontal load does not depend on the drainage condition of the soil beneath the base: H<sub>d</sub> = γ<sub>G</sub>·E<sub>a,k</sub> + γ<sub>Q</sub>·Q<sub>x,k</sub> = 1.35·10.08 + 1.5·100 = <b>163.6 kN</b>
 a76fdd5	2. Sliding resistance — base adhesion
 67072ba	R<sub>d</sub> = (2.0·1.5·65)/1.1 = <b>177 kN</b> &nbsp;<span style="color:var(--ink-mute)">(the whole base area is mobilised; no earth resistance is needed)</span>
-c2ee233	<b>Result:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; The undrained base adhesion is sufficient on its own (in the drained case the earth resistance was also needed).
 806e02b	Mini calculator — undrained
 68acc1a	WE11
 0644a1a	1. Governing horizontal load — active earth pressure + column load
@@ -507,16 +504,12 @@ eb870a3	All three bearing resistance factors depend solely on φ and grow <b>exp
 4e14f62	b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ), with α in radians (EC7 Annex D). On the model B = 2 m, D = 1 m; the foundation settles perpendicular to its base, and the mechanism is one-sided, towards the higher edge. For a small inclination (5°) the reduction is about 10%; at 15° it is already close to 30% (φ = 30°).
 373552b	Check the adequacy against bearing failure, in the drained case, of the <b>strip footing</b> (L&nbsp;≫&nbsp;B) shown in the figure. Loads: <b>G<sub>v,k</sub> = 220 kN/m</b>, <b>Q<sub>v,k</sub> = 70 kN/m</b> (concentric, vertical). Geometry: b = 0.3 m, B = 1.1 m, h = 0.6 m, with the foundation base 1.1 m below ground level. γ<sub>b</sub> = 25 kN/m³. The groundwater is deep. <b>Sandy gravel fill:</b> γ = 17 kN/m³, φ = 30°, c = 10 kPa. <b>Silty sand:</b> γ = 18 kN/m³, φ = 24°, c = 12 kPa.
 828269e	=
-8bfb323	Check the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) against bearing failure in the drained case. Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 1000 kN</b> (concentric) and a horizontal force <b>Q<sub>x,k</sub> = 100 kN</b> (parallel to side B). The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa; <b>sandy gravel:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 32°, c = 0 kPa. Since the horizontal load “weakens” the longer side, <b>both directions (B and L) must be checked</b>.
 db73ce8	<b>Side B</b> (weakened by Q<sub>x</sub> — governing): s<sub>γ</sub>=0.64, s<sub>q</sub>=1.63, s<sub>c</sub>=1.66; &nbsp; f = H<sub>k</sub>/V<sub>k</sub> = 0.09; m<sub>B</sub> = (2 + B′/L′)/(1 + B′/L′) = 1.46 → i<sub>γ</sub>=0.793, i<sub>q</sub>=0.872, i<sub>c</sub>=0.866.
 b23ba3c	N<sub>q</sub> = e<sup>π·tan φ</sup>·tan²(45°+φ/2) = <b>18.40</b>; &nbsp; N<sub>γ</sub> = 2·(N<sub>q</sub>−1)·tan φ = <b>20.09</b>. &nbsp; Strip footing → s = 1; vertical load (no horizontal force) → i = 1; c = 0 → the cohesion term vanishes.
 d75086f	Worked Example 10 — Sliding check (GEO, drained)
-bd32c55	Check the adequacy of the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) shown in the figure against <b>horizontal sliding</b> (GEO limit state, drained case). Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads (characteristic): <b>G<sub>z,k</sub> = 320 kN</b> vertical (including the self-weight of the foundation and the soil) and <b>Q<sub>x,k</sub> = 100 kN</b> horizontal column load. The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 0 kPa; <b>silty sand:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 28°, c = 0 kPa. The condition for adequacy: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.
-f329526	<b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 168.4 kN &gt; H<sub>d</sub> = 163.6 kN → <b>ADEQUATE.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Note: if the “passive”/at-rest soil may disappear or be affected by frost, its resistance must not be taken into account.</span>
 7271e9f	GEO · sliding
 f4eef9e	Cast-in-situ reinforced-concrete foundation → δ = φ. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>. The at-rest earth pressure (R<sub>p;d</sub>) may be relied upon only if the soil is certain not to freeze and cannot be removed.
 b4c04df	Worked Example 11 — Sliding with passive earth resistance (GEO, drained)
-9040ded	Check the adequacy of the <b>pad footing</b> (B = 0.95 m, L = 1.45 m) shown in the figure against horizontal sliding (GEO, drained). h = 0.95 m; t = 2.05 m; t<sub>fill</sub> = 3.0 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 490 kN</b> (permanent) and <b>Q<sub>z,k</sub> = 610 kN</b> (variable) vertical, plus <b>Q<sub>x,k</sub> = 250 kN</b> horizontal; e<sub>b</sub> = 0.04 m. The vertical loads include the weight of the foundation and of the soil lying above it. The groundwater is 0.95 m above the foundation base (h<sub>GWL</sub>). <b>sand fill:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 32°, c = 0 kPa; <b>silt:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 16°, c = 40 kPa. Between the foundation and the soil, <b>δ = ⅔·φ</b> is to be used.
 7725381	3. Passive earth resistance on the front face of the foundation
 4cf3817	Bearing resistance factors: N<sub>q</sub> = e<sup>π·tanφ</sup>·tan²(45° + φ/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·cotφ, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tanφ. Shape factors for a pad footing with the ratio B′/L′ (s<sub>γ</sub> = 1 − 0.3·B′/L′, s<sub>q</sub> = 1 + (B′/L′)·sinφ, s<sub>c</sub> = (s<sub>q</sub>·N<sub>q</sub> − 1)/(N<sub>q</sub> − 1)), where B′ is always the smaller and L′ the larger effective side (EC7); for a strip footing s = 1.
 8899dd0	Sliding (GEO)
@@ -526,40 +519,32 @@ b4c04df	Worked Example 11 — Sliding with passive earth resistance (GEO, draine
 1054cc4	For a horizontal foundation base, α = 0° → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> = 1.
 1865ff5	V<sub>d</sub> = γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k</sub> = 1.35·243.3 + 1.5·70 = <b>433 kN/m</b>
 71f3674	Strip footing, concentric load, horizontal base → s = i = b = 1.
-5e6f6b3	<b>Result (B = 1.1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 433 kN/m → <b>NOT ADEQUATE.</b>
 94b197b	Same as WE1: G<sub>k</sub> = 243.3 kN/m → V<sub>d</sub> = 1.35·243.3 + 1.5·70 = <b>433 kN/m</b>
 48651fa	R<sub>k</sub> = 790·1.1 = 869 kN/m → R<sub>d</sub> = 869/1.4 = <b>621 kN/m</b>
-d9787d9	<b>Result:</b> R<sub>d</sub> = 621 kN/m &gt; V<sub>d</sub> = 433 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; In the undrained state the stiff cohesive soil can carry the load even with a width of 1.1 m.
 5866dd2	Moment equation about the axis of the foundation base: e<sub>B,k</sub> = |(H<sub>k</sub>·h) − (Q<sub>z,k</sub>·e<sub>q</sub>)| / V<sub>k</sub> = |(30·1.0) − (170·0.3)| / 459.7 = 21/459.7 = <b>0.0457 m</b>
 35e57ec	Effective width: B′ = B − 2·e<sub>B,k</sub> = 1.3 − 2·0.0457 = <b>1.209 m</b>; &nbsp; A′ = 1.209 m²/m
 51b080f	N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; Strip footing → s = 1; horizontal base → b = 1.
 c1e13c9	f = H<sub>k</sub>/(V<sub>k</sub> + B′·L′·c·cotφ) = 30/(459.7 + 1.209·30·cot26°) = 30/534 = <b>0.0562</b>
 49e6e9a	= 0.5·10·1.209·10.59·0.841 + 20.1·11.85·0.891 + 30·22.25·0.881 ≈ 54 + 212 + 588 = <b>854 kPa</b>
 4c26c5b	R<sub>k</sub> = 854·1.209 = 1032 kN/m → R<sub>d</sub> = 1032/1.4 = <b>737 kN/m</b>
-bf84295	<b>Result:</b> R<sub>d</sub> = 737 kN/m &gt; V<sub>d</sub> = 646.1 kN/m → <b>ADEQUATE.</b> ✓
 823a32a	γ′ = (20−10) + (18−(20−10))·(1.4/1.209 − 0.5) = 10 + 8·0.658 = <b>15.3 kN/m³</b> &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 10 kN/m³)</span>
 eac6b5f	N<sub>q</sub> = 11.85; N<sub>c</sub> = 22.25; N<sub>γ</sub> = 10.59. &nbsp; f = 0.056 → i<sub>γ</sub> = 0.841; i<sub>q</sub> = 0.891; i<sub>c</sub> = 0.881. &nbsp; Strip footing → s = 1.
 39be126	R<sub>k</sub>/A′ = 0.5·15.3·1.209·10.59·0.841 + 25.2·11.85·0.891 + 30·22.25·0.881 ≈ 82 + 266 + 588 = <b>936 kPa</b>
 1571591	R<sub>k</sub> = 936·1.209 = 1131.6 kN/m → R<sub>d</sub> = 1131.6/1.4 = <b>808 kN/m</b>
-07d4f00	<b>Result:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the deeper groundwater, R<sub>d</sub> <b>increased</b> (WE3: 737 → WE4: 808 kN/m): less buoyancy → larger γ′ and q′ → higher bearing resistance.
 99eaa3b	B′ = 1.3 − 2·0.176 = <b>0.948 m</b>; &nbsp; A′ = 0.948 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.209 m)</span>
 8f6d191	R<sub>k</sub>/A′ = 0.5·10·0.948·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 42 + 211 + 586 = <b>839 kPa</b>
-35cd2fe	<b>Result:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>NOT ADEQUATE!</b> &nbsp; Reversing G<sub>x</sub> <b>significantly reduces</b> R<sub>d</sub> (WE3: 737 → 568 kN/m): the two moments add up, the eccentricity grows (0.046 → 0.176 m), so the effective width B′ (and with it the bearing resistance) decreases.
 5a37c5e	B′ = 1.3 − 2·0.120 = <b>1.06 m</b>; &nbsp; A′ = 1.06 m²/m &nbsp;<span style="color:var(--ink-mute)">(in WE3 it was 1.209 m)</span>
 693c0cc	R<sub>k</sub>/A′ = 0.5·10·1.06·10.59·0.84 + 20.1·11.85·0.89 + 30·22.25·0.88 ≈ 47 + 212 + 587 = <b>846 kPa</b>
 044c76b	R<sub>k</sub> = 846·1.06 = 897 kN/m → R<sub>d</sub> = 897/1.4 = <b>641 kN/m</b>
-423b422	<b>Result:</b> R<sub>d</sub> = 641 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>only just NOT ADEQUATE!</b> &nbsp; Because of the larger eccentricity, R<sub>d</sub> <b>decreased</b> (WE3: 737 → WE6: 641 kN/m): larger e<sub>q</sub> → larger e<sub>B</sub> → smaller effective width (B′) → lower bearing resistance.
 9251841	Set the e<sub>q</sub> field to 0.3 to see the WE3 case (R<sub>d</sub> = 737). Constants: b=0.3; h=1.0; t=0.4 m; γ<sub>fill</sub>=18; γ<sub>b</sub>=25 kN/m³; strip footing.
 6de061f	V<sub>d</sub> = <b>646.1 kN/m</b>; &nbsp; e<sub>B</sub> = 0.0457 m → B′ = <b>1.209 m</b> (as in WE3).
 8dc007f	R<sub>k</sub>/A′ = 53.8·0.917 + 212.3·0.917 + 588.0·0.909 ≈ 49.3 + 194.6 + 534.5 = <b>778 kPa</b>
 2e4128a	R<sub>k</sub> = 778.4·1.209 = 941 kN/m → R<sub>d</sub> = 941/1.4 = <b>672 kN/m</b>
-a9c5cc7	<b>Result:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>ADEQUATE.</b> ✓ &nbsp; Because of the inclined base, R<sub>d</sub> <b>decreases</b> (WE3: 737 → WE7: 672 kN/m): the b &lt; 1 base-inclination factors reduce all three terms — but the margin is still sufficient, so the foundation is adequate.
 70658de	Set α to 0 to see the WE3 case (R<sub>d</sub> = 737). The base-inclination factors: b<sub>q</sub> = b<sub>γ</sub> = (1 − α·tan φ)², b<sub>c</sub> = b<sub>q</sub> − (1 − b<sub>q</sub>)/(N<sub>c</sub>·tan φ).
 6f0e113	N<sub>q</sub> = 23.18; N<sub>c</sub> = 35.49; N<sub>γ</sub> = 27.72. &nbsp; Horizontal base → b<sub>γ</sub> = b<sub>q</sub> = b<sub>c</sub> = 1.
 d082170	R<sub>k</sub>/A′ = 0.5·10·1.784·27.72·0.643·0.793 + 23.5·23.18·1.630·0.872 + 0 = 126 + 774 + 0 = <b>900 kPa</b>
 889352e	R<sub>k,B</sub> = 900·2.676 = 2408 kN → R<sub>d,B</sub> = 2408/1.4 = <b>1720 kN</b>
 e039a79	<b>Side L:</b> s<sub>γ</sub>=0.75, s<sub>q</sub>=1.45, s<sub>c</sub>=1.47; the horizontal load is parallel to B, so in the L direction i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. Hence <b>side B</b> governs.
-8800372	<b>Result:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1720 kN &gt; V<sub>d</sub> = 1499 kN → <b>ADEQUATE.</b> ✓ &nbsp; Side B governs, because the horizontal Q<sub>x</sub> is parallel to this direction (i &lt; 1).
 af7ef07	R<sub>d</sub> = (320·0.532)/1.1 = <b>154.7 kN</b> &nbsp; <span style="color:var(--ink-mute)">→ R<sub>d</sub> = 154.7 &lt; H<sub>d</sub> = 163.6, so on its own it is <b>not enough</b>.</span>
 1b0a458	R<sub>p;d</sub> from at-rest or passive earth pressure? On the safe side we use the <b>at-rest</b> earth pressure: K<sub>0</sub> = 1 − sin φ.
 285cc71	The resultant at-rest earth pressure E<sub>0,k</sub> = <b>15.1 kN</b> &nbsp;→&nbsp; R<sub>p;d</sub> = E<sub>0,k</sub>/γ<sub>R;h</sub> = 15.1/1.1 = <b>13.7 kN</b>
@@ -572,7 +557,6 @@ f44d2cb	Undrained sliding resistance over the whole base area: R<sub>d</sub> = A
 00a1592	R<sub>d</sub> = V′<sub>k</sub>·tan δ<sub>k</sub> / γ<sub>R;h</sub> = (490·0.1883)/1.1 = <b>83.9 kN</b>
 0e5d885	E<sub>p,k</sub> = (130.12+162.59)/2·h·L = 146.35·0.95·1.45 = <b>201.6 kN</b> &nbsp;→&nbsp; R<sub>p;d</sub> = E<sub>p,k</sub>/γ<sub>R;h</sub> = 201.6/1.1 = <b>183.3 kN</b>
 8c5298c	R<sub>d</sub> + R<sub>p;d</sub> = 83.9 + 183.3 = <b>267.2 kN</b> &lt; H<sub>d</sub> = 400.65 kN
-712a699	<b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267.2 kN &lt; H<sub>d</sub> = 400.65 kN → <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.
 341318a	Precast foundation → δ = ⅔·φ. The base friction uses only the permanent vertical load. Condition: H<sub>d</sub> ≤ R<sub>d</sub> + R<sub>p;d</sub>.
 ca43d84	e<tspan dy="2.6" font-size="10">B</tspan><tspan dy="-2.6">&#160;&#160;&#160;in the B direction</tspan>
 8c96327	e<tspan dy="2.6" font-size="10">L</tspan><tspan dy="-2.6">&#160;&#160;&#160;in the L direction</tspan>
@@ -621,3 +605,19 @@ ef8f21b	E<tspan dy="3" font-size="78%">p</tspan><tspan dy="-3">​</tspan> → R
 989e869	φ = 16° · c = 40 kPa
 6e637f7	t<tspan dy="3" font-size="78%">fill</tspan><tspan dy="-3">​</tspan> = 3.0 m
 b9519d2	Pad footing (L = 1.45 m) · γ<tspan dy="3" font-size="78%">b</tspan><tspan dy="-3">​</tspan> = 25 kN/m³
+91ab440	<b>Result (B = 1.1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 433 kN/m <wbr>→ <b>NOT ADEQUATE.</b>
+c483b19	<b>Result (B = 1.3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m <wbr>→ <b>ADEQUATE.</b> ✓
+25a5975	<b>Result:</b> R<sub>d</sub> = 621 kN/m &gt; V<sub>d</sub> = 433 kN/m <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; In the undrained state the stiff cohesive soil can carry the load even with a width of 1.1 m.
+7eaeb1c	Check the <b>strip footing</b> in the drained case. Loads: <b>G<sub>z,k</sub> = 250 kN/m</b> (concentric), <b>Q<sub>z,k</sub> = 170 kN/m</b> applied eccentrically (e<sub>q</sub> = 0.3 m), and a horizontal force of <b>G<sub>x,k</sub> = 30 kN/m</b>. Geometry: b = 0.3 m, B = 1.3 m, h = 1.0 m, t = 0.4 m, t<sub>fill</sub> = 1.1 m, γ<sub>b</sub> = 25 kN/m³. The groundwater is 0.6 m above the foundation base.<br><b>sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa. <b>Silty sand:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 26°, c = 30 kPa.
+bb7c612	<b>Result:</b> R<sub>d</sub> = 737 kN/m &gt; V<sub>d</sub> = 646.1 kN/m <wbr>→ <b>ADEQUATE.</b> ✓
+86d4300	<b>Result:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; Because of the deeper groundwater, R<sub>d</sub> <b>increased</b> (WE3: 737 → WE4: 808 kN/m): less buoyancy → larger γ′ and q′ → higher bearing resistance.
+2972f28	<b>Result:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>NOT ADEQUATE!</b> &nbsp; Reversing G<sub>x</sub> <b>significantly reduces</b> R<sub>d</sub> (WE3: 737 → 568 kN/m): the two moments add up, the eccentricity grows (0.046 → 0.176 m), so the effective width B′ (and with it the bearing resistance) decreases.
+26d676d	<b>Result:</b> R<sub>d</sub> = 641 kN/m &lt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>only just NOT ADEQUATE!</b> &nbsp; Because of the larger eccentricity, R<sub>d</sub> <b>decreased</b> (WE3: 737 → WE6: 641 kN/m): larger e<sub>q</sub> → larger e<sub>B</sub> → smaller effective width (B′) → lower bearing resistance.
+acc2e00	<b>Result:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; Because of the inclined base, R<sub>d</sub> <b>decreases</b> (WE3: 737 → WE7: 672 kN/m): the b &lt; 1 base-inclination factors reduce all three terms — but the margin is still sufficient, so the foundation is adequate.
+3a36d37	Check the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) against bearing failure in the drained case. Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 1000 kN</b> (concentric) and a horizontal force <b>Q<sub>x,k</sub> = 100 kN</b> (parallel to side B). The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>Sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 5 kPa; <b>sandy gravel:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 32°, c = 0 kPa. Since the horizontal load “weakens” the longer side, <b>both directions (B and L) must be checked</b>.
+274fcad	<b>Result:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1720 kN &gt; V<sub>d</sub> = 1499 kN <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; Side B governs, because the horizontal Q<sub>x</sub> is parallel to this direction (i &lt; 1).
+77e1f04	Check the adequacy of the <b>pad footing</b> (B = 2.0 m, L = 1.5 m) shown in the figure against <b>horizontal sliding</b> (GEO limit state, drained case). Column: b = l = 0.4 m; h = 1.2 m; t = 0.4 m; t<sub>fill</sub> = 1.5 m; γ<sub>b</sub> = 25 kN/m³. Loads (characteristic): <b>G<sub>z,k</sub> = 320 kN</b> vertical (including the self-weight of the foundation and the soil) and <b>Q<sub>x,k</sub> = 100 kN</b> horizontal column load. The groundwater is 0.6 m above the foundation base (h<sub>GWL</sub>). <b>Sand fill:</b> γ = 18 kN/m³, γ<sub>sat</sub> = 19 kN/m³, φ = 30°, c = 0 kPa; <b>silty sand:</b> γ = 19 kN/m³, γ<sub>sat</sub> = 20 kN/m³, φ = 28°, c = 0 kPa. The condition for adequacy: <b>H<sub>d</sub> ≤ R<sub>d</sub></b>.
+acedbbe	<b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 168.4 kN &gt; H<sub>d</sub> = 163.6 kN <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Note: if the “passive”/at-rest soil may disappear or be affected by frost, its resistance must not be taken into account.</span>
+7e57e8e	<b>Result:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163.6 kN <wbr>→ <b>ADEQUATE.</b> ✓ &nbsp; The undrained base adhesion is sufficient on its own (in the drained case the earth resistance was also needed).
+0a81e34	Check the adequacy of the <b>pad footing</b> (B = 0.95 m, L = 1.45 m) shown in the figure against horizontal sliding (GEO, drained). h = 0.95 m; t = 2.05 m; t<sub>fill</sub> = 3.0 m; γ<sub>b</sub> = 25 kN/m³. Loads: <b>G<sub>z,k</sub> = 490 kN</b> (permanent) and <b>Q<sub>z,k</sub> = 610 kN</b> (variable) vertical, plus <b>Q<sub>x,k</sub> = 250 kN</b> horizontal; e<sub>b</sub> = 0.04 m. The vertical loads include the weight of the foundation and of the soil lying above it. The groundwater is 0.95 m above the foundation base (h<sub>GWL</sub>). <b>Sand fill:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 32°, c = 0 kPa; <b>silt:</b> γ = 19.5 kN/m³, γ<sub>sat</sub> = 20.5 kN/m³, φ = 16°, c = 40 kPa. Between the foundation and the soil, <b>δ = ⅔·φ</b> is to be used.
+0e10ad0	<b>Result:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267.2 kN &lt; H<sub>d</sub> = 400.65 kN <wbr>→ <b>NOT ADEQUATE.</b> ✗ &nbsp; Because of the large horizontal load, the base friction and the full passive earth resistance together are still not enough; a larger foundation width or deeper embedment is needed.

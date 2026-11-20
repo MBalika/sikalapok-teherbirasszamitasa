@@ -288,6 +288,7 @@ table.dt th{background:var(--steel-dk)}
 
 /* sorkizárt szövegek, nem törő képletek */
 main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;hyphens:manual;-webkit-hyphens:manual}
+main ul.fleft li{text-align:left}
 .hero p,.kside p,.kside li,.ktile *,.calc-row label,.res-row *,.cr *{text-align:left}
 .nowrap{white-space:nowrap}
 .kchecks{display:flex;flex-direction:column;gap:8px;margin:14px 0}
@@ -332,6 +333,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
 .dfsl label{font-size:.84rem;display:flex;justify-content:space-between;gap:8px;color:var(--ink)}
 .dfsl .v{font-family:'JetBrains Mono';font-weight:600;color:var(--steel-dk)}
 .dfsl input[type=range]{width:100%;accent-color:var(--rebar)}
+.dfsl .dfnote{font-size:.76rem;color:var(--ink-mute);line-height:1.35}
 .dfchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .dfchip{font-family:'JetBrains Mono';font-size:.78rem;border:1px solid var(--line);border-radius:8px;background:#fff;padding:5px 8px;color:var(--ink-mute)}
 .dfchip b{color:var(--ink)}
@@ -545,15 +547,15 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="grid c3">
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--rebar)">
         <h4 style="margin-top:0;text-align:center">Szélességi tag</h4>
-        <p style="font-size:0.9rem;margin:0">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alaptest szélessége és&nbsp;az&nbsp;alatta lévő talaj súlya adja</span></p>
+        <p style="font-size:0.9rem;margin:0;text-align:center">0,5·B′·γ′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alaptest szélessége és&nbsp;az&nbsp;alatta lévő talaj súlya adja</span></p>
       </div>
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--steel)">
         <h4 style="margin-top:0;text-align:center">Mélységi tag</h4>
-        <p style="font-size:0.9rem;margin:0">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alapsík melletti q′ geosztatikus nyomás (alapozási mélység) hatása</span></p>
+        <p style="font-size:0.9rem;margin:0;text-align:center">q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">az&nbsp;alapsík melletti q′ geosztatikus nyomás (alapozási mélység) hatása</span></p>
       </div>
       <div class="panel" style="margin:8px 0;border-top:3px solid var(--azure)">
         <h4 style="margin-top:0;text-align:center">Kohéziós tag</h4>
-        <p style="font-size:0.9rem;margin:0">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">a&nbsp;talaj kohéziójából származó ellenállás</span></p>
+        <p style="font-size:0.9rem;margin:0;text-align:center">c·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub><br><span style="color:var(--ink-mute);font-size:0.85rem">a&nbsp;talaj kohéziójából származó ellenállás</span></p>
       </div>
     </div>
     <h3>Bemenő paraméterek</h3>
@@ -882,8 +884,8 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="dfcmp">
       <div class="panel">
         <div class="hd"><i style="background:var(--moss)"></i>Drénezett eset — hatékony feszültségek</div>
-        <div class="callout formula" style="font-size:.84rem;margin:8px 0">R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub> + q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub> + c′·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub></div>
-        <ul class="bullet" style="font-size:.92rem">
+        <div class="callout formula" style="font-size:.84rem;margin:8px 0;text-align:center">R<sub>k</sub>/A′ = 0,5·γ′·B′·N<sub>γ</sub>·s<sub>γ</sub>·i<sub>γ</sub>·b<sub>γ</sub><br>+ q′·N<sub>q</sub>·s<sub>q</sub>·i<sub>q</sub>·b<sub>q</sub><br>+ c′·N<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub>·b<sub>c</sub></div>
+        <ul class="bullet fleft" style="font-size:.92rem">
           <li><b>Paraméterek:</b> c′ és φ′ (hatékony nyírószilárdsági jellemzők), a térfogatsúly a talajvíz alatt γ′ = γ<sub>sat</sub> − γ<sub>w</sub>.</li>
           <li><b>Teherbírási tényezők:</b> N<sub>q</sub> = e<sup>π·tg φ′</sup>·tg²(45° + φ′/2), N<sub>c</sub> = (N<sub>q</sub> − 1)·ctg φ′, N<sub>γ</sub> = 2·(N<sub>q</sub> − 1)·tg φ′ — mindhárom tényező csak φ′-től függ, és φ′-vel meredeken nő.</li>
           <li><b>q′:</b> az alapsík fölötti talaj <b>hatékony</b> geosztatikus nyomása; a talajvíz közelsége a γ′ tagot is csökkenti (t<sub>wd</sub>/B′ szabály).</li>
@@ -894,7 +896,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="panel">
         <div class="hd"><i style="background:var(--rebar)"></i>Drénezetlen eset — teljes feszültségek</div>
         <div class="callout formula" style="font-size:.84rem;margin:8px 0">σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q &nbsp;&nbsp; (φ<sub>u</sub> = 0 → N<sub>c</sub> = 2 + π = 5,14)</div>
-        <ul class="bullet" style="font-size:.92rem">
+        <ul class="bullet fleft" style="font-size:.92rem">
           <li><b>Paraméter:</b> egyetlen szám, a c<sub>u</sub> drénezetlen nyírószilárdság (laborból vagy szondázásból); φ<sub>u</sub> = 0, ezért nincs N<sub>q</sub>- és N<sub>γ</sub>-tag — a teherbírás <b>független a szélességtől</b> és a mélységgel is csak a q tag miatt nő.</li>
           <li><b>q:</b> az alapsík fölötti talaj <b>teljes</b> nyomása (γ<sub>sat</sub>-tal, a víz felhajtóereje nélkül), mert a teljes feszültségekkel számolunk.</li>
           <li><b>Alaki és ferdeségi tényezők:</b> s<sub>c</sub> = 1 + 0,2·B′/L′, i<sub>c</sub> = 0,5·[1 + √(1 − H/(A′·c<sub>u</sub>))], b<sub>c</sub> = 1 − 2α/(π + 2).</li>
@@ -996,7 +998,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="dfwrap">
         <div><div class="dfcv dfcv3d"><canvas id="kp-cv3" width="880" height="470"></canvas></div></div>
         <div class="dfside">
-          <div class="dfsl"><label>Teherferdeség H/V <span class="v" id="kp-v3HV"></span></label><input type="range" id="kp-3HV" min="0" max="0.6" step="0.01"></div>
+          <div class="dfsl"><label>Teherferdeség H/V <span class="v" id="kp-v3HV"></span></label><input type="range" id="kp-3HV" min="0" max="0.6" step="0.01"><small class="dfnote" id="kp-n3HV"></small></div>
           <div class="dfsl"><label>Függőleges teher V <span class="v" id="kp-v3V"></span></label><input type="range" id="kp-3V" min="100" max="1000" step="10"></div>
           <div class="dfsl"><label>Belső súrlódási szög φ <span class="v" id="kp-v3phi"></span></label><input type="range" id="kp-3phi" min="10" max="40" step="1"></div>
           <div class="dfsl"><label>Kohézió c <span class="v" id="kp-v3c"></span></label><input type="range" id="kp-3c" min="0" max="30" step="1"></div>
@@ -1103,13 +1105,13 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>= 76 + 182 + 232 = <b>490 kPa</b></p>
       <p>R<sub>k</sub> = 490·1,1 = 539 kN/m → R<sub>d</sub> = R<sub>k</sub>/γ<sub>R</sub> = 539/1,4 = <b>385 kN/m</b></p>
     </div>
-    <div class="callout fail"><b>Eredmény (B = 1,1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 433 kN/m → <b>NEM FELEL MEG.</b></div>
+    <div class="callout fail"><b>Eredmény (B = 1,1 m):</b> R<sub>d</sub> = 385 kN/m &lt; V<sub>d</sub> = 433 kN/m <wbr>→ <b>NEM FELEL MEG.</b></div>
     <div class="step"><h4>5. Megoldás: szélesítsük az alaptestet — B = 1,3 m</h4>
       <p>Új súlyok: G<sub>f,k</sub> = (1,3−0,3)·0,5·17 = 8,5; &nbsp; G<sub>b,k</sub> = 1,3·0,6·25 = 19,5 → G<sub>k</sub> = 248 → V<sub>d</sub> = 1,35·248 + 1,5·70 = <b>440 kN/m</b></p>
       <p>R<sub>k</sub>/A′ = 0,5·18·1,3·7,66 + 19·9,60 + 12·19,32 = 90 + 182 + 232 = 504 kPa</p>
       <p>R<sub>k</sub> = 504·1,3 = 655 → R<sub>d</sub> = 655/1,4 = <b>468 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Eredmény (B = 1,3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m → <b>MEGFELEL.</b> ✓</div>
+    <div class="callout success"><b>Eredmény (B = 1,3 m):</b> R<sub>d</sub> = 468 kN/m &gt; V<sub>d</sub> = 440 kN/m <wbr>→ <b>MEGFELEL.</b> ✓</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp1')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1156,7 +1158,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>σ<sub>t</sub> = R<sub>k</sub>/A′ = (2+π)·c<sub>u</sub>·b<sub>c</sub>·s<sub>c</sub>·i<sub>c</sub> + q = (2+π)·150·1·1·1 + 19 = 771 + 19 = <b>790 kPa</b></p>
       <p>R<sub>k</sub> = 790·1,1 = 869 kN/m → R<sub>d</sub> = 869/1,4 = <b>621 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 621 kN/m &gt; V<sub>d</sub> = 433 kN/m → <b>MEGFELEL.</b> ✓ &nbsp; A kemény kötött talaj drénezetlen állapotban már 1,1 m szélességgel is bírja a terhet.</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 621 kN/m &gt; V<sub>d</sub> = 433 kN/m <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; A kemény kötött talaj drénezetlen állapotban már 1,1 m szélességgel is bírja a terhet.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp2')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1183,7 +1185,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="task-head">
         <div>
           <h3>Feladat</h3>
-          <p style="margin:6px 0 0">Ellenőrizd a&nbsp;<b>sávalapot</b> drénezett esetben! Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;250&nbsp;kN/m</b> (központos), <b>Q<sub>z,k</sub>&nbsp;=&nbsp;170&nbsp;kN/m</b> külpontosan (e<sub>q</sub>&nbsp;=&nbsp;0,3&nbsp;m), <b>G<sub>x,k</sub>&nbsp;=&nbsp;30&nbsp;kN/m</b> vízszintes erő. Geometria: b&nbsp;=&nbsp;0,3&nbsp;m, B&nbsp;=&nbsp;1,3&nbsp;m, h&nbsp;=&nbsp;1,0&nbsp;m, t&nbsp;=&nbsp;0,4&nbsp;m, t<sub>fill</sub>&nbsp;=&nbsp;1,1&nbsp;m, γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel.<br><b>homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;5&nbsp;kPa. <b>iszapos homok:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;26°, c&nbsp;=&nbsp;30&nbsp;kPa.</p>
+          <p style="margin:6px 0 0">Ellenőrizd a&nbsp;<b>sávalapot</b> drénezett esetben! Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;250&nbsp;kN/m</b> (központos), <b>Q<sub>z,k</sub>&nbsp;=&nbsp;170&nbsp;kN/m</b> külpontosan (e<sub>q</sub>&nbsp;=&nbsp;0,3&nbsp;m), <b>G<sub>x,k</sub>&nbsp;=&nbsp;30&nbsp;kN/m</b> vízszintes erő. Geometria: b&nbsp;=&nbsp;0,3&nbsp;m, B&nbsp;=&nbsp;1,3&nbsp;m, h&nbsp;=&nbsp;1,0&nbsp;m, t&nbsp;=&nbsp;0,4&nbsp;m, t<sub>fill</sub>&nbsp;=&nbsp;1,1&nbsp;m, γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel.<br><b>Homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;5&nbsp;kPa. <b>Iszapos homok:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;26°, c&nbsp;=&nbsp;30&nbsp;kPa.</p>
         </div>
         <span class="task-num">MP3</span>
       </div>
@@ -1219,7 +1221,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>= 0,5·10·1,209·10,59·0,841 + 20,1·11,85·0,891 + 30·22,25·0,881 ≈ 54 + 212 + 588 = <b>854 kPa</b></p>
       <p>R<sub>k</sub> = 854·1,209 = 1032 kN/m → R<sub>d</sub> = 1032/1,4 = <b>737 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 737 kN/m &gt; V<sub>d</sub> = 646,1 kN/m → <b>MEGFELEL.</b> ✓</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 737 kN/m &gt; V<sub>d</sub> = 646,1 kN/m <wbr>→ <b>MEGFELEL.</b> ✓</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp3')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1282,7 +1284,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>k</sub>/A′ = 0,5·15,3·1,209·10,59·0,841 + 25,2·11,85·0,891 + 30·22,25·0,881 ≈ 82 + 266 + 588 = <b>936 kPa</b></p>
       <p>R<sub>k</sub> = 936·1,209 = 1131,6 kN/m → R<sub>d</sub> = 1131,6/1,4 = <b>808 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>MEGFELEL.</b> ✓ &nbsp; A mélyebb talajvíz miatt R<sub>d</sub> <b>nőtt</b> (MP3: 737 → MP4: 808 kN/m): kisebb felhajtóerő → nagyobb γ′ és q′ → nagyobb teherbírás.</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 808 kN/m &gt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; A mélyebb talajvíz miatt R<sub>d</sub> <b>nőtt</b> (MP3: 737 → MP4: 808 kN/m): kisebb felhajtóerő → nagyobb γ′ és q′ → nagyobb teherbírás.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp4')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1342,7 +1344,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>k</sub>/A′ = 0,5·10·0,948·10,59·0,84 + 20,1·11,85·0,89 + 30·22,25·0,88 ≈ 42 + 211 + 586 = <b>839 kPa</b></p>
       <p>R<sub>k</sub> = 839·0,948 = 795 kN/m → R<sub>d</sub> = 795/1,4 = <b>568 kN/m</b></p>
     </div>
-    <div class="callout warn"><b>Eredmény:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>NEM FELEL MEG!</b> &nbsp; A G<sub>x</sub> megfordításával R<sub>d</sub> <b>jelentősen csökken</b> (MP3: 737 → 568 kN/m): a két nyomaték összeadódik, a külpontosság megnő (0,046 → 0,176 m), így a dolgozó szélesség B′ (és vele a teherbírás) lecsökken.</div>
+    <div class="callout warn"><b>Eredmény:</b> R<sub>d</sub> = 568 kN/m &lt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>NEM FELEL MEG!</b> &nbsp; A G<sub>x</sub> megfordításával R<sub>d</sub> <b>jelentősen csökken</b> (MP3: 737 → 568 kN/m): a két nyomaték összeadódik, a külpontosság megnő (0,046 → 0,176 m), így a dolgozó szélesség B′ (és vele a teherbírás) lecsökken.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp5')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1400,7 +1402,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>k</sub>/A′ = 0,5·10·1,06·10,59·0,84 + 20,1·11,85·0,89 + 30·22,25·0,88 ≈ 47 + 212 + 587 = <b>846 kPa</b></p>
       <p>R<sub>k</sub> = 846·1,06 = 897 kN/m → R<sub>d</sub> = 897/1,4 = <b>641 kN/m</b></p>
     </div>
-    <div class="callout warn"><b>Eredmény:</b> R<sub>d</sub> = 641 kN/m &lt; V<sub>d</sub> = 646 kN/m → <b>épphogy NEM FELEL MEG!</b> &nbsp; A nagyobb külpontosság miatt R<sub>d</sub> <b>csökkent</b> (MP3: 737 → MP6: 641 kN/m): nagyobb e<sub>q</sub> → nagyobb e<sub>B</sub> → kisebb dolgozó szélesség (B′) → kisebb teherbírás.</div>
+    <div class="callout warn"><b>Eredmény:</b> R<sub>d</sub> = 641 kN/m &lt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>épphogy NEM FELEL MEG!</b> &nbsp; A nagyobb külpontosság miatt R<sub>d</sub> <b>csökkent</b> (MP3: 737 → MP6: 641 kN/m): nagyobb e<sub>q</sub> → nagyobb e<sub>B</sub> → kisebb dolgozó szélesség (B′) → kisebb teherbírás.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp6')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1457,7 +1459,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>k</sub>/A′ = 53,8·0,917 + 212,3·0,917 + 588,0·0,909 ≈ 49,3 + 194,6 + 534,5 = <b>778 kPa</b></p>
       <p>R<sub>k</sub> = 778,4·1,209 = 941 kN/m → R<sub>d</sub> = 941/1,4 = <b>672 kN/m</b></p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m → <b>MEGFELEL.</b> ✓ &nbsp; A ferde alapsík miatt R<sub>d</sub> <b>csökken</b> (MP3: 737 → MP7: 672 kN/m): a b &lt; 1 talp-dőlési tényezők mindhárom tagot csökkentik — de a tartalék még elég, az alap megfelel.</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 672 kN/m &gt; V<sub>d</sub> = 646 kN/m <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; A ferde alapsík miatt R<sub>d</sub> <b>csökken</b> (MP3: 737 → MP7: 672 kN/m): a b &lt; 1 talp-dőlési tényezők mindhárom tagot csökkentik — de a tartalék még elég, az alap megfelel.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp7')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1489,7 +1491,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="task-head">
         <div>
           <h3>Feladat</h3>
-          <p style="margin:6px 0 0">Ellenőrizd a&nbsp;<b>pilléralapot</b> (B&nbsp;=&nbsp;2,0&nbsp;m, L&nbsp;=&nbsp;1,5&nbsp;m) talajtöréssel szemben, drénezett esetben! Pillér: b&nbsp;=&nbsp;l&nbsp;=&nbsp;0,4&nbsp;m; h&nbsp;=&nbsp;1,2&nbsp;m; t&nbsp;=&nbsp;0,4&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;1,5&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;1000&nbsp;kN</b> (központos) és&nbsp;<b>Q<sub>x,k</sub>&nbsp;=&nbsp;100&nbsp;kN</b> vízszintes erő (a&nbsp;B oldallal párhuzamos). A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel (h<sub>MTV</sub>). <b>homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;5&nbsp;kPa; <b>homokos kavics:</b> γ&nbsp;=&nbsp;19&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;32°, c&nbsp;=&nbsp;0&nbsp;kPa. Mivel a&nbsp;vízszintes teher a&nbsp;hosszabb oldalt „gyengíti”, <b>mindkét irányt (B és&nbsp;L) vizsgálni kell</b>.</p>
+          <p style="margin:6px 0 0">Ellenőrizd a&nbsp;<b>pilléralapot</b> (B&nbsp;=&nbsp;2,0&nbsp;m, L&nbsp;=&nbsp;1,5&nbsp;m) talajtöréssel szemben, drénezett esetben! Pillér: b&nbsp;=&nbsp;l&nbsp;=&nbsp;0,4&nbsp;m; h&nbsp;=&nbsp;1,2&nbsp;m; t&nbsp;=&nbsp;0,4&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;1,5&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;1000&nbsp;kN</b> (központos) és&nbsp;<b>Q<sub>x,k</sub>&nbsp;=&nbsp;100&nbsp;kN</b> vízszintes erő (a&nbsp;B oldallal párhuzamos). A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel (h<sub>MTV</sub>). <b>Homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;5&nbsp;kPa; <b>homokos kavics:</b> γ&nbsp;=&nbsp;19&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;32°, c&nbsp;=&nbsp;0&nbsp;kPa. Mivel a&nbsp;vízszintes teher a&nbsp;hosszabb oldalt „gyengíti”, <b>mindkét irányt (B és&nbsp;L) vizsgálni kell</b>.</p>
         </div>
         <span class="task-num">MP8</span>
       </div>
@@ -1528,7 +1530,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>k,B</sub> = 900·2,676 = 2408 kN → R<sub>d,B</sub> = 2408/1,4 = <b>1720 kN</b></p>
       <p><b>L oldal:</b> s<sub>γ</sub>=0,75, s<sub>q</sub>=1,45, s<sub>c</sub>=1,47; a vízszintes teher B-vel párhuzamos, ezért L irányban i = 1 → R<sub>d,L</sub> &gt; R<sub>d,B</sub>. A mértékadó tehát a <b>B oldal</b>.</p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1720 kN &gt; V<sub>d</sub> = 1499 kN → <b>MEGFELEL.</b> ✓ &nbsp; A mértékadó a B oldal, mert a vízszintes Q<sub>x</sub> ezzel az iránnyal párhuzamos (i &lt; 1).</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = R<sub>d,B</sub> = 1720 kN &gt; V<sub>d</sub> = 1499 kN <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; A mértékadó a B oldal, mert a vízszintes Q<sub>x</sub> ezzel az iránnyal párhuzamos (i &lt; 1).</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp8')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1617,7 +1619,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="task-head">
         <div>
           <h3>Feladat</h3>
-          <p style="margin:6px 0 0">Ellenőrizd az&nbsp;ábrán látható <b>pilléralap</b> (B&nbsp;=&nbsp;2,0&nbsp;m, L&nbsp;=&nbsp;1,5&nbsp;m) megfelelőségét <b>vízszintes elcsúszással</b> szemben (GEO határállapot, drénezett eset)! Pillér: b&nbsp;=&nbsp;l&nbsp;=&nbsp;0,4&nbsp;m; h&nbsp;=&nbsp;1,2&nbsp;m; t&nbsp;=&nbsp;0,4&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;1,5&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek (karakterisztikus): <b>G<sub>z,k</sub>&nbsp;=&nbsp;320&nbsp;kN</b> függőleges (benne az&nbsp;alaptest és&nbsp;a&nbsp;talaj önsúlya is) és&nbsp;<b>Q<sub>x,k</sub>&nbsp;=&nbsp;100&nbsp;kN</b> vízszintes pillérteher. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel (h<sub>MTV</sub>). <b>homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;0&nbsp;kPa; <b>iszapos homok:</b> γ&nbsp;=&nbsp;19&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;28°, c&nbsp;=&nbsp;0&nbsp;kPa. A&nbsp;megfelelőség feltétele: <b>H<sub>d</sub>&nbsp;≤&nbsp;R<sub>d</sub></b>.</p>
+          <p style="margin:6px 0 0">Ellenőrizd az&nbsp;ábrán látható <b>pilléralap</b> (B&nbsp;=&nbsp;2,0&nbsp;m, L&nbsp;=&nbsp;1,5&nbsp;m) megfelelőségét <b>vízszintes elcsúszással</b> szemben (GEO határállapot, drénezett eset)! Pillér: b&nbsp;=&nbsp;l&nbsp;=&nbsp;0,4&nbsp;m; h&nbsp;=&nbsp;1,2&nbsp;m; t&nbsp;=&nbsp;0,4&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;1,5&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek (karakterisztikus): <b>G<sub>z,k</sub>&nbsp;=&nbsp;320&nbsp;kN</b> függőleges (benne az&nbsp;alaptest és&nbsp;a&nbsp;talaj önsúlya is) és&nbsp;<b>Q<sub>x,k</sub>&nbsp;=&nbsp;100&nbsp;kN</b> vízszintes pillérteher. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,6&nbsp;m-rel (h<sub>MTV</sub>). <b>Homok feltöltés:</b> γ&nbsp;=&nbsp;18&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;19&nbsp;kN/m³, φ&nbsp;=&nbsp;30°, c&nbsp;=&nbsp;0&nbsp;kPa; <b>iszapos homok:</b> γ&nbsp;=&nbsp;19&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20&nbsp;kN/m³, φ&nbsp;=&nbsp;28°, c&nbsp;=&nbsp;0&nbsp;kPa. A&nbsp;megfelelőség feltétele: <b>H<sub>d</sub>&nbsp;≤&nbsp;R<sub>d</sub></b>.</p>
         </div>
         <span class="task-num">MP10</span>
       </div>
@@ -1652,7 +1654,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="step"><h4>4. Megfelelőség</h4>
       <p>R<sub>d</sub> + R<sub>p;d</sub> = 154,7 + 13,7 = <b>168,4 kN</b> &gt; H<sub>d</sub> = 163,6 kN</p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> + R<sub>p;d</sub> = 168,4 kN &gt; H<sub>d</sub> = 163,6 kN → <b>MEGFELEL.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Megj.: ha a „passzív”/nyugalmi föld eltűnhet vagy felfagyhat, ellenállását nem szabad figyelembe venni.</span></div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> + R<sub>p;d</sub> = 168,4 kN &gt; H<sub>d</sub> = 163,6 kN <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; <span style="color:var(--ink-mute)">Megj.: ha a „passzív”/nyugalmi föld eltűnhet vagy felfagyhat, ellenállását nem szabad figyelembe venni.</span></div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp10')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -1686,7 +1688,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <p>R<sub>d</sub> = A<sub>c</sub>·c<sub>u;k</sub> / γ<sub>R;h</sub>, &nbsp; ahol A<sub>c</sub> = B·L = 2,0·1,5 = 3,0 m², &nbsp; c<sub>u;k</sub> = 65 kPa, &nbsp; γ<sub>R;h</sub> = 1,1.</p>
       <p>R<sub>d</sub> = (2,0·1,5·65)/1,1 = <b>177 kN</b> &nbsp;<span style="color:var(--ink-mute)">(a teljes talpfelület működik, földellenállásra nincs szükség)</span></p>
     </div>
-    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163,6 kN → <b>MEGFELEL.</b> ✓ &nbsp; A drénezetlen talp-adhézió önmagában elegendő (a drénezett esetben még szükség volt a földellenállásra is).</div>
+    <div class="callout success"><b>Eredmény:</b> R<sub>d</sub> = 177 kN &gt; H<sub>d</sub> = 163,6 kN <wbr>→ <b>MEGFELEL.</b> ✓ &nbsp; A drénezetlen talp-adhézió önmagában elegendő (a drénezett esetben még szükség volt a földellenállásra is).</div>
 
     <h3>Mini-kalkulátor — drénezetlen</h3>
     <div class="calc" id="calc-mp10u">
@@ -1713,7 +1715,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
       <div class="task-head">
         <div>
           <h3>Feladat</h3>
-          <p style="margin:6px 0 0">Ellenőrizd az&nbsp;ábrán látható <b>pilléralap</b> (B&nbsp;=&nbsp;0,95&nbsp;m, L&nbsp;=&nbsp;1,45&nbsp;m) megfelelőségét vízszintes elcsúszással szemben (GEO, drénezett)! h&nbsp;=&nbsp;0,95&nbsp;m; t&nbsp;=&nbsp;2,05&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;3,0&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;490&nbsp;kN</b> (állandó) és&nbsp;<b>Q<sub>z,k</sub>&nbsp;=&nbsp;610&nbsp;kN</b> (esetleges) függőleges, valamint <b>Q<sub>x,k</sub>&nbsp;=&nbsp;250&nbsp;kN</b> vízszintes; e<sub>b</sub>&nbsp;=&nbsp;0,04&nbsp;m. A&nbsp;függőleges terhek tartalmazzák az&nbsp;alaptest és&nbsp;a&nbsp;felette fekvő föld súlyát. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,95&nbsp;m-rel (h<sub>MTV</sub>). <b>homok feltöltés:</b> γ&nbsp;=&nbsp;19,5&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20,5&nbsp;kN/m³, φ&nbsp;=&nbsp;32°, c&nbsp;=&nbsp;0&nbsp;kPa; <b>iszap:</b> γ&nbsp;=&nbsp;19,5&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20,5&nbsp;kN/m³, φ&nbsp;=&nbsp;16°, c&nbsp;=&nbsp;40&nbsp;kPa. Az&nbsp;alaptest és&nbsp;a&nbsp;talaj között <b>δ&nbsp;=&nbsp;⅔·φ</b> veendő figyelembe.</p>
+          <p style="margin:6px 0 0">Ellenőrizd az&nbsp;ábrán látható <b>pilléralap</b> (B&nbsp;=&nbsp;0,95&nbsp;m, L&nbsp;=&nbsp;1,45&nbsp;m) megfelelőségét vízszintes elcsúszással szemben (GEO, drénezett)! h&nbsp;=&nbsp;0,95&nbsp;m; t&nbsp;=&nbsp;2,05&nbsp;m; t<sub>fill</sub>&nbsp;=&nbsp;3,0&nbsp;m; γ<sub>b</sub>&nbsp;=&nbsp;25&nbsp;kN/m³. Terhek: <b>G<sub>z,k</sub>&nbsp;=&nbsp;490&nbsp;kN</b> (állandó) és&nbsp;<b>Q<sub>z,k</sub>&nbsp;=&nbsp;610&nbsp;kN</b> (esetleges) függőleges, valamint <b>Q<sub>x,k</sub>&nbsp;=&nbsp;250&nbsp;kN</b> vízszintes; e<sub>b</sub>&nbsp;=&nbsp;0,04&nbsp;m. A&nbsp;függőleges terhek tartalmazzák az&nbsp;alaptest és&nbsp;a&nbsp;felette fekvő föld súlyát. A&nbsp;talajvíz az&nbsp;alapsík fölött 0,95&nbsp;m-rel (h<sub>MTV</sub>). <b>Homok feltöltés:</b> γ&nbsp;=&nbsp;19,5&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20,5&nbsp;kN/m³, φ&nbsp;=&nbsp;32°, c&nbsp;=&nbsp;0&nbsp;kPa; <b>iszap:</b> γ&nbsp;=&nbsp;19,5&nbsp;kN/m³, γ<sub>sat</sub>&nbsp;=&nbsp;20,5&nbsp;kN/m³, φ&nbsp;=&nbsp;16°, c&nbsp;=&nbsp;40&nbsp;kPa. Az&nbsp;alaptest és&nbsp;a&nbsp;talaj között <b>δ&nbsp;=&nbsp;⅔·φ</b> veendő figyelembe.</p>
         </div>
         <span class="task-num">MP11</span>
       </div>
@@ -1748,7 +1750,7 @@ main p,main li,main .callout:not(.formula),.kcap,.kst,.knote{text-align:justify;
     <div class="step"><h4>4. Elcsúszással szembeni ellenőrzés</h4>
       <p>R<sub>d</sub> + R<sub>p;d</sub> = 83,9 + 183,3 = <b>267,2 kN</b> &lt; H<sub>d</sub> = 400,65 kN</p>
     </div>
-    <div class="callout fail"><b>Eredmény:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267,2 kN &lt; H<sub>d</sub> = 400,65 kN → <b>NEM FELEL MEG.</b> ✗ &nbsp; A nagy vízszintes teher miatt a talp-súrlódás és a teljes passzív földellenállás együtt sem elég; nagyobb alapszélességre vagy mélyebb beágyazásra van szükség.</div>
+    <div class="callout fail"><b>Eredmény:</b> R<sub>d</sub> + R<sub>p;d</sub> = 267,2 kN &lt; H<sub>d</sub> = 400,65 kN <wbr>→ <b>NEM FELEL MEG.</b> ✗ &nbsp; A nagy vízszintes teher miatt a talp-súrlódás és a teljes passzív földellenállás együtt sem elég; nagyobb alapszélességre vagy mélyebb beágyazásra van szükség.</div>
 
     <h3>Mini-kalkulátor</h3>
     <p style="margin:-4px 0 10px"><button type="button" class="kbtn" onclick="openPreset('mp11')">⚙ Adatok betöltése a rétegzett kalkulátorba (3D)</button></p>
@@ -3311,7 +3313,7 @@ const KPL=(function(){
     y=r3.bars(h,T3(T),y+12,{title:'A három tag i-vel [kPa]',bh:70,max:Math.max(T0.g,T0.qT,T0.c)});
     c.font='10.5px Inter'; c.fillStyle='#2E2620'; c.fillText('függőlegesen: '+F(T0.sum,0)+' kPa',bx,y); c.fillText('→ ferdén: '+F(T.sum,0)+' kPa (−'+F((1-T.sum/T0.sum)*100,0)+' %)',bx,y+14);
   }
-  function ui3(){ const hvMax=Math.floor(0.9*Math.tan(S3.phi*rad)*100)/100; $('3HV').max=hvMax; if(S3.HV>hvMax){ S3.HV=hvMax; } $('3HV').value=S3.HV; $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2)+' (H = '+F(S3.HV*S3.V,0)+' kN/m; legfeljebb 0,9·tg φ = '+F(hvMax,2)+')'; }
+  function ui3(){ const hvMax=Math.floor(0.9*Math.tan(S3.phi*rad)*100)/100; $('3HV').max=hvMax; if(S3.HV>hvMax){ S3.HV=hvMax; } $('3HV').value=S3.HV; $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2); $('n3HV').textContent='H = '+F(S3.HV*S3.V,0)+' kN/m; legfeljebb 0,9·tg φ = '+F(hvMax,2); }
   [['3phi','phi'],['3c','c'],['3V','V'],['3HV','HV']].forEach(([id,k])=>{ const el=$(id); el.value=S3[k]; el.addEventListener('input',()=>{S3[k]=parseFloat(el.value);ui3();if(!S3.play)draw3();}); });
 
   /* ====================================================== 4. MÉLYSÉGI TAG — A TAKARÁS ====================================================== */
@@ -3558,6 +3560,8 @@ p,li,td,th,.lead,.kst,.ks2,.knote,.kcap,.calc-note{overflow-wrap:break-word}
   .cr{grid-template-columns:1fr 84px}
   .res-row{grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:8px}
   .res-row>*{min-width:0;overflow-wrap:anywhere}
+  .res-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px}
+  .res-row .val{margin-left:auto}
   .verdict{padding:10px 12px;overflow-wrap:anywhere}
   .verdict .big{font-size:1.15rem;line-height:1.3}
   figure{padding:8px;border-radius:8px}
@@ -3719,6 +3723,7 @@ const GUARD = (() => {
       let off = 0;
       for (const n of nodes) {
         const v = n.nodeValue; let o = '', ch = false;
+        if (!v.trim()) { off += v.length; continue; } /* a blokk gyerekei közti behúzás (csak szóköz) soha nem válhat nem törő szóközzé: üres sort adna */
         for (let i = 0; i < v.length; i++) {
           if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i];
         }
