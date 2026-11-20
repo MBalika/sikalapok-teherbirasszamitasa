@@ -6,7 +6,10 @@ const INLINE = new Set(['a', 'b', 'strong', 'i', 'em', 'sub', 'sup', 'span', 'sm
 const SKIPEL = new Set(['script', 'style', 'template']);
 const ATTRS = ['alt', 'title', 'aria-label', 'placeholder', 'data-title', 'data-tip', 'data-label', 'data-cap', 'data-q', 'data-text', 'data-hint', 'data-name', 'data-desc', 'label'];
 // csak számot (tizedesvesszővel), jeleket és mértékegységet tartalmazó karakterlánc, pl. '0,5 m', '≥ 2,00 m' (rgb-hármas nem)
-export const numLike = (t) => t.length < 40 && /\d,\d/.test(t) && !/\d+,\d+,\d+/.test(t) && !/\p{L}{2,}/u.test(t.replace(/(mm|cm|kPa|MPa|kN|m²|m³)/g, ''));
+const numShort = (t) => t.length < 40 && /\d,\d/.test(t) && !/\d+,\d+,\d+/.test(t) && !/\p{L}{2,}/u.test(t.replace(/(mm|cm|kPa|MPa|kN|m²|m³)/g, ''));
+// képletcímke indexekkel (pl. 'V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>'): a címkéket levéve csak szám, jel és egybetűs jelölés
+const formulaLike = (t) => /<su[bp]>/.test(t) && /\d,\d/.test(t) && !/\d+,\d+,\d+/.test(t) && !/[{}`]/.test(t) && (() => { const b = t.replace(/<[^>]*>/g, ' '); return b.length < 80 && !/\p{L}{2,}/u.test(b.replace(/(mm|cm|kPa|MPa|kN|m²|m³)/g, '')); })();
+export const numLike = (t) => numShort(t) || formulaLike(t);
 export const hasWords = (s) => /\p{L}{2,}/u.test(s.replace(/<[^>]*>|&[a-z#0-9]+;|\$\{[^}]*\}/gi, ' '));
 // inline = true: a <script> blokkok (src nélkül) JS-egységei is (egyfájlos oldalakhoz)
 export function htmlUnits(src, file, inline = true) {

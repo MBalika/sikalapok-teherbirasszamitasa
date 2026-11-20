@@ -331,3 +331,8 @@ ef66898	▼ groundwater at ground level (blue dashed line) → γ′\u00A0=\u00A
 fbac9a4	<text x="${(px.x0+px.x1)/2}" y="${px.y1+32}" text-anchor="middle" font-size="11" fill="#6B6052">angle of shearing resistance φ</text><text x="14" y="${(px.y0+px.y1)/2}" text-anchor="middle" font-size="11" fill="#6B6052" transform="rotate(-90 14 ${(px.y0+px.y1)/2})">N factor (decimal scale)</text>
 6a8ba72	solid: towards the higher edge a shorter spiral, a smaller passive wedge
 75b1912	dashed: mechanism for a horizontal base
+e20a828!	${sub('R','k')}/A′ = 0.5·γ′·B′·${sub('N','γ')}·s·i·b + q′·${sub('N','q')}·s·i·b + c·${sub('N','c')}·s·i·b = ${F(R.tw,1)} + ${F(R.td,1)} + ${F(R.tc,1)} = <b>${F(R.RkA,1)} kPa</b>
+d492bda	<span class="dfchip">0.5·γ·B·N<sub>γ</sub> = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N<sub>q</sub> = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N<sub>c</sub> = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R<sub>k</sub>/A′ = <b>${F(T.sum,0)} kPa</b></span>
+f4286f7!	R<sub>d</sub> = V′<sub>k</sub>·tan δ / γ<sub>R;h</sub>
+6afeb6e!	R<sub>d</sub> = G<sub>z,k</sub>·tan δ / γ<sub>R;h</sub>
+0502c7f!	 kN/m; at most 0.9·tan φ = 

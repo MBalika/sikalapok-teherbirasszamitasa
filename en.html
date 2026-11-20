@@ -2260,14 +2260,14 @@ const KALK = (function(){
       h+=step(7,`Shape factors${R.strip?' (strip footing → 1)':` (B′/L′ = ${F(R.ratio,3)})`}: ${sub('s','γ')} = ${F(R.sg,3)} · ${sub('s','q')} = ${F(R.sq,3)} · ${sub('s','c')} = ${F(R.sc,3)}; &nbsp; ${R.strip?`m = ${sub('m','B')} = 2`:(R.HL>0?`${sub('m','B')} = ${F(R.mB,3)}, ${sub('m','L')} = ${F(R.mL,3)}; according to the direction of the resultant H, m = ${sub('m','L')}·cos²θ + ${sub('m','B')}·sin²θ = ${F(R.mL,3)}·${F(R.cos2,3)} + ${F(R.mB,3)}·${F(R.sin2,3)} = <b>${F(R.m,3)}</b>`:`m = ${sub('m','B')} = (2 + B′/L′)/(1 + B′/L′) = ${F(R.m,3)}`)}`);
       h+=step(8,`Load inclination${R.HL>0?` (resultant H: √(${F(R.HB,0)}² + ${F(R.HL,0)}²) = ${F(R.Hres,1)}${u})`:''}: f = H/(${sub('V','k')} + A′·c·cotφ) = ${F(R.Hres,1)}/(${F(R.Vk,1)} + ${F(R.Ap,3)}·${F(R.c,0)}·cot${F(R.phi,0)}°) = ${F(R.f,4)} → ${sub('i','γ')} = (1 − f)<sup>m+1</sup> = ${F(R.ig,3)} · ${sub('i','q')} = (1 − f)<sup>m</sup> = ${F(R.iq,3)} · ${sub('i','c')} = ${F(R.ic,3)}`);
       h+=step(9,`Base inclination (α = ${F(S.alpha,1)}°): ${sub('b','q')} = ${sub('b','γ')} = ${F(R.bq,3)} · ${sub('b','c')} = ${F(R.bc,3)}`);
-      h+=step(10,`${sub('R','k')}/A′ = 0,5·γ′·B′·${sub('N','γ')}·s·i·b + q′·${sub('N','q')}·s·i·b + c·${sub('N','c')}·s·i·b = ${F(R.tw,1)} + ${F(R.td,1)} + ${F(R.tc,1)} = <b>${F(R.RkA,1)} kPa</b>`);
+      h+=step(10,`${sub('R','k')}/A′ = 0.5·γ′·B′·${sub('N','γ')}·s·i·b + q′·${sub('N','q')}·s·i·b + c·${sub('N','c')}·s·i·b = ${F(R.tw,1)} + ${F(R.td,1)} + ${F(R.tc,1)} = <b>${F(R.RkA,1)} kPa</b>`);
       h+=step(11,`${sub('R','k')} = ${F(R.RkA,1)}·${F(R.Ap,3)} = ${F(R.Rk,1)}${u} → ${sub('R','d')} = ${sub('R','k')}/γ<sub>R</sub> = ${F(R.Rk,1)}/${F(S.gR,2)} = <b>${F(R.Rd,1)}${u}</b>; utilisation ${sub('V','d')}/${sub('R','d')} = <b>${F(R.utilDr,0)}%</b>`);
       h+=vd(R.okDr,`${sub('R','d')} = ${F(R.Rd,0)}${u}`,`${sub('V','d')} = ${F(R.Vd,0)}${u}`);
     } else if(S.detail==='ud'){
       h+=common(R);
       if(!R.hasCu){ h+=`<p class="kwarn">No c<sub>u</sub> is given for the layer below the foundation base (${R.base.L.name}) — enter it in the layer table for the undrained check.</p>`; }
       h+=step(4,`Total overburden pressure at the foundation base (total stress, water buoyancy not taken into account): q = Σγ<sub>i</sub>·t<sub>i</sub> = ${R.qTotStr} = <b>${F(R.qTot,2)} kPa</b>`);
-      h+=step(5,`Factors: ${sub('s','c')} = ${R.strip?'1 (strip footing)':`1 + 0,2·B′/L′ = ${F(R.scU,3)}`} · ${sub('b','c')} = 1 − 2α/(π+2) = ${F(R.bcU,3)} · ${sub('i','c')} = 0,5·[1 + √(1 − H/(A′·c<sub>u</sub>))] = ${F(R.icU,3)}${R.HL>0?` (resultant H = ${F(R.Hres,1)}${u})`:''}`);
+      h+=step(5,`Factors: ${sub('s','c')} = ${R.strip?'1 (strip footing)':`1 + 0,2·B′/L′ = ${F(R.scU,3)}`} · ${sub('b','c')} = 1 − 2α/(π+2) = ${F(R.bcU,3)} · ${sub('i','c')} = 0.5·[1 + √(1 − H/(A′·c<sub>u</sub>))] = ${F(R.icU,3)}${R.HL>0?` (resultant H = ${F(R.Hres,1)}${u})`:''}`);
       h+=step(6,`σ<sub>t</sub> = (2 + π)·c<sub>u</sub>·${sub('b','c')}·${sub('s','c')}·${sub('i','c')} + q = (2 + π)·${F(R.cu,0)}·${F(R.bcU,3)}·${F(R.scU,3)}·${F(R.icU,3)} + ${F(R.qTot,2)} = <b>${F(R.sigT,1)} kPa</b>`);
       h+=step(7,`${sub('R','k')} = σ<sub>t</sub>·A′ = ${F(R.RkU,1)}${u} → ${sub('R','d')} = ${F(R.RkU,1)}/${F(S.gR,2)} = <b>${F(R.RdU,1)}${u}</b>; utilisation <b>${F(R.utilUd,0)}%</b>`);
       if(R.hasCu) h+=vd(R.okUd,`${sub('R','d')} = ${F(R.RdU,0)}${u}`,`${sub('V','d')} = ${F(R.Vd,0)}${u}`);
@@ -2543,11 +2543,11 @@ function calcMP1(){
   document.getElementById('mp1-res').innerHTML='<h4>Result</h4>'+
     rr('Self-weight G<sub>f,k</sub> + G<sub>b,k</sub>', fmt(Gf,1)+' + '+fmt(Gb,1)+' kN/m',true)+
     rr('G<sub>k</sub> permanent load', fmt(Gk,1)+' kN/m',true)+
-    rr('V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
+    rr('V<sub>d</sub> = 1.35·G<sub>k</sub> + 1.5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
     rr('N<sub>q</sub> / N<sub>c</sub> / N<sub>γ</sub> (φ='+fmt(phi,0)+'°)', fmt(N.Nq,2)+' / '+fmt(N.Nc,2)+' / '+fmt(N.Ng,2),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
     rr('R<sub>k</sub> = R<sub>k</sub>/A′ · B', fmt(Rk,0)+' kN/m',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP2(){
@@ -2556,10 +2556,10 @@ function calcMP2(){
   const st=(2+Math.PI)*cu+q, Rk=st*B, Rd=Rk/1.4;
   document.getElementById('mp2-res').innerHTML='<h4>Result</h4>'+
     rr('G<sub>k</sub> permanent load', fmt(Gk,1)+' kN/m',true)+
-    rr('V<sub>d</sub> = 1,35·G<sub>k</sub> + 1,5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
+    rr('V<sub>d</sub> = 1.35·G<sub>k</sub> + 1.5·Q<sub>k</sub>', fmt(Vd,0)+' kN/m')+
     rr('σ<sub>t</sub> = (2+π)·c<sub>u</sub> + q', '(2+π)·'+fmt(cu,0)+' + '+fmt(q,0)+' = '+fmt(st,0)+' kPa',true)+
     rr('R<sub>k</sub> = σ<sub>t</sub> · B', fmt(Rk,0)+' kN/m',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP3(){
@@ -2578,7 +2578,7 @@ function calcMP3(){
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP4(){
@@ -2597,7 +2597,7 @@ function calcMP4(){
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP5(){
@@ -2616,7 +2616,7 @@ function calcMP5(){
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP6(){
@@ -2635,7 +2635,7 @@ function calcMP6(){
     rr('f load-inclination parameter', fmt(f,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP7(){
@@ -2654,7 +2654,7 @@ function calcMP7(){
     rr('b<sub>γ</sub> / b<sub>q</sub> / b<sub>c</sub> (α='+fmt(alpha,0)+'°)', fmt(bg,3)+' / '+fmt(bq,3)+' / '+fmt(bc,3),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub>', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′ = width + surcharge + cohesion', fmt(tw,1)+' + '+fmt(td,1)+' + '+fmt(tc,1)+' = '+fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1,4', fmt(Rd,0)+' kN/m')+
+    rr('R<sub>d</sub> = R<sub>k</sub>/A′ · B′ / 1.4', fmt(Rd,0)+' kN/m')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN/m');
 }
 function calcMP8(){
@@ -2673,7 +2673,7 @@ function calcMP8(){
     rr('s<sub>γ</sub> / s<sub>q</sub> / s<sub>c</sub> shape factors', fmt(sg,2)+' / '+fmt(sq,2)+' / '+fmt(sc,2),true)+
     rr('i<sub>γ</sub> / i<sub>q</sub> / i<sub>c</sub> inclination factors', fmt(ig,3)+' / '+fmt(iq,3)+' / '+fmt(ic,3),true)+
     rr('R<sub>k</sub>/A′', fmt(RkA,0)+' kPa',true)+
-    rr('R<sub>d</sub> = R<sub>k</sub> / 1,4', fmt(Rd,0)+' kN')+
+    rr('R<sub>d</sub> = R<sub>k</sub> / 1.4', fmt(Rd,0)+' kN')+
     vbox(Rd>=Vd, fmt(Rd,0), fmt(Vd,0), ' kN');
 }
 function calcMP9(){
@@ -2693,8 +2693,8 @@ function calcMP10(){
   const Vk=num('mp10-Vk'),delta=num('mp10-delta'),gR=num('mp10-gR'),Qx=num('mp10-Qx'),Ea=num('mp10-Ea'),E0=num('mp10-E0');
   const Hd=1.35*Ea+1.5*Qx, Rd=gR>0?Vk*Math.tan(deg2rad(delta))/gR:0, Rpd=gR>0?E0/gR:0, tot=Rd+Rpd, ok=tot>=Hd;
   document.getElementById('mp10-res').innerHTML='<h4>Result (sliding, drained)</h4>'+
-    rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
-    rr('R<sub>d</sub> = V′<sub>k</sub>·tg δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
+    rr('H<sub>d</sub> = 1.35·E<sub>a,k</sub> + 1.5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
+    rr('R<sub>d</sub> = V′<sub>k</sub>·tan δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
     rr('R<sub>p;d</sub> = E<sub>0,k</sub> / γ<sub>R;h</sub> (earth resistance)', fmt(Rpd,1)+' kN',true)+
     rr('R<sub>d</sub> + R<sub>p;d</sub>', fmt(tot,1)+' kN',true)+
     `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>p;d</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
@@ -2703,7 +2703,7 @@ function calcMP10u(){
   const B=num('mp10u-B'),L=num('mp10u-L'),cu=num('mp10u-cu'),gR=num('mp10u-gR'),Qx=num('mp10u-Qx'),Ea=num('mp10u-Ea');
   const Hd=1.35*Ea+1.5*Qx, Ac=B*L, Rd=gR>0?Ac*cu/gR:0, ok=Rd>=Hd;
   document.getElementById('mp10u-res').innerHTML='<h4>Result (sliding, undrained)</h4>'+
-    rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
+    rr('H<sub>d</sub> = 1.35·E<sub>a,k</sub> + 1.5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
     rr('A<sub>c</sub> = B·L', fmt(Ac,2)+' m²',true)+
     rr('R<sub>d</sub> = A<sub>c</sub>·c<sub>u;k</sub> / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
     `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub> = ${fmt(Rd,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
@@ -2713,9 +2713,9 @@ function calcMP11(){
   const Hd=1.35*Ea+1.5*Qx, delta=2/3*phi, tgd=Math.tan(deg2rad(delta));
   const Rd=gR>0?Gz*tgd/gR:0, Rpd=gR>0?Ep/gR:0, tot=Rd+Rpd, ok=tot>=Hd;
   document.getElementById('mp11-res').innerHTML='<h4>Result (sliding + passive earth resistance)</h4>'+
-    rr('H<sub>d</sub> = 1,35·E<sub>a,k</sub> + 1,5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
+    rr('H<sub>d</sub> = 1.35·E<sub>a,k</sub> + 1.5·Q<sub>x,k</sub>', fmt(Hd,1)+' kN')+
     rr('δ = ⅔·φ → tan δ', fmt(delta,2)+'° → '+fmt(tgd,3),true)+
-    rr('R<sub>d</sub> = G<sub>z,k</sub>·tg δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
+    rr('R<sub>d</sub> = G<sub>z,k</sub>·tan δ / γ<sub>R;h</sub>', fmt(Rd,1)+' kN',true)+
     rr('R<sub>p;d</sub> = E<sub>p,k</sub> / γ<sub>R;h</sub>', fmt(Rpd,1)+' kN',true)+
     rr('R<sub>d</sub> + R<sub>p;d</sub>', fmt(tot,1)+' kN',true)+
     `<div class="verdict ${ok?'ok':'fail'}"><span class="big">${ok?'ADEQUATE ✓':'NOT ADEQUATE ✗'}</span>R<sub>d</sub>+R<sub>p;d</sub> = ${fmt(tot,1)} kN ${ok?'≥':'&lt;'} H<sub>d</sub> = ${fmt(Hd,1)} kN</div>`;
@@ -3238,7 +3238,7 @@ const KPL=(function(){
     y+=4+lines.length*15+10; c.font='10px Inter'; c.fillStyle='#5C6B79'; c.fillText('depth of the mechanism: '+F(D+P.ymax,2)+' m,',bx,y); c.fillText('run-out at the surface: '+F(2*P.G.x,2)+' m',bx,y+13);
   }
   function ui1(){ $('v1phi').textContent=S1.phi+'°'; $('v1c').textContent=S1.c+' kPa'; $('v1g').textContent=S1.g+' kN/m³'; $('v1B').textContent=F(S1.B,1)+' m'; $('v1D').textContent=F(S1.D,1)+' m'; const T=terms({phi:S1.phi,c:S1.c,g:S1.g,B:S1.B,L:Infinity,D:S1.D});
-    $('chips1').innerHTML=`<span class="dfchip">0,5·γ·B·N<sub>γ</sub> = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N<sub>q</sub> = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N<sub>c</sub> = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R<sub>k</sub>/A′ = <b>${F(T.sum,0)} kPa</b></span>`; }
+    $('chips1').innerHTML=`<span class="dfchip">0.5·γ·B·N<sub>γ</sub> = <b>${F(T.g,0)} kPa</b></span><span class="dfchip">q′·N<sub>q</sub> = ${F(S1.g*S1.D,0)}·${F(T.N.Nq,2)} = <b>${F(T.qT,0)} kPa</b></span><span class="dfchip">c·N<sub>c</sub> = ${S1.c}·${F(T.N.Nc,2)} = <b>${F(T.c,0)} kPa</b></span><span class="dfchip ok">R<sub>k</sub>/A′ = <b>${F(T.sum,0)} kPa</b></span>`; }
   [['1phi','phi'],['1c','c'],['1g','g'],['1B','B'],['1D','D']].forEach(([id,k])=>{ const el=$(id); el.value=S1[k]; el.addEventListener('input',()=>{S1[k]=parseFloat(el.value);ui1();if(!S1.play)draw1();}); });
   document.querySelectorAll('#kp-hl1 button').forEach(b=>b.addEventListener('click',()=>{ S1.hl=b.dataset.h==='all'?null:b.dataset.h; document.querySelectorAll('#kp-hl1 button').forEach(x=>x.classList.toggle('on',x===b)); if(!S1.play) draw1(); }));
 
@@ -3315,7 +3315,7 @@ const KPL=(function(){
     y=r3.bars(h,T3(T),y+12,{title:'The three terms with i [kPa]',bh:70,max:Math.max(T0.g,T0.qT,T0.c)});
     c.font='10.5px Inter'; c.fillStyle='#2E2620'; c.fillText('vertical: '+F(T0.sum,0)+' kPa',bx,y); c.fillText('→ inclined: '+F(T.sum,0)+' kPa (−'+F((1-T.sum/T0.sum)*100,0)+' %)',bx,y+14);
   }
-  function ui3(){ const hvMax=Math.floor(0.9*Math.tan(S3.phi*rad)*100)/100; $('3HV').max=hvMax; if(S3.HV>hvMax){ S3.HV=hvMax; } $('3HV').value=S3.HV; $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2); $('n3HV').textContent='H = '+F(S3.HV*S3.V,0)+' kN/m; legfeljebb 0,9·tg φ = '+F(hvMax,2); }
+  function ui3(){ const hvMax=Math.floor(0.9*Math.tan(S3.phi*rad)*100)/100; $('3HV').max=hvMax; if(S3.HV>hvMax){ S3.HV=hvMax; } $('3HV').value=S3.HV; $('v3phi').textContent=S3.phi+'°'; $('v3c').textContent=S3.c+' kPa'; $('v3V').textContent=S3.V+' kN/m'; $('v3HV').textContent=F(S3.HV,2); $('n3HV').textContent='H = '+F(S3.HV*S3.V,0)+' kN/m; at most 0.9·tan φ = '+F(hvMax,2); }
   [['3phi','phi'],['3c','c'],['3V','V'],['3HV','HV']].forEach(([id,k])=>{ const el=$(id); el.value=S3[k]; el.addEventListener('input',()=>{S3[k]=parseFloat(el.value);ui3();if(!S3.play)draw3();}); });
 
   /* ====================================================== 4. MÉLYSÉGI TAG — A TAKARÁS ====================================================== */
