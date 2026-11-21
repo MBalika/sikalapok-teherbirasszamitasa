@@ -1,7 +1,7 @@
 # sorhoz kötött kulcsok: <azonosító>@index.html:<sor> — a kódban kulcsként is használt szavak (pl. talajnév) csak a megjelenített helyen fordulnak
 # ha a magyar forrás sorai elcsúsznak, a build „elcsúszott sorkulcsok” hibával leáll: a sorszámot itt kell frissíteni
-413c75e@index.html:1959	sand
-413c75e@index.html:2771	sand
+413c75e@index.html:1979	sand
+413c75e@index.html:2791	sand
 413c75e@index.html:867	sand
-d1591f7@index.html:1961	clay
-d1591f7@index.html:1980	clay
+d1591f7@index.html:1981	clay
+d1591f7@index.html:2000	clay
